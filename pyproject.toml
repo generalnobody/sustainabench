@@ -1,0 +1,28 @@
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "SustainaBench"
+version = "0.0.1"
+description = "Operational sustainability benchmarking framework"
+authors = [
+    { name = "Ingmar Biemond" }
+]
+readme = "README.md"
+requires-python = ">=3.11"
+
+dependencies = [
+    "typer[all]",
+    "pydantic",
+    "psutil",
+    "numpy",
+    "rich"
+]
+
+[project.scripts]
+sustainabench = "sustainabench.cli:app"
+
+[tool.setuptools.packages.find]
+where = ["."]
+include = ["sustainabench*"]
