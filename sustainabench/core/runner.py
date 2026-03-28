@@ -1,40 +1,13 @@
-from sustainabench.workloads import WORKLOADS   
-
-# class BenchmarkRunner:
-
-#     def __init__(self, workload, measurements, indicators):
-#         self.workload = workload
-#         self.measurements = measurements
-#         self.indicators = indicators
-
-#     def execute(self):
-
-#         self.workload.setup()
-
-#         for m in self.measurements:
-#             m.start()
-
-#         self.workload.run()
-
-#         raw_metrics = {}
-#         for m in self.measurements:
-#             raw_metrics.update(m.stop())
-
-#         self.workload.teardown()
-
-#         computed = {}
-#         for ind in self.indicators:
-#             computed.update(ind.compute(raw_metrics))
-
-#         return raw_metrics, computed
-
+from sustainabench.workloads import WORKLOADS
+from sustainabench.measurement import MEASUREMENTS
+from sustainabench.indicators import INDICATORS
 
 class BenchmarkRunner:
 
-    def __init__(self, workload_name, measurements, indicators):
+    def __init__(self, workload_name, measurement_names, indicator_names):
         self.workload_name = workload_name
-        self.measurements = measurements
-        self.indicators = indicators
+        self.measurement_names = measurement_names
+        self.indicator_names = indicator_names
 
     def run(self):
 
@@ -44,19 +17,30 @@ class BenchmarkRunner:
         workload_cls = WORKLOADS[self.workload_name]
         workload = workload_cls()
 
-        for m in self.measurements:
+        measurements = [
+            MEASUREMENTS[name]()
+            for name in self.measurement_names
+        ]
+
+        indicators = [
+            INDICATORS[name]()
+            for name in self.indicator_names
+        ]
+
+        for m in measurements:
             m.start()
 
         workload.run()
 
         raw_metrics = {}
-        for m in self.measurements:
-            raw_metrics.update(m.stop())
+        for m in measurements:
+            m.stop()
+            raw_metrics.update(m.result())
 
         # workload.teardown()
 
         computed = {}
-        for ind in self.indicators:
+        for ind in indicators:
             computed.update(ind.compute(raw_metrics))
 
         return raw_metrics, computed
