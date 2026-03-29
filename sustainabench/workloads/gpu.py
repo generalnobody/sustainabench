@@ -2,7 +2,7 @@ import torch
 from sustainabench.workloads.base import Workload, register_workload
 
 @register_workload
-class CPUMatrixSingleWorkload(Workload):
+class CGPUMatrixWorkload(Workload):
     name = "gpu-mm"
 
     def run(self):

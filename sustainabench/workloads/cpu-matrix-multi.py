@@ -9,7 +9,7 @@ def worker(_):
             return a @ b
 
 @register_workload
-class CPUMatrixSingleWorkload(Workload):
+class CPUMatrixMultiWorkload(Workload):
     name = "cpu-mm"
 
     def run(self):
