@@ -4,43 +4,51 @@ from sustainabench.indicators import INDICATORS
 
 class BenchmarkRunner:
 
-    def __init__(self, workload_name, measurement_names, indicator_names):
-        self.workload_name = workload_name
-        self.measurement_names = measurement_names
-        self.indicator_names = indicator_names
+    def __init__(self, workload_name, measurement_names, indicator_names, backend):
+        # self.workload_name = workload_name
+        # self.measurement_names = measurement_names
+        # self.indicator_names = indicator_names
+        if workload_name not in WORKLOADS:
+            raise ValueError(f"Unknown workload: {workload_name}")
+        
+        self.workload = WORKLOADS[workload_name]()
 
-    def run(self):
+        for name in measurement_names:
+            if name not in MEASUREMENTS:
+                raise ValueError(f"Unknown measurement: {name}")
 
-        if self.workload_name not in WORKLOADS:
-            raise ValueError(f"Unknown workload: {self.workload_name}")
-
-        workload_cls = WORKLOADS[self.workload_name]
-        workload = workload_cls()
-
-        measurements = [
+        self.measurements = [
             MEASUREMENTS[name]()
-            for name in self.measurement_names
+            for name in measurement_names
         ]
 
-        indicators = [
+        for name in indicator_names:
+            if name not in INDICATORS:
+                raise ValueError(f"Unknown indicator: {name}")
+            
+        self.indicators = [
             INDICATORS[name]()
-            for name in self.indicator_names
+            for name in indicator_names
         ]
 
-        for m in measurements:
+        self.backend = backend        
+
+    def _run_local(self):
+        for m in self.measurements:
             m.start()
 
-        workload.run()
+        self.workload.run()
 
         raw_metrics = {}
-        for m in measurements:
+        for m in self.measurements:
             m.stop()
             raw_metrics.update(m.result())
 
-        # workload.teardown()
-
         computed = {}
-        for ind in indicators:
+        for ind in self.indicators:
             computed.update(ind.compute(raw_metrics))
 
         return raw_metrics, computed
+    
+    def run(self):
+        return self.backend.run(self)

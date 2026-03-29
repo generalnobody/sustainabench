@@ -5,6 +5,7 @@ from sustainabench.core.runner import BenchmarkRunner
 from sustainabench.workloads import WORKLOADS
 from sustainabench.measurement import MEASUREMENTS
 from sustainabench.indicators import INDICATORS
+from sustainabench.core.backends import BACKENDS
 
 app = typer.Typer()
 
@@ -12,14 +13,24 @@ app = typer.Typer()
 def benchmark(
     workload: Annotated[str, typer.Option(..., "--workload", "-w", help="The workload to run (from 'workloads/')")],
     measurement_names: Annotated[list[str], typer.Option(..., "--measure", "-m", help="Which measurements to conduct while executing the workload (multiple allowed)")],
-    indicator_names: Annotated[list[str], typer.Option(..., "--indicator", "-i", help="Which indicators to derive from the raw measurements after the workload has been completed (multiple allowed)")]
+    indicator_names: Annotated[list[str], typer.Option(..., "--indicator", "-i", help="Which indicators to derive from the raw measurements after the workload has been completed (multiple allowed)")],
+    backend: Annotated[str, typer.Option(..., "--backend", "-b", help="Which backend to use")] = "local",
+    processors: Annotated[int, typer.Option(..., "--processors", "-p", help="How many processors to use (when applicable)")] = 1
 ):
     print(f"Running workload: {workload}")
+
+    backend_cls = BACKENDS[backend]
+
+    if backend == "ray":
+        backend_instance = backend_cls(num_workers=processors)
+    else:
+        backend_instance = backend_cls()
 
     runner = BenchmarkRunner(
         workload_name=workload,
         measurement_names=measurement_names,
-        indicator_names=indicator_names
+        indicator_names=indicator_names,
+        backend=backend_instance
     )
 
     raw, indicators = runner.run()
