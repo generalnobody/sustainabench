@@ -1,7 +1,6 @@
 from importlib import import_module
 from pathlib import Path
 from .base import WORKLOADS, register_workload
-from . import cpu
 
 # auto-import all workload modules
 package_dir = Path(__file__).parent

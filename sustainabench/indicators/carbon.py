@@ -7,7 +7,7 @@ from sustainabench.indicators.base import (
 class CarbonIndicator(Indicator):
     name = "carbon"
 
-    def __init__(self, carbon_intensity):
+    def __init__(self, carbon_intensity=400):
         self.ci = carbon_intensity  # gCO2/kWh
 
     def compute(self, measurements):
