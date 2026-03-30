@@ -1,5 +1,5 @@
 from typing import Tuple
-from sustainabench.core.backend import ExecutionBackend
+from .base import ExecutionBackend, register_backend
 import ray
 
 
@@ -7,11 +7,13 @@ import ray
 def _ray_execute(runner):
     return runner._run_local()
 
-
+@register_backend
 class RayBackend(ExecutionBackend):
+    name = "ray"
 
-    def __init__(self, num_workers: int = 1):
-        self.num_workers = num_workers
+    def __init__(self, processors: int = 1, *args: object, **kwargs: object) -> None:
+        super().__init__(*args, **kwargs)
+        self.num_workers = processors
         ray.init(ignore_reinit_error=True)
 
     def run(self, runner):
