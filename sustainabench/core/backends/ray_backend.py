@@ -9,6 +9,7 @@ def _ray_execute(runner):
 
 @register_backend
 class RayBackend(ExecutionBackend):
+    """Runs benchmark using Ray (used for distributed execution)"""
     name = "ray"
 
     def __init__(self, processors: int = 1, *args: object, **kwargs: object) -> None:

@@ -3,6 +3,7 @@ from sustainabench.measurement import MEASUREMENTS
 from sustainabench.indicators import INDICATORS
 
 class BenchmarkRunner:
+    """Class than handles running the benchmarks"""
 
     def __init__(self, workload_name, measurement_names, indicator_names, backend):
         # self.workload_name = workload_name
@@ -34,6 +35,7 @@ class BenchmarkRunner:
         self.backend = backend        
 
     def _run_local(self):
+        """Run the benchmark locally"""
         for m in self.measurements:
             m.start()
 
@@ -51,4 +53,5 @@ class BenchmarkRunner:
         return raw_metrics, computed
     
     def run(self):
+        """Function that runs the benchmark on the correct backend"""
         return self.backend.run(self)

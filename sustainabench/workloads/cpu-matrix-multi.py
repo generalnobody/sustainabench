@@ -10,6 +10,7 @@ def worker(_):
 
 @register_workload
 class CPUMatrixMultiWorkload(Workload):
+    """Multi-threaded CPU Matrix-Multiplication workload"""
     name = "cpu-mm"
 
     def run(self):

@@ -1,9 +1,6 @@
 import time
 
-from sustainabench.measurement.base import (
-    Measurement,
-    register_measurement,
-)
+from sustainabench.measurement.base import  Measurement, register_measurement
 
 
 @register_measurement

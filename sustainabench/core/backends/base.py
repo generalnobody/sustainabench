@@ -4,6 +4,7 @@ from typing import Dict, Type, Any
 BACKENDS: Dict[str, Type["ExecutionBackend"]] = {}
 
 def register_backend(cls):
+    """Macro used by each backend to register in BACKENDS"""
     BACKENDS[cls.name] = cls
     return cls
 

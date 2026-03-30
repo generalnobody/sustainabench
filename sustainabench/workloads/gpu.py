@@ -3,6 +3,7 @@ from sustainabench.workloads.base import Workload, register_workload
 
 @register_workload
 class CGPUMatrixWorkload(Workload):
+    """GPU Matrix-Multiplication workload"""
     name = "gpu-mm"
 
     def run(self):

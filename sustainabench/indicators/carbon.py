@@ -1,7 +1,4 @@
-from sustainabench.indicators.base import (
-    Indicator,
-    register_indicator,
-)
+from sustainabench.indicators.base import Indicator, register_indicator
 
 @register_indicator
 class CarbonIndicator(Indicator):
@@ -17,14 +14,3 @@ class CarbonIndicator(Indicator):
         return {
             "carbon_g": energy_kwh * self.ci
         }
-
-
-
-# @register_indicator
-# class RuntimeIndicator(Indicator):
-#     name = "runtime"
-
-#     def compute(self, measurements):
-#         return {
-#             "runtime_seconds": measurements["execution_time"]
-#         }

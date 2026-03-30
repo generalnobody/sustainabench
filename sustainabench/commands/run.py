@@ -19,14 +19,11 @@ def benchmark(
     backend: Annotated[str, typer.Option(..., "--backend", "-b", help="Which backend to use")] = "local",
     processors: Annotated[int, typer.Option(..., "--processors", "-p", help="How many processors to use (when applicable)")] = 1
 ):
+    """Command used to run a benchmark"""
     print(f"Running workload: {workload}")
 
     backend_cls = BACKENDS[backend]
     backend_instance = backend_cls(processors=processors)
-    # if backend == "ray":
-    #     backend_instance = backend_cls(num_workers=processors)
-    # else:
-    #     backend_instance = backend_cls()
 
     runner = BenchmarkRunner(
         workload_name=workload,
@@ -48,6 +45,7 @@ def benchmark_list(
     indicator_names: Annotated[bool, typer.Option(..., "--indicator", "-i", help="View available indicators")] = False,
     backends: Annotated[bool, typer.Option(..., "--backend", "-b", help="View available backends")] = False
 ):
+    """Command to see benchmark command options"""
     if workload:
         print("[bold]Available Workloads:[/bold]")
         for k in WORKLOADS:
