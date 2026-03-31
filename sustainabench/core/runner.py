@@ -34,12 +34,12 @@ class BenchmarkRunner:
 
         self.backend = backend        
 
-    def _run_local(self):
+    def _run_local(self, num_processors):
         """Run the benchmark locally"""
         for m in self.measurements:
             m.start()
 
-        self.workload.run()
+        self.workload.run(num_processors)
 
         raw_metrics = {}
         for m in self.measurements:

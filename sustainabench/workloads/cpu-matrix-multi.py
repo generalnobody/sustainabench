@@ -1,6 +1,6 @@
 from multiprocessing import Pool
 import numpy as np
-import os
+# import os
 from sustainabench.workloads.base import Workload, register_workload
 
 def worker(_):
@@ -13,8 +13,8 @@ class CPUMatrixMultiWorkload(Workload):
     """Multi-threaded CPU Matrix-Multiplication workload"""
     name = "cpu-mm"
 
-    def run(self):
-        cores = os.cpu_count() or 1
+    def run(self, num_processors: int = 1, *args: object, **kwargs: object):
+        # num_processors = os.cpu_count() or 1
 
-        with Pool(cores) as p:
-            p.map(worker, range(cores * 2))
+        with Pool(num_processors) as p:
+            p.map(worker, range(num_processors * 2))

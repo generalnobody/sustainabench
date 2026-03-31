@@ -5,16 +5,16 @@ import ray
 
 @ray.remote
 def _ray_execute(runner):
-    return runner._run_local()
+    return runner._run_local(num_processors=1)
 
 @register_backend
 class RayBackend(ExecutionBackend):
     """Runs benchmark using Ray (used for distributed execution)"""
     name = "ray"
 
-    def __init__(self, processors: int = 1, *args: object, **kwargs: object) -> None:
+    def __init__(self, num_processors: int = 1, *args: object, **kwargs: object) -> None:
         super().__init__(*args, **kwargs)
-        self.num_workers = processors
+        self.num_workers = num_processors
         ray.init(ignore_reinit_error=True)
 
     def run(self, runner):

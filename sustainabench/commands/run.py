@@ -23,7 +23,7 @@ def benchmark(
     print(f"Running workload: {workload}")
 
     backend_cls = BACKENDS[backend]
-    backend_instance = backend_cls(processors=processors)
+    backend_instance = backend_cls(num_processors=processors)
 
     runner = BenchmarkRunner(
         workload_name=workload,
@@ -45,7 +45,10 @@ def benchmark_list(
     indicator_names: Annotated[bool, typer.Option(..., "--indicator", "-i", help="View available indicators")] = False,
     backends: Annotated[bool, typer.Option(..., "--backend", "-b", help="View available backends")] = False
 ):
-    """Command to see benchmark command options"""
+    """Command to see benchmark command options. Lists all if none are selected."""
+    if not workload and not measurement_names and not indicator_names and not backends:
+        workload = measurement_names = indicator_names = backends = True
+
     if workload:
         print("[bold]Available Workloads:[/bold]")
         for k in WORKLOADS:
