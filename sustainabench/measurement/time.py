@@ -13,5 +13,8 @@ class TimeMeasurement(Measurement):
     def stop(self):
         self.t1 = time.perf_counter()
 
+    def sample(self):
+        pass
+
     def result(self):
         return {"execution_time": self.t1 - self.t0}

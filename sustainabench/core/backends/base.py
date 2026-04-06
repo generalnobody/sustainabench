@@ -17,9 +17,9 @@ class ExecutionBackend(ABC):
         pass
 
     @abstractmethod
-    def run(self, runner) -> tuple[dict[Any, Any], dict[Any, Any]]:
+    def run(self, runner) -> dict[Any, Any]:
         """
         Execute a configured runner.
-        Returns (raw_metrics, indicators)
+        Returns raw_metrics
         """
         pass

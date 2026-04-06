@@ -1,5 +1,6 @@
 from abc import ABC, abstractmethod
 from typing import Dict, Type
+import threading
 
 MEASUREMENTS: Dict[str, Type["Measurement"]] = {}
 
@@ -12,6 +13,7 @@ def register_measurement(cls):
 class Measurement(ABC):
     """Base Measurement class"""
     name: str
+    poll_interval: float | None = None # Seconds
 
     @abstractmethod
     def start(self):
@@ -19,6 +21,11 @@ class Measurement(ABC):
 
     @abstractmethod
     def stop(self):
+        pass
+
+    @abstractmethod
+    def sample(self):
+        "Called repeatedly if poll_interval is set"
         pass
 
     @abstractmethod

@@ -1,11 +1,13 @@
 from sustainabench.workloads import WORKLOADS
 from sustainabench.measurement import MEASUREMENTS
 from sustainabench.indicators import INDICATORS
+from sustainabench.measurement.manager import MeasurementManager
+import psutil
 
 class BenchmarkRunner:
     """Class than handles running the benchmarks"""
 
-    def __init__(self, workload_name, measurement_names, indicator_names, backend):
+    def __init__(self, workload_name, measurement_names, backend):
         # self.workload_name = workload_name
         # self.measurement_names = measurement_names
         # self.indicator_names = indicator_names
@@ -23,34 +25,34 @@ class BenchmarkRunner:
             for name in measurement_names
         ]
 
-        for name in indicator_names:
-            if name not in INDICATORS:
-                raise ValueError(f"Unknown indicator: {name}")
+        # for name in indicator_names:
+        #     if name not in INDICATORS:
+        #         raise ValueError(f"Unknown indicator: {name}")
             
-        self.indicators = [
-            INDICATORS[name]()
-            for name in indicator_names
-        ]
+        # self.indicators = [
+        #     INDICATORS[name]()
+        #     for name in indicator_names
+        # ]
 
         self.backend = backend        
 
     def _run_local(self, num_processors):
         """Run the benchmark locally"""
-        for m in self.measurements:
-            m.start()
+
+        manager = MeasurementManager(self.measurements)
+
+        manager.start()
 
         self.workload.run(num_processors)
 
-        raw_metrics = {}
-        for m in self.measurements:
-            m.stop()
-            raw_metrics.update(m.result())
+        manager.stop()
 
-        computed = {}
-        for ind in self.indicators:
-            computed.update(ind.compute(raw_metrics))
+        raw_metrics = manager.collect()
 
-        return raw_metrics, computed
+        # for ind in self.indicators:
+        #     computed.update(ind.compute(raw_metrics))
+
+        return raw_metrics
     
     def run(self):
         """Function that runs the benchmark on the correct backend"""

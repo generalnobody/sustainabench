@@ -26,7 +26,6 @@ class RayBackend(ExecutionBackend):
         results = ray.get(futures)
 
         raws = [r[0] for r in results]
-        inds = [r[1] for r in results]
 
         # simple aggregation
         aggregated_raw = {
@@ -34,9 +33,4 @@ class RayBackend(ExecutionBackend):
             for k in raws[0]
         }
 
-        aggregated_indicators = {
-            k: sum(d[k] for d in inds) / len(inds)
-            for k in inds[0]
-        }
-
-        return aggregated_raw, aggregated_indicators
+        return aggregated_raw
