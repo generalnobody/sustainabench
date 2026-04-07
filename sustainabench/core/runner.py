@@ -8,9 +8,6 @@ class BenchmarkRunner:
     """Class than handles running the benchmarks"""
 
     def __init__(self, workload_name, measurement_names, backend):
-        # self.workload_name = workload_name
-        # self.measurement_names = measurement_names
-        # self.indicator_names = indicator_names
         if workload_name not in WORKLOADS:
             raise ValueError(f"Unknown workload: {workload_name}")
         
@@ -24,15 +21,6 @@ class BenchmarkRunner:
             MEASUREMENTS[name]()
             for name in measurement_names
         ]
-
-        # for name in indicator_names:
-        #     if name not in INDICATORS:
-        #         raise ValueError(f"Unknown indicator: {name}")
-            
-        # self.indicators = [
-        #     INDICATORS[name]()
-        #     for name in indicator_names
-        # ]
 
         self.backend = backend        
 
@@ -48,9 +36,6 @@ class BenchmarkRunner:
         manager.stop()
 
         raw_metrics = manager.collect()
-
-        # for ind in self.indicators:
-        #     computed.update(ind.compute(raw_metrics))
 
         return raw_metrics
     
