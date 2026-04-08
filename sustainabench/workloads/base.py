@@ -14,7 +14,7 @@ def register_workload(cls):
 class Workload(ABC):
     """Base class for all benchmark workloads."""
 
-    # every workload must define this
+    # Every workload must define this
     name: str
 
     @abstractmethod
