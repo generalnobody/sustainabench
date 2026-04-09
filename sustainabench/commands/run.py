@@ -7,7 +7,6 @@ from datetime import datetime
 from sustainabench.core.runner import BenchmarkRunner
 from sustainabench.workloads import WORKLOADS
 from sustainabench.measurement import MEASUREMENTS
-from sustainabench.indicators import INDICATORS
 from sustainabench.core.backends import BACKENDS
 
 app = typer.Typer()
@@ -26,6 +25,9 @@ def benchmark(
 
     backend_cls = BACKENDS[backend]
     backend_instance = backend_cls(num_processors=processors)
+
+    if "all" in measurement_names:
+        measurement_names = list(MEASUREMENTS.keys())
 
     runner = BenchmarkRunner(
         workload_name=workload,
@@ -65,6 +67,7 @@ def benchmark_list(
 
     if measurement_names:
         print("[bold]Available Measurements:[/bold]")
+        print(" - all")
         for k in MEASUREMENTS:
             print(f" - {k}")
 

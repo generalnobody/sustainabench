@@ -4,6 +4,7 @@ import json
 from rich import print
 from pathlib import Path
 from sustainabench.reporting.result_processor import ResultProcessor
+from sustainabench.indicators import INDICATORS
 
 app = typer.Typer()
 
@@ -20,6 +21,9 @@ def generate(
 
     with results_file.open("w", encoding="utf-8") as f: # If other benchmarks can export to this format, then further analysis can be done using 'sustainabench generate' on third-party results
         raw_results = json.load(f)
+
+    if "all" in indicator_names:
+        indicator_names = list(INDICATORS.keys())
     
     processor = ResultProcessor(raw_results, indicator_names)
 
