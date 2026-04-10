@@ -13,7 +13,7 @@ class ExecutionBackend(ABC):
     name: str
 
     @abstractmethod
-    def __init__(self, *args: object, **kwargs: object) -> None:
+    def __init__(self, num_processors: int) -> None:
         pass
 
     @abstractmethod

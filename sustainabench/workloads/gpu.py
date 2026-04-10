@@ -6,7 +6,7 @@ class CGPUMatrixWorkload(Workload):
     """GPU Matrix-Multiplication workload"""
     name = "gpu-mm"
 
-    def run(self, *args: object, **kwargs: object):
+    def run(self, num_processors: int):
         if torch.cuda.is_available(): # CUDA or ROCm GPU
             device = torch.device("cuda")
         else:

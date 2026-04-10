@@ -12,7 +12,7 @@ class RayBackend(ExecutionBackend):
     """Runs benchmark using Ray (used for distributed execution)"""
     name = "ray"
 
-    def __init__(self, num_processors: int = 1, *args: object, **kwargs: object) -> None:
+    def __init__(self, num_processors: int = 1) -> None:
         super().__init__(*args, **kwargs)
         self.num_workers = num_processors
         ray.init(ignore_reinit_error=True)
