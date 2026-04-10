@@ -18,6 +18,9 @@ class CPUMeasurement(Measurement):
         pass
 
     def result(self):
+        if not self.samples:
+            return {"cpu_avg": 0, "cpu_max": 0}
+
         return {
             "cpu_avg": sum(self.samples) / len(self.samples),
             "cpu_max": max(self.samples),

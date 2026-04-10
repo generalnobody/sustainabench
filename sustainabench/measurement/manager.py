@@ -38,7 +38,7 @@ class MeasurementManager:
 
                 if now >= next_time:
                     m.sample()
-                    self._next_sample[m] = now + m.poll_interval
+                    self._next_sample[m] += m.poll_interval
 
                 remaining = self._next_sample[m] - now
                 next_wakeup = min(next_wakeup, remaining)

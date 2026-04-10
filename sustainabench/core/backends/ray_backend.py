@@ -25,12 +25,13 @@ class RayBackend(ExecutionBackend):
 
         results = ray.get(futures)
 
-        raws = [r[0] for r in results]
+        # raws = [r[0] for r in results]
 
         # simple aggregation
-        aggregated_raw = {
-            k: sum(d[k] for d in raws) / len(raws)
-            for k in raws[0]
-        }
+        aggregated = {}
+        for k in raws[0]:
+            values = [d.get(k) for d in raws if k in d]
+            if all(isinstance(v, (int, float)) for v in values):
+                aggregated[k] = sum(values) / len(values)
 
         return aggregated_raw

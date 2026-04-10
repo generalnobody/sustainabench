@@ -27,7 +27,10 @@ class ProcessCPUMeasurement(Measurement):
         pass
 
     def result(self):
-        print(self.samples)
+        # print(self.samples)
+        if not self.samples:
+            return {"cpu_process_avg_percent": 0, "cpu_process_max_percent": 0}
+
         return {
             "cpu_process_avg_percent": sum(self.samples) / len(self.samples),
             "cpu_process_max_percent": max(self.samples),
