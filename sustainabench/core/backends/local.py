@@ -6,7 +6,6 @@ class LocalBackend(ExecutionBackend):
     name = "local"
 
     def __init__(self, num_processors: int = 1) -> None:
-        super().__init__(*args, **kwargs)
         self.num_processors = num_processors
 
     def run(self, runner):

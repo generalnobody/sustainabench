@@ -7,6 +7,7 @@ class CPUMeasurement(Measurement):
 
     name = "cpu"
     poll_interval = 0.1
+    scope = "node"
 
     def start(self):
         self.samples = []

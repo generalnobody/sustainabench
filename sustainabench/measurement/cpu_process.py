@@ -6,6 +6,7 @@ from sustainabench.measurement.base import Measurement, register_measurement
 class ProcessCPUMeasurement(Measurement):
     name = "process_cpu"
     poll_interval = 0.1  # seconds
+    scope = "worker"
 
     def start(self):
         self.proc = psutil.Process()

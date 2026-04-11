@@ -6,6 +6,7 @@ from sustainabench.measurement.base import  Measurement, register_measurement
 @register_measurement
 class TimeMeasurement(Measurement):
     name = "time"
+    scope = "node"
 
     def start(self):
         self.t0 = time.perf_counter()

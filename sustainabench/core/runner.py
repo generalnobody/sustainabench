@@ -39,6 +39,9 @@ class BenchmarkRunner:
 
         return raw_metrics
     
+    def get_measurements(self): # Expose selected measurements
+        return self.measurements
+
     def run(self):
         """Function that runs the benchmark on the correct backend"""
         return self.backend.run(self)

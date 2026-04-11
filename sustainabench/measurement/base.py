@@ -14,6 +14,7 @@ class Measurement(ABC):
     """Base Measurement class"""
     name: str
     poll_interval: float | None = None # Seconds
+    scope: str
 
     @abstractmethod
     def start(self):
