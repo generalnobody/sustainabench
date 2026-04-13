@@ -40,14 +40,15 @@ from typing import Any, Dict, List
 from .base import ExecutionBackend, register_backend
 import ray
 from ..models import BenchmarkResult, NodeResult
+from sustainabench.utils.system_info import get_node_metadata
 
 
 @ray.remote
-def _ray_execute_node(runner):
+def _ray_execute_node(runner, num_processors):
     """
     Runs a full benchmark on a single node.
     """
-    return runner._run_local(num_processors=1)
+    return runner._run_local(num_processors), get_node_metadata()
 
 
 @register_backend
@@ -56,7 +57,7 @@ class RayBackend(ExecutionBackend):
     name = "ray"
 
     def __init__(self, num_processors: int = 1) -> None:
-        self.num_workers = num_processors
+        self.num_processors = num_processors
 
         ray.init(ignore_reinit_error=True)
 
@@ -84,8 +85,8 @@ class RayBackend(ExecutionBackend):
             print("[WARNING] RAPL detected but only one node available.")
             print("Running a single worker to avoid double counting.")
 
-            result = ray.get(_ray_execute_node.remote(runner))
-            node_results = self._format_results([result])
+            result, metrics = ray.get(_ray_execute_node.remote(runner, self.num_processors))
+            node_results = self._format_results([(result, metrics)])
             return BenchmarkResult(runner.get_workload_name(), node_results, {})
 
         # Multi-node → run one task per node
@@ -96,11 +97,12 @@ class RayBackend(ExecutionBackend):
 
             futures.append(
                 _ray_execute_node.options(
-                    resources={node_key: 0.01}
-                ).remote(runner)
+                    resources={node_key: 0.01},
+                    num_cpus=self.num_processors
+                ).remote(runner, self.num_processors)
             )
 
-        results: List[Dict[str, Any]] = ray.get(futures)
+        results: List[tuple[Dict[str, Any], Dict[str, Any]]] = ray.get(futures)
 
         # # Aggregate results
         # return self._aggregate(results)
@@ -108,16 +110,17 @@ class RayBackend(ExecutionBackend):
         node_results = self._format_results(results)
         return BenchmarkResult(runner.get_workload_name(), node_results, {})
 
-    def _format_results(self, raw_results: list) -> list[NodeResult]:
+    def _format_results(self, results: List[tuple[Dict[str, Any], Dict[str, Any]]]) -> list[NodeResult]:
         node_results = []
 
-        for node, node_worker_results in zip(self.nodes, raw_results):
+        for node, (node_worker_results, node_metrics) in zip(self.nodes, results):
             node_results.append(
                 NodeResult(
                     node_id=node["NodeID"],
                     metrics=node_worker_results,
                     metadata={
-                        "address": node["NodeManagerAddress"]
+                        "address": node["NodeManagerAddress"],
+                        **node_metrics
                     }
                 )
             )
