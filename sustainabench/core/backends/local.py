@@ -1,4 +1,5 @@
 from .base import ExecutionBackend, register_backend
+from ..models import BenchmarkResult, NodeResult
 
 @register_backend
 class LocalBackend(ExecutionBackend):
@@ -9,4 +10,11 @@ class LocalBackend(ExecutionBackend):
         self.num_processors = num_processors
 
     def run(self, runner):
-        return runner._run_local(self.num_processors)
+        raw_metrics = runner._run_local(self.num_processors)
+
+        results = BenchmarkResult(
+            runner.get_workload_name(),
+            [NodeResult(self.name, raw_metrics, {})],
+            {}
+        )
+        return results

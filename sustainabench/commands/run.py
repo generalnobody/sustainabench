@@ -35,17 +35,18 @@ def benchmark(
         backend=backend_instance
     )
 
-    raw = runner.run()
+    results = runner.run()
+    results_dict = results.to_dict()
 
     print("Results:")
-    print(raw)
+    print(json.dumps(results_dict, indent=4))
 
     output_dir.mkdir(parents=True, exist_ok=True)
     filename = f"{workload}__{'-'.join(measurement_names)}__{datetime.now().strftime('%Y%m%d_%H%M%S')}.json"
     output_file = output_dir / filename
 
     with output_file.open("w", encoding="utf-8") as f: # If other benchmarks can export to this format, then further analysis can be done using 'sustainabench generate' on third-party results
-        json.dump(raw, f, indent=4, ensure_ascii=False)
+        json.dump(results_dict, f, indent=4, ensure_ascii=False)
         print("Outputted results to:", output_file)
 
 

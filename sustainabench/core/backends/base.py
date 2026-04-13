@@ -1,5 +1,6 @@
 from abc import ABC, abstractmethod
 from typing import Dict, Type, Any
+from ..models import BenchmarkResult
 
 BACKENDS: Dict[str, Type["ExecutionBackend"]] = {}
 
@@ -17,7 +18,7 @@ class ExecutionBackend(ABC):
         pass
 
     @abstractmethod
-    def run(self, runner) -> dict[Any, Any]:
+    def run(self, runner) -> BenchmarkResult:
         """
         Execute a configured runner.
         Returns raw_metrics

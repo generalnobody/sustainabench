@@ -39,6 +39,7 @@
 from typing import Any, Dict, List
 from .base import ExecutionBackend, register_backend
 import ray
+from ..models import BenchmarkResult, NodeResult
 
 
 @ray.remote
@@ -75,7 +76,7 @@ class RayBackend(ExecutionBackend):
     def _has_node_scoped_measurement(self, runner) -> bool:
         return any(m.scope == "node" for m in runner.get_measurements())
 
-    def run(self, runner) -> Dict[str, Any]:
+    def run(self, runner) -> BenchmarkResult:
         has_node_scope = self._has_node_scoped_measurement(runner)
 
         # Single node + node-scoped measurement (RAPL)
@@ -84,7 +85,8 @@ class RayBackend(ExecutionBackend):
             print("Running a single worker to avoid double counting.")
 
             result = ray.get(_ray_execute_node.remote(runner))
-            return result
+            node_results = self._format_results([result])
+            return BenchmarkResult(runner.get_workload_name(), node_results, {})
 
         # Multi-node → run one task per node
         futures = []
@@ -100,30 +102,49 @@ class RayBackend(ExecutionBackend):
 
         results: List[Dict[str, Any]] = ray.get(futures)
 
-        # Aggregate results
-        return self._aggregate(results)
+        # # Aggregate results
+        # return self._aggregate(results)
 
-    def _aggregate(self, results: List[Dict[str, Any]]) -> Dict[str, Any]:
-        """
-        Aggregates per-node results safely.
-        - numeric → average
-        """
+        node_results = self._format_results(results)
+        return BenchmarkResult(runner.get_workload_name(), node_results, {})
 
-        if not results:
-            return {}
+    def _format_results(self, raw_results: list) -> list[NodeResult]:
+        node_results = []
 
-        aggregated = {}
+        for node, node_worker_results in zip(self.nodes, raw_results):
+            node_results.append(
+                NodeResult(
+                    node_id=node["NodeID"],
+                    metrics=node_worker_results,
+                    metadata={
+                        "address": node["NodeManagerAddress"]
+                    }
+                )
+            )
 
-        keys = results[0].keys()
+        return node_results
 
-        for k in keys:
-            values = [r.get(k) for r in results if k in r]
+    # def _aggregate(self, results: List[Dict[str, Any]]) -> Dict[str, Any]:
+    #     """
+    #     Aggregates per-node results safely.
+    #     - numeric → average
+    #     """
 
-            if all(isinstance(v, (int, float)) for v in values):
-                aggregated[k] = sum(values) / len(values)
-            else:
-                aggregated[k] = values  # fallback
+    #     if not results:
+    #         return {}
 
-        return aggregated
+    #     aggregated = {}
+
+    #     keys = results[0].keys()
+
+    #     for k in keys:
+    #         values = [r.get(k) for r in results if k in r]
+
+    #         if all(isinstance(v, (int, float)) for v in values):
+    #             aggregated[k] = sum(values) / len(values)
+    #         else:
+    #             aggregated[k] = values  # fallback
+
+    #     return aggregated
 
 

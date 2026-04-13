@@ -3,6 +3,7 @@ from sustainabench.measurement import MEASUREMENTS
 from sustainabench.indicators import INDICATORS
 from sustainabench.measurement.manager import MeasurementManager
 import psutil
+from .models import BenchmarkResult
 
 class BenchmarkRunner:
     """Class than handles running the benchmarks"""
@@ -42,6 +43,9 @@ class BenchmarkRunner:
     def get_measurements(self): # Expose selected measurements
         return self.measurements
 
-    def run(self):
+    def run(self) -> BenchmarkResult:
         """Function that runs the benchmark on the correct backend"""
         return self.backend.run(self)
+    
+    def get_workload_name(self):
+        return self.workload.name
