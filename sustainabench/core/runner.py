@@ -8,7 +8,7 @@ from .models import BenchmarkResult
 class BenchmarkRunner:
     """Class than handles running the benchmarks"""
 
-    def __init__(self, workload_name, measurement_names, backend):
+    def __init__(self, workload_name, measurement_names, runs, backend):
         if workload_name not in WORKLOADS:
             raise ValueError(f"Unknown workload: {workload_name}")
         
@@ -23,22 +23,28 @@ class BenchmarkRunner:
             for name in measurement_names
         ]
 
+        if runs >= 1:
+            self.runs = runs
+        else:
+            raise ValueError(f"Runs amount lower than 1: {runs}")
+
         self.backend = backend        
 
     def _run_local(self, num_processors: int):
         """Run the benchmark locally"""
 
-        manager = MeasurementManager(self.measurements)
+        measurements = {}
+        for i in range(self.runs):
+            manager = MeasurementManager(self.measurements)
+            manager.start()
+            self.workload.run(num_processors)
+            manager.stop()
+            raw_metrics = manager.collect()
 
-        manager.start()
+            measurements[f"run{i}"] = raw_metrics
+        
 
-        self.workload.run(num_processors)
-
-        manager.stop()
-
-        raw_metrics = manager.collect()
-
-        return raw_metrics
+        return measurements
     
     def get_measurements(self): # Expose selected measurements
         return self.measurements

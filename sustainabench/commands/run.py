@@ -15,6 +15,7 @@ app = typer.Typer()
 def benchmark(
     workload: Annotated[str, typer.Option(..., "--workload", "-w", help="The workload to run (from 'workloads/')")],
     measurement_names: Annotated[list[str], typer.Option(..., "--measure", "-m", help="Which measurements to conduct while executing the workload (multiple allowed)")],
+    runs: Annotated[int, typer.Option(..., "--runs", "-r", help="How many times to run the same benchmark")] = 1,
     config_file: Annotated[Path, typer.Option(..., "--config", "-c", help="Path to the config file for the benchmark")] = Path(""),
     backend: Annotated[str, typer.Option(..., "--backend", "-b", help="Which backend to use")] = "local",
     processors: Annotated[int, typer.Option(..., "--processors", "-p", help="How many processors to use (when applicable)")] = 1,
@@ -32,6 +33,7 @@ def benchmark(
     runner = BenchmarkRunner(
         workload_name=workload,
         measurement_names=measurement_names,
+        runs=runs,
         backend=backend_instance
     )
 
