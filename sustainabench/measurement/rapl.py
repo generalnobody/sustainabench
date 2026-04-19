@@ -1,4 +1,5 @@
 from sustainabench.measurement.base import Measurement, register_measurement
+import os
 
 @register_measurement
 class RAPLMeasurement(Measurement):
@@ -6,26 +7,92 @@ class RAPLMeasurement(Measurement):
     poll_interval = None
     scope = "node"
 
-    def start(self):
-        import pyRAPL
+    def _discover_domains(self, base_path="/sys/class/powercap/intel-rapl"): # Handles cases where multiple packages are present in system.
+        domains = []
 
-        pyRAPL.setup()
-        self.meter = pyRAPL.Measurement("benchmark")
-        self.meter.begin()
+        if not os.path.exists(base_path):
+            return domains
+
+        for entry in os.listdir(base_path):
+            path = os.path.join(base_path, entry)
+
+            if not os.path.isdir(path):
+                continue
+
+            name_file = os.path.join(path, "name")
+            energy_file = os.path.join(path, "energy_uj")
+            max_file = os.path.join(path, "max_energy_range_uj")
+
+            if not (os.path.exists(name_file) and os.path.exists(energy_file)):
+                continue
+
+            with open(name_file) as f:
+                name = f.read().strip()
+
+            # Only take package-level domains
+            if "package" in name.lower():
+                max_range = None
+                if os.path.exists(max_file):
+                    with open(max_file) as f:
+                        max_range = int(f.read())
+
+                domains.append({
+                    "name": name,
+                    "energy_path": energy_file,
+                    "max_range": max_range
+                })
+
+        return domains
+    
+    def _read_energy(self):
+        results = []
+
+        for d in self.domains:
+            with open(d["energy_path"]) as f:
+                results.append(int(f.read()))
+        
+        return results
+    
+    def _energy_diff(self, start, end):
+        diffs = []
+
+        for i, d in enumerate(self.domains):
+            s = start[i]
+            e = end[i]
+            max_range = d["max_range"]
+
+            if max_range is not None and e < s: # Handle RAPL counter wrap-around
+                diff = (max_range - s) + e
+            else:
+                diff = e - s
+
+            diffs.append(diff)
+
+        return diffs
+    
+    def start(self):
+        self.domains = self._discover_domains()
+
+        if not self.domains:
+            raise RuntimeError("No RAPL domains found")
+
+        self.start_energy = self._read_energy()
+        self.end_energy = None
 
     def stop(self):
-        self.meter.end()
+        self.end_energy = self._read_energy()
 
     def sample(self):
         pass  # not used
 
     def result(self):
-        result = self.meter.result
-
-        # pkg is per CPU socket — sum them
-        energy_uj = sum(result.pkg) if result.pkg else 0
+        if self.start_energy is None or self.end_energy is None:
+            return {}
+        
+        diffs_uj = self._energy_diff(self.start_energy, self.end_energy)
+        total_energy_j = sum(diffs_uj) / 1e6
 
         return {
-            "energy_uj": energy_uj,
-            "energy_kwh": energy_uj / 3.6e9,
+            "cpu_energy_j": total_energy_j,
+            "cpu_energy_per_domain": [d / 1e6 for d in diffs_uj]
         }
