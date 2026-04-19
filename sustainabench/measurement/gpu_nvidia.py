@@ -25,17 +25,7 @@ class NvidiaGPUMeasurement(Measurement):
 
     def result(self):
         if len(self.samples) < 2:
-            return {
-                "avg_util": 0,
-                "peak_util": 0,
-                "energy_j": 0,
-                "energy_kwh": 0,
-                "pow_avg": 0,
-                "raw": {
-                    "pow": self.samples,
-                    "utils": self.utils,
-                }
-            }
+            return {}
 
         energy_j = 0.0
 
