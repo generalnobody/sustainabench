@@ -26,9 +26,9 @@ class NvidiaGPUMeasurement(Measurement):
     def result(self):
         if len(self.samples) < 2:
             return {
-                "energy-j": 0.0,
-                "energy-kwh": 0.0,
-                "pow-avg": 0.0
+                "energy_j": 0.0,
+                "energy_kwh": 0.0,
+                "pow_avg": 0.0
             }
 
         energy_j = 0.0
@@ -46,11 +46,11 @@ class NvidiaGPUMeasurement(Measurement):
         energy_kwh = energy_j / 3600000
 
         return {
-            "avg-util": sum(self.utils) / len(self.utils),
-            "peak-util": max(self.utils),
-            "energy-j": energy_j,
-            "energy-kwh": energy_kwh,
-            "pow-avg": average_power_w,
+            "avg_util": sum(self.utils) / len(self.utils),
+            "peak_util": max(self.utils),
+            "energy_j": energy_j,
+            "energy_kwh": energy_kwh,
+            "pow_avg": average_power_w,
             "raw": {
                 "pow": self.samples,
                 "utils": self.utils,
