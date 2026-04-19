@@ -3,7 +3,7 @@ import os
 
 @register_measurement
 class RAPLMeasurement(Measurement):
-    name = "rapl"
+    name = "cpu-energy"
     poll_interval = None
     scope = "node"
 
