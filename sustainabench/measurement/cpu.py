@@ -68,34 +68,36 @@ class CPUMeasurement(Measurement):
         ]
 
         return {
-            "cpu": {
-                "usage": {
-                    "avg": cpu_avg,
-                    "max": cpu_max,
-                },
-                "frequency": {
-                    "min": cpu_freq.min,
-                    "max": cpu_freq.max,
-                    "avg": cpu_freq_avg,
-                },
-            },
-            "percpu": [
-                {
-                    "core": i,
+            f"{self.name}": {
+                "package": {
                     "usage": {
-                        "avg": u_avg,
-                        "max": u_max,
+                        "avg": cpu_avg,
+                        "max": cpu_max,
                     },
                     "frequency": {
-                        "avg": f_avg,
-                        "min": freq.min,
-                        "max": freq.max,
+                        "min": cpu_freq.min,
+                        "max": cpu_freq.max,
+                        "avg": cpu_freq_avg,
                     },
-                }
-                for i, (u_avg, u_max, f_avg, freq) in enumerate(
-                    zip(per_cpu_avg, per_cpu_max, percore_freq_avg, per_cpu_freq)
-                )
-            ]
+                },
+                "percpu": [
+                    {
+                        "core": i,
+                        "usage": {
+                            "avg": u_avg,
+                            "max": u_max,
+                        },
+                        "frequency": {
+                            "avg": f_avg,
+                            "min": freq.min,
+                            "max": freq.max,
+                        },
+                    }
+                    for i, (u_avg, u_max, f_avg, freq) in enumerate(
+                        zip(per_cpu_avg, per_cpu_max, percore_freq_avg, per_cpu_freq)
+                    )
+                ]
+            }
         }
 
         # percpu = [

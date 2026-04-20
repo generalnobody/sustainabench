@@ -4,7 +4,7 @@ from sustainabench.measurement.base import Measurement, register_measurement
 
 @register_measurement
 class MemoryMeasurement(Measurement):
-    name = "mem"
+    name = "memory"
     poll_interval = 0.1
     scope = "node"
 
@@ -37,16 +37,26 @@ class MemoryMeasurement(Measurement):
         swap_avg_pct = sum(sample[3] for sample in self.samples) / len(self.samples)
         swap_max_pct = max(sample[3] for sample in self.samples)
         return {
-            "mem": {
-                "avg_mb": mem_avg,
-                "max_mb": mem_max,
-                "avg_pct": mem_avg_pct,
-                "max_pct": mem_max_pct
-            },
-            "swap": {
-                "avg_mb": swap_avg,
-                "max_mb": swap_max,
-                "avg_pct": swap_avg_pct,
-                "max_pct": swap_max_pct
+            f"{self.name}": {
+                "mem": {
+                    "mb": {
+                        "avg": mem_avg,
+                        "max": mem_max
+                    },
+                    "pct": {
+                        "avg": mem_avg_pct,
+                        "max": mem_max_pct
+                    }
+                },
+                "swap": {
+                    "mb": {
+                        "avg": swap_avg,
+                        "max": swap_max
+                    },
+                    "pct": {
+                        "avg": swap_avg_pct,
+                        "max": swap_max_pct
+                    }
+                }
             }
         }

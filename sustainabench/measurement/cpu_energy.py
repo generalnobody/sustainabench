@@ -93,13 +93,19 @@ class RAPLMeasurement(Measurement):
         total_energy_j = sum(diffs_uj) / 1e6
 
         return {
-            "cpu_energy_j": total_energy_j,
-            "cpu_energy_kwh": total_energy_j / 3.6e6,
-            "cpu_energy_per_domain": [
-                {
-                    "energy_j": d / 1e6,
-                    "energy_kwh": d / 3.6e12
-                }
-                for d in diffs_uj
-            ]
+            f"{self.name}": {
+                "energy": {
+                    "j": total_energy_j,
+                    "kwh": total_energy_j / 3.6e6
+                },
+                "per_domain": [
+                    {
+                        "energy": {
+                            "j": d / 1e6,
+                            "kwh": d / 3.6e12
+                        }
+                    }
+                    for d in diffs_uj
+                ]
+            }
         }

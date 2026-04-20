@@ -50,7 +50,9 @@ class IOMeasurement(Measurement):
             }
 
         return {
-            "io_disk": delta_disk,
-            "io_net": delta_net,
-            # "samples": self.samples
+            f"{self.name}": {
+                "io_disk": delta_disk,
+                "io_net": delta_net,
+                # "samples": self.samples
+            }
         }

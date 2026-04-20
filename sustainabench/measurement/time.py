@@ -1,11 +1,11 @@
 import time
-
 from sustainabench.measurement.base import  Measurement, register_measurement
 
 
 @register_measurement
 class TimeMeasurement(Measurement):
     name = "time"
+    poll_interval = None
     scope = "node"
 
     def start(self):
