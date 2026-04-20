@@ -8,20 +8,37 @@ class CPUMeasurement(Measurement):
     poll_interval = 0.1
     scope = "node"
 
+    def _get_cpu_temp(self):
+        temps = psutil.sensors_temperatures()
+
+        fallback = None
+
+        for device, entries in temps.items():
+            for e in entries:
+                if e.current is None:
+                    continue
+
+                label = (e.label or "").lower()
+
+                # Prioritize "real CPU temp" of the full package 
+                # Current options should work on both AMD and Intel, but may need fine-tuning for divergent systems
+                if "tdie" in label or "package" in label or "core" in label:
+                    return e.current
+
+                # Fallback candidate
+                if fallback is None:
+                    fallback = e.current
+
+        return fallback
+
     def start(self):
         self.samples = []
-        psutil.cpu_percent(interval=None) # Ignore first bogus value
+
+        # Ignore first bogus value
+        psutil.cpu_percent(interval=None) 
         psutil.cpu_percent(interval=None, percpu=True)
         # psutil.cpu_times_percent(interval=None)
         # psutil.cpu_times_percent(interval=None, percpu=True)
-
-        ################# Test #################
-        temps = psutil.sensors_temperatures()
-        for name, entries in temps.items():
-            print(f"{name}:")
-            for entry in entries:
-                print(f"  {entry.label or 'N/A'}: {entry.current}°C")
-        ########################################
 
     def sample(self):
         cpu_freq = psutil.cpu_freq()
@@ -31,7 +48,8 @@ class CPUMeasurement(Measurement):
             psutil.cpu_percent(interval=None),
             psutil.cpu_percent(interval=None, percpu=True),
             cpu_freq.current,
-            [freq.current for freq in per_cpu_freq]
+            [freq.current for freq in per_cpu_freq],
+            self._get_cpu_temp()
             # psutil.cpu_times_percent(interval=None)._asdict(),
             # [t._asdict() for t in psutil.cpu_times_percent(interval=None, percpu=True)]
         ))
@@ -67,8 +85,18 @@ class CPUMeasurement(Measurement):
             for values in zip(*(sample[3] for sample in self.samples))
         ]
 
+        # Temp (only full package)
+        temp_avg = sum(sample[4] for sample in self.samples)/len(self.samples)
+        temp_max = max(sample[4] for sample in self.samples)
+        temp_min = min(sample[4] for sample in self.samples)
+
         return {
             f"{self.name}": {
+                "temp": {
+                    "avg": temp_avg,
+                    "max": temp_max,
+                    "min": temp_min
+                },
                 "package": {
                     "usage": {
                         "avg": cpu_avg,
