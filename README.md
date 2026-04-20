@@ -42,6 +42,8 @@ To calculate the indicators, run:
 sustainabench result generate <options>     # Generates results based on input file
 ```
 
+Please note: This benchmark suite assumes exclusive access to the node that the benchmark is run on. Otherwise, actions performed by other users may impact the final results.
+
 ## Expand
 
 To expand this project with additional modules, please ensure the project was installed in the editable configuration. It is possible to add new workloads, new measurement modules and additional indicators.
