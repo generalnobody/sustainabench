@@ -32,7 +32,7 @@ def benchmark(
         measurement_names = list(MEASUREMENTS.keys())
 
     workload_cfg = None
-    if config_file is not Path(""):
+    if config_file != Path(""):
         with open(config_file) as f:
             workload_cfg = yaml.safe_load(f)
 
