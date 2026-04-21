@@ -8,11 +8,13 @@ from .models import BenchmarkResult
 class BenchmarkRunner:
     """Class than handles running the benchmarks"""
 
-    def __init__(self, workload_name, measurement_names, runs, backend):
+    def __init__(self, workload_name, workload_cfg, measurement_names, runs, backend):
         if workload_name not in WORKLOADS:
             raise ValueError(f"Unknown workload: {workload_name}")
         
         self.workload = WORKLOADS[workload_name]()
+
+        self.workload_cfg = workload_cfg
 
         for name in measurement_names:
             if name not in MEASUREMENTS:
@@ -37,7 +39,7 @@ class BenchmarkRunner:
         for i in range(self.runs):
             manager = MeasurementManager(self.measurements)
             manager.start()
-            self.workload.run(num_processors)
+            self.workload.run(num_processors, self.workload_cfg)
             manager.stop()
             raw_metrics = manager.collect()
 

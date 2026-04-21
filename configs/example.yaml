@@ -1,0 +1,6 @@
+workload:         # Top-level workload object, must always exist
+  name: "example" # Selected workload. Must correspond to workload name defined in corresponding workload file in 'sustainabench/workloads/''
+  params:         # Workload's parameters. Not checked by benchmark runner, much be verified within benchmark script.
+    m: 1000
+    n: 2000
+    p: 5
