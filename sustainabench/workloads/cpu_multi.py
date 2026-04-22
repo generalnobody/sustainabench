@@ -4,7 +4,7 @@ from sustainabench.workloads.base import Workload, register_workload
 
 @register_workload
 class CPUMultiWorkload(Workload):
-    """Single-threaded CPU workload. Performs prime checking"""
+    """Multi-threaded CPU workload. Performs prime checking"""
     name = "cpu-multi"
 
     def _work(self, n):
@@ -21,7 +21,7 @@ class CPUMultiWorkload(Workload):
 
     def run(self, num_processors: int, workload_cfg):
         limit = 100
-        if workload_cfg:
+        if workload_cfg and "limit" in workload_cfg["workload"]["params"]:
             limit = workload_cfg["workload"]["params"]["limit"]
 
         with mp.Pool(num_processors) as pool:

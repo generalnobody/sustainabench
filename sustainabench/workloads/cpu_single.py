@@ -16,7 +16,7 @@ class CPUSingleWorkload(Workload):
 
     def run(self, num_processors: int, workload_cfg):
         limit = 100
-        if workload_cfg:
+        if workload_cfg and "limit" in workload_cfg["workload"]["params"]:
             limit = workload_cfg["workload"]["params"]["limit"]
 
         count = 0
