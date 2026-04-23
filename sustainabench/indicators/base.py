@@ -12,7 +12,12 @@ def register_indicator(cls):
 class Indicator(ABC):
     """Base Indicator class"""
     name: str
+    require_file: bool # Control whether this indicator should require a file path to be included or not.
 
     @abstractmethod
-    def compute(self, measurements: dict) -> dict:
+    def __init__(self, filename) -> None:
+        pass
+
+    @abstractmethod
+    def compute(self, measurements: dict, indicator_config: dict) -> dict:
         pass
