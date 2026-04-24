@@ -23,7 +23,7 @@ class NvidiaGPUMeasurement(Measurement):
     def sample(self):
         for i in range(self.gpu_count):
             self.samples[i].append((
-                time.perf_counter, 
+                time.perf_counter(), 
                 pynvml.nvmlDeviceGetPowerUsage(self.handles[i]), 
                 pynvml.nvmlDeviceGetUtilizationRates(self.handles[i]).gpu, 
                 pynvml.nvmlDeviceGetTemperature(self.handles[i], pynvml.NVML_TEMPERATURE_GPU),
@@ -36,19 +36,22 @@ class NvidiaGPUMeasurement(Measurement):
         pynvml.nvmlShutdown()
 
     def result(self):
-        if len(self.samples) < 2:
+        if len(self.samples) < 1: # No GPU-s available
             return {}
         
         results = []
 
+        # Per-gpu loop
         for i, samples in enumerate(self.samples):
             length = len(samples)
+            if length < 2: # Not enough samples
+                continue
 
             # Energy calculation
             energy_j = 0.0
-            for i in range(1, length):
-                t1, mw1, *_ = samples[i]
-                t0, mw0, *_ = samples[i-1]
+            for j in range(1, length):
+                t1, mw1, *_ = samples[j]
+                t0, mw0, *_ = samples[j-1]
                 dt = t1 - t0
                 avg_power_w = (mw1 + mw0) / 2 / 1000 # Average power between two measurements, converted from mW to W, using trapezoidal rule
                 energy_j += avg_power_w * dt
