@@ -27,6 +27,15 @@ def generate(
     with results_file.open("r", encoding="utf-8") as f: # If other benchmarks can export to this format, then further analysis can be done using 'sustainabench generate' on third-party results
         raw_results = json.load(f)
 
+    if raw_results is not None:
+        if "workload" not in raw_results:
+            raise ValueError("Missing 'workload' key in results")
+        if "node_results" not in raw_results:
+            raise ValueError("Missing 'node_results' key in results")
+        for node in raw_results["node_results"]:
+            if "metrics" not in node:
+                raise ValueError("Missing 'metrics' key in results")
+
     indicator_cfg = None
     if config_file != Path(""):
         with open(config_file) as f:
@@ -50,7 +59,7 @@ def generate(
     print(results)
 
     output_dir.mkdir(parents=True, exist_ok=True)
-    filename = f"{results_file.stem}___{'-'.join(indicator_names)}.json"
+    filename = f"{results_file.stem}___{'-'.join(processor.get_loaded_indicators())}.json"
     output_file = output_dir / filename
 
     with output_file.open("w", encoding="utf-8") as f: # If other benchmarks can export to this format, then further analysis can be done using 'sustainabench generate' on third-party results
