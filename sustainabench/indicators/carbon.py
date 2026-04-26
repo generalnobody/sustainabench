@@ -1,4 +1,6 @@
 import pandas as pd
+from pathlib import Path
+import requests
 from sustainabench.indicators.base import Indicator, register_indicator
 
 @register_indicator
@@ -8,9 +10,10 @@ class CarbonIndicator(Indicator):
 
 
     def __init__(self, filename):
-        self.filename = filename
+        self.filename = filename # Can be either a .parquet file containing all the traces, or can be a dir containing lots of .parquet traces. 
+        # If it is a dir, filenames are used to automatically determine selected .parquet files based on county (and possibly region) code using metadata public IP.
 
-    def compute(self, measurements, indicator_config):
+    def compute(self, measurements, metadata, indicator_config):
         possible_modes = ["auto", "fixed"] # TODO: add fromto mode, where selecting two values is possible to select the dataset between those two timestamps (allows for finer control)
         reference_time_mode = possible_modes[0] # Default is auto
         reference_time_value = ""
@@ -44,8 +47,47 @@ class CarbonIndicator(Indicator):
                     raise ValueError("An all-zero window is unsupported. Please make sure to select at least 1 for either yearsa, months or days")
                 window_years = years; window_months = 0; window_days = 0
         
+        df = None
+        # Auto-region selection logic
+        datapath = Path(self.filename)
+        if datapath.is_file():
+            df = pd.read_parquet(datapath)
+        elif datapath.is_dir():
+            if "public_ip" not in metadata:
+                raise ValueError (f"Key 'public_ip' absent from node's metadata. This is needed as you entered a directory for auto-selection of carbon traces.")
+            response = requests.get(f"http://ip-api.com/json/{metadata['public_ip']}")
+            data = response.json()
+            country_code = data.get("countryCode")
+            region_code = data.get("region")
+            if not country_code:
+                raise ValueError("Could not determine country code from IP lookup.")
+            
+            files = [p for p in datapath.iterdir() if p.is_file()]
+            # First: exact region match
+            region_match = [
+                p for p in files
+                if p.stem.startswith(f"{country_code}-{region_code}_")
+            ]
+            # Second: country-only fallback
+            country_match = [
+                p for p in files
+                if p.stem.startswith(f"{country_code}_")
+            ]
+            if region_match:
+                print(f"Loading carbon traces for region {region_code} in country {country_code}")
+                df = pd.read_parquet(region_match[0])
+            elif country_match:
+                print(f"Loading carbon traces for country {country_code}")
+                df = pd.read_parquet(country_match[0])
+            else:
+                raise FileNotFoundError(
+                    f"No carbon traces found for country '{country_code}' "
+                    f"and/or region '{region_code}'."
+                )   
+        else:
+            raise ValueError(f"Tracefile '{self.filename}' does not exist.")
+
         # Load parquet trace and check if selected gap is available, then calculate average intensity over the selected period
-        df = pd.read_parquet(self.filename)
         if "timestamp" not in df.columns:
             raise ValueError("Missing 'timestamp' column")
         elif "carbon_intensity" not in df.columns:
@@ -78,55 +120,38 @@ class CarbonIndicator(Indicator):
 
         # Calculate carbon output
         # Load measurement data & check
-        results = []
-        for node_result in measurements["node_results"]:
-            node_ci = {}
-            # Calculate, per run, carbon output
-            for run in node_result["metrics"]: # 'run' is run's id
-                cpu_kwh = 0
-                gpu_kwh = []
-                if "cpu-energy" in node_result["metrics"][run]:
-                    if "energy" in node_result["metrics"][run]["cpu-energy"] and "kwh" in node_result["metrics"][run]["cpu-energy"]["energy"]:
-                        cpu_kwh = node_result["metrics"][run]["cpu-energy"]["energy"]["kwh"]
-                    else:
-                        raise ValueError("Missing key in measurements related to cpu-energy. Please double-check")
-                    
-                if "gpu-nv" in node_result["metrics"][run]:
-                    for gpu_result in node_result["metrics"][run]["gpu-nv"]:
-                        if "gpu_id" in gpu_result and "energy" in gpu_result and "kwh" in gpu_result["energy"]:
-                            gpu_kwh.append({
-                                "gpu_id": gpu_result["gpu_id"],
-                                "kwh": gpu_result["energy"]["kwh"]
-                            })
-                        else:
-                            raise ValueError("Missing key in measurement related to gpu-nv. Please double-check")
-                        
-                # Here, we have cpu's kwh, as well as the kwh of all gpu's
-                cpu_carbon = cpu_kwh * avg_intensity
-                gpu_carbon = [
-                    {
-                        "gpu_id": g_kwh["gpu_id"],
-                        "carbon_g": g_kwh["kwh"] * avg_intensity
-                    }
-                    for g_kwh in gpu_kwh
-                ]
-                total_run_carbon = cpu_carbon + sum(item["carbon_g"] for item in gpu_carbon)
-
-                results.append({
-                    f"{run}": {
-                        "total_carbon_g": total_run_carbon,
-                        "cpu_carbon_g": cpu_carbon,
-                        "gpu_carbon": gpu_carbon
-                    }
-                })
-
-
-        # Sum kWh, multiply with carbon intensity
-        
-
-        return {f"{self.name}": results}
-        # energy_kwh = measurements.get("energy_kwh", 0)
-
-        # return {
-        #     "carbon_g": energy_kwh * self.ci
-        # }
+        results = {}
+        cpu_kwh = 0
+        gpu_kwh = []
+        if "cpu-energy" in measurements:
+            if "energy" in measurements["cpu-energy"] and "kwh" in measurements["cpu-energy"]["energy"]:
+                cpu_kwh = measurements["cpu-energy"]["energy"]["kwh"]
+            else:
+                raise ValueError("Missing key in measurements related to cpu-energy. Please double-check")
+            
+        if "gpu-nv" in measurements:
+            for gpu_result in measurements["gpu-nv"]:
+                if "gpu_id" in gpu_result and "energy" in gpu_result and "kwh" in gpu_result["energy"]:
+                    gpu_kwh.append({
+                        "gpu_id": gpu_result["gpu_id"],
+                        "kwh": gpu_result["energy"]["kwh"]
+                    })
+                else:
+                    raise ValueError("Missing key in measurement related to gpu-nv. Please double-check")
+                
+        cpu_carbon = cpu_kwh * avg_intensity
+        gpu_carbon = [
+            {
+                "gpu_id": g_kwh["gpu_id"],
+                "carbon_g": g_kwh["kwh"] * avg_intensity
+            }
+            for g_kwh in gpu_kwh
+        ]
+        total_run_carbon = cpu_carbon + sum(item["carbon_g"] for item in gpu_carbon)
+        return {
+            self.name: {
+                "total_g": total_run_carbon,
+                "cpu_g": cpu_carbon,
+                "gpu_g": gpu_carbon
+            }
+        }

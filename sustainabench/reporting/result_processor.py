@@ -29,9 +29,25 @@ class ResultProcessor:
         ]
 
     def process(self, raw_results, indicator_cfg):
-        computed = {}
-        for ind in self.indicators:
-            computed.update(ind.compute(raw_results, indicator_cfg))
-
+        computed = {
+            "workload": raw_results["workload"],
+            "node_results": [],
+            "metadata": raw_results["metadata"]
+        }
+        for node in raw_results["node_results"]:
+            node_res = {} # Contains per-run derived metrics
+            node_metadata = node["metadata"]
+            for run in node["metrics"]:
+                run_res = {}
+                run_metrics = node["metrics"][run]
+                for ind in self.indicators:
+                    run_res.update(ind.compute(run_metrics, node_metadata, indicator_cfg))
+                node_res.update({run: run_res})
+            computed["node_results"].append({
+                "node_id": node["node_id"],
+                "metrics": node_res,
+                "metadata": node_metadata
+            })
+            
         return computed
 

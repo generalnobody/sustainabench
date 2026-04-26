@@ -33,8 +33,14 @@ def generate(
         if "node_results" not in raw_results:
             raise ValueError("Missing 'node_results' key in results")
         for node in raw_results["node_results"]:
-            if "metrics" not in node:
+            if "node_id" not in node:
+                raise ValueError("Missing 'node_id' key in results")
+            elif "metrics" not in node:
                 raise ValueError("Missing 'metrics' key in results")
+            elif "metadata" not in node:
+                raise ValueError("MIssing 'metadata' key in results")
+        if "metadata" not in raw_results:
+            raise ValueError("Missing 'metadata' key in results")
 
     indicator_cfg = None
     if config_file != Path(""):

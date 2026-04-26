@@ -19,5 +19,5 @@ class Indicator(ABC):
         pass
 
     @abstractmethod
-    def compute(self, measurements: dict, indicator_config: dict) -> dict:
+    def compute(self, measurements: dict, metadata: dict, indicator_config: dict) -> dict:
         pass
