@@ -2,9 +2,11 @@ indicators:
   carbon:
     params:
       reference_time: 
-        mode: fixed                     # 'fixed' to use 'value', 'auto' to select from most recent available date
-        value: "2025-12-31T23:59:59Z"   # Date from when to count selected period back. Required ISO 8601 format.
+        mode: auto                     # 'fixed' to use 'value', 'auto' to select from most recent available date. 'fromto' to select range using 'from' and 'to'
+        value: "2024-12-31T23:59:59Z"   # Date from when to count selected period back. Required ISO 8601 format.
+        from: "2023-12-31T23:59:59Z"
+        to: "2024-12-31T23:59:59Z"
       window:                           # How many years + months + days to slice from the selected parquet traces.
-        years: 0
+        years: 1
         months: 0
         days: 0
