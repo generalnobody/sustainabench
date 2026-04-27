@@ -10,20 +10,21 @@ class CarbonIndicator(Indicator):
 
 
     def __init__(self, filename):
-        self.filename = filename # Can be either a .parquet file containing all the traces, or can be a dir containing lots of .parquet traces. 
+        self.parquets = filename # Can be either a .parquet file containing all the traces, or can be a dir containing lots of .parquet traces. 
         # If it is a dir, filenames are used to automatically determine selected .parquet files based on county (and possibly region) code using metadata public IP.
 
-    def compute(self, measurements, metadata, indicator_config):
+    def setup(self, indicator_config):
+        # Load config. Must always be run before compute()
         possible_modes = ["auto", "fixed", "fromto"]
-        reference_time_mode = possible_modes[0] # Default is auto
-        reference_time_value = ""
-        reference_time_from = ""
-        reference_time_to = ""
+        self.reference_time_mode = possible_modes[0] # Default is auto
+        self.reference_time_value = ""
+        self.reference_time_from = ""
+        self.reference_time_to = ""
 
         # Default window is 1 year. With default 'auto' mode, uses the most recent available year
-        window_years = 1
-        window_months = 0
-        window_days = 0
+        self.window_years = 1
+        self.window_months = 0
+        self.window_days = 0
 
         # Config validation and application
         if indicator_config and self.name in indicator_config["indicators"]:
@@ -32,18 +33,18 @@ class CarbonIndicator(Indicator):
                 if "mode" in params["reference_time"]:
                     if params["reference_time"]["mode"] not in possible_modes:
                         raise ValueError(f"Unknown reference time mode detected. Mode '{indicator_config['indicators'][self.name]['params']['reference_time']['mode']} does not exist. Please select from these modes: {possible_modes}'")
-                    reference_time_mode = params["reference_time"]["mode"]
-                    if reference_time_mode == "fixed":
+                    self.reference_time_mode = params["reference_time"]["mode"]
+                    if self.reference_time_mode == "fixed":
                         if "value" not in params["reference_time"]:
                             raise ValueError("Please make sure to select a reference time value when selecting fixed mode.")
-                        reference_time_value = params["reference_time"]["value"]
-                    if reference_time_mode == "fromto":
+                        self.reference_time_value = params["reference_time"]["value"]
+                    if self.reference_time_mode == "fromto":
                         if "from" not in params["reference_time"]:
                             raise ValueError("Please make sure to select a reference 'from' time value when selecting fromto mode.")
                         elif "to" not in params["reference_time"]:
                             raise ValueError("Please make sure to select a reference 'to' time value when selecting fromto mode.")
-                        reference_time_from = params["reference_time"]["from"]
-                        reference_time_to = params["reference_time"]["to"]
+                        self.reference_time_from = params["reference_time"]["from"]
+                        self.reference_time_to = params["reference_time"]["to"]
             if "window" in params:
                 years = months = days = 0
                 if "years" in params["window"]:
@@ -52,14 +53,15 @@ class CarbonIndicator(Indicator):
                     months = params["window"]["months"]
                 if "days" in params["window"]:
                     days = params["window"]["days"]
-                if years == months == days == 0 and reference_time_mode != "fromto":
+                if years == months == days == 0 and self.reference_time_mode != "fromto":
                     raise ValueError("An all-zero window is unsupported. Please make sure to select at least 1 for either years, months or days")
-                window_years = years; window_months = 0; window_days = 0
-        
+                self.window_years = years; self.window_months = 0; self.window_days = 0
+
+    def compute(self, measurements, metadata):
         # Load carbon tracefile
         df = None
         # Auto-region selection logic
-        datapath = Path(self.filename)
+        datapath = Path(self.parquets)
         if datapath.is_file():
             df = pd.read_parquet(datapath)
         elif datapath.is_dir():
@@ -95,7 +97,7 @@ class CarbonIndicator(Indicator):
                     f"and/or region '{region_code}'."
                 )   
         else:
-            raise ValueError(f"Tracefile '{self.filename}' does not exist.")
+            raise ValueError(f"Tracefile '{self.parquets}' does not exist.")
 
         # Load parquet trace and check if selected gap is available, then calculate average intensity over the selected period
         if "timestamp" not in df.columns:
@@ -110,24 +112,23 @@ class CarbonIndicator(Indicator):
         
 
         reference_from = reference_to = None
-        if reference_time_mode == "fromto":
-            reference_from = pd.to_datetime(reference_time_from, utc=True)
-            reference_to = pd.to_datetime(reference_time_to, utc=True)
+        if self.reference_time_mode == "fromto":
+            reference_from = pd.to_datetime(self.reference_time_from, utc=True)
+            reference_to = pd.to_datetime(self.reference_time_to, utc=True)
 
             if reference_from > reference_to:
                 raise ValueError("Reference time 'from' must be <= reference time 'to'")
         else:
-            if reference_time_mode == "fixed":
-                reference_to = pd.to_datetime(reference_time_value, utc=True)
+            if self.reference_time_mode == "fixed":
+                reference_to = pd.to_datetime(self.reference_time_value, utc=True)
             else:
                 reference_to =  df["timestamp"].max()
             
-            reference_from = reference_to - pd.DateOffset(years=window_years, months=window_months, days=window_days)
+            reference_from = reference_to - pd.DateOffset(years=self.window_years, months=self.window_months, days=self.window_days)
 
         filtered = df[
             df["timestamp"].between(reference_from, reference_to)
         ]
-        print(filtered)
         if filtered.empty:
             raise ValueError("With the configured mode, reference time and cutoff window, no data was found in the parquet dataset. Please modify your config to ensure data is present.")
         filtered["carbon_intensity"] = pd.to_numeric(

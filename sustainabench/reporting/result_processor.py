@@ -34,6 +34,9 @@ class ResultProcessor:
             "node_results": [],
             "metadata": raw_results["metadata"]
         }
+
+        for ind in self.indicators: # Setup all indicators. Prevents needing to re-config for every node for every run
+            ind.setup(indicator_cfg) 
         for node in raw_results["node_results"]:
             node_res = {} # Contains per-run derived metrics
             node_metadata = node["metadata"]
@@ -41,7 +44,7 @@ class ResultProcessor:
                 run_res = {}
                 run_metrics = node["metrics"][run]
                 for ind in self.indicators:
-                    run_res.update(ind.compute(run_metrics, node_metadata, indicator_cfg))
+                    run_res.update(ind.compute(run_metrics, node_metadata))
                 node_res.update({run: run_res})
             computed["node_results"].append({
                 "node_id": node["node_id"],
