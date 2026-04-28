@@ -141,12 +141,19 @@ class CarbonIndicator(Indicator):
         # Load measurement data & check
         results = {}
         cpu_kwh = 0
+        cpu_per_domain_kwh = [] # cpu_kwh is already total, so this is just for completeness. Further calculations for total system carbon are done using cpu_kwh and gpu_kwh, this only on itself
         gpu_kwh = []
         if "cpu-energy" in measurements:
             if "energy" in measurements["cpu-energy"] and "kwh" in measurements["cpu-energy"]["energy"]:
                 cpu_kwh = measurements["cpu-energy"]["energy"]["kwh"]
             else:
                 raise ValueError("Missing key in measurements related to cpu-energy. Please double-check")
+            if "per_domain" in measurements["cpu-energy"]: # Not required per se, so if not available, just ignore it, no need for an error
+                for domain in measurements["cpu-energy"]["per_domain"]:
+                    if "energy" in domain and "kwh" in domain["energy"]:
+                        cpu_per_domain_kwh.append(domain["energy"]["kwh"])
+                    else:
+                        raise ValueError("Missing key in a CPU domain's 'energy' value. Please check")
             
         if "gpu-nv" in measurements:
             for gpu_result in measurements["gpu-nv"]:
@@ -158,7 +165,22 @@ class CarbonIndicator(Indicator):
                 else:
                     raise ValueError("Missing key in measurement related to gpu-nv. Please double-check")
                 
-        cpu_carbon = cpu_kwh * avg_intensity
+        cpu_carbon = {
+            "carbon_g": cpu_kwh * avg_intensity
+        }
+        if cpu_per_domain_kwh:
+            cpu_per_domain_carbon = [
+                cpu_domain_kwh * avg_intensity
+                for cpu_domain_kwh in cpu_per_domain_kwh
+            ]
+            cpu_carbon.update({
+                "per_domain": [
+                    {
+                        "carbon_g": g
+                    } for g in cpu_per_domain_carbon
+                ]
+            })
+        print(cpu_carbon)
         gpu_carbon = [
             {
                 "gpu_id": g_kwh["gpu_id"],
@@ -166,11 +188,11 @@ class CarbonIndicator(Indicator):
             }
             for g_kwh in gpu_kwh
         ]
-        total_run_carbon = cpu_carbon + sum(item["carbon_g"] for item in gpu_carbon)
+        total_run_carbon = cpu_carbon["carbon_g"] + sum(item["carbon_g"] for item in gpu_carbon)
         return {
             self.name: {
                 "total_g": total_run_carbon,
-                "cpu_g": cpu_carbon,
-                "gpu_g": gpu_carbon
+                "cpu": cpu_carbon,
+                "gpu": gpu_carbon
             }
         }
