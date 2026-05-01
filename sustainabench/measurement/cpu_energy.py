@@ -1,5 +1,6 @@
 from sustainabench.measurement.base import Measurement, register_measurement
 import os
+import time
 
 @register_measurement
 class RAPLMeasurement(Measurement):
@@ -77,20 +78,26 @@ class RAPLMeasurement(Measurement):
             raise RuntimeError("No RAPL domains found")
 
         self.start_energy = self._read_energy()
+        self.start_time = time.perf_counter()
         self.end_energy = None
+        self.end_time = None
 
     def stop(self):
         self.end_energy = self._read_energy()
+        self.end_time = time.perf_counter()
 
     def sample(self):
         pass  # not used
 
     def result(self):
-        if self.start_energy is None or self.end_energy is None:
+        if self.start_energy is None or self.end_energy is None or self.start_time is None or self.end_time is None:
             return {}
         
         diffs_uj = self._energy_diff(self.start_energy, self.end_energy)
         total_energy_j = sum(diffs_uj) / 1e6
+
+        elapsed_time = self.end_time - self.start_time
+        avg_total_power_w = total_energy_j / elapsed_time if elapsed_time > 0 else 0
 
         return {
             f"{self.name}": {
@@ -98,11 +105,17 @@ class RAPLMeasurement(Measurement):
                     "j": total_energy_j,
                     "kwh": total_energy_j / 3.6e6
                 },
+                "power": {
+                    "w": avg_total_power_w
+                },
                 "per_domain": [
                     {
                         "energy": {
                             "j": d / 1e6,
                             "kwh": d / 3.6e12
+                        },
+                        "power": {
+                            "w": (d / 1e6) / elapsed_time if elapsed_time > 0 else 0
                         }
                     }
                     for d in diffs_uj
