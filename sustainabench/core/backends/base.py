@@ -48,10 +48,6 @@ class ExecutionBackend(ABC):
 
             manager.stop()
 
-            # manager.start()
-            # workload.run(self.num_processors, workload_cfg, context=context)
-            # manager.stop()
-
             results[f"run{i}"] = manager.collect()
 
         return results
