@@ -1,6 +1,5 @@
 from abc import ABC, abstractmethod
 from typing import Dict, Type
-import threading
 
 MEASUREMENTS: Dict[str, Type["Measurement"]] = {}
 

@@ -7,7 +7,7 @@ class GPUTrainWorkload(Workload):
     """GPU Training workload"""
     name = "gpu-train"
 
-    def run(self, num_processors: int, workload_cfg):
+    def run(self, num_processors: int, workload_cfg, context=None):
         if not torch.cuda.is_available(): # CUDA or ROCm GPU
             raise RuntimeError("CUDA is required for this benchmark but is not available on this system.")
 

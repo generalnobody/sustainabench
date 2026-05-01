@@ -19,7 +19,7 @@ class CPUMultiWorkload(Workload):
                 count += 1
         return count
 
-    def run(self, num_processors: int, workload_cfg):
+    def run(self, num_processors: int, workload_cfg, context=None):
         limit = 100
         if workload_cfg and "limit" in workload_cfg["workload"]["params"]:
             limit = workload_cfg["workload"]["params"]["limit"]

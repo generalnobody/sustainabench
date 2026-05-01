@@ -12,6 +12,6 @@ class CPUMatrixMultiWorkload(Workload):
     """Multi-threaded CPU Matrix-Multiplication workload"""
     name = "cpu-mm"
 
-    def run(self, num_processors: int, workload_cfg):        
+    def run(self, num_processors: int, workload_cfg, context=None):        
         with Pool(num_processors) as p:
             p.map(worker, range(num_processors * 2))

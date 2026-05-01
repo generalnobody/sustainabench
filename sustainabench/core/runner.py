@@ -1,8 +1,5 @@
 from sustainabench.workloads import WORKLOADS
 from sustainabench.measurement import MEASUREMENTS
-from sustainabench.indicators import INDICATORS
-from sustainabench.measurement.manager import MeasurementManager
-import psutil
 from .models import BenchmarkResult
 
 class BenchmarkRunner:
@@ -25,35 +22,24 @@ class BenchmarkRunner:
             for name in measurement_names
         ]
 
-        if runs >= 1:
-            self.runs = runs
-        else:
-            raise ValueError(f"Runs amount lower than 1: {runs}")
-
-        self.backend = backend        
-
-    def _run_local(self, num_processors: int):
-        """Run the benchmark locally"""
-
-        measurements = {}
-        for i in range(self.runs):
-            manager = MeasurementManager(self.measurements)
-            manager.start()
-            self.workload.run(num_processors, self.workload_cfg)
-            manager.stop()
-            raw_metrics = manager.collect()
-
-            measurements[f"run{i}"] = raw_metrics
-        
-
-        return measurements
-    
-    def get_measurements(self): # Expose selected measurements
-        return self.measurements
+        if runs < 1:
+            raise ValueError(f"Cannot perform {runs} runs")
+            
+        self.runs = runs
+        self.backend = backend
 
     def run(self) -> BenchmarkResult:
         """Function that runs the benchmark on the correct backend"""
         return self.backend.run(self)
-    
-    def get_workload_name(self):
-        return self.workload.name
+
+    def get_measurements(self):
+        return self.measurements
+
+    def get_workload(self):
+        return self.workload
+
+    def get_runs(self):
+        return self.runs
+
+    def get_workload_cfg(self):
+        return self.workload_cfg

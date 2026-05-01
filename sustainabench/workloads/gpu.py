@@ -6,7 +6,7 @@ class GPUMatrixWorkload(Workload):
     """GPU Matrix-Multiplication workload"""
     name = "gpu-mm"
 
-    def run(self, num_processors: int, workload_cfg):
+    def run(self, num_processors: int, workload_cfg, context=None):
         m = n = p = 2000
         if workload_cfg:
             if "m" in workload_cfg["workload"]["params"]:

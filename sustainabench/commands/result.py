@@ -5,7 +5,6 @@ import yaml
 from rich import print
 from pathlib import Path
 from sustainabench.reporting.result_processor import ResultProcessor
-from sustainabench.indicators import INDICATORS
 
 app = typer.Typer()
 

@@ -12,6 +12,13 @@ from sustainabench.core.backends import BACKENDS
 
 app = typer.Typer()
 
+def _is_main_process():
+    try:
+        from mpi4py import MPI
+        return MPI.COMM_WORLD.Get_rank() == 0
+    except:
+        return True
+
 @app.command()
 def benchmark(
     workload: Annotated[str, typer.Option(..., "--workload", "-w", help="The workload to run (from 'workloads/')")],
@@ -55,18 +62,19 @@ def benchmark(
     )
 
     results = runner.run()
-    results_dict = results.to_dict()
+    if results is not None and _is_main_process():
+        results_dict = results.to_dict()
 
-    print("Results:")
-    print(json.dumps(results_dict, indent=4))
+        print("Results:")
+        print(json.dumps(results_dict, indent=4))
 
-    output_dir.mkdir(parents=True, exist_ok=True)
-    filename = f"{workload}__{'-'.join(measurement_names)}__{datetime.now().strftime('%Y%m%d_%H%M%S')}.json"
-    output_file = output_dir / filename
+        output_dir.mkdir(parents=True, exist_ok=True)
+        filename = f"{workload}__{'-'.join(measurement_names)}__{datetime.now().strftime('%Y%m%d_%H%M%S')}.json"
+        output_file = output_dir / filename
 
-    with output_file.open("w", encoding="utf-8") as f: # If other benchmarks can export to this format, then further analysis can be done using 'sustainabench generate' on third-party results
-        json.dump(results_dict, f, indent=4, ensure_ascii=False)
-        print("Outputted results to:", output_file)
+        with output_file.open("w", encoding="utf-8") as f: # If other benchmarks can export to this format, then further analysis can be done using 'sustainabench generate' on third-party results
+            json.dump(results_dict, f, indent=4, ensure_ascii=False)
+            print("Outputted results to:", output_file)
 
 
 @app.command()

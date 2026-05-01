@@ -18,6 +18,6 @@ class Workload(ABC):
     name: str
 
     @abstractmethod
-    def run(self, num_processors: int, workload_cfg):
+    def run(self, num_processors: int, workload_cfg, context=None):
         """Execute workload."""
         pass
