@@ -9,6 +9,7 @@ class NvidiaGPUMeasurement(Measurement):
     name = "gpu-nv"
     poll_interval = 0.1
     scope = "node"
+    require_file = False
 
     def start(self):
         pynvml.nvmlInit()

@@ -7,6 +7,7 @@ class RAPLMeasurement(Measurement):
     name = "cpu-energy"
     poll_interval = None
     scope = "node"
+    require_file = False
 
     def _discover_domains(self, base_path="/sys/class/powercap/intel-rapl"): # Handles cases where multiple packages are present in system.
         domains = []

@@ -8,11 +8,10 @@ class LocalBackend(ExecutionBackend):
     name = "local"
 
     def run(self, runner):
-        raw_metrics = runner._run_local(self.num_processors)
+        raw_metrics = self._execute_single(runner, None)
 
-        results = BenchmarkResult(
-            runner.get_workload().name,
-            [NodeResult(self.name, raw_metrics, get_node_metadata())],
-            {}
-        )
-        return results
+        return [NodeResult(
+            self.name,
+            raw_metrics,
+            get_node_metadata()
+        )]

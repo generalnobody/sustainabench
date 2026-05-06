@@ -1,6 +1,6 @@
 from abc import ABC, abstractmethod
 from typing import Dict, Type
-from ..models import BenchmarkResult
+from ..models import BenchmarkResult, NodeResult
 from sustainabench.measurement.manager import MeasurementManager
 
 BACKENDS: Dict[str, Type["ExecutionBackend"]] = {}
@@ -18,36 +18,33 @@ class ExecutionBackend(ABC):
         self.num_processors = num_processors
 
     @abstractmethod
-    def run(self, runner) -> BenchmarkResult:
+    def run(self, runner) -> list[NodeResult]:
         pass
 
     # Shared execution unit used by all backends
     def _execute_single(self, runner, context=None):
         workload = runner.get_workload()
         measurements = runner.get_measurements()
-        runs = runner.get_runs()
         workload_cfg = runner.get_workload_cfg()
 
-        results = {}
+        manager = MeasurementManager(measurements)
 
-        for i in range(runs):
-            manager = MeasurementManager(measurements)
+        if context and context.comm:
+            context.comm.Barrier()
 
-            if context and context.comm:
-                context.comm.Barrier()
+        manager.start()
 
-            manager.start()
+        if context and context.comm:
+            context.comm.Barrier()
 
-            if context and context.comm:
-                context.comm.Barrier()
+        workload.run(self.num_processors, workload_cfg, context=context)
 
-            workload.run(self.num_processors, workload_cfg, context=context)
+        if context and context.comm:
+            context.comm.Barrier()
 
-            if context and context.comm:
-                context.comm.Barrier()
+        manager.stop()
 
-            manager.stop()
+        return manager.collect()
 
-            results[f"run{i}"] = manager.collect()
-
-        return results
+    def get_processors(self) -> int | None:
+        return self.num_processors

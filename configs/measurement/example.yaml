@@ -1,0 +1,5 @@
+measurement:         # Top-level measurement object, must always exist
+  name: "example" # Selected measurement. Must correspond to measurement name defined in corresponding measurement file in 'sustainabench/measurement/''
+  params:         # Measurement's parameters. Not checked by benchmark runner, must be verified within benchmark script.
+    c: 1
+    p: 5

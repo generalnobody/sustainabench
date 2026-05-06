@@ -7,6 +7,7 @@ class TimeMeasurement(Measurement):
     name = "time"
     poll_interval = None
     scope = "node"
+    require_file = False
 
     def start(self):
         self.t0 = time.perf_counter()

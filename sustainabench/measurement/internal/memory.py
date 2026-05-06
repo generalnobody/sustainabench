@@ -7,6 +7,7 @@ class MemoryMeasurement(Measurement):
     name = "memory"
     poll_interval = 0.1
     scope = "node"
+    require_file = False
 
     def start(self):
         self.samples = []

@@ -11,12 +11,9 @@ class NodeResult:
 @dataclass
 class BenchmarkResult:
     workload: str
-    node_results: list[NodeResult]
+    backend: str # Only included to make processing weird nodes (global) easier when using, for instance, MPI
+    results: Dict[str, list[NodeResult]]
     metadata: Dict[str, Any]
 
     def to_dict(self) -> Dict[str, Any]:
-        return {
-            "workload": self.workload,
-            "node_results": [asdict(node) for node in self.node_results],
-            "metadata": self.metadata
-        }
+        return asdict(self)

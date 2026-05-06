@@ -6,6 +6,13 @@ from .base import MEASUREMENTS, register_measurement
 package_dir = Path(__file__).parent
 
 # Import of all relevant measurements
-for file in package_dir.glob("*.py"):
-    if file.stem not in ("__init__", "base"):
-        import_module(f"{__name__}.{file.stem}")
+for file in package_dir.rglob("*.py"):
+    if file.stem in ("__init__", "base", "manager"):
+        continue    
+        
+    rel_path = file.relative_to(package_dir)
+
+    module_parts = rel_path.with_suffix("").parts
+    module_name = ".".join(module_parts)
+
+    import_module(f"{__name__}.{module_name}")

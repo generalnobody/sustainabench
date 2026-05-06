@@ -32,17 +32,21 @@ class MPIBackend(ExecutionBackend):
 
         node_results = []
         if rank == 0 and gathered:
+
+            hostnames = [meta["hostname"] for _, meta in gathered]
+
+            local_rank_map = {}
+            local_ranks = []
+            for h in hostnames:
+                local_rank = local_rank_map.get(h, 0)
+                local_ranks.append(local_rank)
+                local_rank_map[h] = local_rank + 1
+
             node_results = [
-                NodeResult(f"rank_{i}", m, meta)
+                NodeResult(f"{meta['hostname']}:{i}:{local_ranks[i]}", m, meta)
                 for i, (m, meta) in enumerate(gathered)
             ]
         elif rank == 0 and not gathered:
             raise ValueError("MPI: gathered benchmarking results not present at root rank")
         
-        return BenchmarkResult(
-            runner.get_workload().name,
-            node_results,
-            {
-                self.name: {"world_size": size}
-            }
-        )
+        return node_results
