@@ -98,7 +98,7 @@ class LikwidMeasurement(ExternalMeasurement):
                 f"STDOUT: {output.stdout}\nSTDERR: {output.stderr}"
             )
         
-        self.results = output.stdout
+        self.results = output.stdout.splitlines()
 
     def _parse_likwid_output(self, results):
         csvdata = None
