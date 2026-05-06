@@ -69,7 +69,8 @@ class LikwidMeasurement(ExternalMeasurement):
         # Measurements should be a dict (passed from runner.run()), add them dynamically, or add 'none' if no other measurement present
         filtered_measurements = []
         for m in measurements:
-            filtered_measurements.append((m.name, getattr(m, "file", None)))
+            if m.name != self.name:
+                filtered_measurements.append((m.name, getattr(m, "file", None)))
         # filtered_measurements = {m.name: m.file for m in measurements if m.name != self.name} # Exclude current measurement
         if len(filtered_measurements) > 0:
             for measurement, filename in filtered_measurements:
