@@ -96,7 +96,7 @@ class LikwidMeasurement(ExternalMeasurement):
             "-r", str(runs), # Probably always run with 1 run, since number of runs should be handled by the top-level external measurement's runner? And keep re-launching?
             "-c", config_file,
             "-b", backend,
-            "-p", processors,
+            "-p", str(processors),
             "-o", output_dir,
             "-of", output_filename
         ])
