@@ -89,8 +89,16 @@ class LikwidMeasurement(ExternalMeasurement):
             "-o", output_dir,
             "-of", output_filename
         ])
+
+        output = subprocess.run(cmd, capture_output=True, text=True)
+
+        if output.returncode != 0:
+            raise RuntimeError(
+                f"FAILURE: Subprocess executed with command '{' '.join(cmd)}' failed with return code {output.returncode}\n"
+                f"STDOUT: {output.stdout}\nSTDERR: {output.stderr}"
+            )
         
-        self.results = subprocess.run(cmd, capture_output=True, text=True)
+        self.results = output.stdout
 
     def _parse_likwid_output(self, results):
         csvdata = None
