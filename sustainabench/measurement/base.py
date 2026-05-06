@@ -15,11 +15,16 @@ class Measurement(ABC):
     poll_interval: float | None = None # Seconds
     scope: str
     require_file: bool # Control whether this indicator should require a file path to be included or not.
-    priority: int = 0
 
     def __init__(self, filename: str) -> None:
         pass
 
+    @abstractmethod
+    def is_external(self) -> bool:
+        pass
+    
+
+class InternalMeasurement(Measurement):
     def is_external(self) -> bool:
         return False
 
@@ -41,8 +46,8 @@ class Measurement(ABC):
         pass
 
 class ExternalMeasurement(Measurement):
+    priority: int = 0
     # The higher the priority, if multiple external measurements are to be conducted, the earlier this one gets started
-
     def is_external(self) -> bool:
         return True
     

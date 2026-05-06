@@ -1,8 +1,8 @@
-from sustainabench.measurement.base import Measurement, register_measurement
+from sustainabench.measurement.base import InternalMeasurement, register_measurement
 
 
 @register_measurement
-class NoneMeasurement(Measurement):
+class NoneMeasurement(InternalMeasurement): # Technically run as an internal measurement, just not included among the other internal measurements as its sole purpose is being useless.
     """Dummy measurement. Useful when running external workloads that have their own measurement systems."""
     name = "none"
     poll_interval = None

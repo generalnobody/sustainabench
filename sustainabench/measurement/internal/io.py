@@ -1,9 +1,9 @@
 import psutil
-from sustainabench.measurement.base import Measurement, register_measurement
+from sustainabench.measurement.base import InternalMeasurement, register_measurement
 
 
 @register_measurement
-class IOMeasurement(Measurement):
+class IOMeasurement(InternalMeasurement):
     name = "io"
     poll_interval = None
     scope = "node"

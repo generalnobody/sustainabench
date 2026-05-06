@@ -1,9 +1,9 @@
 import psutil
-from sustainabench.measurement.base import Measurement, register_measurement
+from sustainabench.measurement.base import InternalMeasurement, register_measurement
 
 
 @register_measurement
-class MemoryMeasurement(Measurement):
+class MemoryMeasurement(InternalMeasurement):
     name = "memory"
     poll_interval = 0.1
     scope = "node"

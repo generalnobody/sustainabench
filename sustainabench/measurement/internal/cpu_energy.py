@@ -1,9 +1,9 @@
-from sustainabench.measurement.base import Measurement, register_measurement
+from sustainabench.measurement.base import InternalMeasurement, register_measurement
 import os
 import time
 
 @register_measurement
-class RAPLMeasurement(Measurement):
+class RAPLMeasurement(InternalMeasurement):
     name = "cpu-energy"
     poll_interval = None
     scope = "node"

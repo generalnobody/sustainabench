@@ -1,10 +1,10 @@
 import pynvml
 import time
-from sustainabench.measurement.base import Measurement, register_measurement
+from sustainabench.measurement.base import InternalMeasurement, register_measurement
 
 
 @register_measurement
-class NvidiaGPUMeasurement(Measurement):
+class NvidiaGPUMeasurement(InternalMeasurement):
 
     name = "gpu-nv"
     poll_interval = 0.1

@@ -1,9 +1,9 @@
 import time
-from sustainabench.measurement.base import  Measurement, register_measurement
+from sustainabench.measurement.base import  InternalMeasurement, register_measurement
 
 
 @register_measurement
-class TimeMeasurement(Measurement):
+class TimeMeasurement(InternalMeasurement):
     name = "time"
     poll_interval = None
     scope = "node"
