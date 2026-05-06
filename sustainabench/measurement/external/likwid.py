@@ -79,10 +79,16 @@ class LikwidMeasurement(ExternalMeasurement):
         # ] # Excludes measurements for now
 
         # Measurements should be a dict (passed from runner.run()), add them dynamically, or add 'none' if no other measurement present
-        filtered_measurements = {m.name: m.file for m in measurements if m.name != self.name} # Exclude current measurement
+        filtered_measurements = []
+        for m in measurements:
+            filtered_measurements.append((m.name, getattr(m, "file", None)))
+        # filtered_measurements = {m.name: m.file for m in measurements if m.name != self.name} # Exclude current measurement
         if len(filtered_measurements) > 0:
-            for measurement, filename in filtered_measurements.items():
-                cmd.extend(["-m", f"{measurement}={filename}"])
+            for measurement, filename in filtered_measurements:
+                if filename:
+                    cmd.extend(["-m", f"{measurement}={filename}"])
+                else:
+                    cmd.extend(["-m", measurement])
         else:
             cmd.extend(["-m", "none"])
 
@@ -97,136 +103,7 @@ class LikwidMeasurement(ExternalMeasurement):
 
         self.results = subprocess.run(cmd, capture_output=True, text=True)
 
-    # def _parse_likwid_output(self, output):
-    #     tables = {}
-    #     current_name = None
-    #     reader = csv.reader(io.StringIO(output))
-
-    #     for row in reader:
-    #         if not row:
-    #             continue
-
-    #         # detect new table
-    #         if row[0].startswith("TABLE"):
-    #             # e.g. ["TABLE", "Region compute"]
-    #             current_name = row[1].strip()
-    #             tables[current_name] = {
-    #                 "header": None,
-    #                 "rows": []
-    #             }
-    #             continue
-
-    #         if current_name:
-    #             if tables[current_name]["header"] is None:
-    #                 tables[current_name]["header"] = row
-    #             else:
-    #                 tables[current_name]["rows"].append(row)
-
-    #     return tables
-    
-    # def _normalize_table(self, table):
-    #     header = table["header"]
-    #     rows = table["rows"]
-
-    #     result = {}
-
-    #     for row in rows:
-    #         metric = row[0]
-    #         values = row[1:]
-
-    #         parsed = []
-    #         for v in values:
-    #             try:
-    #                 parsed.append(float(v))
-    #             except ValueError:
-    #                 parsed.append(v)
-
-    #         result[metric] = dict(zip(header[1:], parsed))
-
-    #     return result
-
-    # def parse_likwid_output(self, text):
-    #     # from io import StringIO
-
-    #     result = {
-    #         "struct": {},
-    #         "tables": []
-    #     }
-
-    #     lines = text.strip().splitlines()
-    #     current_table = None
-    #     reader = csv.reader(lines)
-
-    #     for row in reader:
-    #         if not row:
-    #             continue
-
-    #         tag = row[0]
-
-    #         # ---- STRUCT ----
-    #         if tag == "STRUCT":
-    #             current_table = None
-    #             continue
-
-    #         # key-value metadata
-    #         if current_table is None and ":" in row[0]:
-    #             key = row[0].strip(":")
-    #             value = row[1] if len(row) > 1 else ""
-    #             result["struct"][key] = value
-    #             continue
-
-    #         # ---- TABLE ----
-    #         if tag == "TABLE":
-    #             # Save previous table
-    #             if current_table:
-    #                 result["tables"].append(current_table)
-
-    #             current_table = {
-    #                 "name": row[1],
-    #                 "group": row[2],
-    #                 "headers": [],
-    #                 "rows": []
-    #             }
-    #             continue
-
-    #         # ---- Inside table ----
-    #         if current_table:
-    #             # first row after TABLE = header
-    #             if not current_table["headers"]:
-    #                 current_table["headers"] = row
-    #             else:
-    #                 # map row to dict
-    #                 entry = {
-    #                     current_table["headers"][i]: row[i] if i < len(row) else None
-    #                     for i in range(len(current_table["headers"]))
-    #                 }
-    #                 current_table["rows"].append(entry)
-
-    #     # append last table
-    #     if current_table:
-    #         result["tables"].append(current_table)
-
-    #     return result
-
     def _parse_likwid_output(self, results):
-        # Load the results as CSV
-        # Loop through the CSV lines until STRUCT or TABLE
-        # Select all lines from STRUCT/TABLE line until but not including next STRUCT/TABLE line
-        # Probably skip STRUCT now?
-        # 
-        # match = re.search(r"(STRUCT|TABLE)", output)
-
-        # if match:
-        #     result = output[match.start():]
-        # else:
-        #     result = ""
-
-        # Select all lines, then loop through them
-        # Depending on the originally selected backend, either collect all results together, grouped by table name (line[1]) or split across ranks based on second item in rankid shown by likwid-mpirun
-        # Probably, with likwid-mpirun results, some should also be global? Cause some tables arent specific to ranks 
-
-        # TODO: maybe write this in a separate python script, just to test with the saved txt files? should be easier for testing
-
         csvdata = None
         for i in range(len(results)):
             if results[i].startswith("STRUCT") or results[i].startswith("TABLE"):
@@ -323,11 +200,7 @@ class LikwidMeasurement(ExternalMeasurement):
 
     def result_json(self, nodeids: list[str]) -> dict:
         parsed = self._parse_likwid_output(self.results)
-
-        # node_results = []
-        # global_results = []
         result = {}
-
 
         if self.backend == "local":
             result = {
