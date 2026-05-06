@@ -109,7 +109,6 @@ class LikwidMeasurement(ExternalMeasurement):
 
         if not csvdata:
             raise ValueError("Expected likwid output, not found")
-
         reader = csv.reader(csvdata)
 
         structs = []
@@ -161,7 +160,7 @@ class LikwidMeasurement(ExternalMeasurement):
                 for row in table[2:]:
                     results[table_group][table_key][header].update({row[0]: row[i]})
 
-        return {}
+        return results
     
     def _split_results(self, data, nodeids):
         node_results = {node_id: {} for node_id in nodeids}
