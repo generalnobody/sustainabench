@@ -66,18 +66,6 @@ class LikwidMeasurement(ExternalMeasurement):
             "-w", workload,
         ] # Excludes measurements for now
 
-        # cmd = [
-        #     "likwid-perfctr",
-        #     "-C", self.cores,
-        #     "-g", self.group,
-        #     "-O",
-        #     "--",
-        #     "sustainabench",
-        #     "run",
-        #     "benchmark",
-        #     "-w", workload
-        # ] # Excludes measurements for now
-
         # Measurements should be a dict (passed from runner.run()), add them dynamically, or add 'none' if no other measurement present
         filtered_measurements = []
         for m in measurements:
@@ -100,9 +88,7 @@ class LikwidMeasurement(ExternalMeasurement):
             "-o", output_dir,
             "-of", output_filename
         ])
-
-        print(cmd)
-
+        
         self.results = subprocess.run(cmd, capture_output=True, text=True)
 
     def _parse_likwid_output(self, results):

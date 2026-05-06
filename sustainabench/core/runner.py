@@ -50,7 +50,7 @@ class BenchmarkRunner:
 
         return BenchmarkResult(
             self.workload.name,
-            self.backend,
+            self.backend.name,
             results,
             {}
         )
