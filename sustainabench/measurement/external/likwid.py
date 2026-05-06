@@ -101,6 +101,8 @@ class LikwidMeasurement(ExternalMeasurement):
             "-of", output_filename
         ])
 
+        print(cmd)
+
         self.results = subprocess.run(cmd, capture_output=True, text=True)
 
     def _parse_likwid_output(self, results):
