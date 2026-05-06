@@ -93,7 +93,7 @@ def benchmark(
                 if not child_results:
                     raise ValueError(f"File {child_file} could not be loaded")
                 
-                res = [NodeResult(**item) for item in child_results["run0"]]   # Always run0 since child always does just 1 run
+                res = [NodeResult(**item) for item in child_results["results"]["run0"]]   # Always run0 since child always does just 1 run
                 nodeids = [noderes.node_id for noderes in res] # These are expected to match external measurements' node ids. If not match, treated as global. If parser has local backend, treat all results as falling under node_id local.
                 index = {r.node_id: r for r in res}
 
