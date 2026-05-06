@@ -42,14 +42,18 @@ class LikwidMeasurement(ExternalMeasurement):
 
         # Decide which launcher to use. Depending on future backend functionality, might need to be changed
         if backend == "mpi":
+            try:
+                from mpi4py import MPI
+                size = MPI.COMM_WORLD.Get_size()
+            except ImportError:
+                raise RuntimeError("mpi4py is required for MPI backend but is not installed")
             launcher = [
                 "likwid-mpirun",
-                "-np", str(processors),
+                "-np", str(size),
                 "-C", self.cores,
                 "-g", self.group,
                 "-O",
             ]
-            processors = 1 # Set processors to 1, otherwise possibly infinite processors depending on the situation lol
         else:
             launcher = [
                 "likwid-perfctr",
