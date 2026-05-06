@@ -93,7 +93,7 @@ class LikwidMeasurement(ExternalMeasurement):
             cmd.extend(["-m", "none"])
 
         cmd.extend([ # Add the rest of the cmd params
-            "-r", runs, # Probably always run with 1 run, since number of runs should be handled by the top-level external measurement's runner? And keep re-launching?
+            "-r", str(runs), # Probably always run with 1 run, since number of runs should be handled by the top-level external measurement's runner? And keep re-launching?
             "-c", config_file,
             "-b", backend,
             "-p", processors,
