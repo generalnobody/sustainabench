@@ -104,7 +104,7 @@ class LikwidMeasurement(ExternalMeasurement):
         # ])
 
 
-        with tempfile.NamedTemporaryFile(mode="w", suffix=".sh", dir=output_dir) as f:
+        with tempfile.NamedTemporaryFile(mode="w+", suffix=".sh", dir=output_dir) as f:
             # TODO: launch sustainabench from a temp script file, such that likwid-mpirun doesnt mess up args
             filtered_measurements = []
             for m in measurements:
@@ -122,25 +122,18 @@ class LikwidMeasurement(ExternalMeasurement):
                 measurement_array.extend(["-m", "none"])
 
             script = f"""#!/bin/bash\n
-            sustainabench run benchmark -w {workload} {" ".join(measurement_array)} -r {str(runs)} -c {str(config_file)} -b {backend} =p {str(processors)} -p {str(processors)} -o {output_dir} -of {output_filename}\n
+            sustainabench run benchmark -w {workload} {" ".join(measurement_array)} -r {str(runs)} -c {str(config_file)} -b {backend} -np {str(node_processors)} -p {str(processors)} -o {output_dir} -of {output_filename}\n
             """
             f.write(script)
+            f.flush()
             cmd = launcher + self.likwid_params  + [
                 "--",
-                f.name
+                "bash", f.name
             ]
-
-            os.chmod(f.name, os.stat(f.name).st_mode | stat.S_IEXEC)
 
             output = subprocess.run(cmd, capture_output=True, text=True)
 
-
-
-
-
-        # output = subprocess.run(cmd, capture_output=True, text=True)
-
-        if output.returncode != 0 or output.stdout == []:
+        if output.returncode != 0 or output.stdout == "":
             raise RuntimeError(
                 f"FAILURE: Subprocess executed with command '{' '.join(cmd)}' failed with return code {output.returncode}\n"
                 f"STDOUT: {output.stdout}\nSTDERR: {output.stderr}"
