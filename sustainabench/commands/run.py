@@ -12,6 +12,7 @@ from sustainabench.measurement import MEASUREMENTS
 from sustainabench.core.backends import BACKENDS
 from sustainabench.measurement.base import ExternalMeasurement
 from sustainabench.schemas.results.benchmark import BenchmarkResult, NodeResult
+from sustainabench.schemas.configs.workloads.config import WorkloadConfig
 
 app = typer.Typer()
 
@@ -42,18 +43,10 @@ def benchmark(
 
     workload_cfg = None
     if config_file != Path(""):
+        tmp = None
         with open(config_file) as f:
-            workload_cfg = yaml.safe_load(f)
-
-    if workload_cfg is not None:
-        if "workload" not in workload_cfg:
-            raise ValueError("Missing 'workload' key in config")
-        if "name" not in workload_cfg["workload"]:
-            raise ValueError("Missing 'name' key under 'workload' key in config")
-        if workload_cfg["workload"]["name"] != workload:
-            raise ValueError(f"Workload's name does not match. Expected '{workload}', found: '{workload_cfg['workload']['name']}'")
-        if "params" not in workload_cfg["workload"]:
-            raise ValueError("Missing 'params' key under 'workload' key in config")
+            tmp = yaml.safe_load(f)
+        workload_cfg = WorkloadConfig.model_validate(tmp)
 
     runner = BenchmarkRunner(
         workload_name=workload,
@@ -97,7 +90,6 @@ def benchmark(
                 
                 child_results = BenchmarkResult.model_validate(raw)
                 res = child_results.results["run0"] # Always run0 since child always does just 1 run
-                # res = [NodeResult(**item) for item in child_results["results"]["run0"]]   # Always run0 since child always does just 1 run
                 nodeids = [noderes.node_id for noderes in res] # These are expected to match external measurements' node ids. If not match, treated as global. If parser has local backend, treat all results as falling under node_id local.
                 index = {r.node_id: r for r in res}
 

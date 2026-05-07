@@ -11,9 +11,7 @@ class BenchmarkRunner:
         if workload_name not in WORKLOADS:
             raise ValueError(f"Unknown workload: {workload_name}")
         
-        self.workload = WORKLOADS[workload_name]()
-
-        self.workload_cfg = workload_cfg
+        self.workload = WORKLOADS[workload_name](workload_cfg)
 
         measurement_dict = {}
         for name in measurement_names:
@@ -63,6 +61,3 @@ class BenchmarkRunner:
 
     def get_runs(self):
         return self.runs
-
-    def get_workload_cfg(self):
-        return self.workload_cfg

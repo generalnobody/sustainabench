@@ -25,7 +25,6 @@ class ExecutionBackend(ABC):
     def _execute_single(self, runner, context=None):
         workload = runner.get_workload()
         measurements = runner.get_measurements()
-        workload_cfg = runner.get_workload_cfg()
 
         manager = MeasurementManager(measurements)
 
@@ -37,7 +36,7 @@ class ExecutionBackend(ABC):
         if context and context.comm:
             context.comm.Barrier()
 
-        workload.run(self.num_processors, workload_cfg, context=context)
+        workload.run(self.num_processors, context=context)
 
         if context and context.comm:
             context.comm.Barrier()

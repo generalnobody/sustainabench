@@ -4,7 +4,7 @@ from sustainabench.workloads.base import Workload, register_workload
 class MPIPingPong(Workload):
     name = "mpi-pingpong"
 
-    def run(self, num_processors, workload_cfg, context=None):
+    def run(self, num_processors, context=None):
         if not context:
             raise ValueError(f"Workload {self.name} relies on MPI. Please ensure MPI backend is correctly configured and run again")
 

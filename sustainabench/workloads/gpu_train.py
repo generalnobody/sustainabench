@@ -1,44 +1,43 @@
 import torch
 import torch.nn as nn
 from sustainabench.workloads.base import Workload, register_workload
+from pydantic import BaseModel
 
 @register_workload
 class GPUTrainWorkload(Workload):
     """GPU Training workload"""
     name = "gpu-train"
 
-    def run(self, num_processors: int, workload_cfg, context=None):
+    class WorkloadParams(BaseModel):
+        steps: int = 50
+        input_size: int = 4096
+        hidden_size: int = 4096
+        output_size: int = 4096
+        batch_size: int = 1024
+
+    def run(self, num_processors: int, context=None):
         if not torch.cuda.is_available(): # CUDA or ROCm GPU
             raise RuntimeError("CUDA is required for this benchmark but is not available on this system.")
 
         torch.backends.cudnn.benchmark = True
+        
+        if self.workload_cfg is None:
+            params = self.WorkloadParams()
+        else:
+            params = self.WorkloadParams.model_validate(self.workload_cfg.workload.params)
 
-        steps = 50
-        input_size = hidden_size = output_size = 4096
-        batch_size = 1024
-        if workload_cfg:
-            if "steps" in workload_cfg["workload"]["params"]:
-                steps = workload_cfg["workload"]["params"]["steps"]
-            if "input_size" in workload_cfg["workload"]["params"]:
-                input_size = workload_cfg["workload"]["params"]["input_size"]
-            if "hidden_size" in workload_cfg["workload"]["params"]:
-                hidden_size = workload_cfg["workload"]["params"]["hidden_size"]
-            if "output_size" in workload_cfg["workload"]["params"]:
-                output_size = workload_cfg["workload"]["params"]["output_size"]
-            if "batch_size" in workload_cfg["workload"]["params"]:
-                batch_size = workload_cfg["workload"]["params"]["batch_size"]
 
         model = nn.Sequential(
-            nn.Linear(input_size, hidden_size),
+            nn.Linear(params.input_size, params.hidden_size),
             nn.ReLU(),
-            nn.Linear(hidden_size, output_size)
+            nn.Linear(params.hidden_size, params.output_size)
         ).cuda()
 
-        x = torch.randn(batch_size, input_size).cuda()
+        x = torch.randn(params.batch_size, params.input_size).cuda()
 
         torch.cuda.synchronize()
 
-        for _ in range(steps):
+        for _ in range(params.steps):
             model.zero_grad(set_to_none=True)
             y = model(x)
             loss = y.sum()

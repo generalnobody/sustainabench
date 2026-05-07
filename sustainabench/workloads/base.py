@@ -1,5 +1,6 @@
 from abc import ABC, abstractmethod
 from typing import Dict, Type
+from sustainabench.schemas.configs.workloads.config import WorkloadConfig
 
 # global registry
 WORKLOADS: Dict[str, Type["Workload"]] = {}
@@ -19,9 +20,12 @@ class Workload(ABC):
 
     def is_external(self) -> bool:
         return False
+    
+    def __init__(self, workload_cfg: WorkloadConfig) -> None:
+        self.workload_cfg = workload_cfg
 
     @abstractmethod
-    def run(self, num_processors: int, workload_cfg, context=None):
+    def run(self, num_processors: int, context=None):
         """Execute workload."""
         pass
 
