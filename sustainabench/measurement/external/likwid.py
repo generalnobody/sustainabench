@@ -44,8 +44,6 @@ class LikwidMeasurement(ExternalMeasurement):
                 if not isinstance(p, str) or not (isinstance(v, str) or v is None):
                     raise ValueError(f"Flag parameters require first item to be a string and second item to be a string or null. Flag {flag} does not follow this")
             
-            # self.cores = cfg["measurement"]["params"]["c"]
-            # self.group = cfg["measurement"]["params"]["g"]
             self.likwid_params = [v for s in cfg["measurement"]["params"]["flags"] for v in s if v is not None]
             self.likwid_params += ["-O"] # Doesnt need to be added in likwid's yaml, since this one is required for output parsing.
         else:
@@ -62,50 +60,8 @@ class LikwidMeasurement(ExternalMeasurement):
                 "likwid-perfctr",
             ]
 
-        # cmd = launcher + self.likwid_params + [
-        #     "--",
-        #     "sustainabench",
-        #     "run",
-        #     "benchmark",
-        #     "-w", workload,
-        # ] # Excludes measurements for now
-
-        
-        # + [
-        #     "--",
-        #     "sustainabench",
-        #     "run",
-        #     "benchmark",
-        #     "-w", workload,
-        # ] # Excludes measurements for now
-
-        # Measurements should be a dict (passed from runner.run()), add them dynamically, or add 'none' if no other measurement present
-        # filtered_measurements = []
-        # for m in measurements:
-        #     if m.name != self.name:
-        #         filtered_measurements.append((m.name, getattr(m, "file", None)))
-        # # filtered_measurements = {m.name: m.file for m in measurements if m.name != self.name} # Exclude current measurement
-        # if len(filtered_measurements) > 0:
-        #     for measurement, filename in filtered_measurements:
-        #         if filename:
-        #             cmd.extend(["-m", f"{measurement}={filename}"])
-        #         else:
-        #             cmd.extend(["-m", measurement])
-        # else:
-        #     cmd.extend(["-m", "none"])
-
-        # cmd.extend([ # Add the rest of the cmd params
-        #     "-r", str(runs),
-        #     "-c", str(config_file),
-        #     "-b", backend,
-        #     "-p", str(processors),
-        #     "-o", output_dir,
-        #     "-of", output_filename
-        # ])
-
 
         with tempfile.NamedTemporaryFile(mode="w+", suffix=".sh", dir=output_dir) as f:
-            # TODO: launch sustainabench from a temp script file, such that likwid-mpirun doesnt mess up args
             filtered_measurements = []
             for m in measurements:
                 if m.name != self.name:

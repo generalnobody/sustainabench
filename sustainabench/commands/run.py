@@ -99,7 +99,6 @@ def benchmark(
                 nodeids = [noderes.node_id for noderes in res] # These are expected to match external measurements' node ids. If not match, treated as global. If parser has local backend, treat all results as falling under node_id local.
                 index = {r.node_id: r for r in res}
 
-                # temp_results[f"run{i}"] = ext.result()
                 ext_results = ext.result_json(nodeids)
                 for node_id, metrics in ext_results.items():
                     if node_id in index:
@@ -120,7 +119,7 @@ def benchmark(
         output_dir.mkdir(parents=True, exist_ok=True)
         if output_filename != "" and not output_filename.endswith(".json"): # Internally, always ends with .json. However, if users figure this one out, ensure it ends with .json by always appending .json
                 output_filename = f"{output_filename}.json"
-        filename = f"{workload}__{'-'.join(measurement.name for measurement in runner.get_measurements())}__{datetime.now().strftime('%Y%m%d_%H%M%S')}.json" if output_filename == "" else output_filename
+        filename = f"{workload}__{backend}__{'-'.join(measurement.name for measurement in runner.get_measurements())}__{datetime.now().strftime('%Y%m%d_%H%M%S')}.json" if output_filename == "" else output_filename
         output_file = output_dir / filename
 
         with output_file.open("w", encoding="utf-8") as f: # If other benchmarks can export to this format, then further analysis can be done using 'sustainabench generate' on third-party results
