@@ -11,7 +11,7 @@ from sustainabench.workloads import WORKLOADS
 from sustainabench.measurement import MEASUREMENTS
 from sustainabench.core.backends import BACKENDS
 from sustainabench.measurement.base import ExternalMeasurement
-from sustainabench.core.models import BenchmarkResult, NodeResult
+from sustainabench.schemas.results.benchmark import BenchmarkResult, NodeResult
 
 app = typer.Typer()
 
@@ -88,14 +88,16 @@ def benchmark(
                     output_filename=temp_output_filename,
                 )
 
-                child_results = None
+                raw = None
                 child_file = Path(tmpdir, temp_output_filename)
                 with child_file.open("r", encoding="utf-8") as f:
-                    child_results = json.load(f)
-                if not child_results:
+                    raw = json.load(f)
+                if not raw:
                     raise ValueError(f"File {child_file} could not be loaded")
                 
-                res = [NodeResult(**item) for item in child_results["results"]["run0"]]   # Always run0 since child always does just 1 run
+                child_results = BenchmarkResult.model_validate(raw)
+                res = child_results.results["run0"] # Always run0 since child always does just 1 run
+                # res = [NodeResult(**item) for item in child_results["results"]["run0"]]   # Always run0 since child always does just 1 run
                 nodeids = [noderes.node_id for noderes in res] # These are expected to match external measurements' node ids. If not match, treated as global. If parser has local backend, treat all results as falling under node_id local.
                 index = {r.node_id: r for r in res}
 
@@ -106,12 +108,13 @@ def benchmark(
                     else:
                         res.append(NodeResult(node_id=node_id, metrics=metrics, metadata={}))
                 temp_results[f"run{i}"] = res
-        results = BenchmarkResult(workload, backend, temp_results, {})
+        results = BenchmarkResult(workload=workload, backend=backend, results=temp_results, metadata={})
     else:
         results = runner.run()
     
     if results is not None and _is_main_process():
-        results_dict = results.to_dict()
+        # results_dict = results.to_dict()
+        results_dict = results.model_dump()
 
         print("Results:")
         print(json.dumps(results_dict, indent=4))

@@ -2,7 +2,7 @@ from pathlib import Path
 from sustainabench.workloads import WORKLOADS
 from sustainabench.measurement import MEASUREMENTS
 from sustainabench.measurement.base import ExternalMeasurement
-from .models import BenchmarkResult
+from sustainabench.schemas.results.benchmark import BenchmarkResult
 
 class BenchmarkRunner:
     """Class than handles running the benchmarks"""
@@ -49,10 +49,10 @@ class BenchmarkRunner:
                 results[f"run{i}"] = node_results
 
         return BenchmarkResult(
-            self.workload.name,
-            self.backend.name,
-            results,
-            {}
+            workload=self.workload.name,
+            backend=self.backend.name,
+            results=results,
+            metadata={}
         )
 
     def get_measurements(self):

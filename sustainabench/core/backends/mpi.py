@@ -1,7 +1,7 @@
 from .base import ExecutionBackend, register_backend
-from ..models import BenchmarkResult, NodeResult
 from sustainabench.utils.system_info import get_node_metadata
 from ..context import ExecutionContext
+from sustainabench.schemas.results.benchmark import NodeResult
 
 @register_backend
 class MPIBackend(ExecutionBackend):
@@ -43,7 +43,7 @@ class MPIBackend(ExecutionBackend):
                 local_rank_map[h] = local_rank + 1
 
             node_results = [
-                NodeResult(f"{meta['hostname']}:{i}:{local_ranks[i]}", m, meta)
+                NodeResult(node_id=f"{meta['hostname']}:{i}:{local_ranks[i]}", metrics=m, metadata=meta)
                 for i, (m, meta) in enumerate(gathered)
             ]
         elif rank == 0 and not gathered:

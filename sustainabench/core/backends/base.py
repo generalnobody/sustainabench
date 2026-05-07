@@ -1,7 +1,7 @@
 from abc import ABC, abstractmethod
 from typing import Dict, Type
-from ..models import BenchmarkResult, NodeResult
 from sustainabench.measurement.manager import MeasurementManager
+from sustainabench.schemas.results.benchmark import NodeResult
 
 BACKENDS: Dict[str, Type["ExecutionBackend"]] = {}
 
