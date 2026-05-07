@@ -2,6 +2,9 @@ from sustainabench.measurement.base import  ExternalMeasurement, register_measur
 import yaml
 import subprocess
 import csv
+import tempfile
+import os
+import stat
 import io
 import re
 
@@ -48,7 +51,6 @@ class LikwidMeasurement(ExternalMeasurement):
         else:
             raise RuntimeError(f"Measurement {self.name} expects config to be provided.")
 
-
         # Decide which launcher to use. Depending on future backend functionality, might need to be changed
         if backend == "mpi":
             launcher = [
@@ -60,41 +62,85 @@ class LikwidMeasurement(ExternalMeasurement):
                 "likwid-perfctr",
             ]
 
-        cmd = launcher + self.likwid_params + [
-            "--",
-            "sustainabench",
-            "run",
-            "benchmark",
-            "-w", workload,
-        ] # Excludes measurements for now
+        # cmd = launcher + self.likwid_params + [
+        #     "--",
+        #     "sustainabench",
+        #     "run",
+        #     "benchmark",
+        #     "-w", workload,
+        # ] # Excludes measurements for now
+
+        
+        # + [
+        #     "--",
+        #     "sustainabench",
+        #     "run",
+        #     "benchmark",
+        #     "-w", workload,
+        # ] # Excludes measurements for now
 
         # Measurements should be a dict (passed from runner.run()), add them dynamically, or add 'none' if no other measurement present
-        filtered_measurements = []
-        for m in measurements:
-            if m.name != self.name:
-                filtered_measurements.append((m.name, getattr(m, "file", None)))
-        # filtered_measurements = {m.name: m.file for m in measurements if m.name != self.name} # Exclude current measurement
-        if len(filtered_measurements) > 0:
-            for measurement, filename in filtered_measurements:
-                if filename:
-                    cmd.extend(["-m", f"{measurement}={filename}"])
-                else:
-                    cmd.extend(["-m", measurement])
-        else:
-            cmd.extend(["-m", "none"])
+        # filtered_measurements = []
+        # for m in measurements:
+        #     if m.name != self.name:
+        #         filtered_measurements.append((m.name, getattr(m, "file", None)))
+        # # filtered_measurements = {m.name: m.file for m in measurements if m.name != self.name} # Exclude current measurement
+        # if len(filtered_measurements) > 0:
+        #     for measurement, filename in filtered_measurements:
+        #         if filename:
+        #             cmd.extend(["-m", f"{measurement}={filename}"])
+        #         else:
+        #             cmd.extend(["-m", measurement])
+        # else:
+        #     cmd.extend(["-m", "none"])
 
-        cmd.extend([ # Add the rest of the cmd params
-            "-r", str(runs), # Probably always run with 1 run, since number of runs should be handled by the top-level external measurement's runner? And keep re-launching?
-            "-c", config_file,
-            "-b", backend,
-            "-p", str(processors),
-            "-o", output_dir,
-            "-of", output_filename
-        ])
+        # cmd.extend([ # Add the rest of the cmd params
+        #     "-r", str(runs),
+        #     "-c", str(config_file),
+        #     "-b", backend,
+        #     "-p", str(processors),
+        #     "-o", output_dir,
+        #     "-of", output_filename
+        # ])
 
-        output = subprocess.run(cmd, capture_output=True, text=True)
 
-        if output.returncode != 0:
+        with tempfile.NamedTemporaryFile(mode="w", suffix=".sh", dir=output_dir) as f:
+            # TODO: launch sustainabench from a temp script file, such that likwid-mpirun doesnt mess up args
+            filtered_measurements = []
+            for m in measurements:
+                if m.name != self.name:
+                    filtered_measurements.append((m.name, getattr(m, "file", None)))
+
+            measurement_array = []
+            if len(filtered_measurements) > 0:
+                for measurement, filename in filtered_measurements:
+                    if filename: 
+                        measurement_array.extend(["-m", f"{measurement}={filename}"])
+                    else:
+                        measurement_array.extend(["-m", measurement])
+            else:
+                measurement_array.extend(["-m", "none"])
+
+            script = f"""#!/bin/bash\n
+            sustainabench run benchmark -w {workload} {" ".join(measurement_array)} -r {str(runs)} -c {str(config_file)} -b {backend} =p {str(processors)} -p {str(processors)} -o {output_dir} -of {output_filename}\n
+            """
+            f.write(script)
+            cmd = launcher + self.likwid_params  + [
+                "--",
+                f.name
+            ]
+
+            os.chmod(f.name, os.stat(f.name).st_mode | stat.S_IEXEC)
+
+            output = subprocess.run(cmd, capture_output=True, text=True)
+
+
+
+
+
+        # output = subprocess.run(cmd, capture_output=True, text=True)
+
+        if output.returncode != 0 or output.stdout == []:
             raise RuntimeError(
                 f"FAILURE: Subprocess executed with command '{' '.join(cmd)}' failed with return code {output.returncode}\n"
                 f"STDOUT: {output.stdout}\nSTDERR: {output.stderr}"

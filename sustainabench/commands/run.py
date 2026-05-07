@@ -79,7 +79,7 @@ def benchmark(
                 ext.execute_cli_passthrough(
                     workload=workload,
                     measurements=measurement_instances,
-                    runs=1, # When launching a child process, always use 1 run. This keeps it clean
+                    runs=1, # When launching a child process, always use 1 run. This keeps implementation simple
                     config_file=config_file,
                     backend=backend,
                     node_processors=node_processors,
