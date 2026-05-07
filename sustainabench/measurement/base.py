@@ -52,7 +52,7 @@ class ExternalMeasurement(Measurement):
         return True
     
     @abstractmethod
-    def execute_cli_passthrough(self, workload, measurements, runs, config_file, backend, processors, output_dir, output_filename):
+    def execute_cli_passthrough(self, workload, measurements, runs, config_file, backend, node_processors, processors, output_dir, output_filename):
         pass
 
     @abstractmethod

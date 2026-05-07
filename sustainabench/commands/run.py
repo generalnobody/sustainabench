@@ -29,6 +29,7 @@ def benchmark(
     runs: Annotated[int, typer.Option(..., "--runs", "-r", help="How many times to run the same benchmark")] = 1,
     config_file: Annotated[Path, typer.Option(..., "--config", "-c", help="Path to the config file for the workload. Only supports YAML/JSON files")] = Path(""),
     backend: Annotated[str, typer.Option(..., "--backend", "-b", help="Which backend to use")] = "local",
+    node_processors: Annotated[int, typer.Option(..., "--node-processors", "-np", help="Number of nodes that the MPI backend (or backend with similar situation) uses. Not used with local backend, use --processors/-p then. When using this, normal --processors/-p describes how many local threads are used per node.")] = 1,
     processors: Annotated[int, typer.Option(..., "--processors", "-p", help="How many processors to use (when applicable)")] = 1,
     output_dir: Annotated[Path, typer.Option(..., "--output", "-o", help="Benchmark output directory")] = Path("./experiments/raw/"),
     output_filename: Annotated[str, typer.Option(..., "--output-filename", "-of", help="Which specific filename to use within the output directory. Note: meant only for internal child runs, so is hidden from the help menu.", hidden=True)] = ""
@@ -81,6 +82,7 @@ def benchmark(
                     runs=1, # When launching a child process, always use 1 run. This keeps it clean
                     config_file=config_file,
                     backend=backend,
+                    node_processors=node_processors,
                     processors=processors,
                     output_dir=tmpdir,
                     output_filename=temp_output_filename,

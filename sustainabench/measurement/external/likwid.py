@@ -16,7 +16,7 @@ class LikwidMeasurement(ExternalMeasurement):
     def __init__(self, filename: str):
         self.file = filename
 
-    def execute_cli_passthrough(self, workload, measurements, runs, config_file, backend, processors, output_dir, output_filename):
+    def execute_cli_passthrough(self, workload, measurements, runs, config_file, backend, node_processors, processors, output_dir, output_filename):
         self.backend = backend
 
         cfg = None
@@ -32,37 +32,35 @@ class LikwidMeasurement(ExternalMeasurement):
                 raise ValueError(f"Measurement's name does not match. Expected '{self.name}', found: '{cfg['measurement']['name']}'")
             if "params" not in cfg["measurement"]:
                 raise ValueError("Missing 'params' key under 'measurement' key in config")
-            if "c" not in cfg["measurement"]["params"]:
-                raise ValueError("Missing 'c' key in config's params")
-            if "g" not in cfg["measurement"]["params"]:
-                raise ValueError("Missing 'g' key in config's params")
+            if "flags" not in cfg["measurement"]["params"]:
+                raise ValueError("Missing 'flags' key under 'params' key in config")
+            for flag in cfg["measurement"]["params"]["flags"]:
+                if len(flag) != 2:
+                    raise ValueError(f"Flag '{flag}' is incorrectly structured. Expected: [<flag>, <value>]")
+                p, v = flag
+                if not isinstance(p, str) or not (isinstance(v, str) or v is None):
+                    raise ValueError(f"Flag parameters require first item to be a string and second item to be a string or null. Flag {flag} does not follow this")
             
-        self.cores = cfg["measurement"]["params"]["c"]
-        self.group = cfg["measurement"]["params"]["g"]
+            # self.cores = cfg["measurement"]["params"]["c"]
+            # self.group = cfg["measurement"]["params"]["g"]
+            self.likwid_params = [v for s in cfg["measurement"]["params"]["flags"] for v in s if v is not None]
+            self.likwid_params += ["-O"] # Doesnt need to be added in likwid's yaml, since this one is required for output parsing.
+        else:
+            raise RuntimeError(f"Measurement {self.name} expects config to be provided.")
+
 
         # Decide which launcher to use. Depending on future backend functionality, might need to be changed
         if backend == "mpi":
-            try:
-                from mpi4py import MPI
-                size = MPI.COMM_WORLD.Get_size()
-            except ImportError:
-                raise RuntimeError("mpi4py is required for MPI backend but is not installed")
             launcher = [
                 "likwid-mpirun",
-                "-np", str(size),
-                "-C", self.cores,
-                "-g", self.group,
-                "-O",
+                "-np", str(node_processors),
             ]
         else:
             launcher = [
                 "likwid-perfctr",
-                "-C", self.cores,
-                "-g", self.group,
-                "-O"
             ]
 
-        cmd = launcher + [
+        cmd = launcher + self.likwid_params + [
             "--",
             "sustainabench",
             "run",

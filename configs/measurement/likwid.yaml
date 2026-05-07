@@ -1,5 +1,6 @@
 measurement:
   name: "likwid"
   params:
-    c: "0" # Which cores to pin the program to. Expects a string
-    g: "ENERGY" # Which group to measure
+    flags: # Supports any flags for likwid-perfctr/likwid-mpirun. NOTE: do NOT use -O or -np here. -O is always added in the measurement, -np is configured through the sustainabench CLI.
+      - [-c, "0"]
+      - [-g, ENERGY]
