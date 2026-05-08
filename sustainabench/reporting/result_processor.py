@@ -1,4 +1,6 @@
 from sustainabench.indicators import INDICATORS
+from sustainabench.schemas.results.benchmark import BenchmarkResult, NodeResult
+from sustainabench.schemas.configs.indicators.config import IndicatorConfig
 
 class ResultProcessor:
     """Class than handles processing raw results"""
@@ -28,29 +30,26 @@ class ResultProcessor:
             for ind in self.indicators
         ]
 
-    def process(self, raw_results, indicator_cfg):
-        computed = {
-            "workload": raw_results["workload"],
-            "node_results": [],
-            "metadata": raw_results["metadata"]
-        }
+    def process(self, raw_results: BenchmarkResult, indicator_cfg: IndicatorConfig | None) -> BenchmarkResult:
+        results: dict[str, list[NodeResult]] = {}
 
         for ind in self.indicators: # Setup all indicators. Prevents needing to re-config for every node for every run
-            ind.setup(indicator_cfg) 
-        for node in raw_results["node_results"]:
-            node_res = {} # Contains per-run derived metrics
-            node_metadata = node["metadata"]
-            for run in node["metrics"]:
-                run_res = {}
-                run_metrics = node["metrics"][run]
-                for ind in self.indicators:
-                    run_res.update(ind.compute(run_metrics, node_metadata))
-                node_res.update({run: run_res})
-            computed["node_results"].append({
-                "node_id": node["node_id"],
-                "metrics": node_res,
-                "metadata": node_metadata
-            })
+            ind.setup(indicator_cfg)
             
-        return computed
+        for run, node_results in raw_results.results.items():
+            run_results = []
+            for node_result in node_results:
+                node_metrics = {}
+                for ind in self.indicators:
+                    node_metrics.update(ind.compute(node_result.metrics, node_result.metadata))
+                run_results.append(NodeResult(node_id=node_result.node_id, metrics=node_metrics, metadata=node_result.metadata))
+            results.update({run: run_results})
+
+        return BenchmarkResult(
+            workload=raw_results.workload, 
+            backend=raw_results.backend, 
+            results=results, 
+            metadata=raw_results.metadata
+        )
+
 

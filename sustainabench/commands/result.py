@@ -5,6 +5,8 @@ import yaml
 from rich import print
 from pathlib import Path
 from sustainabench.reporting.result_processor import ResultProcessor
+from sustainabench.schemas.results.benchmark import BenchmarkResult
+from sustainabench.schemas.configs.indicators.config import IndicatorConfig
 
 app = typer.Typer()
 
@@ -22,43 +24,21 @@ def generate(
     
     processor = ResultProcessor(indicator_names) # Initialize processor
 
-    raw_results = None
     with results_file.open("r", encoding="utf-8") as f: # If other benchmarks can export to this format, then further analysis can be done using 'sustainabench generate' on third-party results
-        raw_results = json.load(f)
+        raw = json.load(f)
 
-    if raw_results is not None:
-        if "workload" not in raw_results:
-            raise ValueError("Missing 'workload' key in results")
-        if "node_results" not in raw_results:
-            raise ValueError("Missing 'node_results' key in results")
-        for node in raw_results["node_results"]:
-            if "node_id" not in node:
-                raise ValueError("Missing 'node_id' key in results")
-            elif "metrics" not in node:
-                raise ValueError("Missing 'metrics' key in results")
-            elif "metadata" not in node:
-                raise ValueError("MIssing 'metadata' key in results")
-        if "metadata" not in raw_results:
-            raise ValueError("Missing 'metadata' key in results")
+    raw_results = BenchmarkResult.model_validate(raw)
 
-    indicator_cfg = None
+    raw_indicator_cfg = None
     if config_file != Path(""):
         with open(config_file) as f:
-            indicator_cfg = yaml.safe_load(f)
+            raw_indicator_cfg = yaml.safe_load(f)
 
-    if indicator_cfg is not None:
-        loaded_indicators = processor.get_loaded_indicators()
-        if "indicators" not in indicator_cfg:
-            raise ValueError("Missing 'indicators' key in config")
-        if len(indicator_cfg["indicators"]) == 0:
-            raise ValueError("Config files requires at least one item to be present under main 'indicators' key")
-        for ind in indicator_cfg["indicators"]:
-            if ind not in loaded_indicators:
-                raise ValueError(f"Unknown indicator key '{ind}'. Maybe you misspelled?")
-            if "params" not in indicator_cfg["indicators"][ind]:
-                raise ValueError(f"Missing 'params' key under '{ind}' key in config")
+    indicator_cfg = None
+    if raw_indicator_cfg:
+        indicator_cfg = IndicatorConfig.model_validate(raw_indicator_cfg, context={ "allowed_indicators": processor.get_loaded_indicators() }) # Validate imported config
 
-    results = processor.process(raw_results, indicator_cfg)
+    results = processor.process(raw_results, indicator_cfg).model_dump()
 
     print("Results:")
     print(results)

@@ -2,60 +2,87 @@ import pandas as pd
 from pathlib import Path
 import requests
 from sustainabench.indicators.base import Indicator, register_indicator
+from sustainabench.schemas.configs.indicators.config import IndicatorConfig
+from pydantic import BaseModel, model_validator, ConfigDict, field_validator
+from typing import Literal
+
+class ReferenceTime(BaseModel):
+    model_config = ConfigDict(arbitrary_types_allowed=True)
+    mode: Literal["auto", "fixed", "fromto"] = "auto"
+    value: pd.Timestamp | None = None
+    start: pd.Timestamp | None = None
+    end: pd.Timestamp | None = None
+
+    @field_validator("value", "start", "end", mode="before")
+    @classmethod
+    def parse_timestamp(cls, v):
+        if v is None:
+            return None
+        return pd.to_datetime(v, utc=True)
+
+    @model_validator(mode="after")
+    def validate_mode_constraints(self):
+        if self.mode == "fromto":
+            if self.start is None or self.end is None:
+                raise ValueError(
+                    "With mode 'fromto' you must specify both start and end"
+                )
+            if self.start > self.end:
+                raise ValueError("start must be <= end")
+
+        elif self.mode == "fixed":
+            if self.value is None:
+                raise ValueError(
+                    "With mode 'fixed' you must specify value"
+                )
+
+        return self
+
+class TimeWindow(BaseModel):
+    years: int = 0
+    months: int = 0
+    days: int = 0
+    hours: int = 0
+
+    @model_validator(mode="after")
+    def apply_years_default(self):
+        any_fields_set = any(
+            v != 0 for k, v in self.model_dump().items()
+        )
+
+        if not any_fields_set:
+            self.years = 1
+
+        return self
+
+    @property
+    def offset(self) -> pd.DateOffset:
+        return pd.DateOffset(**self.model_dump())
+
+class IndicatorValues(BaseModel):
+    reference_time: ReferenceTime
+    window: TimeWindow
+    fallback_country: str | None
 
 @register_indicator
 class CarbonIndicator(Indicator):
     name = "carbon"
     require_file = True
 
-
     def __init__(self, filename):
         self.parquets = filename # Can be either a .parquet file containing all the traces, or can be a dir containing lots of .parquet traces. 
         # If it is a dir, filenames are used to automatically determine selected .parquet files based on county (and possibly region) code using metadata public IP.
 
     def setup(self, indicator_config):
-        # Load config. Must always be run before compute()
-        possible_modes = ["auto", "fixed", "fromto"]
-        self.reference_time_mode = possible_modes[0] # Default is auto
-        self.reference_time_value = ""
-        self.reference_time_from = ""
-        self.reference_time_to = ""
-
-        # Default window is 1 year. With default 'auto' mode, uses the most recent available year
-        self.window_years = 1
-        self.window_months = 0
-        self.window_days = 0
-
-        # Config validation and application
-        if indicator_config and self.name in indicator_config["indicators"]:
-            params = indicator_config["indicators"][self.name]["params"]
-            if "reference_time" in params:
-                if "mode" in params["reference_time"]:
-                    if params["reference_time"]["mode"] not in possible_modes:
-                        raise ValueError(f"Unknown reference time mode detected. Mode '{indicator_config['indicators'][self.name]['params']['reference_time']['mode']} does not exist. Please select from these modes: {possible_modes}'")
-                    self.reference_time_mode = params["reference_time"]["mode"]
-                    if self.reference_time_mode == "fixed":
-                        if "value" not in params["reference_time"]:
-                            raise ValueError("Please make sure to select a reference time value when selecting fixed mode.")
-                        self.reference_time_value = params["reference_time"]["value"]
-                    if self.reference_time_mode == "fromto":
-                        if "from" not in params["reference_time"]:
-                            raise ValueError("Please make sure to select a reference 'from' time value when selecting fromto mode.")
-                        elif "to" not in params["reference_time"]:
-                            raise ValueError("Please make sure to select a reference 'to' time value when selecting fromto mode.")
-                        self.reference_time_from = params["reference_time"]["from"]
-                        self.reference_time_to = params["reference_time"]["to"]
-            if "window" in params:
-                years = months = days = 0
-                if "years" in params["window"]:
-                    years = params["window"]["years"]
-                if "months" in params["window"]:
-                    months = params["window"]["months"]
-                if "days" in params["window"]:
-                    days = params["window"]["days"]
-                if years == months == days == 0 and self.reference_time_mode != "fromto":
-                    raise ValueError("An all-zero window is unsupported. Please make sure to select at least 1 for either years, months or days")
-                self.window_years = years; self.window_months = 0; self.window_days = 0
+        raw_config = indicator_config.indicators.get(self.name) if indicator_config else None
+        if raw_config:
+            self.config = IndicatorValues.model_validate(raw_config.params)
+        else:
+            self.config = IndicatorValues(
+                reference_time=ReferenceTime(),
+                window=TimeWindow(),
+                fallback_country=None
+        )
 
     def compute(self, measurements, metadata):
         # Load carbon tracefile
@@ -65,12 +92,19 @@ class CarbonIndicator(Indicator):
         if datapath.is_file():
             df = pd.read_parquet(datapath)
         elif datapath.is_dir():
-            if "public_ip" not in metadata:
-                raise ValueError (f"Key 'public_ip' absent from node's metadata. This is needed as you entered a directory for auto-selection of carbon traces.")
-            response = requests.get(f"http://ip-api.com/json/{metadata['public_ip']}")
-            data = response.json()
-            country_code = data.get("countryCode")
-            region_code = data.get("region")
+            public_ip = metadata.get("public_ip")
+            if not public_ip and not self.config.fallback_country:
+                raise ValueError("Missing 'public_ip' in metadata and no fallback country configured. Either is required for auto-selection of carbon traces.")
+
+            if public_ip:
+                response = requests.get(f"http://ip-api.com/json/{public_ip}")
+                data = response.json()
+                country_code = data.get("countryCode")
+                region_code = data.get("region")
+            else:
+                country_code = self.config.fallback_country
+                region_code = ""
+            
             if not country_code:
                 raise ValueError("Could not determine country code from IP lookup.")
             
@@ -110,24 +144,24 @@ class CarbonIndicator(Indicator):
         if df["timestamp"].notna().sum() == 0:
             raise ValueError("No valid timestamps found")
         
-
-        reference_from = reference_to = None
-        if self.reference_time_mode == "fromto":
-            reference_from = pd.to_datetime(self.reference_time_from, utc=True)
-            reference_to = pd.to_datetime(self.reference_time_to, utc=True)
-
-            if reference_from > reference_to:
-                raise ValueError("Reference time 'from' must be <= reference time 'to'")
+        start = end = None
+        if self.config.reference_time.mode == "fromto":
+            end = self.config.reference_time.end
+            start = self.config.reference_time.start
         else:
-            if self.reference_time_mode == "fixed":
-                reference_to = pd.to_datetime(self.reference_time_value, utc=True)
+            if self.config.reference_time.mode == "fixed":
+                end = self.config.reference_time.value
             else:
-                reference_to =  df["timestamp"].max()
+                end =  df["timestamp"].max()
             
-            reference_from = reference_to - pd.DateOffset(years=self.window_years, months=self.window_months, days=self.window_days)
+            if end is None:
+                raise ValueError("How did we get here? Config stuff shouldve been foolproof with pydantic, how did you still manage to get everything this messed up?")
+            start = end - self.config.window.offset
 
+        if start is None or end is None:
+            raise ValueError("I only added this error to deal with PyLance errors. If you still managed to get it, congrats! You have royally messed something up which should not have been possible. Now, please use the program as intended.")
         filtered = df[
-            df["timestamp"].between(reference_from, reference_to)
+            df["timestamp"].between(start, end)
         ]
         if filtered.empty:
             raise ValueError("With the configured mode, reference time and cutoff window, no data was found in the parquet dataset. Please modify your config to ensure data is present.")
@@ -180,7 +214,6 @@ class CarbonIndicator(Indicator):
                     } for g in cpu_per_domain_carbon
                 ]
             })
-        print(cpu_carbon)
         gpu_carbon = [
             {
                 "gpu_id": g_kwh["gpu_id"],

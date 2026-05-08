@@ -1,5 +1,6 @@
 from abc import ABC, abstractmethod
 from typing import Dict, Type
+from sustainabench.schemas.configs.indicators.config import IndicatorConfig
 
 INDICATORS: Dict[str, Type["Indicator"]] = {}
 
@@ -19,7 +20,7 @@ class Indicator(ABC):
         pass
 
     @abstractmethod
-    def setup(self, indicator_config: dict) -> None:
+    def setup(self, indicator_config: IndicatorConfig | None) -> None:
         pass
 
     @abstractmethod
