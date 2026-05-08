@@ -1,5 +1,7 @@
 from abc import ABC, abstractmethod
 from typing import Dict, Type
+import yaml
+from sustainabench.schemas.configs.measurement.config import MeasurementConfig
 
 MEASUREMENTS: Dict[str, Type["Measurement"]] = {}
 
@@ -15,9 +17,16 @@ class Measurement(ABC):
     poll_interval: float | None = None # Seconds
     scope: str
     require_file: bool # Control whether this indicator should require a file path to be included or not.
+    config: MeasurementConfig | None = None
 
     def __init__(self, filename: str) -> None:
-        pass
+        if filename != "":
+            cfg = None
+            with open(filename) as f:
+                cfg = yaml.safe_load(f)
+            self.config = MeasurementConfig.model_validate(cfg)
+            if self.config.measurement.name != self.name:
+                raise ValueError(f"Config's name '{self.config.measurement.name}' does not match measurement's name: '{self.name}'")
 
     @abstractmethod
     def is_external(self) -> bool:

@@ -1,12 +1,8 @@
 from sustainabench.measurement.base import  ExternalMeasurement, register_measurement
-import yaml
 import subprocess
 import csv
 import tempfile
-import os
-import stat
-import io
-import re
+from pydantic import BaseModel
 
 @register_measurement
 class LikwidMeasurement(ExternalMeasurement):
@@ -16,40 +12,18 @@ class LikwidMeasurement(ExternalMeasurement):
     require_file = True
     priority = 100
 
-    def __init__(self, filename: str):
-        self.file = filename
+    class MeasurementParams(BaseModel):
+        flags: list[tuple[str, *tuple[str | None, ...]]]
 
     def execute_cli_passthrough(self, workload, measurements, runs, config_file, backend, node_processors, processors, output_dir, output_filename):
         self.backend = backend
 
-        cfg = None
-        with open(self.file) as f:
-            cfg = yaml.safe_load(f)
-
-        if cfg is not None:
-            if "measurement" not in cfg:
-                raise ValueError("Missing 'measurement' key in config")
-            if "name" not in cfg["measurement"]:
-                raise ValueError("Missing 'name' key under 'measurement' key in config")
-            if cfg["measurement"]["name"] != self.name:
-                raise ValueError(f"Measurement's name does not match. Expected '{self.name}', found: '{cfg['measurement']['name']}'")
-            if "params" not in cfg["measurement"]:
-                raise ValueError("Missing 'params' key under 'measurement' key in config")
-            if "flags" not in cfg["measurement"]["params"]:
-                raise ValueError("Missing 'flags' key under 'params' key in config")
-            for flag in cfg["measurement"]["params"]["flags"]:
-                if len(flag) != 2:
-                    raise ValueError(f"Flag '{flag}' is incorrectly structured. Expected: [<flag>, <value>]")
-                p, v = flag
-                if not isinstance(p, str) or not (isinstance(v, str) or v is None):
-                    raise ValueError(f"Flag parameters require first item to be a string and second item to be a string or null. Flag {flag} does not follow this")
-            
-            self.likwid_params = [v for s in cfg["measurement"]["params"]["flags"] for v in s if v is not None]
-            self.likwid_params += ["-O"] # Doesnt need to be added in likwid's yaml, since this one is required for output parsing.
-        else:
-            raise RuntimeError(f"Measurement {self.name} expects config to be provided.")
-
-        # Decide which launcher to use. Depending on future backend functionality, might need to be changed
+        if not self.config:
+            raise RuntimeError(f"Measurement {self.name} expects a config to be provided")
+        
+        likwid_flags = self.MeasurementParams.model_validate(self.config.measurement.params)
+        likwid_params = [item for flag in likwid_flags for item in flag if item is not None] + ["-O"] # '-O' doesnt need to be added in likwid's yaml, since this one is required for output parsing.
+        
         if backend == "mpi":
             launcher = [
                 "likwid-mpirun",
@@ -82,7 +56,7 @@ class LikwidMeasurement(ExternalMeasurement):
             """
             f.write(script)
             f.flush()
-            cmd = launcher + self.likwid_params  + [
+            cmd = launcher + likwid_params  + [
                 "--",
                 "bash", f.name
             ]

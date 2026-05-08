@@ -27,9 +27,9 @@ class BenchmarkRunner:
             for name, file in measurement_dict.items()
         ]
 
-        for measurement in self.measurements: # Check if all indicators got their required files
+        for measurement in self.measurements: # Check if all measurements got their required files
             if measurement.require_file and measurement_dict[measurement.name] == "":
-                raise ValueError(f"File not provided for indicator '{measurement.name}'. Use as follows: -i {measurement.name}=<file>.")
+                raise ValueError(f"File not provided for measurement '{measurement.name}'. Use as follows: -m {measurement.name}=<file>.")
 
         if runs < 1:
             raise ValueError(f"Cannot perform {runs} runs")
