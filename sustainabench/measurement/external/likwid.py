@@ -13,7 +13,7 @@ class LikwidMeasurement(ExternalMeasurement):
     priority = 100
 
     class MeasurementParams(BaseModel):
-        flags: list[tuple[str, *tuple[str | None, ...]]]
+        flags: list[list[str]]
 
     def execute_cli_passthrough(self, workload, measurements, runs, config_file, backend, node_processors, processors, output_dir, output_filename):
         self.backend = backend
@@ -22,8 +22,8 @@ class LikwidMeasurement(ExternalMeasurement):
             raise RuntimeError(f"Measurement {self.name} expects a config to be provided")
         
         likwid_flags = self.MeasurementParams.model_validate(self.config.measurement.params)
-        likwid_params = [item for flag in likwid_flags for item in flag if item is not None] + ["-O"] # '-O' doesnt need to be added in likwid's yaml, since this one is required for output parsing.
-        
+        likwid_params = [item for flag in likwid_flags.flags for item in flag] + ["-O"] # '-O' doesnt need to be added in likwid's yaml, since this one is required for output parsing.
+
         if backend == "mpi":
             launcher = [
                 "likwid-mpirun",
