@@ -1,8 +1,8 @@
-from sustainabench.workloads.base import Workload, register_workload
+from sustainabench.workloads.base import InternalWorkload, register_workload
 from pydantic import BaseModel
 
 @register_workload
-class CPUSingleWorkload(Workload):
+class CPUSingleWorkload(InternalWorkload):
     """Single-threaded CPU workload. Performs prime checking"""
     name = "cpu-single"
 

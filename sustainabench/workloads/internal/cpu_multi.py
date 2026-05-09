@@ -1,9 +1,9 @@
 import multiprocessing as mp
-from sustainabench.workloads.base import Workload, register_workload
+from sustainabench.workloads.base import InternalWorkload, register_workload
 from pydantic import BaseModel
 
 @register_workload
-class CPUMultiWorkload(Workload):
+class CPUMultiWorkload(InternalWorkload):
     """Multi-threaded CPU workload. Performs prime checking"""
     name = "cpu-multi"
 

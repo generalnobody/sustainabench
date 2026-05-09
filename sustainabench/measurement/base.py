@@ -27,16 +27,9 @@ class Measurement(ABC):
             self.config = MeasurementConfig.model_validate(cfg)
             if self.config.measurement.name != self.name:
                 raise ValueError(f"Config's name '{self.config.measurement.name}' does not match measurement's name: '{self.name}'")
-
-    @abstractmethod
-    def is_external(self) -> bool:
-        pass
     
 
 class InternalMeasurement(Measurement):
-    def is_external(self) -> bool:
-        return False
-
     @abstractmethod
     def start(self):
         pass
@@ -57,8 +50,6 @@ class InternalMeasurement(Measurement):
 class ExternalMeasurement(Measurement):
     priority: int = 0
     # The higher the priority, if multiple external measurements are to be conducted, the earlier this one gets started
-    def is_external(self) -> bool:
-        return True
     
     @abstractmethod
     def execute_cli_passthrough(self, workload, measurements, runs, config_file, backend, node_processors, processors, output_dir, output_filename):

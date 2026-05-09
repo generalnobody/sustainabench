@@ -1,10 +1,10 @@
 import torch
 import torch.nn as nn
-from sustainabench.workloads.base import Workload, register_workload
+from sustainabench.workloads.base import InternalWorkload, register_workload
 from pydantic import BaseModel
 
 @register_workload
-class GPUTrainWorkload(Workload):
+class GPUTrainWorkload(InternalWorkload):
     """GPU Training workload"""
     name = "gpu-train"
 

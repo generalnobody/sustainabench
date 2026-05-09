@@ -1,7 +1,7 @@
-from sustainabench.workloads.base import Workload, register_workload
+from sustainabench.workloads.base import InternalWorkload, register_workload
 
 @register_workload
-class MPIPingPong(Workload):
+class MPIPingPong(InternalWorkload):
     name = "mpi-pingpong"
 
     def run(self, num_processors, context=None):

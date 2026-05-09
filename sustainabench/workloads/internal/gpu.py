@@ -1,9 +1,9 @@
 import torch
-from sustainabench.workloads.base import Workload, register_workload
+from sustainabench.workloads.base import InternalWorkload, register_workload
 from pydantic import BaseModel
 
 @register_workload
-class GPUMatrixWorkload(Workload):
+class GPUMatrixWorkload(InternalWorkload):
     """GPU Matrix-Multiplication workload"""
     name = "gpu-mm"
 

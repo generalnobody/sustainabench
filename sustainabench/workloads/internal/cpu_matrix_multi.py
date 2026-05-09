@@ -1,6 +1,6 @@
 from multiprocessing import Pool
 import numpy as np
-from sustainabench.workloads.base import Workload, register_workload
+from sustainabench.workloads.base import InternalWorkload, register_workload
 
 def worker(_):
             a = np.random.rand(1500,1500)
@@ -8,7 +8,7 @@ def worker(_):
             return a @ b
 
 @register_workload
-class CPUMatrixMultiWorkload(Workload):
+class CPUMatrixMultiWorkload(InternalWorkload):
     """Multi-threaded CPU Matrix-Multiplication workload"""
     name = "cpu-mm"
 

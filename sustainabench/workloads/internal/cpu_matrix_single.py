@@ -3,11 +3,11 @@ import os
 os.environ["OMP_NUM_THREADS"] = "1"
 os.environ["MKL_NUM_THREADS"] = "1"
 import numpy as np
-from sustainabench.workloads.base import Workload, register_workload
+from sustainabench.workloads.base import InternalWorkload, register_workload
 
 
 @register_workload
-class CPUMatrixSingleWorkload(Workload):
+class CPUMatrixSingleWorkload(InternalWorkload):
     """Single-threaded CPU Matrix-Multiplication workload"""
     name = "cpu-ms"
 
