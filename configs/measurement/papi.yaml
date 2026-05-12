@@ -2,4 +2,9 @@ measurement:
   name: "papi"
   params:
     events: # List of papi events to follow
-      - PAPI_FP_OPS
+      - PAPI_TOT_CYC
+      - PAPI_TOT_INS
+      - PAPI_BR_MSP
+      - PAPI_BR_INS
+      - PAPI_VEC_INS
+      - PAPI_TLB_DM
