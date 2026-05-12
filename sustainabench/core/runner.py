@@ -1,7 +1,6 @@
 from pathlib import Path
 from sustainabench.workloads import WORKLOADS
 from sustainabench.measurement import MEASUREMENTS
-from sustainabench.measurement.base import ExternalMeasurement
 from sustainabench.schemas.results.benchmark import BenchmarkResult
 
 class BenchmarkRunner:

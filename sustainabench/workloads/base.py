@@ -1,5 +1,5 @@
 from abc import ABC, abstractmethod
-from typing import Dict, Type
+from typing import Dict, Type, Any
 from sustainabench.schemas.configs.workloads.config import WorkloadConfig
 
 # global registry
@@ -35,6 +35,6 @@ class ExternalWorkload(Workload):
         pass
 
     @abstractmethod
-    def process(self):
+    def process(self, backend_name: str) -> dict[str, Any]:
         # Process the results obtained from the execute() method. Please make sure to turn them into a format that fits what this suite expects.
         pass

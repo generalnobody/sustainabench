@@ -2,6 +2,7 @@ from .base import ExecutionBackend, register_backend
 from sustainabench.utils.system_info import get_node_metadata
 from ..context import ExecutionContext
 from sustainabench.schemas.results.benchmark import NodeResult
+from sustainabench.workloads.base import ExternalWorkload
 
 @register_backend
 class MPIBackend(ExecutionBackend):
@@ -46,6 +47,11 @@ class MPIBackend(ExecutionBackend):
                 NodeResult(node_id=f"{meta['hostname']}:{i}:{local_ranks[i]}", metrics=m, metadata=meta)
                 for i, (m, meta) in enumerate(gathered)
             ]
+
+            workload = runner.get_workload()
+            if isinstance(workload, ExternalWorkload):
+                extra_results = workload.process(self.name)
+                node_results = self.add_result(node_results, extra_results)
         elif rank == 0 and not gathered:
             raise ValueError("MPI: gathered benchmarking results not present at root rank")
         

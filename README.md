@@ -11,6 +11,11 @@ Please ensure correct install for GPU version. For CUDA GPUs (NVIDIA), run (defa
 pip install . 
 ```
 
+For CUDA 12.6 (used during development):
+```bash
+pip install . --index-url https://download.pytorch.org/whl/cu126
+```
+
 For ROCm GPUs (AMD), run:
 ```bash
 pip install . --index-url https://download.pytorch.org/whl/rocm7.2
