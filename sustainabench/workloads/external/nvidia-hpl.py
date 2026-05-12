@@ -32,17 +32,17 @@ class CPUSingleWorkload(ExternalWorkload):
     def _parse_results(self, data):
         for i in range(1, len(data)):
             if data[i].startswith("T/V") and data[i-1].endswith("="):
-                data = data[i:]
+                data_sel = data[i:]
                 break
 
-        for i in range(len(data)):
-            if data[i].startswith(""):
-                data = data[:i]
+        for i in range(len(data_sel)):
+            if data_sel[i] == "":
+                data_sel = data_sel[:i]
                 break
 
-        if len(data) < 3:
-            raise ValueError("Incorrect data got selected. Size not large enough for further extraction. Ended up selecting: ", data)
-        raw_headers = data[0].split()
+        if len(data_sel) < 3:
+            raise ValueError("Incorrect data got selected. Size not large enough for further extraction. Ended up selecting: ", data_sel, "\nOriginal data: ", data)
+        raw_headers = data_sel[0].split()
         headers = [
             raw_headers[0],
             raw_headers[1],
@@ -54,7 +54,7 @@ class CPUSingleWorkload(ExternalWorkload):
             f"{raw_headers[8]}_{raw_headers[9]}".strip(")"),
 
         ]
-        values = data[2].split() # Select third row of extracted data and split it
+        values = data_sel[2].split() # Select third row of extracted data and split it
         cleaned = [
             values[0],  # T/V
             int(values[1]),
