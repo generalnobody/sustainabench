@@ -31,17 +31,29 @@ class CPUSingleWorkload(ExternalWorkload):
 
     def _parse_results(self, data):
         for i in range(1, len(data)):
-            if data[i].startswith("T/V") and data[i-1].endswith("=\n"):
+            if data[i].startswith("T/V") and data[i-1].endswith("="):
                 data = data[i:]
                 break
 
         for i in range(len(data)):
-            if data[i].startswith("\n"):
+            if data[i].startswith(""):
                 data = data[:i]
                 break
 
         if len(data) < 3:
             raise ValueError("Incorrect data got selected. Size not large enough for further extraction. Ended up selecting: ", data)
+        raw_headers = data[0].split()
+        headers = [
+            raw_headers[0],
+            raw_headers[1],
+            raw_headers[2],
+            raw_headers[3],
+            raw_headers[4],
+            raw_headers[5],
+            raw_headers[6],
+            f"{raw_headers[8]}_{raw_headers[9]}".strip(")"),
+
+        ]
         values = data[2].split() # Select third row of extracted data and split it
         cleaned = [
             values[0],  # T/V
@@ -54,44 +66,8 @@ class CPUSingleWorkload(ExternalWorkload):
             float(values[8].strip(")"))  # inside parentheses
         ]
 
-        headers = [
-            "T/V",
-            "N",
-            "NB",
-            "P",
-            "Q",
-            "Time",
-            "Gflops",
-            "per_GPU"
-        ]
-
         return dict(zip(headers, cleaned))
-
-        # parsed = []
-
-        # for row in results:
-        #     values = row.split()
-
-        #     # Last value is inside parentheses (requires stripping off right parenthesis due to how output is done)
-        #     # Example:
-        #     # ['WC0', '19456', '1024', '1', '1', '16.04',
-        #     #  '3.062e+02', '(', '3.062e+02)']
-
-        #     cleaned = [
-        #         values[0],  # T/V
-        #         int(values[1]),
-        #         int(values[2]),
-        #         int(values[3]),
-        #         int(values[4]),
-        #         float(values[5]),
-        #         float(values[6]),
-        #         float(values[8].strip(")"))  # inside parentheses
-        #     ]
-
-        #     parsed.append(dict(zip(headers, cleaned)))
-
-        # return parsed
-
+    
     def process(self, backend_name: str):
         # Process the results obtained from the execute() method. Please make sure to turn them into a format that fits what this suite expects.
 
