@@ -1,0 +1,5 @@
+workload:
+  name: "hpcg"
+  params:
+    dir: "path/to/hpcg/" # Used to select cwd. Not used for locating the executable, only important for the .dat file.
+    executable: "xhpcg" # Full path to the executable. Does not do dir+executable, just executable

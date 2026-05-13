@@ -5,11 +5,11 @@ import subprocess
 @register_workload
 class CPUSingleWorkload(ExternalWorkload):
     """External Nvidia HPL benchmark runner & parser"""
-    name = "nvidia-hpl"
+    name = "hpl"
 
     class WorkloadParams(BaseModel):
+        dir: str
         executable: str
-        flags: list[list[str]]
 
     def execute(self):
         # Execute the external workload. Expected to be something like running a command-line subprocess
@@ -17,57 +17,39 @@ class CPUSingleWorkload(ExternalWorkload):
 
         # It is expected, that this is already run inside a MPI instance, so no mpi-specific runs here. Just call the executable with its arguments. Expected to be run using MPI backend.
 
-        cmd = [params.executable] + [item for flag in params.flags for item in flag]
-
-        output = subprocess.run(cmd, capture_output=True, text=True)
+        output = subprocess.run(params.executable, cwd=params.dir, capture_output=True, text=True)
 
         if output.returncode != 0 or output.stdout == "":
             raise RuntimeError(
-                f"FAILURE: Subprocess executed with command '{' '.join(cmd)}' failed with return code {output.returncode}\n"
+                f"FAILURE: Subprocess {params.executable} failed with return code {output.returncode}\n"
                 f"STDOUT: {output.stdout}\n\nSTDERR: {output.stderr}"
             )
 
         self.results = output.stdout.splitlines()
 
     def _parse_results(self, data):
-        data_sel = []
+        result_blocks = []
+        # Find first resuit
         for i in range(1, len(data)):
-            if data[i].startswith("T/V") and data[i-1].endswith("="):
-                data_sel = data[i:]
-                break
+            if data[i].startswith("T/V") and data[i-1].endswith("=") and data[i+8].endswith("PASSED"): # Only append passed data
+                block_data = data[i+2].split()
+                block = {
+                    "T/V": block_data[0],
+                    "N":  int(block_data[1]),
+                    "NB":  int(block_data[2]),
+                    "P":  int(block_data[3]),
+                    "Q":  int(block_data[4]),
+                    "Time":  float(block_data[5]),
+                    "Gflops":  float(block_data[6])
+                }
+                result_blocks.append(block)
 
-        for i in range(len(data_sel)):
-            if data_sel[i] == "":
-                data_sel = data_sel[:i]
-                break
+        max_block = result_blocks[0]
+        for block in result_blocks:
+            if block["Gflops"] > max_block["Gflops"]:
+                max_block = block
 
-        if len(data_sel) < 3:
-            raise ValueError("Incorrect data got selected. Size not large enough for further extraction. Ended up selecting: ", data_sel, "\nOriginal data: ", data)
-        raw_headers = data_sel[0].split()
-        headers = [
-            raw_headers[0],
-            raw_headers[1],
-            raw_headers[2],
-            raw_headers[3],
-            raw_headers[4],
-            raw_headers[5],
-            raw_headers[6],
-            f"{raw_headers[8]}_{raw_headers[9]}".strip(")"),
-
-        ]
-        values = data_sel[2].split() # Select third row of extracted data and split it
-        cleaned = [
-            values[0],  # T/V
-            int(values[1]),
-            int(values[2]),
-            int(values[3]),
-            int(values[4]),
-            float(values[5]),
-            float(values[6]),
-            float(values[8].strip(")"))  # inside parentheses
-        ]
-
-        return dict(zip(headers, cleaned))
+        return max_block
     
     def process(self, backend_name: str):
         # Process the results obtained from the execute() method. Please make sure to turn them into a format that fits what this suite expects.
