@@ -6,9 +6,9 @@ import shutil
 from pathlib import Path
 
 @register_workload
-class CPUSingleWorkload(ExternalWorkload):
+class HPCGWorkload(ExternalWorkload):
     """External Nvidia HPL benchmark runner & parser"""
-    name = "hpl"
+    name = "hpcg"
 
     class WorkloadParams(BaseModel):
         dir: str

@@ -3,7 +3,7 @@ from pydantic import BaseModel
 import subprocess
 
 @register_workload
-class CPUSingleWorkload(ExternalWorkload):
+class NvidiaHPLWorkload(ExternalWorkload):
     """External Nvidia HPL benchmark runner & parser"""
     name = "nvidia-hpl"
 
