@@ -68,6 +68,8 @@ class HPCGWorkload(ExternalWorkload):
                 cur[leaf]["_value"] = value
             else:
                 cur[leaf] = value
+
+        return results
     
     def process(self, backend_name: str):
         # Process the results obtained from the execute() method. Please make sure to turn them into a format that fits what this suite expects.
