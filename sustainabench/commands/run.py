@@ -39,7 +39,7 @@ def benchmark(
     print(f"Running workload: {workload}")
 
     backend_cls = BACKENDS[backend]
-    backend_instance = backend_cls(num_processors=processors)
+    backend_instance = backend_cls(num_processors=processors, node_processors=node_processors)
 
     workload_cfg = None
     if config_file != Path(""):

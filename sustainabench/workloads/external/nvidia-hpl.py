@@ -11,7 +11,7 @@ class NvidiaHPLWorkload(ExternalWorkload):
         executable: str
         flags: list[list[str]]
 
-    def execute(self):
+    def execute(self, node_processors):
         # Execute the external workload. Expected to be something like running a command-line subprocess
         params = self.WorkloadParams.model_validate(self.workload_cfg.workload.params)
 

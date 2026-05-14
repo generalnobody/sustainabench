@@ -15,8 +15,9 @@ class ExecutionBackend(ABC):
     """Defines how workloads are executed."""
     name: str
 
-    def __init__(self, num_processors: int = 1) -> None:
+    def __init__(self, num_processors: int = 1, node_processors: int = 1) -> None:
         self.num_processors = num_processors
+        self.node_processors = node_processors
 
     def add_result(self, node_results: list[NodeResult], result: dict[str, Any]):
         index = {r.node_id: r for r in node_results}
@@ -50,7 +51,7 @@ class ExecutionBackend(ABC):
         if isinstance(workload, InternalWorkload):
             workload.run(self.num_processors, context=context)
         elif isinstance(workload, ExternalWorkload):
-            workload.execute()
+            workload.execute(self.node_processors)
 
         if context and context.comm:
             context.comm.Barrier()
