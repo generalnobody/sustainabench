@@ -12,7 +12,7 @@ from pydantic import ValidationError
 class BenchmarkRunner:
     """Class than handles running the benchmarks"""
 
-    def __init__(self, workload_name, config_filepath, measurement_names, runs, backend):
+    def __init__(self, workload_name, config_filepath, measurement_names, runs, backend, wrapped_execution):
         if workload_name not in WORKLOADS:
             raise ValueError(f"Unknown workload: {workload_name}")
         
@@ -48,6 +48,7 @@ class BenchmarkRunner:
             
         self.runs = runs
         self.backend = backend
+        self.wrapped_execution = wrapped_execution
 
     def _process_wrapped_results(self, output: str) -> list[NodeResult]:
         decoder = json.JSONDecoder()
@@ -77,7 +78,7 @@ class BenchmarkRunner:
         """Function that runs the benchmark on the correct backend (only internal measurements)"""
         results = {}
         for i in range(self.runs):
-            if isinstance(self.workload, ExternalWorkload) and self.workload.require_wrapping:
+            if isinstance(self.workload, ExternalWorkload) and self.workload.require_wrapping and not self.wrapped_execution:
                 measurement_filelist = [
                     (m.name, getattr(m, "file", None))
                     for m in self.measurements

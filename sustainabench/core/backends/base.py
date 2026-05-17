@@ -20,11 +20,10 @@ class ExecutionBackend(ABC):
     """Defines how workloads are executed."""
     name: str
 
-    def __init__(self, num_processors, node_processors, hostfile, wrapped_execution) -> None:
+    def __init__(self, num_processors, node_processors, hostfile) -> None:
         self.num_processors = num_processors
         self.node_processors = node_processors
         self.hostfile = hostfile
-        self.wrapped_execution = wrapped_execution
 
     def add_result(self, node_results: list[NodeResult], result: dict[str, Any]):
         index = {r.node_id: r for r in node_results}

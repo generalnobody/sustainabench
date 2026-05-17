@@ -41,16 +41,15 @@ def benchmark(
     print(f"Running workload: {workload}")
 
     backend_cls = BACKENDS[backend]
-    backend_instance = backend_cls(num_processors=processors, node_processors=node_processors, hostfile=hostfile, wrapped_execution=wrapped_execution)
-
-    
+    backend_instance = backend_cls(num_processors=processors, node_processors=node_processors, hostfile=hostfile)
 
     runner = BenchmarkRunner(
         workload_name=workload,
         config_filepath=config_file,
         measurement_names=measurement_names,
         runs=runs,
-        backend=backend_instance
+        backend=backend_instance,
+        wrapped_execution=wrapped_execution
     )
 
     measurement_instances = runner.get_measurements()
