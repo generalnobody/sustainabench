@@ -1,5 +1,4 @@
 import typer
-from rich import print
 import importlib
 import pkgutil
 import sustainabench.commands as commands

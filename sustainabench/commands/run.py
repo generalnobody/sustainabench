@@ -1,6 +1,5 @@
 from typing import Annotated
 import typer
-from rich import print
 from pathlib import Path
 import json
 import yaml

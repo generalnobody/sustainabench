@@ -2,7 +2,6 @@ from typing import Annotated
 import typer
 import json
 import yaml
-from rich import print
 from pathlib import Path
 from sustainabench.reporting.result_processor import ResultProcessor
 from sustainabench.schemas.results.benchmark import BenchmarkResult

@@ -107,8 +107,7 @@ class BenchmarkRunner:
                     "-we",
                     "-nof"
                 ]
-                env = {**os.environ, "NO_COLOR": "1"} # Did this because rich otherwise gives color. If any future issues arise because of colors, that is why
-                output = subprocess.run(cmd, capture_output=True, text=True, env=env)
+                output = subprocess.run(cmd, capture_output=True, text=True)
 
                 if output.returncode != 0 or output.stdout == "":
                     raise RuntimeError(
