@@ -14,14 +14,14 @@ from sustainabench.schemas.results.benchmark import BenchmarkResult, NodeResult
 
 app = typer.Typer()
 
-def _is_main_process():
+def _is_main_process(wrapped):
     rank = ( # Should cover most MPI rank env variables.
         os.getenv("OMPI_COMM_WORLD_RANK")
         or os.getenv("PMI_RANK")
         or os.getenv("SLURM_PROCID")
     )
 
-    if rank is None or str(rank) == "0":
+    if rank is None or str(rank) == "0" or wrapped:
         return True
     else:
         return False
@@ -105,7 +105,7 @@ def benchmark(
     else:
         results = runner.run()
     
-    if results is not None and _is_main_process():
+    if results is not None and _is_main_process(wrapped_execution):
         results_dict = results.model_dump()
 
         print("Results:")
