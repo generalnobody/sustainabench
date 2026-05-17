@@ -34,7 +34,7 @@ def benchmark(
     processors: Annotated[int, typer.Option(..., "--processors", "-p", help="How many processors to use (when applicable)")] = 1,
     output_dir: Annotated[Path, typer.Option(..., "--output", "-o", help="Benchmark output directory")] = Path("./experiments/raw/"),
     output_filename: Annotated[str, typer.Option(..., "--output-filename", "-of", help="Which specific filename to use within the output directory. Note: meant only for internal child runs, so is hidden from the help menu.", hidden=True)] = "",
-    wrapped_execution: Annotated[bool, typer.Option(..., "--wrapped", "-we", help="Whether the execution (only works for external workloads and only if they support it) has already been wrapped by another 'sustainabench run benchmark ...' (should not be used manually)", hidden=True)] = True,
+    wrapped_execution: Annotated[bool, typer.Option(..., "--wrapped", "-we", help="Whether the execution (only works for external workloads and only if they support it) has already been wrapped by another 'sustainabench run benchmark ...' (should not be used manually)", hidden=True)] = False,
     no_output_file: Annotated[bool, typer.Option(..., "--no-output-file", "-nof", help="Do not output output to a file and instead only to stdout.", hidden=True)] = False
 ):
     """Command used to run a benchmark"""
