@@ -16,6 +16,7 @@ from sustainabench.schemas.results.benchmark import BenchmarkResult, NodeResult
 app = typer.Typer()
 
 def _is_main_process():
+    return True # Rethink how to check this. Really annoying when running wrapped workloads as it cannot init MPI
     try:
         from mpi4py import MPI
         return MPI.COMM_WORLD.Get_rank() == 0

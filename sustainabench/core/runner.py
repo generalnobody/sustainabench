@@ -54,8 +54,7 @@ class BenchmarkRunner:
         decoder = json.JSONDecoder()
         json_objects = []
         
-        i = 0
-        while i < len(output):
+        for i in range(len(output)):
             if output[i] == "{":
                 try:
                     obj, end = decoder.raw_decode(output[i:])
