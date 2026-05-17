@@ -23,13 +23,13 @@ class HPLWorkload(ExternalWorkload):
 
         print(output)
 
-        if output.returncode != 0 or output.stdout == "":
+        if output.returncode != 0:
             raise RuntimeError(
                 f"FAILURE: Subprocess {params.executable} failed with return code {output.returncode}\n"
                 f"STDOUT: {output.stdout}\n\nSTDERR: {output.stderr}"
             )
 
-        self.results = output.stdout.splitlines()
+        self.results = output.stdout.splitlines() if output.stdout != "" else None
 
     def _parse_results(self, data):
         result_blocks = []
@@ -56,6 +56,8 @@ class HPLWorkload(ExternalWorkload):
         return max_block
     
     def process(self, backend_name: str):
+        if not self.results:
+            return {}
         results = {
             self.name: self._parse_results(self.results)
         }
