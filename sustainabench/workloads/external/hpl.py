@@ -20,9 +20,6 @@ class HPLWorkload(ExternalWorkload):
         params = self.WorkloadParams.model_validate(self.workload_cfg.workload.params)
         output = subprocess.run([params.executable], cwd=params.dir, capture_output=True, text=True)
 
-
-        print(output)
-
         if output.returncode != 0:
             raise RuntimeError(
                 f"FAILURE: Subprocess {params.executable} failed with return code {output.returncode}\n"
