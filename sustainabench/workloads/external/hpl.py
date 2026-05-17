@@ -8,21 +8,17 @@ import tempfile
 class HPLWorkload(ExternalWorkload):
     """External HPL benchmark runner & parser"""
     name = "hpl"
+    require_wrapping = True
+    require_config = True
 
     class WorkloadParams(BaseModel):
         dir: str
         executable: str
 
-    def execute(self, node_processors):
+    def execute(self):
         # Execute the external workload. Expected to be something like running a command-line subprocess
         params = self.WorkloadParams.model_validate(self.workload_cfg.workload.params)
-
-        cmd = [
-            "mpirun",
-            "-np", str(node_processors),
-            params.executable
-        ]
-        output = subprocess.run(cmd, cwd=params.dir, capture_output=True, text=True)
+        output = subprocess.run([params.executable], cwd=params.dir, capture_output=True, text=True)
 
 
         print(output)

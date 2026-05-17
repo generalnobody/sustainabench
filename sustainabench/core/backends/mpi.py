@@ -1,12 +1,22 @@
 from .base import ExecutionBackend, register_backend
 from sustainabench.utils.system_info import get_node_metadata
-from ..context import ExecutionContext
+from sustainabench.core.context import ExecutionContext
 from sustainabench.schemas.results.benchmark import NodeResult
 from sustainabench.workloads.base import ExternalWorkload
 
 @register_backend
 class MPIBackend(ExecutionBackend):
     name = "mpi"
+
+    def get_wrap_command(self):
+        cmd = ["mpirun"]
+        if self.node_processors:
+            cmd += ["-np", str(self.node_processors)]
+        if self.hostfile:
+            cmd += ["--hostfile", self.hostfile.name]
+
+        return cmd
+
 
     def run(self, runner):
         from mpi4py import MPI

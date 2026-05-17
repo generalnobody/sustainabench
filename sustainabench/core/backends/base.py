@@ -3,6 +3,11 @@ from typing import Dict, Type, Any
 from sustainabench.measurement.manager import MeasurementManager
 from sustainabench.schemas.results.benchmark import NodeResult
 from sustainabench.workloads.base import InternalWorkload, ExternalWorkload
+from sustainabench.core.runner import BenchmarkRunner
+from dataclasses import dataclass
+import subprocess
+import json
+from pydantic import ValidationError
 
 BACKENDS: Dict[str, Type["ExecutionBackend"]] = {}
 
@@ -15,9 +20,11 @@ class ExecutionBackend(ABC):
     """Defines how workloads are executed."""
     name: str
 
-    def __init__(self, num_processors: int = 1, node_processors: int = 1) -> None:
+    def __init__(self, num_processors, node_processors, hostfile, wrapped_execution) -> None:
         self.num_processors = num_processors
         self.node_processors = node_processors
+        self.hostfile = hostfile
+        self.wrapped_execution = wrapped_execution
 
     def add_result(self, node_results: list[NodeResult], result: dict[str, Any]):
         index = {r.node_id: r for r in node_results}
@@ -31,6 +38,10 @@ class ExecutionBackend(ABC):
 
     @abstractmethod
     def run(self, runner) -> list[NodeResult]:
+        pass
+
+    @abstractmethod
+    def get_wrap_command(self) -> list[str]:
         pass
 
     # Shared execution unit used by all backends
@@ -51,7 +62,7 @@ class ExecutionBackend(ABC):
         if isinstance(workload, InternalWorkload):
             workload.run(self.num_processors, context=context)
         elif isinstance(workload, ExternalWorkload):
-            workload.execute(self.node_processors)
+            workload.execute()
 
         if context and context.comm:
             context.comm.Barrier()

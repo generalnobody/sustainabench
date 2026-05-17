@@ -8,6 +8,9 @@ class LocalBackend(ExecutionBackend):
     """Runs benchmark locally."""
     name = "local"
 
+    def get_wrap_command(self):
+        raise RuntimeError(f"Backend {self.name} does not support command wrapping. Please ensure the correct backend is selected for the chosen workload, as it seems to require wrapping.")
+
     def run(self, runner):
         raw_metrics = self._execute_single(runner, None)
 

@@ -9,24 +9,21 @@ from pathlib import Path
 class HPCGWorkload(ExternalWorkload):
     """External HPCG benchmark runner & parser"""
     name = "hpcg"
+    require_wrapping = True
+    require_config = True
 
     class WorkloadParams(BaseModel):
         dir: str
         executable: str
 
-    def execute(self, node_processors):
+    def execute(self):
         # Execute the external workload. Expected to be something like running a command-line subprocess
         params = self.WorkloadParams.model_validate(self.workload_cfg.workload.params)
         with tempfile.TemporaryDirectory() as tmpdir:
             tmpdir = Path(tmpdir)
             datfile = "hpcg.dat"
             shutil.copy(Path(params.dir)/datfile, tmpdir / datfile)
-            cmd = [
-                "mpirun",
-                "-np", str(node_processors),
-                params.executable
-            ]
-            subprocess.run(cmd, cwd = tmpdir)
+            subprocess.run([params.executable], cwd = tmpdir)
             output_matches = list(tmpdir.glob("HPCG-Benchmark*.txt"))
             self.results = output_matches[0].read_text(encoding="utf-8").splitlines()
 

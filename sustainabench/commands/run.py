@@ -12,7 +12,6 @@ from sustainabench.measurement import MEASUREMENTS
 from sustainabench.core.backends import BACKENDS
 from sustainabench.measurement.base import ExternalMeasurement
 from sustainabench.schemas.results.benchmark import BenchmarkResult, NodeResult
-from sustainabench.schemas.configs.workloads.config import WorkloadConfig
 
 app = typer.Typer()
 
@@ -30,36 +29,57 @@ def benchmark(
     runs: Annotated[int, typer.Option(..., "--runs", "-r", help="How many times to run the same benchmark")] = 1,
     config_file: Annotated[Path, typer.Option(..., "--config", "-c", help="Path to the config file for the workload. Only supports YAML/JSON files")] = Path(""),
     backend: Annotated[str, typer.Option(..., "--backend", "-b", help="Which backend to use")] = "local",
-    node_processors: Annotated[int, typer.Option(..., "--node-processors", "-np", help="Number of nodes that the MPI backend (or backend with similar situation) uses. Not used with local backend, use --processors/-p then. When using this, normal --processors/-p describes how many local threads are used per node.")] = 1,
+    node_processors: Annotated[int | None, typer.Option(..., "--node-processors", "-np", help="Number of nodes that the MPI backend (or backend with similar situation) uses. Not used with local backend, use --processors/-p then. When using this, normal --processors/-p describes how many local threads are used per node.")] = None,
+    hostfile: Annotated[Path | None, typer.Option(..., "--hostfile", "-hf", help="Hostfile used by the MPI backend (or similar backends).")] = None,
     processors: Annotated[int, typer.Option(..., "--processors", "-p", help="How many processors to use (when applicable)")] = 1,
     output_dir: Annotated[Path, typer.Option(..., "--output", "-o", help="Benchmark output directory")] = Path("./experiments/raw/"),
-    output_filename: Annotated[str, typer.Option(..., "--output-filename", "-of", help="Which specific filename to use within the output directory. Note: meant only for internal child runs, so is hidden from the help menu.", hidden=True)] = ""
+    output_filename: Annotated[str, typer.Option(..., "--output-filename", "-of", help="Which specific filename to use within the output directory. Note: meant only for internal child runs, so is hidden from the help menu.", hidden=True)] = "",
+    wrapped_execution: Annotated[bool, typer.Option(..., "--wrapped", "-we", help="Whether the execution (only works for external workloads and only if they support it) has already been wrapped by another 'sustainabench run benchmark ...' (should not be used manually)", hidden=True)] = True,
+    no_output_file: Annotated[bool, typer.Option(..., "--no-output-file", "-nof", help="Do not output output to a file and instead only to stdout.", hidden=True)] = False
 ):
     """Command used to run a benchmark"""
     print(f"Running workload: {workload}")
 
     backend_cls = BACKENDS[backend]
-    backend_instance = backend_cls(num_processors=processors, node_processors=node_processors)
+    backend_instance = backend_cls(num_processors=processors, node_processors=node_processors, hostfile=hostfile, wrapped_execution=wrapped_execution)
 
-    workload_cfg = None
-    if config_file != Path(""):
-        tmp = None
-        with open(config_file) as f:
-            tmp = yaml.safe_load(f)
-        workload_cfg = WorkloadConfig.model_validate(tmp)
+    
 
     runner = BenchmarkRunner(
         workload_name=workload,
-        workload_cfg=workload_cfg,
+        config_filepath=config_file,
         measurement_names=measurement_names,
         runs=runs,
-        backend=backend_instance,
+        backend=backend_instance
     )
 
     measurement_instances = runner.get_measurements()
     external_measurements = [
         m for m in measurement_instances if isinstance(m, ExternalMeasurement) 
     ]
+
+    ###########################################################################################
+    # TODO: major rework
+    # Fix MPI: try to figure out how to have measurements & workloads run in parallel. Probably requires something like side-by-side MPI or smth
+    # If using MPI, and an external workload, then external measurements should be run with MPI-specific commands (likwid-mpirun vs likwid-perfctr)
+    # Main sustainabench should never initialize MPI. even import mpi4py initializes it and fucks up
+    # For external workloads, maybe to make backend requirements clear, add something like 'allowed_backends = ["mpi"]'. If this is not set, then just allow all
+    # 
+    #
+    #
+    ############################################################################################
+
+    # Maybe a good approach is to have sustainabench run benchmark perform a subprocess.popen on another sustainabench run benchmark, never load mpi4py and just have the local benchmark runs output their benchmark runs to stdout (and maybe a tempfile)
+    # 
+    # Flow:
+    # sustainabench run benchmark -w hpl -np 4 ...
+    # this does sustainabench run benchmark -w hpl and gets the results? no but that would cause infinite loop never calling hpl...
+    # maybe run sustainabench run workload?? new command mayh fix the issue?
+    # internally, maybe always set wrapper=true for hpl workload (and hpcg), then one command can be used? since other logic is the same
+
+
+    # OR: handle external workload logic from runner/from here. putting it into the workloads seems annoying...
+    # Also, for measurements like likwid, that have mpi wrappers, mauybe provide some way to cleanly run the program with those instead of with normal mpirun?
 
     if external_measurements:
         ext = max(external_measurements, key=lambda m: m.priority)
@@ -111,6 +131,9 @@ def benchmark(
         print("Results:")
         print(json.dumps(results_dict, indent=4))
 
+        if no_output_file:
+            return
+
         output_dir.mkdir(parents=True, exist_ok=True)
         if output_filename != "" and not output_filename.endswith(".json"): # Internally, always ends with .json. However, if users figure this one out, ensure it ends with .json by always appending .json
                 output_filename = f"{output_filename}.json"
@@ -152,3 +175,35 @@ def benchmark_list(
         print("[bold]Available Backends:[/bold]")
         for k in BACKENDS:
             print(f" - {k}")
+
+
+# @app.command(hidden=True)
+# def benchmark_worker(
+#     workload: Annotated[str, typer.Option(..., "--workload", "-w", help="The workload to run (from 'workloads/')")],
+#     measurement_names: Annotated[list[str], typer.Option(..., "--measure", "-m", help="Which measurements to conduct while executing the workload (multiple allowed)")],
+#     processors: Annotated[int, typer.Option(..., "--processors", "-p", help="How many processors to use (when applicable)")] = 1,
+#     config_file: Annotated[Path, typer.Option(..., "--config", "-c", help="Path to the config file for the workload. Only supports YAML/JSON files")] = Path("")
+# ):
+#     """Local worker command, used for workloads that require wrapping (such as HPL/HPCG)"""
+#     backend_cls = BACKENDS["local"]
+#     backend_instance = backend_cls(num_processors=processors, node_processors=1)
+
+#     workload_cfg = None
+#     if config_file != Path(""):
+#         tmp = None
+#         with open(config_file) as f:
+#             tmp = yaml.safe_load(f)
+#         workload_cfg = WorkloadConfig.model_validate(tmp)
+
+#     runner = BenchmarkRunner(
+#         workload_name=workload,
+#         workload_cfg=workload_cfg,
+#         measurement_names=measurement_names,
+#         runs=1,
+#         backend=backend_instance,
+#     )
+
+#     measurement_instances = runner.get_measurements()
+#     external_measurements = [
+#         m for m in measurement_instances if isinstance(m, ExternalMeasurement) 
+#     ]

@@ -6,12 +6,13 @@ import subprocess
 class NvidiaHPLWorkload(ExternalWorkload):
     """External Nvidia HPL benchmark runner & parser"""
     name = "nvidia-hpl"
+    require_config = True
 
     class WorkloadParams(BaseModel):
         executable: str
         flags: list[list[str]]
 
-    def execute(self, node_processors):
+    def execute(self):
         # Execute the external workload. Expected to be something like running a command-line subprocess
         params = self.WorkloadParams.model_validate(self.workload_cfg.workload.params)
 
