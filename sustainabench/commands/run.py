@@ -2,7 +2,7 @@ from typing import Annotated
 import typer
 from pathlib import Path
 import json
-import yaml
+import os
 import tempfile
 from datetime import datetime
 from sustainabench.core.runner import BenchmarkRunner
@@ -15,12 +15,17 @@ from sustainabench.schemas.results.benchmark import BenchmarkResult, NodeResult
 app = typer.Typer()
 
 def _is_main_process():
-    return True # Rethink how to check this. Really annoying when running wrapped workloads as it cannot init MPI
-    try:
-        from mpi4py import MPI
-        return MPI.COMM_WORLD.Get_rank() == 0
-    except:
+    rank = ( # Should cover most MPI rank env variables.
+        os.getenv("OMPI_COMM_WORLD_RANK")
+        or os.getenv("PMI_RANK")
+        or os.getenv("SLURM_PROCID")
+    )
+
+    if rank is None or str(rank) == "0":
         return True
+    else:
+        return False
+
 
 @app.command()
 def benchmark(
@@ -56,29 +61,6 @@ def benchmark(
     external_measurements = [
         m for m in measurement_instances if isinstance(m, ExternalMeasurement) 
     ]
-
-    ###########################################################################################
-    # TODO: major rework
-    # Fix MPI: try to figure out how to have measurements & workloads run in parallel. Probably requires something like side-by-side MPI or smth
-    # If using MPI, and an external workload, then external measurements should be run with MPI-specific commands (likwid-mpirun vs likwid-perfctr)
-    # Main sustainabench should never initialize MPI. even import mpi4py initializes it and fucks up
-    # For external workloads, maybe to make backend requirements clear, add something like 'allowed_backends = ["mpi"]'. If this is not set, then just allow all
-    # 
-    #
-    #
-    ############################################################################################
-
-    # Maybe a good approach is to have sustainabench run benchmark perform a subprocess.popen on another sustainabench run benchmark, never load mpi4py and just have the local benchmark runs output their benchmark runs to stdout (and maybe a tempfile)
-    # 
-    # Flow:
-    # sustainabench run benchmark -w hpl -np 4 ...
-    # this does sustainabench run benchmark -w hpl and gets the results? no but that would cause infinite loop never calling hpl...
-    # maybe run sustainabench run workload?? new command mayh fix the issue?
-    # internally, maybe always set wrapper=true for hpl workload (and hpcg), then one command can be used? since other logic is the same
-
-
-    # OR: handle external workload logic from runner/from here. putting it into the workloads seems annoying...
-    # Also, for measurements like likwid, that have mpi wrappers, mauybe provide some way to cleanly run the program with those instead of with normal mpirun?
 
     if external_measurements:
         ext = max(external_measurements, key=lambda m: m.priority)
@@ -124,7 +106,6 @@ def benchmark(
         results = runner.run()
     
     if results is not None and _is_main_process():
-        # results_dict = results.to_dict()
         results_dict = results.model_dump()
 
         print("Results:")
@@ -165,44 +146,7 @@ def benchmark_list(
         for k in MEASUREMENTS:
             print(f" - {k}")
 
-    # if indicator_names:
-    #     print("[bold]Available Indicators:[/bold]")
-    #     for k in INDICATORS:
-    #         print(f" - {k}")
-
     if backends:
         print("[bold]Available Backends:[/bold]")
         for k in BACKENDS:
             print(f" - {k}")
-
-
-# @app.command(hidden=True)
-# def benchmark_worker(
-#     workload: Annotated[str, typer.Option(..., "--workload", "-w", help="The workload to run (from 'workloads/')")],
-#     measurement_names: Annotated[list[str], typer.Option(..., "--measure", "-m", help="Which measurements to conduct while executing the workload (multiple allowed)")],
-#     processors: Annotated[int, typer.Option(..., "--processors", "-p", help="How many processors to use (when applicable)")] = 1,
-#     config_file: Annotated[Path, typer.Option(..., "--config", "-c", help="Path to the config file for the workload. Only supports YAML/JSON files")] = Path("")
-# ):
-#     """Local worker command, used for workloads that require wrapping (such as HPL/HPCG)"""
-#     backend_cls = BACKENDS["local"]
-#     backend_instance = backend_cls(num_processors=processors, node_processors=1)
-
-#     workload_cfg = None
-#     if config_file != Path(""):
-#         tmp = None
-#         with open(config_file) as f:
-#             tmp = yaml.safe_load(f)
-#         workload_cfg = WorkloadConfig.model_validate(tmp)
-
-#     runner = BenchmarkRunner(
-#         workload_name=workload,
-#         workload_cfg=workload_cfg,
-#         measurement_names=measurement_names,
-#         runs=1,
-#         backend=backend_instance,
-#     )
-
-#     measurement_instances = runner.get_measurements()
-#     external_measurements = [
-#         m for m in measurement_instances if isinstance(m, ExternalMeasurement) 
-#     ]

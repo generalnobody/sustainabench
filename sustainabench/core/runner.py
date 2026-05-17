@@ -8,7 +8,6 @@ import yaml
 import json
 import subprocess
 from pydantic import ValidationError
-import os
 
 class BenchmarkRunner:
     """Class than handles running the benchmarks"""
