@@ -8,6 +8,7 @@ import yaml
 import json
 import subprocess
 from pydantic import ValidationError
+import os
 
 class BenchmarkRunner:
     """Class than handles running the benchmarks"""
@@ -67,6 +68,9 @@ class BenchmarkRunner:
         results = []
         for obj in json_objects:
             try:
+                # This probably needs to read a BenchmarkResult
+                # Then, if metadata matches (nodeid, local ip at least), select the node with the most data, since thats the one that wouldve been the hpl run, otherwise dunno random selection? Or probably just select the last one then
+                # Still, weird that it doesnt decode anything right now...
                 node_result = NodeResult.model_validate(obj)
                 results.append(node_result)
             except ValidationError:
@@ -103,7 +107,8 @@ class BenchmarkRunner:
                     "-we",
                     "-nof"
                 ]
-                output = subprocess.run(cmd, capture_output=True, text=True)
+                env = {**os.environ, "NO_COLOR": "1"} # Did this because rich otherwise gives color. If any future issues arise because of colors, that is why
+                output = subprocess.run(cmd, capture_output=True, text=True, env=env)
 
                 if output.returncode != 0 or output.stdout == "":
                     raise RuntimeError(
