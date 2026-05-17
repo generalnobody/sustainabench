@@ -93,8 +93,13 @@ class BenchmarkRunner:
                 else:
                     measurement_array.extend(["-m", "none"])
 
-                cmd = self.backend.get_wrap_command() + ["-w", self.workload.name] + measurement_array + [
-                    "-c", self.get_config_filepath().name,
+                cmd = self.backend.get_wrap_command() + [
+                    "sustainabench",
+                    "run",
+                    "benchmark",
+                    "-w", self.workload.name
+                ] + measurement_array + [
+                    "-c", str(self.config_filepath),
                     "-p", str(self.backend.num_processors),
                     "-we",
                     "-nof"
@@ -120,9 +125,6 @@ class BenchmarkRunner:
             results=results,
             metadata={}
         )
-
-    def get_config_filepath(self) -> Path:
-        return self.config_filepath
 
     def get_measurements(self):
         return self.measurements
