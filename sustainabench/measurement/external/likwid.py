@@ -36,62 +36,6 @@ class LikwidMeasurement(ExternalMeasurement):
 
         return launcher + likwid_params
 
-    def execute_cli_passthrough(self, workload, measurements, runs, config_file, backend, node_processors, processors, output_dir, output_filename):
-        self.backend = backend
-
-        if not self.config:
-            raise RuntimeError(f"Measurement {self.name} expects a config to be provided")
-        
-        likwid_flags = self.MeasurementParams.model_validate(self.config.measurement.params)
-        likwid_params = [item for flag in likwid_flags.flags for item in flag] + ["-O"] # '-O' doesnt need to be added in likwid's yaml, since this one is required for output parsing.
-
-        if backend == "mpi":
-            launcher = [
-                "likwid-mpirun",
-                "-np", str(node_processors),
-            ]
-        else:
-            launcher = [
-                "likwid-perfctr",
-            ]
-
-
-        with tempfile.NamedTemporaryFile(mode="w+", suffix=".sh", dir=output_dir) as f:
-            filtered_measurements = []
-            for m in measurements:
-                if m.name != self.name:
-                    filtered_measurements.append((m.name, getattr(m, "file", None)))
-
-            measurement_array = []
-            if len(filtered_measurements) > 0:
-                for measurement, filename in filtered_measurements:
-                    if filename: 
-                        measurement_array.extend(["-m", f"{measurement}={filename}"])
-                    else:
-                        measurement_array.extend(["-m", measurement])
-            else:
-                measurement_array.extend(["-m", "none"])
-
-            script = f"""#!/bin/bash\n
-            sustainabench run benchmark -w {workload} {" ".join(measurement_array)} -r {str(runs)} -c {str(config_file)} -b {backend} -np {str(node_processors)} -p {str(processors)} -o {output_dir} -of {output_filename}\n
-            """
-            f.write(script)
-            f.flush()
-            cmd = launcher + likwid_params  + [
-                "--",
-                "bash", f.name
-            ]
-
-            output = subprocess.run(cmd, capture_output=True, text=True)
-
-        if output.returncode != 0 or output.stdout == "":
-            raise RuntimeError(
-                f"FAILURE: Subprocess executed with command '{' '.join(cmd)}' failed with return code {output.returncode}\n"
-                f"STDOUT: {output.stdout}\nSTDERR: {output.stderr}"
-            )
-        
-        self.results = output.stdout.splitlines()
-
     def _parse_likwid_output(self, results):
         csvdata = None
         for i in range(len(results)):
@@ -209,31 +153,5 @@ class LikwidMeasurement(ExternalMeasurement):
             }
         else:
             raise ValueError(f"Backend '{self.backend_name}' not yet implemented in external measurement '{self.name}' parser. Please implement first.")
-
-        return result
-
-    def result_json(self, nodeids: list[str]) -> dict:
-        parsed = self._parse_likwid_output(self.results)
-        result = {}
-
-        if self.backend == "local":
-            result = {
-                "local": {
-                    self.name: parsed
-                }
-            }
-        elif self.backend == "mpi":
-            node_results, global_results = self._split_results(parsed, nodeids)
-            result = {
-                **{
-                    node_id: {"likwid": node_result}
-                    for node_id, node_result in node_results.items()
-                },
-                "global": {
-                    "likwid": global_results
-                }
-            }
-        else:
-            raise ValueError(f"Backend {self.backend} not yet implemented in external measurement {self.name} parser. Please implement first.")
 
         return result

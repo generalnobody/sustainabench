@@ -57,13 +57,5 @@ class ExternalMeasurement(Measurement):
         pass
 
     @abstractmethod
-    def execute_cli_passthrough(self, workload, measurements, runs, config_file, backend, node_processors, processors, output_dir, output_filename):
-        pass
-
-    @abstractmethod
     def process_results(self, output: str, nodeids: list[str]) -> dict:
-        pass
-
-    @abstractmethod
-    def result_json(self, nodeids: list[str]) -> dict:
         pass
