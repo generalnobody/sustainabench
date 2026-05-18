@@ -16,7 +16,7 @@ class LocalBackend(ExecutionBackend):
 
         metadata = get_node_metadata()
         rank, local_rank = get_mpi_ranks()
-        node_id = f"{metadata['hostname']}:{rank}:{local_rank}" if local_rank else f"{metadata['hostname']}:{rank}" if rank else self.name
+        node_id = f"{metadata['hostname']}:{rank}:{local_rank}" if local_rank is not None else f"{metadata['hostname']}:{rank}" if rank is not None else self.name
 
         results = [NodeResult(
             node_id=node_id,
