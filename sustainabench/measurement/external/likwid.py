@@ -11,9 +11,30 @@ class LikwidMeasurement(ExternalMeasurement):
     scope = "node"
     require_file = True
     priority = 100
+    replace_wrapper = ["mpi"]
 
     class MeasurementParams(BaseModel):
         flags: list[list[str]]
+
+    def get_wrap_command(self, backend_name, node_processors):
+        if not self.config:
+            raise RuntimeError(f"Measurement {self.name} expects a config to be provided")
+        
+        self.backend_name = backend_name
+        if backend_name == "mpi":
+            launcher = [
+                "likwid-mpirun",
+                "-np", str(node_processors),
+            ]
+        else:
+            launcher = [
+                "likwid-perfctr",
+            ]
+        
+        likwid_flags = self.MeasurementParams.model_validate(self.config.measurement.params)
+        likwid_params = [item for flag in likwid_flags.flags for item in flag] + ["-O"] # '-O' doesnt need to be added in likwid's yaml, since this one is required for output parsing.
+
+        return launcher + likwid_params
 
     def execute_cli_passthrough(self, workload, measurements, runs, config_file, backend, node_processors, processors, output_dir, output_filename):
         self.backend = backend
@@ -164,6 +185,32 @@ class LikwidMeasurement(ExternalMeasurement):
         global_results = recurse(data, [])
 
         return node_results, global_results
+
+    def process_results(self, output: str, nodeids: list[str]) -> dict:
+        parsed = self._parse_likwid_output(output.splitlines)
+        result = {}
+
+        if self.backend_name == "local":
+            result = {
+                "local": {
+                    self.name: parsed
+                }
+            }
+        elif self.backend_name == "mpi":
+            node_results, global_results = self._split_results(parsed, nodeids)
+            result = {
+                **{
+                    node_id: {"likwid": node_result}
+                    for node_id, node_result in node_results.items()
+                },
+                "global": {
+                    "likwid": global_results
+                }
+            }
+        else:
+            raise ValueError(f"Backend '{self.backend_name}' not yet implemented in external measurement '{self.name}' parser. Please implement first.")
+
+        return result
 
     def result_json(self, nodeids: list[str]) -> dict:
         parsed = self._parse_likwid_output(self.results)

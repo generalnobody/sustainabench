@@ -54,57 +54,60 @@ def benchmark(
         measurement_names=measurement_names,
         runs=runs,
         backend=backend_instance,
+        output_dir=output_dir,
         wrapped_execution=wrapped_execution
     )
 
-    measurement_instances = runner.get_measurements()
-    external_measurements = [
-        m for m in measurement_instances if isinstance(m, ExternalMeasurement) 
-    ]
+    # measurement_instances = runner.get_measurements()
+    # external_measurements = [
+    #     m for m in measurement_instances if isinstance(m, ExternalMeasurement) 
+    # ]
 
-    if external_measurements:
-        ext = max(external_measurements, key=lambda m: m.priority)
-        temp_results = {} # Should be a dict of each run's results
+    # if external_measurements:
+    #     ext = max(external_measurements, key=lambda m: m.priority)
+    #     temp_results = {} # Should be a dict of each run's results
 
-        for i in range(runs):
-            with tempfile.TemporaryDirectory(dir=output_dir) as tmpdir:
-                temp_output_filename = f"{ext.name}.json"
+    #     for i in range(runs):
+    #         with tempfile.TemporaryDirectory(dir=output_dir) as tmpdir:
+    #             temp_output_filename = f"{ext.name}.json"
 
-                ext.execute_cli_passthrough(
-                    workload=workload,
-                    measurements=measurement_instances,
-                    runs=1, # When launching a child process, always use 1 run. This keeps implementation simple
-                    config_file=config_file,
-                    backend=backend,
-                    node_processors=node_processors,
-                    processors=processors,
-                    output_dir=tmpdir,
-                    output_filename=temp_output_filename,
-                )
+    #             ext.execute_cli_passthrough(
+    #                 workload=workload,
+    #                 measurements=measurement_instances,
+    #                 runs=1, # When launching a child process, always use 1 run. This keeps implementation simple
+    #                 config_file=config_file,
+    #                 backend=backend,
+    #                 node_processors=node_processors,
+    #                 processors=processors,
+    #                 output_dir=tmpdir,
+    #                 output_filename=temp_output_filename,
+    #             )
 
-                raw = None
-                child_file = Path(tmpdir, temp_output_filename)
-                with child_file.open("r", encoding="utf-8") as f:
-                    raw = json.load(f)
-                if not raw:
-                    raise ValueError(f"File {child_file} could not be loaded")
+    #             raw = None
+    #             child_file = Path(tmpdir, temp_output_filename)
+    #             with child_file.open("r", encoding="utf-8") as f:
+    #                 raw = json.load(f)
+    #             if not raw:
+    #                 raise ValueError(f"File {child_file} could not be loaded")
                 
-                child_results = BenchmarkResult.model_validate(raw)
-                res = child_results.results["run0"] # Always run0 since child always does just 1 run
-                nodeids = [noderes.node_id for noderes in res] # These are expected to match external measurements' node ids. If not match, treated as global. If parser has local backend, treat all results as falling under node_id local.
-                index = {r.node_id: r for r in res}
+    #             child_results = BenchmarkResult.model_validate(raw)
+    #             res = child_results.results["run0"] # Always run0 since child always does just 1 run
+    #             nodeids = [noderes.node_id for noderes in res] # These are expected to match external measurements' node ids. If not match, treated as global. If parser has local backend, treat all results as falling under node_id local.
+    #             index = {r.node_id: r for r in res}
 
-                ext_results = ext.result_json(nodeids)
-                for node_id, metrics in ext_results.items():
-                    if node_id in index:
-                        index[node_id].metrics.update(metrics)
-                    else:
-                        res.append(NodeResult(node_id=node_id, metrics=metrics, metadata={}))
-                temp_results[f"run{i}"] = res
-        results = BenchmarkResult(workload=workload, backend=backend, results=temp_results, metadata={})
-    else:
-        results = runner.run()
-    
+    #             ext_results = ext.result_json(nodeids)
+    #             for node_id, metrics in ext_results.items():
+    #                 if node_id in index:
+    #                     index[node_id].metrics.update(metrics)
+    #                 else:
+    #                     res.append(NodeResult(node_id=node_id, metrics=metrics, metadata={}))
+    #             temp_results[f"run{i}"] = res
+    #     results = BenchmarkResult(workload=workload, backend=backend, results=temp_results, metadata={})
+    # else:
+    #     results = runner.run()
+
+    results = runner.run()
+
     if results is not None and _is_main_process(wrapped_execution):
         results_dict = results.model_dump()
 

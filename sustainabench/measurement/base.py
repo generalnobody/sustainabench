@@ -50,9 +50,18 @@ class InternalMeasurement(Measurement):
 class ExternalMeasurement(Measurement):
     priority: int = 0
     # The higher the priority, if multiple external measurements are to be conducted, the earlier this one gets started
+    replace_wrapper: list[str] = [] # List of backends for which this can replace the wrapper functionality (e.g. likwid-mpirun instead of mpirun, for likwid measurement)
     
     @abstractmethod
+    def get_wrap_command(self, backend_name, node_processors)  -> list[str]:
+        pass
+
+    @abstractmethod
     def execute_cli_passthrough(self, workload, measurements, runs, config_file, backend, node_processors, processors, output_dir, output_filename):
+        pass
+
+    @abstractmethod
+    def process_results(self, output: str, nodeids: list[str]) -> dict:
         pass
 
     @abstractmethod
