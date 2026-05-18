@@ -56,13 +56,7 @@ class HPLWorkload(ExternalWorkload):
         if not self.results:
             return {}
         results = {
-            self.name: self._parse_results(self.results)
+            "global": {self.name: self._parse_results(self.results)}
         }
-        if backend_name == "local":
-            results = {"local": results}
-        elif backend_name == "mpi":
-            results = {"global": results}
-        else:
-            raise ValueError(f"Backend {backend_name} currently not supported by workload {self.name}. Please modify the workload to support this backend.")
 
         return results
