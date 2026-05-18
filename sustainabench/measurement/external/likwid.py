@@ -187,7 +187,7 @@ class LikwidMeasurement(ExternalMeasurement):
         return node_results, global_results
 
     def process_results(self, output: str, nodeids: list[str]) -> dict:
-        parsed = self._parse_likwid_output(output.splitlines)
+        parsed = self._parse_likwid_output(output.splitlines())
         result = {}
 
         if self.backend_name == "local":
