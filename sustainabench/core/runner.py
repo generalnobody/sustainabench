@@ -147,93 +147,51 @@ class BenchmarkRunner:
                 external_measurements.remove(workload_wrap_command)
         elif workload_wrap: # No external measurements, but workload does need to be wrapped
             workload_wrap_command = self.backend.get_wrap_command()
-        # Check if any external measurements conflict (add variable for this in ExternalMeasurement)
-        # Get all external measurements that can wrap the workload if applicable
-        # Recursively generate all wrapped commands
-        # Make temp files not delete automatically, handle this later
-        # Select a single wrap command (either from measurement or from workload), that continues into the runs loop
 
-        # TODO: continue with implementation in runs range
-
-
-        # ext = max(external_measurements, key=lambda m: m.rank_priority) if external_measurements else None
-        # Check that proper ext was selected. Prioritize higher priority, but prioritize workload wrapper override above all else
-        # measurement_array = self._get_measurements_for_cli([m for m in self.measurements if not ext or m.name != ext.name])
         measurement_array = self._get_measurements_for_cli([m for m in self.measurements if not isinstance(m, ExternalMeasurement)]) # Select all measurements that are not external (so, internal)
 
-        for i in range(self.runs):
-            if workload_wrap:
-                sustainabench_cmd = f"sustainabench run benchmark -w {self.workload.name} {' '.join(measurement_array)} -c {str(self.config_filepath)} -p {str(self.backend.num_processors)} -we -nof"
-                wrap_cmd = " ".join(self.backend.get_wrap_command())
+        sustainabench_cmd = wrap_cmd = script_files = script_cmd = None
+        if workload_wrap:
+            sustainabench_cmd = f"sustainabench run benchmark -w {self.workload.name} {' '.join(measurement_array)} -c {str(self.config_filepath)} -p {str(self.backend.num_processors)} -we -nof"
+            wrap_cmd = " ".join(self.backend.get_wrap_command())
+        elif external_measurements:
+            sustainabench_cmd = f"sustainabench run benchmark -w {self.workload.name} {' '.join(measurement_array)} -c {str(self.config_filepath)} -b {self.backend.name} -np {str(self.backend.node_processors)} -p {str(self.backend.num_processors)} -o {self.output_dir} -nof"
+
+        try:
+            if sustainabench_cmd is not None:
                 script_files = self._generate_external_measurement_scripts(external_measurements=external_measurements, workload_wrap_command=wrap_cmd, sustainabench_command=sustainabench_cmd)
-                cmd = [
+                script_cmd = [
                     "bash", script_files[-1].name
                 ]
-                output = subprocess.run(cmd, capture_output=True, text=True)
+            for i in range(self.runs):
+                if script_cmd:
+                    output = subprocess.run(script_cmd, capture_output=True, text=True)
 
-                # with tempfile.NamedTemporaryFile(mode="w", suffix=".sh", dir=self.output_dir) as f: # Technically not necessary with local/mpi backend, but you never know when some backend might be annoying like likwid-mpirun
-                #     script = f"#!/bin/bash\nsustainabench run benchmark -w {self.workload.name} {' '.join(measurement_array)} -c {str(self.config_filepath)} -p {str(self.backend.num_processors)} -we -nof\n"
-                #     f.write(script)
-                #     f.flush()
+                    if output.returncode != 0 or output.stdout == "":
+                        raise RuntimeError(
+                            f"FAILURE: Subprocess executed with command '{' '.join(script_cmd)}' failed with return code {output.returncode}\n"
+                            f"STDOUT: {output.stdout}\nSTDERR: {output.stderr}"
+                        )
+                    node_results = self._process_wrapped_results(output.stdout)
 
-                #     # If external measurement can replace backend's wrap command, then use external measurement's
-                #     # Maybe make this override priority?
+                    nodeids = [noderes.node_id for noderes in node_results]
+                    ext_results = [
+                        ext.process_results(output.stdout, nodeids)
+                        for ext in external_measurements
+                    ]
 
-                #     cmd = self.backend.get_wrap_command() + [
-                #         "--",
-                #         "bash", f.name
-                #     ]
+                    for res in ext_results:
+                        node_results = self.backend.add_result(node_results, res)
+                else:
+                    node_results = self.backend.run(self)
 
-                #     output = subprocess.run(cmd, capture_output=True, text=True)
-                    
-                if output.returncode != 0 or output.stdout == "":
-                    raise RuntimeError(
-                        f"FAILURE: Subprocess executed with command '{' '.join(cmd)}' failed with return code {output.returncode}\n"
-                        f"STDOUT: {output.stdout}\nSTDERR: {output.stderr}"
-                    )
-                node_results = self._process_wrapped_results(output.stdout)
-
-            elif external_measurements:
-                sustainabench_cmd = f"sustainabench run benchmark -w {self.workload.name} {' '.join(measurement_array)} -c {str(self.config_filepath)} -b {self.backend.name} -np {str(self.backend.node_processors)} -p {str(self.backend.num_processors)} -o {self.output_dir} -nof"
-                script_files = self._generate_external_measurement_scripts(external_measurements=external_measurements, workload_wrap_command=None, sustainabench_command=sustainabench_cmd)
-                cmd = [
-                    "bash", script_files[-1].name
-                ]
-                output = subprocess.run(cmd, capture_output=True, text=True)
-
-                # with tempfile.NamedTemporaryFile(mode="w", suffix=".sh", dir=self.output_dir) as f:
-                #     script = f"#!/bin/bash\nsustainabench run benchmark -w {self.workload.name} {' '.join(measurement_array)} -c {str(self.config_filepath)} -b {self.backend.name} -np {str(self.backend.node_processors)} -p {str(self.backend.num_processors)} -o {self.output_dir} -nof\n"
-                #     f.write(script)
-                #     f.flush()
-                    
-                #     cmd = ext.get_wrap_command(self.backend.name, self.backend.node_processors) + [
-                #         "--",
-                #         "bash", f.name
-                #     ]
-
-                #     output = subprocess.run(cmd, capture_output=True, text=True)
-
-                if output.returncode != 0 or output.stdout == "":
-                    raise RuntimeError(
-                        f"FAILURE: Subprocess executed with command '{' '.join(cmd)}' failed with return code {output.returncode}\n"
-                        f"STDOUT: {output.stdout}\nSTDERR: {output.stderr}"
-                    )
-                node_results = self._process_wrapped_results(output.stdout)
-                nodeids = [noderes.node_id for noderes in node_results]
-                # ext_results = ext.process_results(output.stdout, nodeids)
-                ext_results = [
-                    ext.process_results(output.stdout, nodeids)
-                    for ext in external_measurements
-                ]
-
-                # node_results = self.backend.add_result(node_results, ext_results)
-                for res in ext_results:
-                    node_results = self.backend.add_result(node_results, res)
-            else:
-                node_results = self.backend.run(self)
-
-            if node_results:
-                results[f"run{i}"] = node_results
+                if node_results:
+                    results[f"run{i}"] = node_results
+        finally:
+            if script_files:
+                for f in script_files: # Clean up temporary files
+                    f.close()
+                    Path(f.name).unlink(missing_ok=True)
 
         return BenchmarkResult(
             workload=self.workload.name,
