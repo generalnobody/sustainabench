@@ -48,12 +48,15 @@ class InternalMeasurement(Measurement):
         pass
 
 class ExternalMeasurement(Measurement):
-    priority: int = 0
-    # The higher the priority, if multiple external measurements are to be conducted, the earlier this one gets started
+    # The higher the rank priority, if multiple external measurements are to be conducted, the earlier this one gets started. 
+    # Is superceded by wrapper priority though, where, if external measurement can act as a backend wrapper replacement, it will, regardless of this priority, following wrapper priority.
+    rank_priority: int = 0 
+    wrapper_priority: int = 0 # External measurement with highest wrapper priority that is compatible with a certain backend will be the one to be selected as the replacement wrapper
     replace_wrapper: list[str] = [] # List of backends for which this can replace the wrapper functionality (e.g. likwid-mpirun instead of mpirun, for likwid measurement)
+    wrapper_conflicts: list[str] = [] # List of other external measurement names that this measurement conflicts with
     
     @abstractmethod
-    def get_wrap_command(self, backend_name, node_processors)  -> list[str]:
+    def get_wrap_command(self, backend_name, node_processors) -> list[str]:
         pass
 
     @abstractmethod

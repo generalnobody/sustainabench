@@ -6,12 +6,14 @@ from pydantic import BaseModel
 
 @register_measurement
 class LikwidMeasurement(ExternalMeasurement):
-    name = "likwid"
+    name = "likwid-perf"
     poll_interval = None
     scope = "node"
     require_file = True
-    priority = 100
+    rank_priority = 100
+    wrapper_priority = 100
     replace_wrapper = ["mpi"]
+    wrapper_conflicts = ["perf"]
 
     class MeasurementParams(BaseModel):
         flags: list[list[str]]

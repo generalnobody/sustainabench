@@ -10,6 +10,7 @@ import json
 import subprocess
 from pydantic import ValidationError
 import tempfile
+from sustainabench.core.backends.base import ExecutionBackend
 
 class BenchmarkRunner:
     """Class than handles running the benchmarks"""
@@ -49,7 +50,7 @@ class BenchmarkRunner:
             raise ValueError(f"Cannot perform {runs} runs")
             
         self.runs = runs
-        self.backend = backend
+        self.backend: ExecutionBackend = backend
         self.output_dir = output_dir
         self.wrapped_execution = wrapped_execution
 
@@ -75,29 +76,115 @@ class BenchmarkRunner:
             except ValidationError:
                 pass
         return results
+    
+    def _generate_external_measurement_scripts(self, external_measurements: list[ExternalMeasurement], workload_wrap_command: str | None, sustainabench_command: str):
+        script_header = "#!/bin/bash"
+        tmp = tempfile.NamedTemporaryFile(
+            mode="w",
+            suffix=".sh",
+            dir=self.output_dir,
+            delete=False
+        )
+        tmp.write(f"{script_header}\n{sustainabench_command}\n")
+        tmp.flush()
+        script_files = [tmp]
+
+        if workload_wrap_command is not None:
+            tmp = tempfile.NamedTemporaryFile(
+                mode="w",
+                suffix=".sh",
+                dir=self.output_dir,
+                delete=False
+            )
+            tmp.write(f"{script_header}\n{workload_wrap_command} -- bash {script_files[-1].name}\n")
+            tmp.flush()
+            script_files.append(tmp)
+        
+        for m in external_measurements:
+            tmp = tempfile.NamedTemporaryFile(
+                mode="w",
+                suffix=".sh",
+                dir=self.output_dir,
+                delete=False
+            )
+            cmd = " ".join(m.get_wrap_command(self.backend.name, self.backend.node_processors))
+            tmp.write(f"{script_header}\n{cmd} -- bash {script_files[-1].name}\n")
+            tmp.flush()
+            script_files.append(tmp)
+
+        return script_files
 
     def run(self) -> BenchmarkResult:
         """Function that runs the benchmark on the correct backend (only internal measurements)"""
         results = {}
 
-        external_measurements = [
-            m for m in self.measurements if isinstance(m, ExternalMeasurement) 
-        ]
+        workload_wrap = isinstance(self.workload, ExternalWorkload) and self.workload.require_wrapping and not self.wrapped_execution
+        workload_wrap_command = None
+        external_measurements = sorted(
+            (
+                m for m in self.measurements 
+                if isinstance(m, ExternalMeasurement) 
+            ),
+            key=lambda m: m.rank_priority,
+            # reverse=True
+        )
+        if external_measurements:
+            for m1 in external_measurements: # Check conflicts
+                for m2 in external_measurements:
+                    if m1.name in m2.wrapper_conflicts:
+                        raise ValueError(f"Measurements {m1.name} and {m2.name} are incompatible. Please select only one of these and run again.")
+                    
+            if workload_wrap:
+                wrappable_measurements = sorted(
+                    (
+                        m for m in external_measurements
+                        if self.backend.name in m.replace_wrapper
+                    ),
+                    key=lambda m: m.wrapper_priority,
+                    reverse=True
+                )
+                workload_wrap_command = max(wrappable_measurements, key=lambda m: m.wrapper_priority)
+                external_measurements.remove(workload_wrap_command)
+        elif workload_wrap: # No external measurements, but workload does need to be wrapped
+            workload_wrap_command = self.backend.get_wrap_command()
+        # Check if any external measurements conflict (add variable for this in ExternalMeasurement)
+        # Get all external measurements that can wrap the workload if applicable
+        # Recursively generate all wrapped commands
+        # Make temp files not delete automatically, handle this later
+        # Select a single wrap command (either from measurement or from workload), that continues into the runs loop
+
+        # TODO: continue with implementation in runs range
+
+
+        # ext = max(external_measurements, key=lambda m: m.rank_priority) if external_measurements else None
+        # Check that proper ext was selected. Prioritize higher priority, but prioritize workload wrapper override above all else
+        # measurement_array = self._get_measurements_for_cli([m for m in self.measurements if not ext or m.name != ext.name])
+        measurement_array = self._get_measurements_for_cli([m for m in self.measurements if not isinstance(m, ExternalMeasurement)]) # Select all measurements that are not external (so, internal)
 
         for i in range(self.runs):
-            if isinstance(self.workload, ExternalWorkload) and self.workload.require_wrapping and not self.wrapped_execution:
-                with tempfile.NamedTemporaryFile(mode="w", suffix=".sh", dir=self.output_dir) as f: # Technically not necessary with local/mpi backend, but you never know when some backend might be annoying like likwid-mpirun
-                    measurement_array = self._get_measurements_for_cli(self.measurements)
-                    script = f"#!/bin/bash\nsustainabench run benchmark -w {self.workload.name} {' '.join(measurement_array)} -c {str(self.config_filepath)} -p {str(self.backend.num_processors)} -we -nof\n"
-                    f.write(script)
-                    f.flush()
+            if workload_wrap:
+                sustainabench_cmd = f"sustainabench run benchmark -w {self.workload.name} {' '.join(measurement_array)} -c {str(self.config_filepath)} -p {str(self.backend.num_processors)} -we -nof"
+                wrap_cmd = " ".join(self.backend.get_wrap_command())
+                script_files = self._generate_external_measurement_scripts(external_measurements=external_measurements, workload_wrap_command=wrap_cmd, sustainabench_command=sustainabench_cmd)
+                cmd = [
+                    "bash", script_files[-1].name
+                ]
+                output = subprocess.run(cmd, capture_output=True, text=True)
 
-                    cmd = self.backend.get_wrap_command() + [
-                        "--",
-                        "bash", f.name
-                    ]
+                # with tempfile.NamedTemporaryFile(mode="w", suffix=".sh", dir=self.output_dir) as f: # Technically not necessary with local/mpi backend, but you never know when some backend might be annoying like likwid-mpirun
+                #     script = f"#!/bin/bash\nsustainabench run benchmark -w {self.workload.name} {' '.join(measurement_array)} -c {str(self.config_filepath)} -p {str(self.backend.num_processors)} -we -nof\n"
+                #     f.write(script)
+                #     f.flush()
 
-                    output = subprocess.run(cmd, capture_output=True, text=True)
+                #     # If external measurement can replace backend's wrap command, then use external measurement's
+                #     # Maybe make this override priority?
+
+                #     cmd = self.backend.get_wrap_command() + [
+                #         "--",
+                #         "bash", f.name
+                #     ]
+
+                #     output = subprocess.run(cmd, capture_output=True, text=True)
                     
                 if output.returncode != 0 or output.stdout == "":
                     raise RuntimeError(
@@ -107,19 +194,24 @@ class BenchmarkRunner:
                 node_results = self._process_wrapped_results(output.stdout)
 
             elif external_measurements:
-                ext = max(external_measurements, key=lambda m: m.priority)
-                with tempfile.NamedTemporaryFile(mode="w", suffix=".sh", dir=self.output_dir) as f:
-                    measurement_array = self._get_measurements_for_cli([m for m in self.measurements if m.name != ext.name])
-                    script = f"#!/bin/bash\nsustainabench run benchmark -w {self.workload.name} {' '.join(measurement_array)} -c {str(self.config_filepath)} -b {self.backend.name} -np {str(self.backend.node_processors)} -p {str(self.backend.num_processors)} -o {self.output_dir} -nof\n"
-                    f.write(script)
-                    f.flush()
-                    
-                    cmd = ext.get_wrap_command(self.backend.name, self.backend.node_processors) + [
-                        "--",
-                        "bash", f.name
-                    ]
+                sustainabench_cmd = f"sustainabench run benchmark -w {self.workload.name} {' '.join(measurement_array)} -c {str(self.config_filepath)} -b {self.backend.name} -np {str(self.backend.node_processors)} -p {str(self.backend.num_processors)} -o {self.output_dir} -nof"
+                script_files = self._generate_external_measurement_scripts(external_measurements=external_measurements, workload_wrap_command=None, sustainabench_command=sustainabench_cmd)
+                cmd = [
+                    "bash", script_files[-1].name
+                ]
+                output = subprocess.run(cmd, capture_output=True, text=True)
 
-                    output = subprocess.run(cmd, capture_output=True, text=True)
+                # with tempfile.NamedTemporaryFile(mode="w", suffix=".sh", dir=self.output_dir) as f:
+                #     script = f"#!/bin/bash\nsustainabench run benchmark -w {self.workload.name} {' '.join(measurement_array)} -c {str(self.config_filepath)} -b {self.backend.name} -np {str(self.backend.node_processors)} -p {str(self.backend.num_processors)} -o {self.output_dir} -nof\n"
+                #     f.write(script)
+                #     f.flush()
+                    
+                #     cmd = ext.get_wrap_command(self.backend.name, self.backend.node_processors) + [
+                #         "--",
+                #         "bash", f.name
+                #     ]
+
+                #     output = subprocess.run(cmd, capture_output=True, text=True)
 
                 if output.returncode != 0 or output.stdout == "":
                     raise RuntimeError(
@@ -128,9 +220,15 @@ class BenchmarkRunner:
                     )
                 node_results = self._process_wrapped_results(output.stdout)
                 nodeids = [noderes.node_id for noderes in node_results]
-                ext_results = ext.process_results(output.stdout, nodeids)
+                # ext_results = ext.process_results(output.stdout, nodeids)
+                ext_results = [
+                    ext.process_results(output.stdout, nodeids)
+                    for ext in external_measurements
+                ]
 
-                node_results = self.backend.add_result(node_results, ext_results)
+                # node_results = self.backend.add_result(node_results, ext_results)
+                for res in ext_results:
+                    node_results = self.backend.add_result(node_results, res)
             else:
                 node_results = self.backend.run(self)
 
