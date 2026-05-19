@@ -119,7 +119,7 @@ class BenchmarkRunner:
         results = {}
 
         workload_wrap = isinstance(self.workload, ExternalWorkload) and self.workload.require_wrapping and not self.wrapped_execution
-        workload_wrap_command = None
+        workload_wrap_command = workload_wrapper = None
         external_measurements = sorted(
             (
                 m for m in self.measurements 
@@ -176,11 +176,14 @@ class BenchmarkRunner:
                     node_results = self._process_wrapped_results(output.stdout)
 
                     nodeids = [noderes.node_id for noderes in node_results]
+                    if workload_wrapper:
+                        res = workload_wrapper.process_results(output.stdout, nodeids)
+                        node_results = self.backend.add_result(node_results, res)
+
                     ext_results = [
                         ext.process_results(output.stdout, nodeids)
                         for ext in external_measurements
                     ]
-
                     for res in ext_results:
                         node_results = self.backend.add_result(node_results, res)
                 else:
