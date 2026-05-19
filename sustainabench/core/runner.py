@@ -143,22 +143,23 @@ class BenchmarkRunner:
                     key=lambda m: m.wrapper_priority,
                     reverse=True
                 )
-                workload_wrap_command = max(wrappable_measurements, key=lambda m: m.wrapper_priority)
-                external_measurements.remove(workload_wrap_command)
+                workload_wrapper = max(wrappable_measurements, key=lambda m: m.wrapper_priority)
+                workload_wrap_command = workload_wrapper.get_wrap_command(self.backend.name, self.backend.node_processors)
+                external_measurements.remove(workload_wrapper)
         elif workload_wrap: # No external measurements, but workload does need to be wrapped
             workload_wrap_command = self.backend.get_wrap_command()
 
         measurement_array = self._get_measurements_for_cli([m for m in self.measurements if not isinstance(m, ExternalMeasurement)]) # Select all measurements that are not external (so, internal)
 
-        sustainabench_cmd = wrap_cmd = script_files = script_cmd = None
+        sustainabench_cmd = script_files = script_cmd = None
         if workload_wrap:
             sustainabench_cmd = f"sustainabench run benchmark -w {self.workload.name} {' '.join(measurement_array)} -c {str(self.config_filepath)} -p {str(self.backend.num_processors)} -we -nof"
-            wrap_cmd = " ".join(self.backend.get_wrap_command())
         elif external_measurements:
             sustainabench_cmd = f"sustainabench run benchmark -w {self.workload.name} {' '.join(measurement_array)} -c {str(self.config_filepath)} -b {self.backend.name} -np {str(self.backend.node_processors)} -p {str(self.backend.num_processors)} -o {self.output_dir} -nof"
 
         try:
             if sustainabench_cmd is not None:
+                wrap_cmd = " ".join(workload_wrap_command) if workload_wrap_command else None
                 script_files = self._generate_external_measurement_scripts(external_measurements=external_measurements, workload_wrap_command=wrap_cmd, sustainabench_command=sustainabench_cmd)
                 script_cmd = [
                     "bash", script_files[-1].name
