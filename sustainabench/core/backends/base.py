@@ -3,7 +3,6 @@ from typing import Dict, Type, Any
 from sustainabench.measurement.manager import MeasurementManager
 from sustainabench.schemas.results.benchmark import NodeResult
 from sustainabench.workloads.base import InternalWorkload, ExternalWorkload
-from sustainabench.core.runner import BenchmarkRunner
 from dataclasses import dataclass
 import subprocess
 import json
