@@ -6,7 +6,7 @@ from pydantic import BaseModel
 
 @register_measurement
 class LikwidMeasurement(ExternalMeasurement):
-    name = "likwid-perf"
+    name = "likwid"
     poll_interval = None
     scope = "node"
     require_file = True
