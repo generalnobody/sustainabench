@@ -9,6 +9,24 @@ class NodeResult(BaseModel):
     metrics: dict[str, Any]
     metadata: dict[str, Any]
 
+    @field_validator("metrics", mode="before")
+    @classmethod
+    def normalize_metric_keys(cls, value):
+
+        def normalize(obj: Any) -> Any:
+            if isinstance(obj, dict):
+                return {
+                    re.sub(r"[\s\-]+", "_", str(k)): normalize(v)
+                    for k, v in obj.items()
+                }
+
+            if isinstance(obj, list):
+                return [normalize(v) for v in obj]
+
+            return obj
+
+        return normalize(value)
+
 
 class BenchmarkResult(BaseModel):
     model_config = ConfigDict(extra="forbid")
