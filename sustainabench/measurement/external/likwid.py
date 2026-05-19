@@ -131,6 +131,39 @@ class LikwidMeasurement(ExternalMeasurement):
         global_results = recurse(data, [])
 
         return node_results, global_results
+    
+    def _collapse_nodeid_layer(self, obj, nodeids):
+        """
+        Recursively removes dict layers where the dict only contains
+        node IDs as keys.
+
+        Example:
+        {
+            "node031:0:0": {...}
+        }
+
+        becomes:
+        {...}
+        """
+
+        if not isinstance(obj, dict):
+            return obj
+
+        keys = set(obj.keys())
+
+        # if this dict is purely a node-id wrapper layer
+        if keys and keys.issubset(set(nodeids)):
+            # usually one entry for local node results
+            if len(obj) == 1:
+                return self._collapse_nodeid_layer(
+                    next(iter(obj.values())),
+                    nodeids
+                )
+
+        return {
+            k: self._collapse_nodeid_layer(v, nodeids)
+            for k, v in obj.items()
+        }
 
     def process_results(self, output: str, nodeids: list[str]) -> dict:
         parsed = self._parse_likwid_output(output.splitlines())
@@ -144,6 +177,12 @@ class LikwidMeasurement(ExternalMeasurement):
             }
         elif self.backend_name == "mpi":
             node_results, global_results = self._split_results(parsed, nodeids)
+
+            node_results = {
+                node_id: self._collapse_nodeid_layer(node_result, nodeids)
+                for node_id, node_result in node_results.items()
+            }
+
             result = {
                 **{
                     node_id: {"likwid": node_result}
