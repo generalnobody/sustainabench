@@ -28,7 +28,7 @@ class ExecutionBackend(ABC):
         index = {r.node_id: r for r in node_results}
         for node_id, metrics in result.items():
             if node_id in index:
-                index[node_id].metrics.update(metrics)
+                index[node_id].metrics.update(NodeResult.normalize_metric_keys(metrics))
             else:
                 node_results.append(NodeResult(node_id=node_id, metrics=metrics, metadata={}))
 
