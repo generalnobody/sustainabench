@@ -3,7 +3,7 @@ from sustainabench.workloads import WORKLOADS
 from sustainabench.measurement import MEASUREMENTS
 from sustainabench.measurement.base import ExternalMeasurement
 from sustainabench.schemas.results.benchmark import BenchmarkResult, NodeResult
-from sustainabench.schemas.configs.workloads.config import WorkloadConfig
+from sustainabench.schemas.configs.workloads import WorkloadConfig
 from sustainabench.workloads.base import ExternalWorkload
 import yaml
 import json

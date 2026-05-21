@@ -1,6 +1,7 @@
 from abc import ABC, abstractmethod
 from typing import Dict, Type
-from sustainabench.schemas.configs.indicators.config import IndicatorConfig
+from sustainabench.schemas.configs.indicators import IndicatorConfig
+from sustainabench.schemas.results.metrics_dict import MetricsDict
 
 INDICATORS: Dict[str, Type["Indicator"]] = {}
 
@@ -16,7 +17,7 @@ class Indicator(ABC):
     require_file: bool # Control whether this indicator should require a file path to be included or not.
 
     @abstractmethod
-    def __init__(self, filename: str) -> None:
+    def __init__(self, filename: str, metrics_dict: MetricsDict) -> None:
         pass
 
     @abstractmethod

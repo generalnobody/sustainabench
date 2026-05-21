@@ -1,6 +1,6 @@
 from abc import ABC, abstractmethod
 from typing import Dict, Type, Any
-from sustainabench.schemas.configs.workloads.config import WorkloadConfig
+from sustainabench.schemas.configs.workloads import WorkloadConfig
 
 # global registry
 WORKLOADS: Dict[str, Type["Workload"]] = {}

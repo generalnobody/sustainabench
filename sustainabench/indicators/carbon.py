@@ -2,9 +2,10 @@ import pandas as pd
 from pathlib import Path
 import requests
 from sustainabench.indicators.base import Indicator, register_indicator
-from sustainabench.schemas.configs.indicators.config import IndicatorConfig
 from pydantic import BaseModel, model_validator, ConfigDict, field_validator
 from typing import Literal
+from sustainabench.schemas.results.metrics_dict import MetricsDict
+import jmespath
 
 class ReferenceTime(BaseModel):
     model_config = ConfigDict(arbitrary_types_allowed=True)
@@ -69,9 +70,10 @@ class CarbonIndicator(Indicator):
     name = "carbon"
     require_file = True
 
-    def __init__(self, filename):
+    def __init__(self, filename, metrics_dict: MetricsDict):
         self.parquets = filename # Can be either a .parquet file containing all the traces, or can be a dir containing lots of .parquet traces. 
         # If it is a dir, filenames are used to automatically determine selected .parquet files based on county (and possibly region) code using metadata public IP.
+        self.metrics_dict = metrics_dict
 
     def setup(self, indicator_config):
         raw_config = indicator_config.indicators.get(self.name) if indicator_config else None
@@ -171,61 +173,38 @@ class CarbonIndicator(Indicator):
 
         avg_intensity = filtered["carbon_intensity"].mean()
 
-        # Calculate carbon output
-        # Load measurement data & check
         results = {}
-        cpu_kwh = 0
-        cpu_per_domain_kwh = [] # cpu_kwh is already total, so this is just for completeness. Further calculations for total system carbon are done using cpu_kwh and gpu_kwh, this only on itself
-        gpu_kwh = []
-        if "cpu-energy" in measurements:
-            if "energy" in measurements["cpu-energy"] and "kwh" in measurements["cpu-energy"]["energy"]:
-                cpu_kwh = measurements["cpu-energy"]["energy"]["kwh"]
-            else:
-                raise ValueError("Missing key in measurements related to cpu-energy. Please double-check")
-            if "per_domain" in measurements["cpu-energy"]: # Not required per se, so if not available, just ignore it, no need for an error
-                for domain in measurements["cpu-energy"]["per_domain"]:
-                    if "energy" in domain and "kwh" in domain["energy"]:
-                        cpu_per_domain_kwh.append(domain["energy"]["kwh"])
-                    else:
-                        raise ValueError("Missing key in a CPU domain's 'energy' value. Please check")
-            
-        if "gpu-nv" in measurements:
-            for gpu_result in measurements["gpu-nv"]:
-                if "gpu_id" in gpu_result and "energy" in gpu_result and "kwh" in gpu_result["energy"]:
-                    gpu_kwh.append({
-                        "gpu_id": gpu_result["gpu_id"],
-                        "kwh": gpu_result["energy"]["kwh"]
-                    })
+        metrics = None
+        for unitdef in self.metrics_dict.metrics_dict:
+            if unitdef.unit == "kwh": # Should only be one in there
+                metrics = unitdef.metrics
+                break
+
+        if not metrics:
+            raise ValueError("Provided metrics dictionary does not contain definitions for paths leading to kwh data. Please provide this, otherwise no carbon output can be calculated.")
+
+        values_for_total = []
+        for key, value in metrics.items():
+            curr_measurements = measurements.get(key)
+            if not curr_measurements:
+                continue
+            values = []
+            for path in value.paths:
+                resolved = jmespath.search(path, curr_measurements)
+                if isinstance(resolved, list):
+                    for i in resolved:
+                        values.append(float(i)) 
                 else:
-                    raise ValueError("Missing key in measurement related to gpu-nv. Please double-check")
-                
-        cpu_carbon = {
-            "carbon_g": cpu_kwh * avg_intensity
-        }
-        if cpu_per_domain_kwh:
-            cpu_per_domain_carbon = [
-                cpu_domain_kwh * avg_intensity
-                for cpu_domain_kwh in cpu_per_domain_kwh
-            ]
-            cpu_carbon.update({
-                "per_domain": [
-                    {
-                        "carbon_g": g
-                    } for g in cpu_per_domain_carbon
-                ]
+                    values.append(float(resolved))
+            carbon_output = sum(values) * avg_intensity
+            results.update({
+                key: {
+                    "g": carbon_output
+                }
             })
-        gpu_carbon = [
-            {
-                "gpu_id": g_kwh["gpu_id"],
-                "carbon_g": g_kwh["kwh"] * avg_intensity
-            }
-            for g_kwh in gpu_kwh
-        ]
-        total_run_carbon = cpu_carbon["carbon_g"] + sum(item["carbon_g"] for item in gpu_carbon)
+            values_for_total.append(carbon_output)
+
+        results["total_g"] = sum(values_for_total)
         return {
-            self.name: {
-                "total_g": total_run_carbon,
-                "cpu": cpu_carbon,
-                "gpu": gpu_carbon
-            }
+            self.name: results
         }

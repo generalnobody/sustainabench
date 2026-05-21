@@ -1,11 +1,11 @@
 from sustainabench.indicators import INDICATORS
 from sustainabench.schemas.results.benchmark import BenchmarkResult, NodeResult
-from sustainabench.schemas.configs.indicators.config import IndicatorConfig
+from sustainabench.schemas.configs.indicators import IndicatorConfig
 
 class ResultProcessor:
     """Class than handles processing raw results"""
 
-    def __init__(self, indicator_names):
+    def __init__(self, indicator_names, metrics_dict):
         indicator_dict = {}
         for name in indicator_names:
             file = ""
@@ -16,7 +16,7 @@ class ResultProcessor:
             indicator_dict[name] = file
 
         self.indicators = [
-            INDICATORS[name](file)
+            INDICATORS[name](file, metrics_dict)
             for name, file in indicator_dict.items()
         ]
 

@@ -1,7 +1,7 @@
 from abc import ABC, abstractmethod
 from typing import Dict, Type
 import yaml
-from sustainabench.schemas.configs.measurement.config import MeasurementConfig
+from sustainabench.schemas.configs.measurement import MeasurementConfig
 
 MEASUREMENTS: Dict[str, Type["Measurement"]] = {}
 

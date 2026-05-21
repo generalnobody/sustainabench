@@ -1,0 +1,25 @@
+metrics_dict: # All these paths are expected to start from inside each metrics object in the loaded results. Other pathing is handled by the indicator scripts
+  - unit: j # Paths that show joule measurement results
+    metrics: 
+      cpu_energy:
+        paths: # Paths that show amount of joules. Please note that all values from here get summed, so make sure nothing duplicate is available (for instance, dont combine energy.j with per_domain[*].energy.j)
+          - energy.j
+
+  - unit: kwh # Paths that show kwh measurement results
+    metrics:
+      cpu_energy: # These should match the measurement names present in results
+        paths:
+          - energy.kwh
+      # gpu-nv:
+      #   paths:
+      #     - *.
+
+  - unit: time # Paths that show execution time
+    metrics:
+      execution_time:
+        paths:
+          - .
+
+      likwid:
+        paths:
+          - ENERGY.Group_1_Metric_STAT.*.Runtime_(RDTSC)_[s] # This one likely has python initialization overhead. Not sure atm how to fix this
