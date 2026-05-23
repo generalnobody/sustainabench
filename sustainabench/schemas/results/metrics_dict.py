@@ -5,12 +5,6 @@ class BaseMetricDefinition(BaseModel):
     contributes_to_total: bool
     contribution_group: str | None
 
-# class MetricDefinition(BaseModel):
-#     kind: Literal["scalar", "collection"]
-#     path: str
-#     contributes_to_total: bool
-#     contribution_group: str | None
-
 class ScalarMetricDefinition(BaseMetricDefinition):
     kind: Literal["scalar"]
     path: str
