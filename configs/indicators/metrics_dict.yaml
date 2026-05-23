@@ -1,25 +1,108 @@
-metrics_dict: # All these paths are expected to start from inside each metrics object in the loaded results. Other pathing is handled by the indicator scripts
-  - unit: j # Paths that show joule measurement results
-    metrics: 
+# metrics_dict: # All these paths are expected to start from inside each metrics object in the loaded results. Other pathing is handled by the indicator scripts
+#   - unit: j # Paths that show joule measurement results
+#     metrics: 
+#       cpu_energy:
+#         paths: # Paths that show amount of joules. Please note that all values from here get summed, so make sure nothing duplicate is available (for instance, dont combine energy.j with per_domain[*].energy.j)
+#           - energy.j
+
+#   - unit: kwh # Paths that show kwh measurement results
+#     metrics:
+#       cpu_energy: # These should match the measurement names present in results
+#         paths:
+#           - energy.kwh
+#       # gpu-nv:
+#       #   paths:
+#       #     - *.
+
+#   - unit: time # Paths that show execution time
+#     metrics:
+#       execution_time:
+#         paths:
+#           - .
+
+#       likwid:
+#         paths:
+#           - ENERGY.Group_1_Metric_STAT.*.Runtime_(RDTSC)_[s] # This one likely has python initialization overhead. Not sure atm how to fix this
+
+# Example:
+# metrics_dict:
+#   - unit: j                                 # Unit name
+#     sources:                                # Which measurements act as sources for this unit
+#       cpu_energy:                           # Measurement name
+#         priority: 100                       # How high this measurement's priority is. Basically, same priority get added to each other if contributes_to_total is set to true, higher priority makes lower priorities not contribute to total by default
+#         metric:                             # Metric data
+#           kind: scalar                      # Scalar or collection
+#           path: energy.j                    # JSON path to this metric (from this specific measurement's location)
+#           contributes_to_total: true        # Whether this metric contributes to the total if it is relevant
+#           contribution_group: cpu_energy_j  # Which contribution group total this metric contributes to
+
+metrics_dict:
+  - unit: j
+    sources:
       cpu_energy:
-        paths: # Paths that show amount of joules. Please note that all values from here get summed, so make sure nothing duplicate is available (for instance, dont combine energy.j with per_domain[*].energy.j)
-          - energy.j
+        priority: 100
+        metrics:
+          - kind: scalar
+            path: energy.j
+            contributes_to_total: true
+            contribution_group: cpu_energy_j
 
-  - unit: kwh # Paths that show kwh measurement results
-    metrics:
-      cpu_energy: # These should match the measurement names present in results
-        paths:
-          - energy.kwh
-      # gpu-nv:
-      #   paths:
-      #     - *.
+  - unit: kwh
+    sources:
+      cpu_energy:
+        priority: 100
+        metrics:
+          - kind: scalar
+            path: energy.kwh
+            contributes_to_total: true
+            contribution_group: cpu_energy_kwh
 
-  - unit: time # Paths that show execution time
-    metrics:
+          - kind: collection
+            collection_path: per_domain
+            value_path: energy.kwh
+            contributes_to_total: false
+            contribution_group: null
+
+      # likwid:
+      #   priority: 100
+      #   metric:
+      #     kind: scalar
+      #     path: 
+      #     contributes_to_total: true
+      #     contribution_group: cpu_energy_kwh
+
+  - unit: time
+    sources:
       execution_time:
-        paths:
-          - .
+        priority: 100
+        metrics:
+          - kind: scalar
+            path: .
+            contributes_to_total: true
+            contribution_group: execution_time
 
-      likwid:
-        paths:
-          - ENERGY.Group_1_Metric_STAT.*.Runtime_(RDTSC)_[s] # This one likely has python initialization overhead. Not sure atm how to fix this
+      # likwid:
+      #   kind: collection
+      #   path: ENERGY.Group_1_Metric_STAT.*.Runtime_(RDTSC)_[s]
+      #   contributes_to_total: true
+      #   contribution_group: execution_time
+
+# Pseudo-algorithm example:
+# selected_groups = {}
+
+# for source in sorted(sources_by_priority):
+
+#     for metric in source.metrics:
+
+#         if not metric.contributes_to_total:
+#             continue
+
+#         group = metric.contribution_group
+
+#         if group:
+#             if group in selected_groups:
+#                 continue
+
+#             selected_groups[group] = metric
+
+#         total += metric_value
