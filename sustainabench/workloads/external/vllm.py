@@ -7,7 +7,7 @@ from pathlib import Path
 class VLLMWorkload(ExternalWorkload):
     """Integrated workload that performs VLLM throughput benchmarking. VLLM parameters can be configured in config parameters."""
     name = "vllm"
-    require_wrapping = True
+    require_wrapping = False
     require_config = True
 
     class WorkloadParams(BaseModel):
