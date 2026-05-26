@@ -34,9 +34,9 @@ class VLLMWorkload(ExternalWorkload):
                 _, rest = data[i].split(":", 1)
                 parts = [p.strip() for p in rest.split(",")]
                 results["throughput"] = {
-                    "reqs/s": float(parts[0].split()[0]),
-                    "tot_tkn/s": float(parts[1].split()[0]),
-                    "out_tkn/s": float(parts[2].split()[0])
+                    parts[0].split(" ", 1)[1].strip().replace(" ", "_"): float(parts[0].split()[0]),
+                    parts[1].split(" ", 1)[1].strip().replace(" ", "_"): float(parts[1].split()[0]),
+                    parts[2].split(" ", 1)[1].strip().replace(" ", "_"): float(parts[2].split()[0])
                 }
 
                 key, value = data[i+1].split(":", 1)
