@@ -2,6 +2,7 @@ from sustainabench.workloads.base import ExternalWorkload, register_workload
 from pydantic import BaseModel
 import subprocess
 import os
+import re
 
 @register_workload
 class StreamWorkload(ExternalWorkload):
@@ -34,7 +35,7 @@ class StreamWorkload(ExternalWorkload):
             if data[i].startswith("Function") and data[i+1].startswith("Copy:") and data[i+2].startswith("Scale:") and data[3].startswith("Add:") and data[i+4].startswith("Triad:"):
                 headers = [
                     h.strip().replace(" ", "_")
-                    for h in data[i].split()
+                    for h in re.split(r'\s{2,}', data[i])
                 ]
 
                 rows = [data[i + j].split() for j in range(1, 5)]
