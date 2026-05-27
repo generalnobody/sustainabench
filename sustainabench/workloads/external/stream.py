@@ -32,7 +32,7 @@ class StreamWorkload(ExternalWorkload):
         results = {}
 
         for i in range(len(data)):
-            if data[i].startswith("Function") and data[i+1].startswith("Copy:") and data[i+2].startswith("Scale:") and data[3].startswith("Add:") and data[i+4].startswith("Triad:"):
+            if data[i].startswith("Function") and data[i+1].startswith("Copy:") and data[i+2].startswith("Scale:") and data[i+3].startswith("Add:") and data[i+4].startswith("Triad:"):
                 headers = [
                     h.strip().replace(" ", "_")
                     for h in re.split(r'\s{2,}', data[i])
