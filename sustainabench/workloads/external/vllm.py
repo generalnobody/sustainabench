@@ -1,7 +1,6 @@
 from sustainabench.workloads.base import ExternalWorkload, register_workload
 from pydantic import BaseModel
 import subprocess
-from pathlib import Path
 
 @register_workload
 class VLLMWorkload(ExternalWorkload):
