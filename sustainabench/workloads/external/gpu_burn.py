@@ -1,26 +1,3 @@
-# (mscenv) [ibd350@node009 gpu-burn]$ ./gpu_burn
-# Run length not specified in the command line. Using compare file: compare.fatbin
-# Burning for 10 seconds.
-# GPU 0: NVIDIA RTX A4000 (UUID: GPU-8a6846c3-57ab-756e-b9e3-f8c47879e2ac)
-# cuInit returned 0 (no error)
-# Initialized device 0 with 16219 MB of memory (16041 MB available, using 14437 MB of it), using FLOATS
-# Results are 268435456 bytes each, thus performing 54 iterations
-# 50.0%  proc'd: 54 (10702 Gflop/s)   errors: 0   temps: 52 C
-#         Summary at:   Wed May 27 20:27:14 CEST 2026
-
-# 100.0%  proc'd: 54 (10702 Gflop/s)   errors: 0   temps: 52 C
-#         Summary at:   Wed May 27 20:27:19 CEST 2026
-
-# 100.0%  proc'd: 108 (12215 Gflop/s)   errors: 0   temps: 56 C
-# Killing processes with SIGTERM (soft kill)
-# Freed memory for dev 0
-# Uninitted cublas
-# done
-
-# Tested 1 GPUs:
-#         GPU 0: OK
-
-
 from sustainabench.workloads.base import ExternalWorkload, register_workload
 from pydantic import BaseModel
 import subprocess
