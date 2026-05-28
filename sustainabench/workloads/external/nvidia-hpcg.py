@@ -34,6 +34,10 @@ class NvidiaHPCGWorkload(ExternalWorkload):
     def _parse_results(self, data):
         results = {}
 
+        def insert(d, keys, value):
+            for k in keys[:-1]:
+                d = d.setdefault(k, {})
+            d[keys[-1]] = value
         
         def try_number(x):
             try:
@@ -62,9 +66,7 @@ class NvidiaHPCGWorkload(ExternalWorkload):
             # convert numeric values when possible
             value = try_number(value)
 
-            for k in keys[:-1]:
-                results = results.setdefault(k, {})
-            results[keys[-1]] = value
+            insert(data, keys, value)
 
         return results
     
