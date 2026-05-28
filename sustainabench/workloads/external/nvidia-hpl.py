@@ -7,6 +7,7 @@ class NvidiaHPLWorkload(ExternalWorkload):
     """External Nvidia HPL benchmark runner & parser"""
     name = "nvidia-hpl"
     require_config = True
+    require_wrapping = True
 
     class WorkloadParams(BaseModel):
         executable: str

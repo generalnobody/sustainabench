@@ -1,0 +1,10 @@
+workload:
+  name: "nvidia-hpcg"
+  params:
+    executable: "/home/ibd350/nvidia_hpc_benchmarks/cuda12/hpcg.sh"
+    flags:
+      - ["--nx", "128"]
+      - ["--ny", "128"]
+      - ["--nz", "128"]
+      - ["--rt", "60"]
+      # - ["--dat", "/home/ibd350/nvidia_hpc_benchmarks/cuda12/hpcg-linux-x86_64/sample-dat/hpcg.dat"] # Arguments for the Nvidia HPCG executable. Use either --dat or the --nx, --ny, --nz, --rt above
