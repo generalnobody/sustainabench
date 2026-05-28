@@ -34,6 +34,7 @@ class GPUBurnWorkload(ExternalWorkload):
     require_config = True
 
     class WorkloadParams(BaseModel):
+        dir: str
         executable: str
         args: list[str] | None
 
@@ -45,7 +46,7 @@ class GPUBurnWorkload(ExternalWorkload):
         if params.args is not None:
             cmd += params.args
 
-        output = subprocess.run(cmd, capture_output=True, text=True)
+        output = subprocess.run(cmd, cwd=params.dir, capture_output=True, text=True)
 
         if output.returncode != 0:
             raise RuntimeError(
