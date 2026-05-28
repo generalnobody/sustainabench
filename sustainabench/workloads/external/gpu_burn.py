@@ -96,7 +96,7 @@ class GPUBurnWorkload(ExternalWorkload):
                 line
             )
             if m:
-                data["summaries"].append({
+                results["summaries"].append({
                     "percent": float(m.group(1)),
                     "processed": int(m.group(2)),
                     "gflops": int(m.group(3)),
@@ -107,7 +107,7 @@ class GPUBurnWorkload(ExternalWorkload):
             # final result
             m = re.search(r'GPU (\d+): (OK|FAIL)', line)
             if m:
-                data["final"][f"gpu_{m.group(1)}"] = m.group(2)
+                results["final"][f"gpu_{m.group(1)}"] = m.group(2)
 
         return results
     
