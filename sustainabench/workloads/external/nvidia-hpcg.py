@@ -34,39 +34,44 @@ class NvidiaHPCGWorkload(ExternalWorkload):
     def _parse_results(self, data):
         results = {}
 
-        def insert(d, keys, value):
-            for k in keys[:-1]:
-                d = d.setdefault(k, {})
-            d[keys[-1]] = value
-        
-        def try_number(x):
-            try:
-                if "." in x or "e" in x.lower():
-                    return float(x)
-                return int(x)
-            except:
-                return x
-
         for line in data:
             line = line.strip()
-
-            # skip headers / separators
-            if not line or line.startswith("##########"):
-                continue
 
             if "=" not in line:
                 continue
 
             key, value = line.split("=", 1)
+            key_parts = key.split("::")
 
-            # split hierarchical keys
-            keys = [k.strip() for k in key.split("::")]
+            # try to convert value to float/int if possible
             value = value.strip()
+            try:
+                if "." in value or "e" in value.lower():
+                    value_cast = float(value)
+                else:
+                    value_cast = int(value)
+                value = value_cast
+            except:
+                pass  # keep as string
 
-            # convert numeric values when possible
-            value = try_number(value)
+            # build nested dict
+            cur = results
 
-            insert(data, keys, value)
+            for part in key_parts[:-1]:
+                if part not in cur:
+                    cur[part] = {}
+                elif not isinstance(cur[part], dict):
+                    cur[part] = {"_value": cur[part]}
+
+                cur = cur[part]
+
+            leaf = key_parts[-1]
+
+            # handle collision at leaf too
+            if leaf in cur and isinstance(cur[leaf], dict):
+                cur[leaf]["_value"] = value
+            else:
+                cur[leaf] = value
 
         return results
     
