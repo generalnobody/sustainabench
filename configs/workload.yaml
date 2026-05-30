@@ -1,0 +1,80 @@
+workloads:
+  - name: "cpu-multi"
+    params:
+      limit: 1000000
+
+  - name: "cpu-single"
+    params:
+      limit: 1000000
+
+  - name: "gpu-burn"
+    params:
+      dir: /home/ibd350/gpu-burn
+      executable: ./gpu_burn
+      args: null
+
+  - name: "gpu-mm"
+    params:
+      m: 2000
+      n: 3000
+      p: 4000
+
+  - name: "gpu-train"
+    params:
+      steps: 50
+      input_size: 4096
+      hidden_size: 4096
+      output_size: 4096
+      batch_size: 1024
+
+  - name: "hpcg"
+    params:
+      dir: "/home/ibd350/hpcg/build/bin/" # Used to select cwd. Not used for locating the executable, only important for the .dat file.
+      executable: "/home/ibd350/hpcg/build/bin/xhpcg" # Full path to the executable. Does not do dir+executable, just executable
+
+  - name: "hpl"
+    params:
+      dir: "/home/ibd350/hpl/bin/Linux_OpenMPI_OpenBLAS/" # Used to select cwd. Not used for locating the executable, only important for the .dat file.
+      executable: "/home/ibd350/hpl/bin/Linux_OpenMPI_OpenBLAS/xhpl" # Full path to the executable. Does not do dir+executable, just executable
+
+  - name: "nvidia-hpcg"
+    params:
+      executable: "/home/ibd350/nvidia_hpc_benchmarks/cuda12/hpcg.sh"
+      flags:
+        - ["--nx", "128"]
+        - ["--ny", "128"]
+        - ["--nz", "128"]
+        - ["--rt", "60"]
+        # - ["--dat", "/home/ibd350/nvidia_hpc_benchmarks/cuda12/hpcg-linux-x86_64/sample-dat/hpcg.dat"] # Arguments for the Nvidia HPCG executable. Use either --dat or the --nx, --ny, --nz, --rt above
+
+  - name: "nvidia-hpl"
+    params:
+      executable: "/home/ibd350/nvidia_hpc_benchmarks/cuda12/hpl.sh"
+      flags:
+        - ["--dat", "/home/ibd350/nvidia_hpc_benchmarks/cuda12/hpl-linux-x86_64/sample-dat/HPL-1GPU.dat"] # Arguments for the Nvidia HPL executable
+
+  - name: "nvidia-stream"
+    params:
+      executable: "/home/ibd350/nvidia_hpc_benchmarks/cuda12/stream-gpu-test.sh"
+      flags:
+        - ["--n", "200000000"] # This size works with 16 GB GPU's
+
+  - name: "stream"
+    params:
+      executable: "/home/ibd350/stream/stream"
+
+  - name: "stress-ng"
+    params:
+      executable: "stress-ng" # Install via Conda/Mamba for easier installation than building by hand
+      args: [
+        "--cpu", "4",
+        "--cpu-method", "matrixprod",
+        "--timeout", "120s",
+        # "--metrics-brief" # Does not need to be included since it is required by the parser anyways and the parser adds it always
+      ]
+
+  - name: "vllm"
+    params:
+      args: [
+        "--model", "Qwen/Qwen2.5-3B-Instruct"
+      ]

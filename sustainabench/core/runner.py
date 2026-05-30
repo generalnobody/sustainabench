@@ -24,7 +24,10 @@ class BenchmarkRunner:
             tmp = None
             with open(config_filepath) as f:
                 tmp = yaml.safe_load(f)
-            workload_cfg = WorkloadConfig.model_validate(tmp)
+            workloads_cfg = WorkloadConfig.model_validate(tmp)
+            for cfg in workloads_cfg.workloads:
+                if cfg.name == workload_name:
+                    workload_cfg = cfg
         self.workload = WORKLOADS[workload_name](workload_cfg)
         self.config_filepath = config_filepath
 
