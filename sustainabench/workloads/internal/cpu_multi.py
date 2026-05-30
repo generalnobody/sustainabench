@@ -27,7 +27,7 @@ class CPUMultiWorkload(InternalWorkload):
         if self.workload_cfg is None:
             params = self.WorkloadParams()
         else:
-            params = self.WorkloadParams.model_validate(self.workload_cfg.workload.params)
+            params = self.WorkloadParams.model_validate(self.workload_cfg.params)
 
         with mp.Pool(num_processors) as pool:
             results = pool.map(self._work, [params.limit]*num_processors)

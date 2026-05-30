@@ -24,7 +24,7 @@ class GPUTrainWorkload(InternalWorkload):
         if self.workload_cfg is None:
             params = self.WorkloadParams()
         else:
-            params = self.WorkloadParams.model_validate(self.workload_cfg.workload.params)
+            params = self.WorkloadParams.model_validate(self.workload_cfg.params)
 
 
         model = nn.Sequential(

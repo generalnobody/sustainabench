@@ -17,7 +17,7 @@ class HPLWorkload(ExternalWorkload):
 
     def execute(self):
         # Execute the external workload. Expected to be something like running a command-line subprocess
-        params = self.WorkloadParams.model_validate(self.workload_cfg.workload.params)
+        params = self.WorkloadParams.model_validate(self.workload_cfg.params)
         output = subprocess.run([params.executable], cwd=params.dir, capture_output=True, text=True)
 
         if output.returncode != 0:

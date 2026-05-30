@@ -16,7 +16,7 @@ class NvidiaStreamWorkload(ExternalWorkload):
 
     def execute(self):
         # Execute the external workload. Expected to be something like running a command-line subprocess
-        params = self.WorkloadParams.model_validate(self.workload_cfg.workload.params)
+        params = self.WorkloadParams.model_validate(self.workload_cfg.params)
 
         # It is expected, that this is already run inside a MPI instance, so no mpi-specific runs here. Just call the executable with its arguments. Expected to be run using MPI backend.
 

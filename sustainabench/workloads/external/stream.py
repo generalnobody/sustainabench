@@ -15,7 +15,7 @@ class StreamWorkload(ExternalWorkload):
         executable: str
 
     def execute(self):
-        params = self.WorkloadParams.model_validate(self.workload_cfg.workload.params)
+        params = self.WorkloadParams.model_validate(self.workload_cfg.params)
         env = os.environ.copy()
         env["OMP_NUM_THREADS"] = str(os.cpu_count()) # Allow STREAM to use all CPU cores
         output = subprocess.run(params.executable, env=env, capture_output=True, text=True)

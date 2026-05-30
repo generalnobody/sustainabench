@@ -18,7 +18,7 @@ class HPCGWorkload(ExternalWorkload):
 
     def execute(self):
         # Execute the external workload. Expected to be something like running a command-line subprocess
-        params = self.WorkloadParams.model_validate(self.workload_cfg.workload.params)
+        params = self.WorkloadParams.model_validate(self.workload_cfg.params)
         with tempfile.TemporaryDirectory() as tmpdir:
             tmpdir = Path(tmpdir)
             datfile = "hpcg.dat"

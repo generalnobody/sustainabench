@@ -21,7 +21,7 @@ class CPUSingleWorkload(InternalWorkload):
         if self.workload_cfg is None:
             params = self.WorkloadParams()
         else:
-            params = self.WorkloadParams.model_validate(self.workload_cfg.workload.params)
+            params = self.WorkloadParams.model_validate(self.workload_cfg.params)
 
         count = 0
         for n in range(2, params.limit):

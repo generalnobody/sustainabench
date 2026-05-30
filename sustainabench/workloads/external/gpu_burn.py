@@ -16,7 +16,7 @@ class GPUBurnWorkload(ExternalWorkload):
         args: list[str] | None
 
     def execute(self):
-        params = self.WorkloadParams.model_validate(self.workload_cfg.workload.params)
+        params = self.WorkloadParams.model_validate(self.workload_cfg.params)
         # cmd_params = ["vllm", "bench", "throughput"] + params.args
         # output = subprocess.run(cmd_params, capture_output=True, text=True)
         cmd = [params.executable]
