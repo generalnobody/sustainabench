@@ -9,7 +9,7 @@
 RUNS=5 # Limiting to 5 runs to save on runtime budget.
 MPI_RANKS=24
 DEFAULT_OMP_THREADS=4
-MPI_RANKS_WITH_OMP=(($MPI_RANKS/$DEFAULT_OMP_THREADS))
+MPI_RANKS_WITH_OMP=$(($MPI_RANKS / $DEFAULT_OMP_THREADS))
 
 #####################################################
 # Micro
