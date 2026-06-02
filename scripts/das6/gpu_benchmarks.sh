@@ -24,7 +24,10 @@ module load cuda12.6/toolkit # Load Nvidia CUDA
 # Only 1 intensity level, but prepend a 'thermal ramp' (30-60s) run to pre-warm the GPU, excluded from measurements. 
 # Intensity scaling does not show much, as gpu-burn is designed as a saturation stress test
 echo "Running gpu-burn experiments"
-/home/ibd350/gpu-burn/gpu_burn 60 # Thermal ramp, not measured
+( # Thermal ramp, not measured
+    cd "/home/ibd350/gpu-burn" || exit 1
+    ./gpu_burn 60
+)
 sustainabench run benchmark -w gpu-burn -m time -m gpu-nv -r $RUNS -c configs/workloads/gpu-burn/default.yaml
 
 
