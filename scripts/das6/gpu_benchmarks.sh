@@ -1,11 +1,14 @@
 #!/bin/bash
 
-#SBATCH --partition=A4000
-#SBATCH --gpus=1
-#SBATCH --time=00:15:00
+#SBATCH --job-name=sustainabench_gpu
+#SBATCH --nodes=1
+#SBATCH --ntasks-per-node=24
+#SBATCH --time=01:00:00
+#SBATCH --gres=gpu:1
+#SBATCH --constraint=A4000
 
 
-RUNS=10
+RUNS=5
 MPI_RANKS=24
 DEFAULT_OMP_THREADS=4
 MPI_RANKS_WITH_OMP=(($MPI_RANKS/$DEFAULT_OMP_THREADS))
