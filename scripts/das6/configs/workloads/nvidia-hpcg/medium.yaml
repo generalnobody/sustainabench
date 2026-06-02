@@ -1,0 +1,9 @@
+workloads:
+  - name: "nvidia-hpcg"
+    params:
+      executable: "/home/ibd350/nvidia_hpc_benchmarks/cuda12/hpcg.sh"
+      flags:
+        - ["--nx", "256"]
+        - ["--ny", "256"]
+        - ["--nz", "256"]
+        - ["--rt", "1800"]

@@ -1,0 +1,6 @@
+workloads:
+  - name: "nvidia-stream"
+    params:
+      executable: "/home/ibd350/nvidia_hpc_benchmarks/cuda12/stream-gpu-test.sh"
+      flags:
+        - ["--n", "16777216"] # On RTX A4000: Working set for FP64 = 3 × N × 8 bytes. 3 × 16777216 × 8 ≈ 384 MB. Definitely DRAM-bound
