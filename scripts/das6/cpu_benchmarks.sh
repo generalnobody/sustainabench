@@ -1,11 +1,10 @@
 #!/bin/bash
 
-#SBATCH --partition=cpunode
-#SBATCH --time=00:15:00
-
-# 10 runs each
-# Run each benchmark, both micro and macro
-# CPU benchmarks only, so: stress-ng, STREAM, HPL & HPCG
+#SBATCH --job-name=sustainabench_cpu
+#SBATCH --nodes=1
+#SBATCH --ntasks-per-node=24
+#SBATCH --constraint=cpunode
+#SBATCH --time=01:00:00
 
 RUNS=5 # Limiting to 5 runs to save on runtime budget.
 MPI_RANKS=24
