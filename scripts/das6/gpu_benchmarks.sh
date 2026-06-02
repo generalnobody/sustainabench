@@ -58,7 +58,7 @@ done
 echo "Running Nvidia HPL experiments"
 for t in "small" "medium" "large"; do
     echo "    Nvidia HPL ($t)"
-    sustainabench run benchmark -w nvidia-hpl -m time -m gpu-nv -r $RUNS -b mpi -np $MPI_RANKS -c configs/workloads/nvidia-hpl/$t/default.yaml
+    sustainabench run benchmark -w nvidia-hpl -m time -m gpu-nv -r $RUNS -b mpi -np 1 -c configs/workloads/nvidia-hpl/$t/default.yaml
 done
 
 # Nvidia HPCG
