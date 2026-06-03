@@ -164,9 +164,12 @@ class BenchmarkRunner:
                     key=lambda m: m.wrapper_priority,
                     reverse=True
                 )
-                workload_wrapper = max(wrappable_measurements, key=lambda m: m.wrapper_priority)
-                workload_wrap_command = workload_wrapper.get_wrap_command(self.backend.name, self.backend.node_processors)
-                external_measurements.remove(workload_wrapper)
+                if wrappable_measurements:
+                    workload_wrapper = max(wrappable_measurements, key=lambda m: m.wrapper_priority)
+                    workload_wrap_command = workload_wrapper.get_wrap_command(self.backend.name, self.backend.node_processors)
+                    external_measurements.remove(workload_wrapper)
+                else:
+                    workload_wrap_command = self.backend.get_wrap_command()
         elif workload_wrap: # No external measurements, but workload does need to be wrapped
             workload_wrap_command = self.backend.get_wrap_command()
 
