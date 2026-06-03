@@ -1,4 +1,6 @@
 from sustainabench.measurement.base import  ExternalMeasurement, register_measurement
+from sustainabench.utils.system_info import get_mpi_ranks, get_node_metadata
+
 import csv
 from pydantic import BaseModel
 
@@ -95,24 +97,13 @@ class LikwidMeasurement(ExternalMeasurement):
 
     def process_results(self, output: str, nodeids: list[str]) -> dict:
         parsed = self._parse_likwid_output(output.splitlines())
-        result = {}
 
-        if self.backend_name == "local":
-            result = {
-                "local": {
-                    self.name: parsed
-                }
+        metadata = get_node_metadata()
+        rank, local_rank = get_mpi_ranks()
+        node_id = f"{metadata['hostname']}:{rank}:{local_rank}" if local_rank is not None else f"{metadata['hostname']}:{rank}" if rank is not None else "local"
+        result = {
+            node_id: {
+                self.name: parsed
             }
-        elif self.backend_name == "mpi":
-            from sustainabench.utils.system_info import get_mpi_ranks, get_node_metadata
-            metadata = get_node_metadata()
-            rank, local_rank = get_mpi_ranks()
-            node_id = f"{metadata['hostname']}:{rank}:{local_rank}" if local_rank is not None else f"{metadata['hostname']}:{rank}" if rank is not None else self.name
-            result = {
-                node_id: {
-                    self.name: parsed
-                }
-            }
-        else:
-            raise ValueError(f"Backend '{self.backend_name}' not yet implemented in external measurement '{self.name}' parser. Please implement first.")
+        }
         return result
