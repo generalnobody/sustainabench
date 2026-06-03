@@ -4,6 +4,8 @@ import subprocess
 import tempfile
 import shutil
 from pathlib import Path
+from datetime import datetime
+from sustainabench.utils.system_info import get_mpi_ranks
 
 @register_workload
 class HPCGWorkload(ExternalWorkload):
@@ -16,16 +18,23 @@ class HPCGWorkload(ExternalWorkload):
         dir: str
         executable: str
 
+    def _extract_datetime(self, path: Path) -> datetime:
+        # e.g. filename: HPCG-Benchmark_3.1_2026-05-13_14-46-42.txt
+        parts = path.stem.split("_")
+        date_str = parts[-2] + "_" + parts[-1]  # "2026-05-13_14-46-42"
+        return datetime.strptime(date_str, "%Y-%m-%d_%H-%M-%S")
+
     def execute(self):
         # Execute the external workload. Expected to be something like running a command-line subprocess
         params = self.WorkloadParams.model_validate(self.workload_cfg.params)
-        with tempfile.TemporaryDirectory() as tmpdir:
-            tmpdir = Path(tmpdir)
-            datfile = "hpcg.dat"
-            shutil.copy(Path(params.dir)/datfile, tmpdir / datfile)
-            subprocess.run([params.executable], cwd = tmpdir)
-            output_matches = list(tmpdir.glob("HPCG-Benchmark*.txt"))
-            self.results = output_matches[0].read_text(encoding="utf-8").splitlines()
+        workdir = Path(params.dir)
+        subprocess.run([params.executable], cwd = workdir)
+        rank, _ = get_mpi_ranks()
+        if rank == 0:
+            output_matches = list(workdir.glob("HPCG-Benchmark*.txt"))
+            latest_file = max(output_matches, key=self._extract_datetime)
+            self.results = latest_file.read_text(encoding="utf-8").splitlines()
+            latest_file.unlink()
 
     def _parse_results(self, data):
         results = {}
