@@ -162,11 +162,6 @@ class BenchmarkRunner:
         inner_external_measurements = [m for m in all_external_measurements if m.within_wrapper]
         outer_external_measurements = [m for m in all_external_measurements if not m.within_wrapper]
 
-        if outer_external_measurements or workload_wrap:
-            measurement_array = self._get_measurements_for_cli([m for m in self.measurements if not isinstance(m, ExternalMeasurement) or m.within_wrapper]) # Select all measurements that are not external (so, internal)
-        else:
-            measurement_array = self._get_measurements_for_cli([m for m in self.measurements if not isinstance(m, ExternalMeasurement)]) # Select all measurements that are not external (so, internal)
-
         if workload_wrap:
             if outer_external_measurements:
                 wrappable_measurements = sorted(
@@ -186,16 +181,18 @@ class BenchmarkRunner:
             else:
                 workload_wrap_command = self.backend.get_wrap_command()
 
+        if len(outer_external_measurements) > 0 or workload_wrap:
+            measurement_array = self._get_measurements_for_cli([m for m in self.measurements if not isinstance(m, ExternalMeasurement) or m.within_wrapper]) # Select all measurements that are not external (so, internal)
+            external_measurements = outer_external_measurements
+        else:
+            measurement_array = self._get_measurements_for_cli([m for m in self.measurements if not isinstance(m, ExternalMeasurement)]) # Select all measurements that are not external (so, internal)
+            external_measurements = inner_external_measurements
+
         sustainabench_cmd = script_files = script_cmd = None
         if workload_wrap:
             sustainabench_cmd = f"sustainabench run benchmark -w {self.workload.name} {' '.join(measurement_array)} -c {str(self.config_filepath)} -p {str(self.backend.num_processors)} -we -nof"
         elif outer_external_measurements or inner_external_measurements:
             sustainabench_cmd = f"sustainabench run benchmark -w {self.workload.name} {' '.join(measurement_array)} -c {str(self.config_filepath)} -b {self.backend.name} -np {str(self.backend.node_processors)} -p {str(self.backend.num_processors)} -o {self.output_dir} -nof"
-
-        if workload_wrap or len(outer_external_measurements) > 0:
-            external_measurements = outer_external_measurements
-        else:
-            external_measurements = inner_external_measurements
 
         try:
             if sustainabench_cmd is not None:
