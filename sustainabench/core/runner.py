@@ -133,18 +133,13 @@ class BenchmarkRunner:
 
         return script_files
 
+    # TODO: if time left, make internal workloads, so ones that do not require wrapping, also play nice with wrapping external measurements. Right now it doesnt work somewhere, but it really should work. Not required for the thesis, but would be nice to get working
     def run(self) -> BenchmarkResult:
         """Function that runs the benchmark on the correct backend (only internal measurements)"""
         results = {}
 
         workload_wrap = isinstance(self.workload, ExternalWorkload) and self.workload.require_wrapping and not self.wrapped_execution
         workload_wrap_command = workload_wrapper = None
-        # TODO: make a distioonction between measurements that have within_wrapper set to true and ones that have it at false.
-        # Basically, when not within wrapper, they should be launched first and processed globally. If it is set to true, but they still must wrap the execution, have that happen separately. 
-        # These should probably be included in the sustainabench run benchmark command launched by the outer wrapper (be that another measurement or a backend wrapper)
-        # And let that handle those measurements as if they were launched as backend="local". This should then work.
-        # Issue is that, right now, external measurements are only parsed from the final output. However, this doesnt make a per-rank distinction, so it gets confused. 
-        # Also, in local backend, it is probably necessary to ensure that external measurement results, if the nodeid isnt "local", get added properly, if their nodeid IS local
         all_external_measurements = sorted(
             (
                 m for m in self.measurements 
