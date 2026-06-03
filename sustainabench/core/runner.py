@@ -162,7 +162,7 @@ class BenchmarkRunner:
         inner_external_measurements = [m for m in all_external_measurements if m.within_wrapper]
         outer_external_measurements = [m for m in all_external_measurements if not m.within_wrapper]
 
-        if outer_external_measurements:
+        if outer_external_measurements or workload_wrap:
             measurement_array = self._get_measurements_for_cli([m for m in self.measurements if not isinstance(m, ExternalMeasurement) or m.within_wrapper]) # Select all measurements that are not external (so, internal)
         else:
             measurement_array = self._get_measurements_for_cli([m for m in self.measurements if not isinstance(m, ExternalMeasurement)]) # Select all measurements that are not external (so, internal)
