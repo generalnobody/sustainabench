@@ -81,6 +81,7 @@ class BenchmarkRunner:
         return results
     
     def _generate_external_measurement_scripts(self, external_measurements: list[ExternalMeasurement], workload_wrap_command: str | None, sustainabench_command: str):
+        # Lowest-level script, runs the actual workload.
         script_header = "#!/bin/bash"
         tmp = tempfile.NamedTemporaryFile(
             mode="w",
@@ -92,6 +93,21 @@ class BenchmarkRunner:
         tmp.flush()
         script_files = [tmp]
 
+        # Script(s) that run external measurements that are expected to happen within the wrapper, so are lower in hierarchy than the workload wrap command.
+        for m in external_measurements:
+            if m.within_wrapper:
+                tmp = tempfile.NamedTemporaryFile(
+                    mode="w",
+                    suffix=".sh",
+                    dir=self.output_dir,
+                    delete=False
+                )
+                cmd = " ".join(m.get_wrap_command(self.backend.name, self.backend.node_processors))
+                tmp.write(f"{script_header}\n{cmd} -- bash {script_files[-1].name}\n")
+                tmp.flush()
+                script_files.append(tmp)
+
+        # Script that, if applicable, handles the workload wrapper, e.g. MPI. 
         if workload_wrap_command is not None:
             tmp = tempfile.NamedTemporaryFile(
                 mode="w",
@@ -103,17 +119,19 @@ class BenchmarkRunner:
             tmp.flush()
             script_files.append(tmp)
         
+        # Highest-level measurements, that run above any wrappers, if applicable.
         for m in external_measurements:
-            tmp = tempfile.NamedTemporaryFile(
-                mode="w",
-                suffix=".sh",
-                dir=self.output_dir,
-                delete=False
-            )
-            cmd = " ".join(m.get_wrap_command(self.backend.name, self.backend.node_processors))
-            tmp.write(f"{script_header}\n{cmd} -- bash {script_files[-1].name}\n")
-            tmp.flush()
-            script_files.append(tmp)
+            if not m.within_wrapper:
+                tmp = tempfile.NamedTemporaryFile(
+                    mode="w",
+                    suffix=".sh",
+                    dir=self.output_dir,
+                    delete=False
+                )
+                cmd = " ".join(m.get_wrap_command(self.backend.name, self.backend.node_processors))
+                tmp.write(f"{script_header}\n{cmd} -- bash {script_files[-1].name}\n")
+                tmp.flush()
+                script_files.append(tmp)
 
         return script_files
 

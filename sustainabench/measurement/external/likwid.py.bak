@@ -1,5 +1,9 @@
+# Backup file for likwid measurement that still supports likwid-mpirun. Might work for systems where likwid-mpirun works as it should.
+
 from sustainabench.measurement.base import  ExternalMeasurement, register_measurement
+import subprocess
 import csv
+import tempfile
 from pydantic import BaseModel
 
 @register_measurement
@@ -9,8 +13,8 @@ class LikwidMeasurement(ExternalMeasurement):
     scope = "node"
     require_file = True
     rank_priority = 100
-    within_wrapper = True
-    replace_wrapper = []
+    wrapper_priority = 100
+    replace_wrapper = ["mpi"]
     wrapper_conflicts = ["perf"]
 
     class MeasurementParams(BaseModel):
@@ -20,9 +24,16 @@ class LikwidMeasurement(ExternalMeasurement):
         if not self.config:
             raise RuntimeError(f"Measurement {self.name} expects a config to be provided")
         
-        launcher = [
-            "likwid-perfctr",
-        ]
+        self.backend_name = backend_name
+        if backend_name == "mpi":
+            launcher = [
+                "likwid-mpirun",
+                "-np", str(node_processors),
+            ]
+        else:
+            launcher = [
+                "likwid-perfctr",
+            ]
         
         likwid_flags = self.MeasurementParams.model_validate(self.config.measurement.params)
         likwid_params = [item for flag in likwid_flags.flags for item in flag] + ["-O"] # '-O' doesnt need to be added in likwid's yaml, since this one is required for output parsing.
@@ -90,13 +101,100 @@ class LikwidMeasurement(ExternalMeasurement):
                     results[table_group][table_key][header].update({row[0]: row[i]})
 
         return results
+    
+    def _split_results(self, data, nodeids):
+        node_results = {node_id: {} for node_id in nodeids}
+        global_results = {}
+
+        def insert_nested(target, path, key, value):
+            """Insert value at target[path...][key]"""
+            d = target
+            for p in path:
+                d = d.setdefault(p, {})
+            d[key] = value
+
+        def recurse(current, path):
+            if not isinstance(current, dict):
+                return current
+
+            new_global = {}
+
+            for key, value in current.items():
+                if key in nodeids and isinstance(value, dict):
+                    # Insert FULL structure into the correct node
+                    insert_nested(node_results[key], path, key, value)
+                else:
+                    processed = recurse(value, path + [key])
+                    if processed is not None:
+                        new_global[key] = processed
+
+            return new_global
+
+        global_results = recurse(data, [])
+
+        return node_results, global_results
+    
+    def _collapse_nodeid_layer(self, obj, nodeids):
+        """
+        Recursively removes dict layers where the dict only contains
+        node IDs as keys.
+
+        Example:
+        {
+            "node031:0:0": {...}
+        }
+
+        becomes:
+        {...}
+        """
+
+        if not isinstance(obj, dict):
+            return obj
+
+        keys = set(obj.keys())
+
+        # if this dict is purely a node-id wrapper layer
+        if keys and keys.issubset(set(nodeids)):
+            # usually one entry for local node results
+            if len(obj) == 1:
+                return self._collapse_nodeid_layer(
+                    next(iter(obj.values())),
+                    nodeids
+                )
+
+        return {
+            k: self._collapse_nodeid_layer(v, nodeids)
+            for k, v in obj.items()
+        }
 
     def process_results(self, output: str, nodeids: list[str]) -> dict:
         parsed = self._parse_likwid_output(output.splitlines())
+        result = {}
 
-        result = {
-            "local": {
-                self.name: parsed
+        if self.backend_name == "local":
+            result = {
+                "local": {
+                    self.name: parsed
+                }
             }
-        }
+        elif self.backend_name == "mpi":
+            node_results, global_results = self._split_results(parsed, nodeids)
+
+            node_results = {
+                node_id: self._collapse_nodeid_layer(node_result, nodeids)
+                for node_id, node_result in node_results.items()
+            }
+
+            result = {
+                **{
+                    node_id: {"likwid": node_result}
+                    for node_id, node_result in node_results.items()
+                },
+                "global": {
+                    "likwid": global_results
+                }
+            }
+        else:
+            raise ValueError(f"Backend '{self.backend_name}' not yet implemented in external measurement '{self.name}' parser. Please implement first.")
+
         return result
