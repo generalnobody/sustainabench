@@ -4,7 +4,7 @@ workloads:
       dir: "/home/ibd350/hpcg/build/bin/" # Used to select cwd. Not used for locating the executable, only important for the .dat file.
       executable: "/home/ibd350/hpcg/build/bin/xhpcg" # Full path to the executable. Does not do dir+executable, just executable
       args: 
-        - ["--nx", "560"]
-        - ["--ny", "560"]
-        - ["--nz", "560"]
+        - ["--nx", "256"]
+        - ["--ny", "256"]
+        - ["--nz", "256"]
         - ["--rt", "300"]
