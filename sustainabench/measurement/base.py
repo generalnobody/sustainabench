@@ -18,9 +18,11 @@ class Measurement(ABC):
     scope: str
     require_file: bool # Control whether this indicator should require a file path to be included or not.
     config: MeasurementConfig | None = None
+    filename: str | None = None
 
     def __init__(self, filename: str) -> None:
-        if filename != "":
+        self.filename = filename
+        if filename is not None and filename != "":
             cfg = None
             with open(filename) as f:
                 cfg = yaml.safe_load(f)
