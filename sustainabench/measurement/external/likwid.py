@@ -108,7 +108,11 @@ class LikwidMeasurement(ExternalMeasurement):
             metadata = get_node_metadata()
             rank, local_rank = get_mpi_ranks()
             node_id = f"{metadata['hostname']}:{rank}:{local_rank}" if local_rank is not None else f"{metadata['hostname']}:{rank}" if rank is not None else self.name
-            pass
+            result = {
+                node_id: {
+                    self.name: parsed
+                }
+            }
         else:
             raise ValueError(f"Backend '{self.backend_name}' not yet implemented in external measurement '{self.name}' parser. Please implement first.")
         return result
