@@ -20,6 +20,8 @@ class LikwidMeasurement(ExternalMeasurement):
         if not self.config:
             raise RuntimeError(f"Measurement {self.name} expects a config to be provided")
         
+        self.backend_name = backend_name
+        
         launcher = [
             "likwid-perfctr",
         ]
@@ -93,10 +95,20 @@ class LikwidMeasurement(ExternalMeasurement):
 
     def process_results(self, output: str, nodeids: list[str]) -> dict:
         parsed = self._parse_likwid_output(output.splitlines())
+        result = {}
 
-        result = {
-            "local": {
-                self.name: parsed
+        if self.backend_name == "local":
+            result = {
+                "local": {
+                    self.name: parsed
+                }
             }
-        }
+        elif self.backend_name == "mpi":
+            from sustainabench.utils.system_info import get_mpi_ranks, get_node_metadata
+            metadata = get_node_metadata()
+            rank, local_rank = get_mpi_ranks()
+            node_id = f"{metadata['hostname']}:{rank}:{local_rank}" if local_rank is not None else f"{metadata['hostname']}:{rank}" if rank is not None else self.name
+            pass
+        else:
+            raise ValueError(f"Backend '{self.backend_name}' not yet implemented in external measurement '{self.name}' parser. Please implement first.")
         return result
