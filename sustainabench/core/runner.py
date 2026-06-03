@@ -191,8 +191,10 @@ class BenchmarkRunner:
         sustainabench_cmd = script_files = script_cmd = None
         if workload_wrap:
             sustainabench_cmd = f"sustainabench run benchmark -w {self.workload.name} {' '.join(measurement_array)} -c {str(self.config_filepath)} -p {str(self.backend.num_processors)} -we -nof"
-        elif outer_external_measurements or inner_external_measurements:
+        elif outer_external_measurements:
             sustainabench_cmd = f"sustainabench run benchmark -w {self.workload.name} {' '.join(measurement_array)} -c {str(self.config_filepath)} -b {self.backend.name} -np {str(self.backend.node_processors)} -p {str(self.backend.num_processors)} -o {self.output_dir} -nof"
+        elif inner_external_measurements:
+            sustainabench_cmd = f"sustainabench run benchmark -w {self.workload.name} {' '.join(measurement_array)} -c {str(self.config_filepath)} -b {self.backend.name} -np {str(self.backend.node_processors)} -p {str(self.backend.num_processors)} -o {self.output_dir} -we -nof"
 
         try:
             if sustainabench_cmd is not None:
