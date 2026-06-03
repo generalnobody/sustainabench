@@ -8,7 +8,7 @@
 #SBATCH --constraint=A4000
 
 
-RUNS=5
+RUNS=1
 MPI_RANKS=24
 DEFAULT_OMP_THREADS=4
 MPI_RANKS_WITH_OMP=$(($MPI_RANKS/$DEFAULT_OMP_THREADS))
@@ -28,7 +28,7 @@ echo "Running gpu-burn experiments"
     cd "/home/ibd350/gpu-burn" || exit 1
     ./gpu_burn 60
 )
-sustainabench run benchmark -w gpu-burn -m time -m gpu-nv -r $RUNS -c configs/workloads/gpu-burn/default.yaml
+sustainabench run benchmark -w gpu-burn -m time -m gpu-nv -r $RUNS -c configs/workloads/gpu-burn/default.yaml -s
 
 
 
@@ -40,7 +40,7 @@ sustainabench run benchmark -w gpu-burn -m time -m gpu-nv -r $RUNS -c configs/wo
 echo "Running Nvidia STREAM experiments"
 for t in "low" "high"; do
     echo "    Nvidia STREAM ($t)"
-    sustainabench run benchmark -w nvidia-stream -m time -m gpu-nv -r $RUNS -c configs/workloads/nvidia-stream/$t.yaml
+    sustainabench run benchmark -w nvidia-stream -m time -m gpu-nv -r $RUNS -c configs/workloads/nvidia-stream/$t.yaml -s
 done
 
 #####################################################
@@ -58,7 +58,7 @@ done
 echo "Running Nvidia HPL experiments"
 for t in "small" "medium" "large"; do
     echo "    Nvidia HPL ($t)"
-    sustainabench run benchmark -w nvidia-hpl -m time -m gpu-nv -r $RUNS -b mpi -np 1 -c configs/workloads/nvidia-hpl/$t/default.yaml
+    sustainabench run benchmark -w nvidia-hpl -m time -m gpu-nv -r $RUNS -b mpi -np 1 -c configs/workloads/nvidia-hpl/$t/default.yaml -s
 done
 
 # Nvidia HPCG
@@ -75,7 +75,8 @@ for t in "medium" "large"; do
     -m time -m gpu-nv \
     -r $RUNS \
     -b mpi -np 1 \
-    -c configs/workloads/nvidia-hpcg/$t.yaml
+    -c configs/workloads/nvidia-hpcg/$t.yaml \
+    -s
 done
 
 # VLLM throughput benchmark
@@ -87,5 +88,5 @@ done
 echo "Running vllm experiments"
 for t in "low" "medium" "high"; do
     echo "    vllm ($t)"
-    sustainabench run benchmark -w vllm -m time -m gpu-nv -r $RUNS -c configs/workloads/vllm/$t.yaml
+    sustainabench run benchmark -w vllm -m time -m gpu-nv -r $RUNS -c configs/workloads/vllm/$t.yaml -s
 done

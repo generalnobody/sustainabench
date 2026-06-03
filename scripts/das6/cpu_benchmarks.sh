@@ -6,7 +6,7 @@
 #SBATCH --constraint=cpunode
 #SBATCH --time=01:00:00
 
-RUNS=5 # Limiting to 5 runs to save on runtime budget.
+RUNS=1 # Limiting to 5 runs to save on runtime budget. Set to 1 for testing
 MPI_RANKS=24
 DEFAULT_OMP_THREADS=4
 MPI_RANKS_WITH_OMP=$(($MPI_RANKS / $DEFAULT_OMP_THREADS))
@@ -24,7 +24,7 @@ MPI_RANKS_WITH_OMP=$(($MPI_RANKS / $DEFAULT_OMP_THREADS))
 echo "Running stress-ng experiments"
 for t in "tiny" "small" "medium" "large"; do
     echo "    stress-ng ($t)"
-    sustainabench run benchmark -w stress-ng -m time -m likwid=/home/ibd350/sustainabench/configs/measurement/likwid.yaml -r $RUNS -c configs/workloads/stress-ng/$t.yaml
+    sustainabench run benchmark -w stress-ng -m time -m likwid=/home/ibd350/sustainabench/configs/measurement/likwid.yaml -r $RUNS -c configs/workloads/stress-ng/$t.yaml -s
 done
 
 # STREAM (memory)
@@ -43,7 +43,8 @@ for t in 1 8 16 32; do
         -w stream \
         -m time -m likwid=/home/ibd350/sustainabench/configs/measurement/likwid.yaml \
         -r $RUNS \
-        -c configs/workloads/stream/default.yaml
+        -c configs/workloads/stream/default.yaml \
+        -s
 done
 
 
@@ -62,7 +63,7 @@ done
 echo "Running HPL experiments"
 for t in "small" "medium" "large"; do
     echo "    HPL ($t)"
-    sustainabench run benchmark -w hpl -m time -m likwid=/home/ibd350/sustainabench/configs/measurement/likwid.yaml -r $RUNS -b mpi -np $MPI_RANKS -c configs/workloads/hpl/$t/hpl.yaml
+    sustainabench run benchmark -w hpl -m time -m likwid=/home/ibd350/sustainabench/configs/measurement/likwid.yaml -r $RUNS -b mpi -np $MPI_RANKS -c configs/workloads/hpl/$t/hpl.yaml -s
 done
 
 
@@ -82,7 +83,8 @@ for t in "medium" "large"; do
     -m time -m likwid=/home/ibd350/sustainabench/configs/measurement/likwid.yaml \
     -r $RUNS \
     -b mpi -np $MPI_RANKS_WITH_OMP \
-    -c configs/workloads/hpcg/$t/hpcg.yaml
+    -c configs/workloads/hpcg/$t/hpcg.yaml \
+    -s
 done
 
 
