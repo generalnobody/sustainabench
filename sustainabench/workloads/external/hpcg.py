@@ -17,6 +17,7 @@ class HPCGWorkload(ExternalWorkload):
     class WorkloadParams(BaseModel):
         dir: str
         executable: str
+        args: list[list[str]]
 
     def _extract_datetime(self, path: Path) -> datetime:
         # e.g. filename: HPCG-Benchmark_3.1_2026-05-13_14-46-42.txt
@@ -27,8 +28,9 @@ class HPCGWorkload(ExternalWorkload):
     def execute(self):
         # Execute the external workload. Expected to be something like running a command-line subprocess
         params = self.WorkloadParams.model_validate(self.workload_cfg.params)
+        cmd = [params.executable] + [item for flag in params.args for item in flag]
         workdir = Path(params.dir)
-        subprocess.run([params.executable], cwd = workdir)
+        subprocess.run(cmd, cwd = workdir)
         rank, _ = get_mpi_ranks()
         if rank == 0:
             output_matches = list(workdir.glob("HPCG-Benchmark*.txt"))

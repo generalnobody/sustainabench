@@ -31,6 +31,11 @@ workloads:
     params:
       dir: "/home/ibd350/hpcg/build/bin/" # Used to select cwd. Not used for locating the executable, only important for the .dat file.
       executable: "/home/ibd350/hpcg/build/bin/xhpcg" # Full path to the executable. Does not do dir+executable, just executable
+      args:  # Use these to configure hpcg. Do not rely on .dat, though it should be possible but is more unpredictable
+        - ["--nx", "128"]
+        - ["--ny", "128"]
+        - ["--nz", "128"]
+        - ["--rt", "60"]
 
   - name: "hpl"
     params:
