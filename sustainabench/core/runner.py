@@ -80,7 +80,7 @@ class BenchmarkRunner:
                 pass
         return results
     
-    def _generate_external_measurement_scripts(self, external_measurements: list[ExternalMeasurement], workload_wrap_command: str | None, sustainabench_command: str):
+    def _generate_external_measurement_scripts(self, outer_external_measurements: list[ExternalMeasurement], inner_external_measurements: list[ExternalMeasurement], workload_wrap_command: str | None, sustainabench_command: str):
         # Lowest-level script, runs the actual workload.
         script_header = "#!/bin/bash"
         tmp = tempfile.NamedTemporaryFile(
@@ -93,9 +93,8 @@ class BenchmarkRunner:
         tmp.flush()
         script_files = [tmp]
 
-        # Script(s) that run external measurements that are expected to happen within the wrapper, so are lower in hierarchy than the workload wrap command.
-        for m in external_measurements:
-            if m.within_wrapper:
+        if not workload_wrap_command and len(outer_external_measurements) == 0:
+            for m in inner_external_measurements:
                 tmp = tempfile.NamedTemporaryFile(
                     mode="w",
                     suffix=".sh",
@@ -120,18 +119,17 @@ class BenchmarkRunner:
             script_files.append(tmp)
         
         # Highest-level measurements, that run above any wrappers, if applicable.
-        for m in external_measurements:
-            if not m.within_wrapper:
-                tmp = tempfile.NamedTemporaryFile(
-                    mode="w",
-                    suffix=".sh",
-                    dir=self.output_dir,
-                    delete=False
-                )
-                cmd = " ".join(m.get_wrap_command(self.backend.name, self.backend.node_processors))
-                tmp.write(f"{script_header}\n{cmd} -- bash {script_files[-1].name}\n")
-                tmp.flush()
-                script_files.append(tmp)
+        for m in outer_external_measurements:
+            tmp = tempfile.NamedTemporaryFile(
+                mode="w",
+                suffix=".sh",
+                dir=self.output_dir,
+                delete=False
+            )
+            cmd = " ".join(m.get_wrap_command(self.backend.name, self.backend.node_processors))
+            tmp.write(f"{script_header}\n{cmd} -- bash {script_files[-1].name}\n")
+            tmp.flush()
+            script_files.append(tmp)
 
         return script_files
 
@@ -141,7 +139,13 @@ class BenchmarkRunner:
 
         workload_wrap = isinstance(self.workload, ExternalWorkload) and self.workload.require_wrapping and not self.wrapped_execution
         workload_wrap_command = workload_wrapper = None
-        external_measurements = sorted(
+        # TODO: make a distioonction between measurements that have within_wrapper set to true and ones that have it at false.
+        # Basically, when not within wrapper, they should be launched first and processed globally. If it is set to true, but they still must wrap the execution, have that happen separately. 
+        # These should probably be included in the sustainabench run benchmark command launched by the outer wrapper (be that another measurement or a backend wrapper)
+        # And let that handle those measurements as if they were launched as backend="local". This should then work.
+        # Issue is that, right now, external measurements are only parsed from the final output. However, this doesnt make a per-rank distinction, so it gets confused. 
+        # Also, in local backend, it is probably necessary to ensure that external measurement results, if the nodeid isnt "local", get added properly, if their nodeid IS local
+        all_external_measurements = sorted(
             (
                 m for m in self.measurements 
                 if isinstance(m, ExternalMeasurement) 
@@ -149,16 +153,25 @@ class BenchmarkRunner:
             key=lambda m: m.rank_priority,
             # reverse=True
         )
-        if external_measurements:
-            for m1 in external_measurements: # Check conflicts
-                for m2 in external_measurements:
+        if all_external_measurements:
+            for m1 in all_external_measurements: # Check conflicts
+                for m2 in all_external_measurements:
                     if m1.name in m2.wrapper_conflicts:
                         raise ValueError(f"Measurements {m1.name} and {m2.name} are incompatible. Please select only one of these and run again.")
-                    
-            if workload_wrap:
+
+        inner_external_measurements = [m for m in all_external_measurements if m.within_wrapper]
+        outer_external_measurements = [m for m in all_external_measurements if not m.within_wrapper]
+
+        if outer_external_measurements:
+            measurement_array = self._get_measurements_for_cli([m for m in self.measurements if not isinstance(m, ExternalMeasurement) or m.within_wrapper]) # Select all measurements that are not external (so, internal)
+        else:
+            measurement_array = self._get_measurements_for_cli([m for m in self.measurements if not isinstance(m, ExternalMeasurement)]) # Select all measurements that are not external (so, internal)
+
+        if workload_wrap:
+            if outer_external_measurements:
                 wrappable_measurements = sorted(
                     (
-                        m for m in external_measurements
+                        m for m in outer_external_measurements
                         if self.backend.name in m.replace_wrapper
                     ),
                     key=lambda m: m.wrapper_priority,
@@ -167,24 +180,27 @@ class BenchmarkRunner:
                 if wrappable_measurements:
                     workload_wrapper = max(wrappable_measurements, key=lambda m: m.wrapper_priority)
                     workload_wrap_command = workload_wrapper.get_wrap_command(self.backend.name, self.backend.node_processors)
-                    external_measurements.remove(workload_wrapper)
+                    outer_external_measurements.remove(workload_wrapper)
                 else:
                     workload_wrap_command = self.backend.get_wrap_command()
-        elif workload_wrap: # No external measurements, but workload does need to be wrapped
-            workload_wrap_command = self.backend.get_wrap_command()
-
-        measurement_array = self._get_measurements_for_cli([m for m in self.measurements if not isinstance(m, ExternalMeasurement)]) # Select all measurements that are not external (so, internal)
+            else:
+                workload_wrap_command = self.backend.get_wrap_command()
 
         sustainabench_cmd = script_files = script_cmd = None
         if workload_wrap:
             sustainabench_cmd = f"sustainabench run benchmark -w {self.workload.name} {' '.join(measurement_array)} -c {str(self.config_filepath)} -p {str(self.backend.num_processors)} -we -nof"
-        elif external_measurements:
+        elif outer_external_measurements or inner_external_measurements:
             sustainabench_cmd = f"sustainabench run benchmark -w {self.workload.name} {' '.join(measurement_array)} -c {str(self.config_filepath)} -b {self.backend.name} -np {str(self.backend.node_processors)} -p {str(self.backend.num_processors)} -o {self.output_dir} -nof"
+
+        if workload_wrap or len(outer_external_measurements) > 0:
+            external_measurements = outer_external_measurements
+        else:
+            external_measurements = inner_external_measurements
 
         try:
             if sustainabench_cmd is not None:
                 wrap_cmd = " ".join(workload_wrap_command) if workload_wrap_command else None
-                script_files = self._generate_external_measurement_scripts(external_measurements=external_measurements, workload_wrap_command=wrap_cmd, sustainabench_command=sustainabench_cmd)
+                script_files = self._generate_external_measurement_scripts(outer_external_measurements=outer_external_measurements, inner_external_measurements=inner_external_measurements, workload_wrap_command=wrap_cmd, sustainabench_command=sustainabench_cmd)
                 script_cmd = [
                     "bash", script_files[-1].name
                 ]
