@@ -30,7 +30,14 @@ class HPCGWorkload(ExternalWorkload):
         params = self.WorkloadParams.model_validate(self.workload_cfg.params)
         cmd = [params.executable] + [item for flag in params.args for item in flag]
         workdir = Path(params.dir)
-        subprocess.run(cmd, cwd = workdir)
+        output = subprocess.run(cmd, cwd = workdir)
+
+        if output.returncode != 0:
+            raise RuntimeError(
+                f"FAILURE: Subprocess {params.executable} failed with return code {output.returncode}\n"
+                f"STDOUT: {output.stdout}\n\nSTDERR: {output.stderr}"
+            )
+        
         rank, _ = get_mpi_ranks()
         if rank == 0:
             output_matches = list(workdir.glob("HPCG-Benchmark*.txt"))
