@@ -35,6 +35,8 @@ class HPCGWorkload(ExternalWorkload):
             latest_file = max(output_matches, key=self._extract_datetime)
             self.results = latest_file.read_text(encoding="utf-8").splitlines()
             latest_file.unlink()
+        else:
+            self.results = None
 
     def _parse_results(self, data):
         results = {}
@@ -82,6 +84,8 @@ class HPCGWorkload(ExternalWorkload):
     
     def process(self, backend_name: str):
         # Process the results obtained from the execute() method. Please make sure to turn them into a format that fits what this suite expects.
+        if not self.results:
+            return {}
         results = {
             self.name: self._parse_results(self.results)
         }
