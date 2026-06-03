@@ -244,7 +244,7 @@ class BenchmarkRunner:
     # Function that turns a list of measurement objects back into subprocess runnable args list
     def _get_measurements_for_cli(self, measurements) -> list[str]:
         measurement_filelist = [
-            (m.name, getattr(m, "file", None))
+            (m.name, getattr(m, "filename", None))
             for m in measurements
         ]
 
