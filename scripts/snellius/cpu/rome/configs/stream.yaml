@@ -2,3 +2,4 @@ workloads:
   - name: "stream"
     params:
       executable: "/home/ibiemond/stream/stream"
+      # Built with gcc -O3 -fopenmp stream.c -DSTREAM_ARRAY_SIZE=100000000 -o stream

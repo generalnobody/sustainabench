@@ -19,4 +19,4 @@ module load likwid/5.4.1-GCC-14.2.0
 RUNS=3
 
 echo "Running STREAM experiments"
-sustainabench run benchmark -w stream -m time -m likwid=configs/likwid.yaml -r $RUNS -c /configs/stream.yaml -s
+sustainabench run benchmark -w stream -m time -m likwid=configs/likwid.yaml -r $RUNS -c configs/stream.yaml -s

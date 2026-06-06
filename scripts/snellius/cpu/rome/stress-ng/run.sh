@@ -19,4 +19,4 @@ module load likwid/5.4.1-GCC-14.2.0
 RUNS=3
 
 echo "Running stress-ng experiments"
-sustainabench run benchmark -w stress-ng -m time -m likwid=configs/likwid.yaml -r $RUNS -c /configs/stress-ng.yaml -s #-o $TMPDIR/experiments/
+sustainabench run benchmark -w stress-ng -m time -m likwid=configs/likwid.yaml -r $RUNS -c configs/stress-ng.yaml -s #-o $TMPDIR/experiments/
