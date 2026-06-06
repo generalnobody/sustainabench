@@ -19,11 +19,11 @@ module load likwid/5.4.1-GCC-14.2.0
 module load HPCG/3.1-foss-2025b
 
 RUNS=5
-SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+
 
 export OMP_NUM_THREADS=$SLURM_CPUS_PER_TASK
 export OMP_PLACES=cores
 export OMP_PROC_BIND=close
 
 echo "Running HPCG experiments (4 nodes)"
-sustainabench run benchmark -w hpcg -m time -m likwid=$SCRIPT_DIR/../configs/likwid.yaml -r $RUNS -b mpi -np $SLURM_NTASKS -c $SCRIPT_DIR/../configs/hpcg/config.yaml -s
+sustainabench run benchmark -w hpcg -m time -m likwid=configs/likwid.yaml -r $RUNS -b mpi -np $SLURM_NTASKS -c configs/hpcg/config.yaml -s

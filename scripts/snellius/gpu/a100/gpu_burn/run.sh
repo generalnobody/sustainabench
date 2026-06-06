@@ -17,9 +17,9 @@ module load likwid/5.4.1-GCC-14.2.0
 # Number of repetitions: 3. Low variability.
 
 RUNS=3
-SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+
 
 echo "Warming GPU up"
 /home/ibiemond/gpu-burn/gpu_burn 60
 echo "Running gpu-burn experiments"
-sustainabench run benchmark -w gpu-burn -m time -m likwid=$SCRIPT_DIR/../configs/likwid.yaml -m gpu-nv -r $RUNS -c $SCRIPT_DIR/../configs/gpu-burn.yaml -s
+sustainabench run benchmark -w gpu-burn -m time -m likwid=configs/likwid.yaml -m gpu-nv -r $RUNS -c configs/gpu-burn.yaml -s

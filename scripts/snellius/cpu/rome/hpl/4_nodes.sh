@@ -19,11 +19,11 @@ module load likwid/5.4.1-GCC-14.2.0
 module load HPL/2.3-foss-2025b
 
 RUNS=3
-SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+
 
 export OMP_NUM_THREADS=$SLURM_CPUS_PER_TASK
 export OMP_PLACES=cores
 export OMP_PROC_BIND=close
 
 echo "Running HPL experiments (4 nodes)"
-sustainabench run benchmark -w hpl -m time -m likwid=$SCRIPT_DIR/../configs/likwid.yaml -r $RUNS -b mpi -np $SLURM_NTASKS -c $SCRIPT_DIR/../configs/hpl/4nodes/config.yaml -s
+sustainabench run benchmark -w hpl -m time -m likwid=configs/likwid.yaml -r $RUNS -b mpi -np $SLURM_NTASKS -c configs/hpl/4nodes/config.yaml -s

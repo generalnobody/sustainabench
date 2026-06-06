@@ -17,9 +17,9 @@ module load likwid/5.4.1-GCC-14.2.0
 # Number of repetitions: 3. Low variability.
 
 RUNS=3
-SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+
 
 echo "Warmup"
 /home/ibiemond/nvidia_hpc_benchmarks/cuda12/stream-gpu-test.sh --n 268435456
 echo "Running Nvidia STREAM experiments"
-sustainabench run benchmark -w nvidia-stream -m time -m likwid=$SCRIPT_DIR/../configs/likwid.yaml -m gpu-nv -r $RUNS -c $SCRIPT_DIR/../configs/nv-stream.yaml -s
+sustainabench run benchmark -w nvidia-stream -m time -m likwid=configs/likwid.yaml -m gpu-nv -r $RUNS -c configs/nv-stream.yaml -s

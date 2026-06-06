@@ -24,7 +24,7 @@ MPI_RANKS_WITH_OMP=$(($MPI_RANKS / $DEFAULT_OMP_THREADS))
 echo "Running stress-ng experiments"
 for t in "tiny" "small" "medium" "large"; do
     echo "    stress-ng ($t)"
-    sustainabench run benchmark -w stress-ng -m time -m likwid=/home/ibd350/sustainabench/configs/measurement/likwid.yaml -r $RUNS -c configs/workloads/stress-ng/$t.yaml -s
+    sustainabench run benchmark -w stress-ng -m time -m likwid=$HOME/sustainabench/configs/measurement/likwid.yaml -r $RUNS -c configs/workloads/stress-ng/$t.yaml -s
 done
 
 # STREAM (memory)
@@ -41,7 +41,7 @@ for t in 1 8 16 32; do
     OMP_NUM_THREADS=$t \
     sustainabench run benchmark \
         -w stream \
-        -m time -m likwid=/home/ibd350/sustainabench/configs/measurement/likwid.yaml \
+        -m time -m likwid=$HOME/sustainabench/configs/measurement/likwid.yaml \
         -r $RUNS \
         -c configs/workloads/stream/default.yaml \
         -s
@@ -63,7 +63,7 @@ done
 echo "Running HPL experiments"
 for t in "small" "medium" "large"; do
     echo "    HPL ($t)"
-    sustainabench run benchmark -w hpl -m time -m likwid=/home/ibd350/sustainabench/configs/measurement/likwid.yaml -r $RUNS -b mpi -np $MPI_RANKS -c configs/workloads/hpl/$t/hpl.yaml -s
+    sustainabench run benchmark -w hpl -m time -m likwid=$HOME/sustainabench/configs/measurement/likwid.yaml -r $RUNS -b mpi -np $MPI_RANKS -c configs/workloads/hpl/$t/hpl.yaml -s
 done
 
 
@@ -80,7 +80,7 @@ for t in "medium" "large"; do
     OMP_NUM_THREADS=$DEFAULT_OMP_THREADS \
     sustainabench run benchmark \
     -w hpcg \
-    -m time -m likwid=/home/ibd350/sustainabench/configs/measurement/likwid.yaml \
+    -m time -m likwid=$HOME/sustainabench/configs/measurement/likwid.yaml \
     -r $RUNS \
     -b mpi -np $MPI_RANKS_WITH_OMP \
     -c configs/workloads/hpcg/$t/hpcg.yaml \

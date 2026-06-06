@@ -15,9 +15,9 @@ module load likwid/5.4.1-GCC-14.2.0
 # Answer the question: AI workload sustainability?
 
 RUNS=3
-SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+
 
 echo "Warmup"
 vllm --model --num-prompts 500 --input-len 2048 --output-len 256 --max-num-seqs 32 --tensor-parallel-size 2
 echo "Running VLLM experiments"
-sustainabench run benchmark -w nvidia-hpcg -m time -m likwid=$SCRIPT_DIR/../configs/likwid.yaml -m gpu-nv -r $RUNS -c $SCRIPT_DIR/../configs/vllm/2GPUs.yaml -s
+sustainabench run benchmark -w nvidia-hpcg -m time -m likwid=configs/likwid.yaml -m gpu-nv -r $RUNS -c configs/vllm/2GPUs.yaml -s

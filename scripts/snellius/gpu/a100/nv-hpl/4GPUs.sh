@@ -17,9 +17,9 @@ module load likwid/5.4.1-GCC-14.2.0
 # Number of repetitions: 3. Low variability.
 
 RUNS=3
-SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+
 
 echo "Warmup"
 mpirun -np $SLURM_NTASKS /home/ibiemond/nvidia_hpc_benchmarks/cuda12/hpl.sh --dat /home/ibiemond/sustainabench/scripts/snellius/gpu/a100/configs/nv-hpl/4GPUs/HPL-4GPUs.dat
 echo "Running Nvidia HPL experiments  (4 GPUs)"
-sustainabench run benchmark -w nvidia-hpl -m time -m likwid=$SCRIPT_DIR/../configs/likwid.yaml -m gpu-nv -r $RUNS -b mpi -np $SLURM_NTASKS -c $SCRIPT_DIR/../configs/nv-hpl/4GPUs/default.yaml -s
+sustainabench run benchmark -w nvidia-hpl -m time -m likwid=configs/likwid.yaml -m gpu-nv -r $RUNS -b mpi -np $SLURM_NTASKS -c configs/nv-hpl/4GPUs/default.yaml -s

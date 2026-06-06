@@ -17,7 +17,6 @@ module load 2025
 module load likwid/5.4.1-GCC-14.2.0
 
 RUNS=3
-SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 
 echo "Running STREAM experiments"
-sustainabench run benchmark -w stream -m time -m likwid=$SCRIPT_DIR/../configs/likwid.yaml -r $RUNS -c $SCRIPT_DIR/../configs/stream.yaml -s
+sustainabench run benchmark -w stream -m time -m likwid=configs/likwid.yaml -r $RUNS -c /configs/stream.yaml -s

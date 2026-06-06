@@ -16,9 +16,9 @@ module load likwid/5.4.1-GCC-14.2.0
 # Answer the question: realistic GPU HPC scaling?
 
 RUNS=3
-SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+
 
 echo "Warmup"
 /home/ibiemond/nvidia_hpc_benchmarks/cuda12/hpcg.sh --nx 640 --ny 640 --nz 640 --rt 300
 echo "Running Nvidia HPCG experiments"
-sustainabench run benchmark -w nvidia-hpcg -m time -m likwid=$SCRIPT_DIR/../configs/likwid.yaml -m gpu-nv -r $RUNS -b mpi -np $SLURM_NTASKS -c $SCRIPT_DIR/../configs/nv-hpcg.yaml -s
+sustainabench run benchmark -w nvidia-hpcg -m time -m likwid=configs/likwid.yaml -m gpu-nv -r $RUNS -b mpi -np $SLURM_NTASKS -c configs/nv-hpcg.yaml -s

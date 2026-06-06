@@ -17,7 +17,7 @@ module load 2025
 module load likwid/5.4.1-GCC-14.2.0
 
 RUNS=3
-SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+
 
 echo "Running stress-ng experiments"
-sustainabench run benchmark -w stress-ng -m time -m likwid=$SCRIPT_DIR/../configs/likwid.yaml -r $RUNS -c $SCRIPT_DIR/../configs/stress-ng.yaml -s #-o $TMPDIR/experiments/
+sustainabench run benchmark -w stress-ng -m time -m likwid=configs/likwid.yaml -r $RUNS -c configs/stress-ng.yaml -s #-o $TMPDIR/experiments/
