@@ -14,9 +14,9 @@
 # Number of repetitions: 3. Low variability.
 # For N: N was chosen to achieve a sustained compute-intensive workload of approximately X minutes.
 
-module load 2025
-module load likwid/5.5.0-GCC-14.3.0
-module load HPL/2.3-foss-2025b
+module load 2023
+module load pypmt/1.2.0-gfbf-2023a
+module load HPL/2.3-foss-2023a
 
 RUNS=3
 
@@ -26,4 +26,4 @@ export OMP_PLACES=cores
 export OMP_PROC_BIND=close
 
 echo "Running HPL experiments (2 nodes)"
-sustainabench run benchmark -w hpl -m time -m likwid=configs/likwid.yaml -r $RUNS -b mpi -np $SLURM_NTASKS -c configs/hpl/2nodes/config.yaml -s
+sustainabench run benchmark -w hpl -m time -m rapl-pypmt -r $RUNS -b mpi -np $SLURM_NTASKS -c configs/hpl/2nodes/config.yaml -s

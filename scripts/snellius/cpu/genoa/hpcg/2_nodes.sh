@@ -14,9 +14,9 @@
 # Answer the question: How does realistic HPC scale?
 # This script: Run on 2 nodes.
 
-module load 2025
-module load likwid/5.5.0-GCC-14.3.0
-module load HPCG/3.1-foss-2025b
+module load 2023
+module load pypmt/1.2.0-gfbf-2023a
+module load HPCG/3.1-foss-2023a
 
 RUNS=3
 
@@ -26,4 +26,4 @@ export OMP_PLACES=cores
 export OMP_PROC_BIND=close
 
 echo "Running HPCG experiments (2 nodes)"
-sustainabench run benchmark -w hpcg -m time -m likwid=configs/likwid.yaml -r $RUNS -b mpi -np $SLURM_NTASKS -c configs/hpcg/config.yaml -s
+sustainabench run benchmark -w hpcg -m time -m rapl-pypmt -r $RUNS -b mpi -np $SLURM_NTASKS -c configs/hpcg/config.yaml -s

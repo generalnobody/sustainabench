@@ -9,9 +9,9 @@
 #SBATCH --time=1:00:00
 #SBATCH --exclusive
 
-module load 2025
-module load CUDA/12.8.0
-module load likwid/5.5.0-GCC-14.3.0
+module load 2023
+module load CUDA/12.4.0
+module load pypmt/1.2.0-gfbf-2023a
 
 # Answer the question: GPU HPC scaling?
 # Number of repetitions: 3. Low variability.
@@ -22,4 +22,4 @@ RUNS=3
 echo "Warmup"
 mpirun -np $SLURM_NTASKS /home/ibiemond/nvidia_hpc_benchmarks/cuda12/hpl.sh --dat /home/ibiemond/sustainabench/scripts/snellius/gpu/a100/configs/nv-hpl/2GPUs/HPL-2GPUs.dat
 echo "Running Nvidia HPL experiments (2 GPUs)"
-sustainabench run benchmark -w nvidia-hpl -m time -m likwid=configs/likwid.yaml -m gpu-nv -r $RUNS -b mpi -np $SLURM_NTASKS -c configs/nv-hpl/2GPUs/default.yaml -s
+sustainabench run benchmark -w nvidia-hpl -m time -m rapl-pypmt -m gpu-nv -r $RUNS -b mpi -np $SLURM_NTASKS -c configs/nv-hpl/2GPUs/default.yaml -s

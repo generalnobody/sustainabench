@@ -13,11 +13,11 @@
 # Run single configuration on single node.
 # Number of repetitions: 3. Low variability.
 
-module load 2025
-module load likwid/5.5.0-GCC-14.3.0
+module load 2023
+module load pypmt/1.2.0-gfbf-2023a
 
 RUNS=3
 
 
 echo "Running STREAM experiments"
-sustainabench run benchmark -w stream -m time -m likwid=configs/likwid.yaml -r $RUNS -c configs/stream.yaml -s
+sustainabench run benchmark -w stream -m time -m rapl-pypmt -r $RUNS -c configs/stream.yaml -s
