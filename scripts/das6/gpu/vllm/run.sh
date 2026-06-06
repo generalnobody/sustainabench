@@ -10,6 +10,8 @@
 
 RUNS=5
 
+module load cuda12.6/toolkit/12.6
+
 echo "Warmup"
 sustainabench run benchmark -w vllm -m none -c configs/vllm.yaml -s -nof
 echo "Running VLLM experiments"

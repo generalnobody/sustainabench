@@ -10,6 +10,8 @@
 
 RUNS=5
 
+module load cuda12.6/toolkit/12.6
+
 echo "warmup"
 sustainabench run benchmark -w nvidia-hpcg -m none -b mpi -np $SLURM_NTASKS -c configs/nv-hpcg.yaml -s -nof
 echo "Running Nvidia HPCG experiments (1 GPU)"

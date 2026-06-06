@@ -10,6 +10,8 @@
 
 RUNS=5
 
+module load cuda12.6/toolkit/12.6
+
 echo "Warmup"
 sustainabench run benchmark -w nvidia-hpl -m none -b mpi -np $SLURM_NTASKS -c configs/nv-hpl/1GPU/config.yaml -s -nof
 echo "Running Nvidia HPL experiments (1 GPU)"

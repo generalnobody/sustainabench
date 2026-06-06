@@ -10,6 +10,8 @@
 
 RUNS=5
 
+module load cuda12.6/toolkit/12.6
+
 echo "Warmup"
 /home/ibd350/gpu-burn/gpu_burn 60
 echo "Running gpu-burn experiments"
