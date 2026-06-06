@@ -26,7 +26,7 @@ class RaplPypmtMeasurement(InternalMeasurement):
                 self.name: {
                     "j": pypmt.PMT.joules(self.start, self.end),
                     "w": pypmt.PMT.watts(self.start, self.end),
-                    "s": pypmt.PMT.watts(self.start, self.end)
+                    "s": pypmt.PMT.seconds(self.start, self.end)
                 }
             }
         else:
