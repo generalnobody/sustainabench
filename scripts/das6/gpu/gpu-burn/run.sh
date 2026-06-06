@@ -11,4 +11,4 @@
 RUNS=5
 
 echo "Running gpu-burn experiments"
-sustainabench run benchmark -w gpu-burn -m time -m likwid=configs/likwid.yaml -m gpu-nvidia -r $RUNS -c configs/gpu-burn.yaml -s
+sustainabench run benchmark -w gpu-burn -m time -m likwid=configs/likwid.yaml -m gpu-nv -r $RUNS -c configs/gpu-burn.yaml -s

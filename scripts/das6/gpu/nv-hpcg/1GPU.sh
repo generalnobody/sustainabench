@@ -11,4 +11,4 @@
 RUNS=5
 
 echo "Running Nvidia HPCG experiments (1 GPU)"
-sustainabench run benchmark -w nvidia-hpcg -m time -m likwid=configs/likwid.yaml -m gpu-nvidia -r $RUNS -b mpi -np $SLURM_NTASKS -c configs/nv-hpcg.yaml -s
+sustainabench run benchmark -w nvidia-hpcg -m time -m likwid=configs/likwid.yaml -m gpu-nv -r $RUNS -b mpi -np $SLURM_NTASKS -c configs/nv-hpcg.yaml -s

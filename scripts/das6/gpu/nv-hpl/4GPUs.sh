@@ -11,4 +11,4 @@
 RUNS=5
 
 echo "Running Nvidia HPL experiments (4 GPU)"
-sustainabench run benchmark -w nvidia-hpl -m time -m likwid=configs/likwid.yaml -m gpu-nvidia -r $RUNS -b mpi -np $SLURM_NTASKS -c configs/nv-hpl/4GPUs/config.yaml -s
+sustainabench run benchmark -w nvidia-hpl -m time -m likwid=configs/likwid.yaml -m gpu-nv -r $RUNS -b mpi -np $SLURM_NTASKS -c configs/nv-hpl/4GPUs/config.yaml -s

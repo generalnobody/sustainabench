@@ -11,4 +11,4 @@
 RUNS=5
 
 echo "Running Nvidia STREAM experiments"
-sustainabench run benchmark -w nvidia-stream -m time -m likwid=configs/likwid.yaml -m gpu-nvidia -r $RUNS -c configs/nv-stream.yaml -s
+sustainabench run benchmark -w nvidia-stream -m time -m likwid=configs/likwid.yaml -m gpu-nv -r $RUNS -c configs/nv-stream.yaml -s

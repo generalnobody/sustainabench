@@ -11,4 +11,4 @@
 RUNS=5
 
 echo "Running VLLM experiments"
-sustainabench run benchmark -w vllm -m time -m likwid=configs/likwid.yaml -m gpu-nvidia -r $RUNS -c configs/vllm.yaml -s
+sustainabench run benchmark -w vllm -m time -m likwid=configs/likwid.yaml -m gpu-nv -r $RUNS -c configs/vllm.yaml -s
