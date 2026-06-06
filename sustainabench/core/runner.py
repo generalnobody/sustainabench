@@ -103,19 +103,19 @@ class BenchmarkRunner:
                 )
                 target_script = script_files[-1].name
                 cmd = " ".join(m.get_wrap_command(self.backend.name, self.backend.node_processors))
-                # tmp.write(f"{script_header}\n{cmd} -- bash {script_files[-1].name}\n")
-                tmp.write(f"{script_header}\n\n")
-                tmp.write("""
-LOCAL_RANK="${OMPI_COMM_WORLD_LOCAL_RANK:-${MPI_LOCALRANKID:-${PMI_LOCAL_RANK:-${SLURM_LOCALID:-}}}}"
+                tmp.write(f"{script_header}\n{cmd} -- bash {script_files[-1].name}\n")
+#                 tmp.write(f"{script_header}\n\n")
+#                 tmp.write("""
+# LOCAL_RANK="${OMPI_COMM_WORLD_LOCAL_RANK:-${MPI_LOCALRANKID:-${PMI_LOCAL_RANK:-${SLURM_LOCALID:-}}}}"
 
 
-""")
-                tmp.write(f"""if [[ "{str(m.only_once_per_node).lower()}" == "true" && "$LOCAL_RANK" != "0" ]]; then
-    bash "{target_script}"
-else
-    {cmd} -- bash "{target_script}"
-fi
-""")
+# """)
+#                 tmp.write(f"""if [[ "{str(m.only_once_per_node).lower()}" == "true" && "$LOCAL_RANK" != "0" ]]; then
+#     bash "{target_script}"
+# else
+#     {cmd} -- bash "{target_script}"
+# fi
+# """)
                 tmp.flush()
                 script_files.append(tmp)
 
