@@ -1,0 +1,16 @@
+workloads:
+  - name: "vllm"
+    params:
+      args: [
+        "--model", "/projects/2/managed_datasets/hf_cache_dir/models--microsoft--phi-4/snapshots/f957856cd926f9d681b14153374d755dd97e45ed/",
+        "--num-prompts", "500",
+        "--input-len", "2048",
+        "--output-len", "256",
+        "--max-num-seqs", "32",
+        "--tensor-parallel-size", "1"
+      ]
+      # For H100:
+      # input-len=4096
+      # output-len=512
+      # max-num-seqs=64
+      # num-prompts=1000
