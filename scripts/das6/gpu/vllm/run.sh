@@ -10,5 +10,7 @@
 
 RUNS=5
 
+echo "Warmup"
+sustainabench run benchmark -w vllm -m none -c configs/vllm.yaml -s -nof
 echo "Running VLLM experiments"
 sustainabench run benchmark -w vllm -m time -m likwid=configs/likwid.yaml -m gpu-nv -r $RUNS -c configs/vllm.yaml -s

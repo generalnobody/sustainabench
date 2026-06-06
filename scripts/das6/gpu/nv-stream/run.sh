@@ -10,5 +10,7 @@
 
 RUNS=5
 
+echo "Warmup"
+sustainabench run benchmark -w nvidia-stream -m none -c configs/nv-stream.yaml -s -nof
 echo "Running Nvidia STREAM experiments"
 sustainabench run benchmark -w nvidia-stream -m time -m likwid=configs/likwid.yaml -m gpu-nv -r $RUNS -c configs/nv-stream.yaml -s
