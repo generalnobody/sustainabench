@@ -15,7 +15,7 @@
 # This script: Run on 4 nodes.
 
 module load 2025
-module load likwid/5.4.1-GCC-14.2.0
+module load likwid/5.5.0-GCC-14.3.0
 module load HPCG/3.1-foss-2025b
 
 RUNS=3

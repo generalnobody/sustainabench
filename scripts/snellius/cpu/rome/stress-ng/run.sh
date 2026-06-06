@@ -14,7 +14,7 @@
 # Number of repetitions: 3. Low variability.
 
 module load 2025
-module load likwid/5.4.1-GCC-14.2.0
+module load likwid/5.5.0-GCC-14.3.0
 
 RUNS=3
 
