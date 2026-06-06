@@ -106,7 +106,8 @@ class BenchmarkRunner:
                 # tmp.write(f"{script_header}\n{cmd} -- bash {script_files[-1].name}\n")
                 tmp.write(f"{script_header}\n\n")
                 tmp.write("""
-LOCAL_RANK="${OMPI_COMM_WORLD_LOCAL_RANK:-${MPI_LOCALRANKID:-${PMI_LOCAL_RANK:-${SLURM_LOCALID:-}}}}"
+LOCAL_RANK="${OMPI_COMM_WORLD_LOCAL_RANK:-${MPI_LOCALRANKID:-${PMI_LOCAL_RANK:-${SLURM_LOCALID:-0}}}}"
+LOCAL_RANK=${LOCAL_RANK:-0}
 
 
 """)
@@ -144,7 +145,8 @@ fi
             # tmp.write(f"{script_header}\n{cmd} -- bash {script_files[-1].name}\n")
             tmp.write(f"{script_header}\n\n")
             tmp.write("""
-LOCAL_RANK="${OMPI_COMM_WORLD_LOCAL_RANK:-${MPI_LOCALRANKID:-${PMI_LOCAL_RANK:-${SLURM_LOCALID:-}}}}"
+LOCAL_RANK="${OMPI_COMM_WORLD_LOCAL_RANK:-${MPI_LOCALRANKID:-${PMI_LOCAL_RANK:-${SLURM_LOCALID:-0}}}}"
+LOCAL_RANK=${LOCAL_RANK:-0}
 
 
 """)
