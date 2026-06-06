@@ -42,7 +42,7 @@ class LikwidMeasurement(ExternalMeasurement):
                 break
 
         if not csvdata:
-            raise ValueError("Expected likwid output, not found")
+            return {}
         reader = csv.reader(csvdata)
 
         structs = []
