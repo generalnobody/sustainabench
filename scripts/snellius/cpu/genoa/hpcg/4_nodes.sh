@@ -18,7 +18,7 @@ module load 2025
 module load likwid/5.4.1-GCC-14.2.0
 module load HPCG/3.1-foss-2025b
 
-RUNS=5
+RUNS=3
 
 
 export OMP_NUM_THREADS=$SLURM_CPUS_PER_TASK
