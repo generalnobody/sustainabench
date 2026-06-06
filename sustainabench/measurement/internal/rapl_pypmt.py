@@ -11,10 +11,10 @@ class RaplPypmtMeasurement(InternalMeasurement):
     
     def start(self):
         self.pmt = pypmt.Rapl.create()
-        self.start = self.pmt.read()
+        self.start_state = self.pmt.read()
 
     def stop(self):
-        self.end = self.pmt.read()
+        self.end_state = self.pmt.read()
 
     def sample(self):
         pass  # not used
@@ -24,9 +24,9 @@ class RaplPypmtMeasurement(InternalMeasurement):
         if local_mpi_rank == 0 or local_mpi_rank == None: # Prevent duplication with multiple MPI ranks per node
             return {
                 self.name: {
-                    "j": pypmt.PMT.joules(self.start, self.end),
-                    "w": pypmt.PMT.watts(self.start, self.end),
-                    "s": pypmt.PMT.seconds(self.start, self.end)
+                    "j": pypmt.PMT.joules(self.start_state, self.end_state),
+                    "w": pypmt.PMT.watts(self.start_state, self.end_state),
+                    "s": pypmt.PMT.seconds(self.start_state, self.end_state)
                 }
             }
         else:
