@@ -12,6 +12,7 @@ class LikwidMeasurement(ExternalMeasurement):
     require_file = True
     rank_priority = 100
     within_wrapper = True
+    only_once_per_node = True
     replace_wrapper = []
     wrapper_conflicts = ["perf"]
 

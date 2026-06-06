@@ -55,6 +55,7 @@ class ExternalMeasurement(Measurement):
     rank_priority: int = 0 
     wrapper_priority: int = 0 # External measurement with highest wrapper priority that is compatible with a certain backend will be the one to be selected as the replacement wrapper
     within_wrapper: bool = False # Whether this measurement should be run within the wrapper. Like, for MPI, if this should be run for each rank.
+    only_once_per_node: bool = False
     replace_wrapper: list[str] = [] # List of backends for which this can replace the wrapper functionality (e.g. likwid-mpirun instead of mpirun, for likwid measurement)
     wrapper_conflicts: list[str] = [] # List of other external measurement names that this measurement conflicts with
     
