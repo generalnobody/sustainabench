@@ -13,6 +13,6 @@ RUNS=5
 module load cuda12.6/toolkit/12.6
 
 echo "Warmup"
-/home/ibd350/gpu-burn/gpu_burn 60
+sustainabench run benchmark -w gpu-burn -m none -c configs/gpu-burn.yaml -s
 echo "Running gpu-burn experiments"
 sustainabench run benchmark -w gpu-burn -m time -m likwid=configs/likwid.yaml -m gpu-nv -r $RUNS -c configs/gpu-burn.yaml -s
