@@ -1,0 +1,9 @@
+workloads:
+  - name: "stress-ng"
+    params:
+      executable: "stress-ng" # Install via Conda/Mamba for easier installation than building by hand
+      args: [
+        "--cpu", "24",
+        "--cpu-method", "matrixprod",
+        "--timeout", "120s"
+      ]
