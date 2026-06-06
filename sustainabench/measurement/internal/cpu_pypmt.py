@@ -3,8 +3,8 @@ from sustainabench.utils.system_info import get_mpi_ranks
 import pypmt # type: ignore # Only works on Snellius
 
 @register_measurement
-class PypmtMeasurement(InternalMeasurement):
-    name = "pypmt"
+class RaplPypmtMeasurement(InternalMeasurement):
+    name = "rapl-pypmt"
     poll_interval = None
     scope = "node"
     require_file = False
