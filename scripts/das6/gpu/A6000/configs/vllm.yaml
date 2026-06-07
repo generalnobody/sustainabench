@@ -1,0 +1,10 @@
+workloads:
+  - name: "vllm"
+    params:
+      args: [
+        "--model", "Qwen/Qwen2.5-3B-Instruct",
+        "--num-prompts", "200",
+        "--input-len", "512",
+        "--output-len", "128",
+        "--max-num-seqs", "16"
+      ]

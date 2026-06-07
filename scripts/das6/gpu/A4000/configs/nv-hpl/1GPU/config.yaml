@@ -1,0 +1,6 @@
+workloads:
+  - name: "nvidia-hpl"
+    params:
+      executable: "/home/ibd350/nvidia_hpc_benchmarks/cuda12/hpl.sh"
+      flags:
+        - ["--dat", "/home/ibd350/sustainabench/scripts/das6/gpu/A4000/configs/nv-hpl/1GPU/HPL.dat"] # Arguments for the Nvidia HPL executable
