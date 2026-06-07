@@ -11,6 +11,9 @@
 RUNS=5
 
 module load cuda12.6/toolkit/12.6
+module unload openmpi4/4.1.6
+module load openmpi4/4.1.6-cuda
+module load nvhpc/24.11
 
 echo "Warmup"
 sustainabench run benchmark -w nvidia-hpl -m none -b mpi -np $SLURM_NTASKS -c configs/nv-hpl/1GPU/config.yaml -s -nof

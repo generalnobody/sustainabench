@@ -1,0 +1,237 @@
+Running HPL experiments (1 node)
+Running workload: hpl
+╭───────────────────── Traceback (most recent call last) ──────────────────────╮
+│ /home/ibd350/sustainabench/sustainabench/commands/run.py:59 in benchmark     │
+│                                                                              │
+│    56 │   │   wrapped_execution=wrapped_execution                            │
+│    57 │   )                                                                  │
+│    58 │                                                                      │
+│ ❱  59 │   results = runner.run()                                             │
+│    60 │                                                                      │
+│    61 │   if results is not None and _is_main_process(wrapped_execution):    │
+│    62 │   │   results_dict = results.model_dump()                            │
+│                                                                              │
+│ /home/ibd350/sustainabench/sustainabench/core/runner.py:234 in run           │
+│                                                                              │
+│   231 │   │   │   │   │   output = subprocess.run(script_cmd, capture_output │
+│   232 │   │   │   │   │                                                      │
+│   233 │   │   │   │   │   if output.returncode != 0 or output.stdout == "":  │
+│ ❱ 234 │   │   │   │   │   │   raise RuntimeError(                            │
+│   235 │   │   │   │   │   │   │   f"FAILURE: Subprocess executed with comman │
+│   236 │   │   │   │   │   │   │   f"STDOUT: {output.stdout}\nSTDERR: {output │
+│   237 │   │   │   │   │   │   )                                              │
+╰──────────────────────────────────────────────────────────────────────────────╯
+RuntimeError: FAILURE: Subprocess executed with command 'bash 
+/home/ibd350/sustainabench/scripts/das6/cpu/experiments/raw/tmp22fkn7kj.sh' 
+failed with return code 1
+STDOUT: Running workload: hpl
+Running workload: hpl
+Running workload: hpl
+Running workload: hpl
+Running workload: hpl
+Running workload: hpl
+Running workload: hpl
+Running workload: hpl
+Running workload: hpl
+Running workload: hpl
+Running workload: hpl
+Running workload: hpl
+Running workload: hpl
+Running workload: hpl
+Running workload: hpl
+Running workload: hpl
+Running workload: hpl
+Running workload: hpl
+Running workload: hpl
+Running workload: hpl
+Running workload: hpl
+Running workload: hpl
+Running workload: hpl
+Running workload: hpl
+
+STDERR: ╭───────────────────── Traceback (most recent call last) 
+──────────────────────╮
+│ /home/ibd350/sustainabench/sustainabench/commands/run.py:59 in benchmark     │
+│                                                                              │
+│    56 │   │   wrapped_execution=wrapped_execution                            │
+│    57 │   )                                                                  │
+│    58 │                                                                      │
+│ ❱  59 │   results = runner.run()                                             │
+│    60 │                                                                      │
+│    61 │   if results is not None and _is_main_process(wrapped_execution):    │
+│    62 │   │   results_dict = results.model_dump()                            │
+│                                                                              │
+│ /home/ibd350/sustainabench/sustainabench/core/runner.py:234 in run           │
+│                                                                              │
+│   231 │   │   │   │   │   output = subprocess.run(script_cmd, capture_output │
+│   232 │   │   │   │   │                                                      │
+│   233 │   │   │   │   │   if output.returncode != 0 or output.stdout == "":  │
+│ ❱ 234 │   │   │   │   │   │   raise RuntimeError(                            │
+│   235 │   │   │   │   │   │   │   f"FAILURE: Subprocess executed with comman │
+│   236 │   │   │   │   │   │   │   f"STDOUT: {output.stdout}\nSTDERR: {output │
+│   237 │   │   │   │   │   │   )                                              │
+╰──────────────────────────────────────────────────────────────────────────────╯
+RuntimeError: FAILURE: Subprocess executed with command 'bash 
+/home/ibd350/sustainabench/scripts/das6/cpu/experiments/raw/tmp8ed65g27.sh' 
+failed with return code 1
+STDOUT: Running workload: hpl
+
+STDERR: ╭───────────────────── Traceback (most recent call last) 
+──────────────────────╮
+│ /home/ibd350/sustainabench/sustainabench/commands/run.py:59 in benchmark     │
+│                                                                              │
+│    56 │   │   wrapped_execution=wrapped_execution                            │
+│    57 │   )                                                                  │
+│    58 │                                                                      │
+│ ❱  59 │   results = runner.run()                                             │
+│    60 │                                                                      │
+│    61 │   if results is not None and _is_main_process(wrapped_execution):    │
+│    62 │   │   results_dict = results.model_dump()                            │
+│                                                                              │
+│ /home/ibd350/sustainabench/sustainabench/core/runner.py:252 in run           │
+│                                                                              │
+│   249 │   │   │   │   │   for res in ext_results:                            │
+│   250 │   │   │   │   │   │   node_results = self.backend.add_result(node_re │
+│   251 │   │   │   │   else:                                                  │
+│ ❱ 252 │   │   │   │   │   node_results = self.backend.run(self)              │
+│   253 │   │   │   │                                                          │
+│   254 │   │   │   │   if node_results:                                       │
+│   255 │   │   │   │   │   results[f"run{i}"] = node_results                  │
+│                                                                              │
+│ /home/ibd350/sustainabench/sustainabench/core/backends/local.py:15 in run    │
+│                                                                              │
+│   12 │   │   raise RuntimeError(f"Backend {self.name} does not support comma │
+│   13 │                                                                       │
+│   14 │   def run(self, runner):                                              │
+│ ❱ 15 │   │   raw_metrics = self._execute_single(runner, None)                │
+│   16 │   │                                                                   │
+│   17 │   │   metadata = get_node_metadata()                                  │
+│   18 │   │   rank, local_rank = get_mpi_ranks()                              │
+│                                                                              │
+│ /home/ibd350/sustainabench/sustainabench/core/backends/base.py:63 in         │
+│ _execute_single                                                              │
+│                                                                              │
+│   60 │   │   if isinstance(workload, InternalWorkload):                      │
+│   61 │   │   │   workload.run(self.num_processors, context=context)          │
+│   62 │   │   elif isinstance(workload, ExternalWorkload):                    │
+│ ❱ 63 │   │   │   workload.execute()                                          │
+│   64 │   │                                                                   │
+│   65 │   │   if context and context.comm:                                    │
+│   66 │   │   │   context.comm.Barrier()                                      │
+│                                                                              │
+│ /home/ibd350/sustainabench/sustainabench/workloads/external/hpl.py:24 in     │
+│ execute                                                                      │
+│                                                                              │
+│   21 │   │   output = subprocess.run([params.executable], cwd=params.dir, ca │
+│   22 │   │                                                                   │
+│   23 │   │   if output.returncode != 0:                                      │
+│ ❱ 24 │   │   │   raise RuntimeError(                                         │
+│   25 │   │   │   │   f"FAILURE: Subprocess {params.executable} failed with r │
+│   26 │   │   │   │   f"STDOUT: {output.stdout}\n\nSTDERR: {output.stderr}"   │
+│   27 │   │   │   )                                                           │
+╰──────────────────────────────────────────────────────────────────────────────╯
+RuntimeError: FAILURE: Subprocess 
+/home/ibd350/hpl/bin/Linux_OpenMPI_OpenBLAS/xhpl failed with return code -9
+STDOUT: 
+
+STDERR: 
+
+╭───────────────────── Traceback (most recent call last) ──────────────────────╮
+│ /home/ibd350/sustainabench/sustainabench/commands/run.py:59 in benchmark     │
+│                                                                              │
+│    56 │   │   wrapped_execution=wrapped_execution                            │
+│    57 │   )                                                                  │
+│    58 │                                                                      │
+│ ❱  59 │   results = runner.run()                                             │
+│    60 │                                                                      │
+│    61 │   if results is not None and _is_main_process(wrapped_execution):    │
+│    62 │   │   results_dict = results.model_dump()                            │
+│                                                                              │
+│ /home/ibd350/sustainabench/sustainabench/core/runner.py:234 in run           │
+│                                                                              │
+│   231 │   │   │   │   │   output = subprocess.run(script_cmd, capture_output │
+│   232 │   │   │   │   │                                                      │
+│   233 │   │   │   │   │   if output.returncode != 0 or output.stdout == "":  │
+│ ❱ 234 │   │   │   │   │   │   raise RuntimeError(                            │
+│   235 │   │   │   │   │   │   │   f"FAILURE: Subprocess executed with comman │
+│   236 │   │   │   │   │   │   │   f"STDOUT: {output.stdout}\nSTDERR: {output │
+│   237 │   │   │   │   │   │   )                                              │
+╰──────────────────────────────────────────────────────────────────────────────╯
+RuntimeError: FAILURE: Subprocess executed with command 'bash 
+/home/ibd350/sustainabench/scripts/das6/cpu/experiments/raw/tmp2vdygjw6.sh' 
+failed with return code 1
+STDOUT: Running workload: hpl
+
+STDERR: ╭───────────────────── Traceback (most recent call last) 
+──────────────────────╮
+│ /home/ibd350/sustainabench/sustainabench/commands/run.py:59 in benchmark     │
+│                                                                              │
+│    56 │   │   wrapped_execution=wrapped_execution                            │
+│    57 │   )                                                                  │
+│    58 │                                                                      │
+│ ❱  59 │   results = runner.run()                                             │
+│    60 │                                                                      │
+│    61 │   if results is not None and _is_main_process(wrapped_execution):    │
+│    62 │   │   results_dict = results.model_dump()                            │
+│                                                                              │
+│ /home/ibd350/sustainabench/sustainabench/core/runner.py:252 in run           │
+│                                                                              │
+│   249 │   │   │   │   │   for res in ext_results:                            │
+│   250 │   │   │   │   │   │   node_results = self.backend.add_result(node_re │
+│   251 │   │   │   │   else:                                                  │
+│ ❱ 252 │   │   │   │   │   node_results = self.backend.run(self)              │
+│   253 │   │   │   │                                                          │
+│   254 │   │   │   │   if node_results:                                       │
+│   255 │   │   │   │   │   results[f"run{i}"] = node_results                  │
+│                                                                              │
+│ /home/ibd350/sustainabench/sustainabench/core/backends/local.py:15 in run    │
+│                                                                              │
+│   12 │   │   raise RuntimeError(f"Backend {self.name} does not support comma │
+│   13 │                                                                       │
+│   14 │   def run(self, runner):                                              │
+│ ❱ 15 │   │   raw_metrics = self._execute_single(runner, None)                │
+│   16 │   │                                                                   │
+│   17 │   │   metadata = get_node_metadata()                                  │
+│   18 │   │   rank, local_rank = get_mpi_ranks()                              │
+│                                                                              │
+│ /home/ibd350/sustainabench/sustainabench/core/backends/base.py:63 in         │
+│ _execute_single                                                              │
+│                                                                              │
+│   60 │   │   if isinstance(workload, InternalWorkload):                      │
+│   61 │   │   │   workload.run(self.num_processors, context=context)          │
+│   62 │   │   elif isinstance(workload, ExternalWorkload):                    │
+│ ❱ 63 │   │   │   workload.execute()                                          │
+│   64 │   │                                                                   │
+│   65 │   │   if context and context.comm:                                    │
+│   66 │   │   │   context.comm.Barrier()                                      │
+│                                                                              │
+│ /home/ibd350/sustainabench/sustainabench/workloads/external/hpl.py:24 in     │
+│ execute                                                                      │
+│                                                                              │
+│   21 │   │   output = subprocess.run([params.executable], cwd=params.dir, ca │
+│   22 │   │                                                                   │
+│   23 │   │   if output.returncode != 0:                                      │
+│ ❱ 24 │   │   │   raise RuntimeError(                                         │
+│   25 │   │   │   │   f"FAILURE: Subprocess {params.executable} failed with r │
+│   26 │   │   │   │   f"STDOUT: {output.stdout}\n\nSTDERR: {output.stderr}"   │
+│   27 │   │   │   )                                                           │
+╰──────────────────────────────────────────────────────────────────────────────╯
+RuntimeError: FAILURE: Subprocess 
+/home/ibd350/hpl/bin/Linux_OpenMPI_OpenBLAS/xhpl failed with return code -9
+STDOUT: 
+
+STDERR: 
+
+--------------------------------------------------------------------------
+Primary job  terminated normally, but 1 process returned
+a non-zero exit code. Per user-direction, the job has been aborted.
+--------------------------------------------------------------------------
+--------------------------------------------------------------------------
+mpirun detected that one or more processes exited with non-zero status, thus 
+causing
+the job to be terminated. The first process to do so was:
+
+  Process name: [[8175,1],22]
+  Exit code:    1
+--------------------------------------------------------------------------
+

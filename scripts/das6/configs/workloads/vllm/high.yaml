@@ -1,9 +1,0 @@
-workloads:
-  - name: "vllm"
-    params:
-      args: [
-        "--model", "Qwen/Qwen2.5-3B-Instruct", # Had to swap to 3B model from 7B model due to OOM error. 
-        "--num-prompts", "24",
-        "--input-len", "2048",
-        "--output-len", "512",
-      ]

@@ -5,6 +5,7 @@
 #SBATCH --nodes=1
 #SBATCH --ntasks-per-node=24
 #SBATCH --cpus-per-task=1
+#SBATCH --threads-per-core=2
 #SBATCH --constraint=cpunode
 #SBATCH --time=01:30:00
 
