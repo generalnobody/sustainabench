@@ -28,4 +28,4 @@ export OMP_PLACES=cores
 export OMP_PROC_BIND=close
 
 echo "Running HPL experiments (2 nodes)"
-sustainabench run benchmark -w hpl -m time -m perf-energy -r $RUNS -b mpi -np $SLURM_NTASKS -c configs/hpl/2nodes/config.yaml -s
+sustainabench run benchmark -w hpl -m time -m perf-energy -m cpu-energy -r $RUNS -b mpi -np $SLURM_NTASKS -c configs/hpl/2nodes/config.yaml -s

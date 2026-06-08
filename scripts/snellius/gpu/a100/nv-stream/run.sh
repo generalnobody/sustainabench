@@ -23,4 +23,4 @@ RUNS=3
 echo "Warmup"
 /home/ibiemond/nvidia_hpc_benchmarks/cuda12/stream-gpu-test.sh --n 268435456
 echo "Running Nvidia STREAM experiments"
-sustainabench run benchmark -w nvidia-stream -m time -m perf-energy -m gpu-nv -r $RUNS -c configs/nv-stream.yaml -s
+sustainabench run benchmark -w nvidia-stream -m time -m perf-energy -m cpu-energy -m gpu-nv -r $RUNS -c configs/nv-stream.yaml -s

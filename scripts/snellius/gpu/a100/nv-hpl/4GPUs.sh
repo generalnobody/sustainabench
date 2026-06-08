@@ -23,4 +23,4 @@ RUNS=3
 echo "Warmup"
 mpirun -np $SLURM_NTASKS /home/ibiemond/nvidia_hpc_benchmarks/cuda12/hpl.sh --dat /home/ibiemond/sustainabench/scripts/snellius/gpu/a100/configs/nv-hpl/4GPUs/HPL-4GPUs.dat
 echo "Running Nvidia HPL experiments  (4 GPUs)"
-sustainabench run benchmark -w nvidia-hpl -m time -m perf-energy -m gpu-nv -r $RUNS -b mpi -np $SLURM_NTASKS -c configs/nv-hpl/4GPUs/default.yaml -s
+sustainabench run benchmark -w nvidia-hpl -m time -m perf-energy -m cpu-energy -m gpu-nv -r $RUNS -b mpi -np $SLURM_NTASKS -c configs/nv-hpl/4GPUs/default.yaml -s

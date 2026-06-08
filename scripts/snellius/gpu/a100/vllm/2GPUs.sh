@@ -21,4 +21,4 @@ RUNS=3
 echo "Warmup"
 vllm --model --num-prompts 500 --input-len 2048 --output-len 256 --max-num-seqs 32 --tensor-parallel-size 2
 echo "Running VLLM experiments"
-sustainabench run benchmark -w nvidia-hpcg -m time -m perf-energy -m gpu-nv -r $RUNS -c configs/vllm/2GPUs.yaml -s
+sustainabench run benchmark -w nvidia-hpcg -m time -m perf-energy -m cpu-energy -m gpu-nv -r $RUNS -c configs/vllm/2GPUs.yaml -s

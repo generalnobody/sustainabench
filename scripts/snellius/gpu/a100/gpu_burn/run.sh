@@ -23,4 +23,4 @@ RUNS=3
 echo "Warming GPU up"
 /home/ibiemond/gpu-burn/gpu_burn 60
 echo "Running gpu-burn experiments"
-sustainabench run benchmark -w gpu-burn -m time -m perf-energy -m gpu-nv -r $RUNS -c configs/gpu-burn.yaml -s
+sustainabench run benchmark -w gpu-burn -m time -m perf-energy -m cpu-energy -m gpu-nv -r $RUNS -c configs/gpu-burn.yaml -s

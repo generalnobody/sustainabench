@@ -20,4 +20,4 @@ module load 2025
 RUNS=3
 
 echo "Running STREAM experiments"
-sustainabench run benchmark -w stream -m time -m perf-energy -r $RUNS -c configs/stream.yaml -s
+sustainabench run benchmark -w stream -m time -m perf-energy -m cpu-energy -r $RUNS -c configs/stream.yaml -s
