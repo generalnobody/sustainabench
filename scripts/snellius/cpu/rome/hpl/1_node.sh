@@ -15,9 +15,9 @@
 # Number of repetitions: 3. Low variability.
 # For N: N was chosen to achieve a sustained compute-intensive workload of approximately X minutes.
 
-module load 2023
-module load pypmt/1.2.0-gfbf-2023a
-module load HPL/2.3-foss-2023a
+module load 2025
+
+module load HPL/2.3-foss-2025b
 
 RUNS=3
 

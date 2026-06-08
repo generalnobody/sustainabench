@@ -10,9 +10,9 @@
 #SBATCH --exclusive
 #SBATCH --constraint=hwperf
 
-module load 2023
-module load CUDA/12.4.0
-module load pypmt/1.2.0-gfbf-2023a
+module load 2025
+module load CUDA/12.9.1
+
 
 # Answer the question: GPU HPC scaling?
 # Number of repetitions: 3. Low variability.

@@ -15,9 +15,9 @@
 # Answer the question: How does realistic HPC scale?
 # This script: Run on 1 node.
 
-module load 2023
-module load pypmt/1.2.0-gfbf-2023a
-module load HPCG/3.1-foss-2023a
+module load 2025
+
+module load HPCG/3.1-foss-2025b
 
 RUNS=3
 

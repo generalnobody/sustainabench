@@ -14,8 +14,8 @@
 # Run single configuration on single node.
 # Number of repetitions: 3. Low variability.
 
-module load 2023
-module load pypmt/1.2.0-gfbf-2023a
+module load 2025
+
 
 RUNS=3
 
