@@ -8,6 +8,7 @@
 #SBATCH --gpus-per-task=1
 #SBATCH --time=1:00:00
 #SBATCH --exclusive
+#SBATCH --constraint=hwperf
 
 module load 2023
 module load CUDA/12.4.0
@@ -22,4 +23,4 @@ RUNS=3
 echo "Warmup"
 mpirun -np $SLURM_NTASKS /home/ibiemond/nvidia_hpc_benchmarks/cuda12/hpl.sh --dat /home/ibiemond/sustainabench/scripts/snellius/gpu/a100/configs/nv-hpl/2GPUs/HPL-2GPUs.dat
 echo "Running Nvidia HPL experiments (2 GPUs)"
-sustainabench run benchmark -w nvidia-hpl -m time -m rapl-pypmt -m gpu-nv -r $RUNS -b mpi -np $SLURM_NTASKS -c configs/nv-hpl/2GPUs/default.yaml -s
+sustainabench run benchmark -w nvidia-hpl -m time -m perf-energy -m gpu-nv -r $RUNS -b mpi -np $SLURM_NTASKS -c configs/nv-hpl/2GPUs/default.yaml -s

@@ -8,6 +8,7 @@
 #SBATCH --partition=rome
 #SBATCH --time=0:20:00
 #SBATCH --exclusive
+#SBATCH --constraint=hwperf
 
 # Answer the question: How energy-efficient is raw CPU computation?
 # No scaling. Run on a full node, with full-core utilization.
@@ -19,4 +20,4 @@ module load pypmt/1.2.0-gfbf-2023a
 RUNS=3
 
 echo "Running stress-ng experiments"
-sustainabench run benchmark -w stress-ng -m time -m rapl-pypmt -r $RUNS -c configs/stress-ng.yaml -s #-o $TMPDIR/experiments/
+sustainabench run benchmark -w stress-ng -m time -m perf-energy -r $RUNS -c configs/stress-ng.yaml -s #-o $TMPDIR/experiments/

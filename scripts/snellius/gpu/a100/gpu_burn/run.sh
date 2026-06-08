@@ -7,6 +7,7 @@
 #SBATCH --gpus=1
 #SBATCH --time=1:00:00
 #SBATCH --exclusive
+#SBATCH --constraint=hwperf
 
 module load 2023
 module load CUDA/12.4.0
@@ -22,4 +23,4 @@ RUNS=3
 echo "Warming GPU up"
 /home/ibiemond/gpu-burn/gpu_burn 60
 echo "Running gpu-burn experiments"
-sustainabench run benchmark -w gpu-burn -m time -m rapl-pypmt -m gpu-nv -r $RUNS -c configs/gpu-burn.yaml -s
+sustainabench run benchmark -w gpu-burn -m time -m perf-energy -m gpu-nv -r $RUNS -c configs/gpu-burn.yaml -s

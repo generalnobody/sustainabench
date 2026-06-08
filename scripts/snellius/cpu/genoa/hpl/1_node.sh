@@ -8,6 +8,7 @@
 #SBATCH --partition=genoa
 #SBATCH --time=1:30:00
 #SBATCH --exclusive
+#SBATCH --constraint=hwperf
 
 # Answer the question: How does compute-heavy HPC scale?
 # This script: run with 1 node.
@@ -26,4 +27,4 @@ export OMP_PLACES=cores
 export OMP_PROC_BIND=close
 
 echo "Running HPL experiments (1 node)"
-sustainabench run benchmark -w hpl -m time -m rapl-pypmt -r $RUNS -b mpi -np $SLURM_NTASKS -c configs/hpl/1node/config.yaml -s
+sustainabench run benchmark -w hpl -m time -m perf-energy -r $RUNS -b mpi -np $SLURM_NTASKS -c configs/hpl/1node/config.yaml -s

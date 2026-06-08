@@ -8,6 +8,7 @@
 #SBATCH --partition=genoa
 #SBATCH --time=0:20:00
 #SBATCH --exclusive
+#SBATCH --constraint=hwperf
 
 # Answer the question: How energy-efficient is memory bandwidth?
 # Run single configuration on single node.
@@ -20,4 +21,4 @@ RUNS=3
 
 
 echo "Running STREAM experiments"
-sustainabench run benchmark -w stream -m time -m rapl-pypmt -r $RUNS -c configs/stream.yaml -s
+sustainabench run benchmark -w stream -m time -m perf-energy -r $RUNS -c configs/stream.yaml -s

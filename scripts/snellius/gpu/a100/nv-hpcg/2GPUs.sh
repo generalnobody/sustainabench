@@ -8,6 +8,7 @@
 #SBATCH --gpus-per-task=1
 #SBATCH --time=0:30:00
 #SBATCH --exclusive
+#SBATCH --constraint=hwperf
 
 module load 2023
 module load CUDA/12.4.0
@@ -21,4 +22,4 @@ RUNS=3
 echo "Warmup"
 /home/ibiemond/nvidia_hpc_benchmarks/cuda12/hpcg.sh --nx 640 --ny 640 --nz 640 --rt 300
 echo "Running Nvidia HPCG experiments"
-sustainabench run benchmark -w nvidia-hpcg -m time -m rapl-pypmt -m gpu-nv -r $RUNS -b mpi -np $SLURM_NTASKS -c configs/nv-hpcg.yaml -s
+sustainabench run benchmark -w nvidia-hpcg -m time -m perf-energy -m gpu-nv -r $RUNS -b mpi -np $SLURM_NTASKS -c configs/nv-hpcg.yaml -s
