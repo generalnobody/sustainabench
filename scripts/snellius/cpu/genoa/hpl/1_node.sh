@@ -3,7 +3,7 @@
 #SBATCH --job-name=sustainabench_cpu_hpl_1node
 #SBATCH --output=logs/%x_%j.out
 #SBATCH --nodes=1
-#SBATCH --ntasks-per-node=2
+#SBATCH --ntasks-per-socket=1
 #SBATCH --cpus-per-task=96
 #SBATCH --partition=genoa
 #SBATCH --time=1:30:00

@@ -3,7 +3,7 @@
 #SBATCH --job-name=sustainabench_cpu_hpl_2nodes
 #SBATCH --output=logs/%x_%j.out
 #SBATCH --nodes=2
-#SBATCH --ntasks-per-node=2
+#SBATCH --ntasks-per-socket=1
 #SBATCH --cpus-per-task=64
 #SBATCH --partition=rome
 #SBATCH --time=1:00:00
