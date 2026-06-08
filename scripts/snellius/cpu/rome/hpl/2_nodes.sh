@@ -20,7 +20,7 @@ module load 2025
 
 module load HPL/2.3-foss-2025b
 
-RUNS=5
+RUNS=3
 
 
 export OMP_NUM_THREADS=$SLURM_CPUS_PER_TASK

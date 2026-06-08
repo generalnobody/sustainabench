@@ -15,7 +15,7 @@ module load CUDA/12.9.1
 
 # Answer the question: AI workload sustainability?
 
-RUNS=5
+RUNS=3
 
 
 echo "Warmup"

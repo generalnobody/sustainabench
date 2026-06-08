@@ -17,7 +17,7 @@
 module load 2025
 
 
-RUNS=5
+RUNS=3
 
 
 echo "Running STREAM experiments"

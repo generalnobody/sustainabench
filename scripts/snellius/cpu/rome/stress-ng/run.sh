@@ -17,7 +17,7 @@
 module load 2025
 
 
-RUNS=5
+RUNS=3
 
 echo "Running stress-ng experiments"
 sustainabench run benchmark -w stress-ng -m time -m perf-energy -r $RUNS -c configs/stress-ng.yaml -s #-o $TMPDIR/experiments/
