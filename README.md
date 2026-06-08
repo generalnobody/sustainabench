@@ -13,17 +13,17 @@ pip install .
 
 For CUDA 12.6 (used during development):
 ```bash
-pip install . --index-url https://download.pytorch.org/whl/cu126
+pip install . --extra-index-url https://download.pytorch.org/whl/cu126
 ```
 
 For ROCm GPUs (AMD), run:
 ```bash
-pip install . --index-url https://download.pytorch.org/whl/rocm7.2
+pip install . --extra-index-url https://download.pytorch.org/whl/rocm7.2
 ```
 
 When neither is available (CPU-only), run:
 ```bash
-pip install . --index-url https://download.pytorch.org/whl/cpu
+pip install . --extra-index-url https://download.pytorch.org/whl/cpu
 ```
 
 If you wish to add custom modules, install using the `-e` flag:
