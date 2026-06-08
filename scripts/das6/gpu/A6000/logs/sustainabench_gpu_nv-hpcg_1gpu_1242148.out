@@ -1,0 +1,414 @@
+warmup
+Running workload: nvidia-hpcg
+╭───────────────────── Traceback (most recent call last) ──────────────────────╮
+│ /home/ibd350/sustainabench/sustainabench/commands/run.py:59 in benchmark     │
+│                                                                              │
+│    56 │   │   wrapped_execution=wrapped_execution                            │
+│    57 │   )                                                                  │
+│    58 │                                                                      │
+│ ❱  59 │   results = runner.run()                                             │
+│    60 │                                                                      │
+│    61 │   if results is not None and _is_main_process(wrapped_execution):    │
+│    62 │   │   results_dict = results.model_dump()                            │
+│                                                                              │
+│ /home/ibd350/sustainabench/sustainabench/core/runner.py:234 in run           │
+│                                                                              │
+│   231 │   │   │   │   │   output = subprocess.run(script_cmd, capture_output │
+│   232 │   │   │   │   │                                                      │
+│   233 │   │   │   │   │   if output.returncode != 0 or output.stdout == "":  │
+│ ❱ 234 │   │   │   │   │   │   raise RuntimeError(                            │
+│   235 │   │   │   │   │   │   │   f"FAILURE: Subprocess executed with comman │
+│   236 │   │   │   │   │   │   │   f"STDOUT: {output.stdout}\nSTDERR: {output │
+│   237 │   │   │   │   │   │   )                                              │
+╰──────────────────────────────────────────────────────────────────────────────╯
+RuntimeError: FAILURE: Subprocess executed with command 'bash 
+/home/ibd350/sustainabench/scripts/das6/gpu/A6000/experiments/raw/tmpvsabvti5.sh
+' failed with return code 1
+STDOUT: Running workload: nvidia-hpcg
+
+STDERR: ╭───────────────────── Traceback (most recent call last) 
+──────────────────────╮
+│ /home/ibd350/sustainabench/sustainabench/commands/run.py:59 in benchmark     │
+│                                                                              │
+│    56 │   │   wrapped_execution=wrapped_execution                            │
+│    57 │   )                                                                  │
+│    58 │                                                                      │
+│ ❱  59 │   results = runner.run()                                             │
+│    60 │                                                                      │
+│    61 │   if results is not None and _is_main_process(wrapped_execution):    │
+│    62 │   │   results_dict = results.model_dump()                            │
+│                                                                              │
+│ /home/ibd350/sustainabench/sustainabench/core/runner.py:252 in run           │
+│                                                                              │
+│   249 │   │   │   │   │   for res in ext_results:                            │
+│   250 │   │   │   │   │   │   node_results = self.backend.add_result(node_re │
+│   251 │   │   │   │   else:                                                  │
+│ ❱ 252 │   │   │   │   │   node_results = self.backend.run(self)              │
+│   253 │   │   │   │                                                          │
+│   254 │   │   │   │   if node_results:                                       │
+│   255 │   │   │   │   │   results[f"run{i}"] = node_results                  │
+│                                                                              │
+│ /home/ibd350/sustainabench/sustainabench/core/backends/local.py:15 in run    │
+│                                                                              │
+│   12 │   │   raise RuntimeError(f"Backend {self.name} does not support comma │
+│   13 │                                                                       │
+│   14 │   def run(self, runner):                                              │
+│ ❱ 15 │   │   raw_metrics = self._execute_single(runner, None)                │
+│   16 │   │                                                                   │
+│   17 │   │   metadata = get_node_metadata()                                  │
+│   18 │   │   rank, local_rank = get_mpi_ranks()                              │
+│                                                                              │
+│ /home/ibd350/sustainabench/sustainabench/core/backends/base.py:63 in         │
+│ _execute_single                                                              │
+│                                                                              │
+│   60 │   │   if isinstance(workload, InternalWorkload):                      │
+│   61 │   │   │   workload.run(self.num_processors, context=context)          │
+│   62 │   │   elif isinstance(workload, ExternalWorkload):                    │
+│ ❱ 63 │   │   │   workload.execute()                                          │
+│   64 │   │                                                                   │
+│   65 │   │   if context and context.comm:                                    │
+│   66 │   │   │   context.comm.Barrier()                                      │
+│                                                                              │
+│ /home/ibd350/sustainabench/sustainabench/workloads/external/nvidia-hpcg.py:2 │
+│ 7 in execute                                                                 │
+│                                                                              │
+│    24 │   │   output = subprocess.run(cmd, capture_output=True, text=True)   │
+│    25 │   │                                                                  │
+│    26 │   │   if output.returncode != 0 or output.stdout == "":              │
+│ ❱  27 │   │   │   raise RuntimeError(                                        │
+│    28 │   │   │   │   f"FAILURE: Subprocess executed with command '{' '.join │
+│    29 │   │   │   │   f"STDOUT: {output.stdout}\n\nSTDERR: {output.stderr}"  │
+│    30 │   │   │   )                                                          │
+╰──────────────────────────────────────────────────────────────────────────────╯
+RuntimeError: FAILURE: Subprocess executed with command 
+'/home/ibd350/nvidia_hpc_benchmarks/cuda12/hpcg.sh --nx 384 --ny 384 --nz 384 
+--rt 600' failed with return code 1
+STDOUT: HPCG-NVIDIA 26.2.0  -- NVIDIA accelerated HPCG benchmark -- NVIDIA
+Build v0.6.0 
+
+Start of application (GPU-Only) ...
+Initial Residual = 8482.53
+Iteration = 1   Scaled Residual = 0.185789
+Iteration = 2   Scaled Residual = 0.101928
+Iteration = 3   Scaled Residual = 0.0702991
+Iteration = 4   Scaled Residual = 0.0536577
+Iteration = 5   Scaled Residual = 0.0433497
+Iteration = 6   Scaled Residual = 0.0363326
+Iteration = 7   Scaled Residual = 0.0312554
+Iteration = 8   Scaled Residual = 0.0274258
+Iteration = 9   Scaled Residual = 0.0244455
+Iteration = 10   Scaled Residual = 0.0220622
+Iteration = 11   Scaled Residual = 0.0201064
+Iteration = 12   Scaled Residual = 0.0184619
+Iteration = 13   Scaled Residual = 0.0170484
+Iteration = 14   Scaled Residual = 0.0158152
+Iteration = 15   Scaled Residual = 0.0147313
+Iteration = 16   Scaled Residual = 0.0137768
+Iteration = 17   Scaled Residual = 0.0129374
+Iteration = 18   Scaled Residual = 0.0121997
+Iteration = 19   Scaled Residual = 0.0115478
+Iteration = 20   Scaled Residual = 0.0109654
+Iteration = 21   Scaled Residual = 0.0104366
+Iteration = 22   Scaled Residual = 0.00994799
+Iteration = 23   Scaled Residual = 0.00949211
+Iteration = 24   Scaled Residual = 0.00906665
+Iteration = 25   Scaled Residual = 0.00867233
+Iteration = 26   Scaled Residual = 0.00831144
+Iteration = 27   Scaled Residual = 0.00798454
+Iteration = 28   Scaled Residual = 0.00768887
+Iteration = 29   Scaled Residual = 0.00741926
+Iteration = 30   Scaled Residual = 0.00716846
+Iteration = 31   Scaled Residual = 0.00692947
+Iteration = 32   Scaled Residual = 0.00669852
+Iteration = 33   Scaled Residual = 0.00647518
+Iteration = 34   Scaled Residual = 0.00626175
+Iteration = 35   Scaled Residual = 0.00606181
+Iteration = 36   Scaled Residual = 0.00587721
+Iteration = 37   Scaled Residual = 0.005707
+Iteration = 38   Scaled Residual = 0.00554767
+Iteration = 39   Scaled Residual = 0.00539363
+Iteration = 40   Scaled Residual = 0.00523979
+Iteration = 41   Scaled Residual = 0.00508401
+Iteration = 42   Scaled Residual = 0.00492712
+Iteration = 43   Scaled Residual = 0.00477229
+Iteration = 44   Scaled Residual = 0.00462331
+Iteration = 45   Scaled Residual = 0.00448213
+Iteration = 46   Scaled Residual = 0.00434846
+Iteration = 47   Scaled Residual = 0.00422034
+Iteration = 48   Scaled Residual = 0.00409504
+Iteration = 49   Scaled Residual = 0.00397208
+Iteration = 50   Scaled Residual = 0.00385646
+GPU Rank Info:
+ | cuSPARSE version 12.5
+ | Reference CPU memory = 25266.20 MB
+ | GPU Name: 'NVIDIA RTX A6000'
+ | Number of SMs: 84
+ | GPU Memory Use: 47683 MB / 48787 MB
+ | Process Grid: 1x1x1
+ | Local Domain: 384x384x384
+ | Number of CPU Threads: 1
+ | Slice Size: 4096
+
+
+STDERR: CUDART: cudaMalloc(&tmp, sizeof(double) * length) = 2 (out of memory) on
+node004 at (../src/CudaKernels.cu:2058)
+
+--------------------------------------------------------------------------
+Primary job  terminated normally, but 1 process returned
+a non-zero exit code. Per user-direction, the job has been aborted.
+--------------------------------------------------------------------------
+--------------------------------------------------------------------------
+mpirun detected that one or more processes exited with non-zero status, thus 
+causing
+the job to be terminated. The first process to do so was:
+
+  Process name: [[5396,1],0]
+  Exit code:    1
+--------------------------------------------------------------------------
+
+Running Nvidia HPCG experiments (1 GPU)
+Running workload: nvidia-hpcg
+╭───────────────────── Traceback (most recent call last) ──────────────────────╮
+│ /home/ibd350/sustainabench/sustainabench/commands/run.py:59 in benchmark     │
+│                                                                              │
+│    56 │   │   wrapped_execution=wrapped_execution                            │
+│    57 │   )                                                                  │
+│    58 │                                                                      │
+│ ❱  59 │   results = runner.run()                                             │
+│    60 │                                                                      │
+│    61 │   if results is not None and _is_main_process(wrapped_execution):    │
+│    62 │   │   results_dict = results.model_dump()                            │
+│                                                                              │
+│ /home/ibd350/sustainabench/sustainabench/core/runner.py:234 in run           │
+│                                                                              │
+│   231 │   │   │   │   │   output = subprocess.run(script_cmd, capture_output │
+│   232 │   │   │   │   │                                                      │
+│   233 │   │   │   │   │   if output.returncode != 0 or output.stdout == "":  │
+│ ❱ 234 │   │   │   │   │   │   raise RuntimeError(                            │
+│   235 │   │   │   │   │   │   │   f"FAILURE: Subprocess executed with comman │
+│   236 │   │   │   │   │   │   │   f"STDOUT: {output.stdout}\nSTDERR: {output │
+│   237 │   │   │   │   │   │   )                                              │
+╰──────────────────────────────────────────────────────────────────────────────╯
+RuntimeError: FAILURE: Subprocess executed with command 'bash 
+/home/ibd350/sustainabench/scripts/das6/gpu/A6000/experiments/raw/tmpzm2bpg3d.sh
+' failed with return code 1
+STDOUT: Running workload: nvidia-hpcg
+
+STDERR: ╭───────────────────── Traceback (most recent call last) 
+──────────────────────╮
+│ /home/ibd350/sustainabench/sustainabench/commands/run.py:59 in benchmark     │
+│                                                                              │
+│    56 │   │   wrapped_execution=wrapped_execution                            │
+│    57 │   )                                                                  │
+│    58 │                                                                      │
+│ ❱  59 │   results = runner.run()                                             │
+│    60 │                                                                      │
+│    61 │   if results is not None and _is_main_process(wrapped_execution):    │
+│    62 │   │   results_dict = results.model_dump()                            │
+│                                                                              │
+│ /home/ibd350/sustainabench/sustainabench/core/runner.py:234 in run           │
+│                                                                              │
+│   231 │   │   │   │   │   output = subprocess.run(script_cmd, capture_output │
+│   232 │   │   │   │   │                                                      │
+│   233 │   │   │   │   │   if output.returncode != 0 or output.stdout == "":  │
+│ ❱ 234 │   │   │   │   │   │   raise RuntimeError(                            │
+│   235 │   │   │   │   │   │   │   f"FAILURE: Subprocess executed with comman │
+│   236 │   │   │   │   │   │   │   f"STDOUT: {output.stdout}\nSTDERR: {output │
+│   237 │   │   │   │   │   │   )                                              │
+╰──────────────────────────────────────────────────────────────────────────────╯
+RuntimeError: FAILURE: Subprocess executed with command 'bash 
+/home/ibd350/sustainabench/scripts/das6/gpu/A6000/experiments/raw/tmp40ft2xl4.sh
+' failed with return code 1
+STDOUT: 
+--------------------------------------------------------------------------------
+CPU name:       AMD EPYC 7402P 24-Core Processor               
+CPU type:       AMD K17 (Zen2) architecture
+CPU clock:      2.79 GHz
+--------------------------------------------------------------------------------
+Running workload: nvidia-hpcg
+--------------------------------------------------------------------------------
+STRUCT,Info,3,,,
+CPU name:,AMD EPYC 7402P 24-Core Processor               ,,,,
+CPU type:,AMD K17 (Zen2) architecture,,,,
+CPU clock:,2.794744772 GHz,,,,
+TABLE,Group 1 Raw,ENERGY,6,,
+Event,Counter,HWThread 0,HWThread 24,,
+ACTUAL_CPU_CLOCK,FIXC1,8803366310,1723383783789,,
+MAX_CPU_CLOCK,FIXC2,8317081724,1444493337756,,
+RETIRED_INSTRUCTIONS,PMC0,-,-,,
+CPU_CLOCKS_UNHALTED,PMC1,-,-,,
+RAPL_CORE_ENERGY,PWR0,1735.8490,0,,
+RAPL_PKG_ENERGY,PWR1,35904.6320,0,,
+TABLE,Group 1 Raw STAT,ENERGY,6,,
+Event,Counter,Sum,Min,Max,Avg
+ACTUAL_CPU_CLOCK STAT,FIXC1,1732187150099,8803366310,1723383783789,8.660936e+11
+MAX_CPU_CLOCK STAT,FIXC2,1452810419480,8317081724,1444493337756,726405209740
+RETIRED_INSTRUCTIONS STAT,PMC0,0,inf,0,0
+CPU_CLOCKS_UNHALTED STAT,PMC1,0,inf,0,0
+RAPL_CORE_ENERGY STAT,PWR0,1735.8490,0,1735.8490,867.9245
+RAPL_PKG_ENERGY STAT,PWR1,35904.6320,0,35904.6320,17952.3160
+TABLE,Group 1 Metric,ENERGY,8,,
+Metric,HWThread 0,HWThread 24,,,
+Runtime (RDTSC) [s],520.7948,520.7948,,,
+Runtime unhalted [s],3.1500,616.6516,,,
+Clock [MHz],2958.1484,3334.3302,,,
+CPI,-,-,,,
+Energy Core [J],1735.8490,0,,,
+Power Core [W],3.3331,0,,,
+Energy PKG [J],35904.6320,0,,,
+Power PKG [W],68.9420,0,,,
+TABLE,Group 1 Metric STAT,ENERGY,8,,
+Metric,Sum,Min,Max,Avg,
+Runtime (RDTSC) [s] STAT,1041.5896,520.7948,520.7948,520.7948,
+Runtime unhalted [s] STAT,619.8016,3.1500,616.6516,309.9008,
+Clock [MHz] STAT,6292.4786,2958.1484,3334.3302,3146.2393,
+CPI STAT,0,inf,0,0,
+Energy Core [J] STAT,1735.8490,0,1735.8490,867.9245,
+Power Core [W] STAT,3.3331,0,3.3331,1.6665,
+Energy PKG [J] STAT,35904.6320,0,35904.6320,17952.3160,
+Power PKG [W] STAT,68.9420,0,68.9420,34.4710,
+
+STDERR: ERROR: The selected register PMC0 is in use.
+Please run likwid with force option (-f, --force) to overwrite settings
+ERROR: The selected register PMC1 is in use.
+Please run likwid with force option (-f, --force) to overwrite settings
+╭───────────────────── Traceback (most recent call last) ──────────────────────╮
+│ /home/ibd350/sustainabench/sustainabench/commands/run.py:59 in benchmark     │
+│                                                                              │
+│    56 │   │   wrapped_execution=wrapped_execution                            │
+│    57 │   )                                                                  │
+│    58 │                                                                      │
+│ ❱  59 │   results = runner.run()                                             │
+│    60 │                                                                      │
+│    61 │   if results is not None and _is_main_process(wrapped_execution):    │
+│    62 │   │   results_dict = results.model_dump()                            │
+│                                                                              │
+│ /home/ibd350/sustainabench/sustainabench/core/runner.py:252 in run           │
+│                                                                              │
+│   249 │   │   │   │   │   for res in ext_results:                            │
+│   250 │   │   │   │   │   │   node_results = self.backend.add_result(node_re │
+│   251 │   │   │   │   else:                                                  │
+│ ❱ 252 │   │   │   │   │   node_results = self.backend.run(self)              │
+│   253 │   │   │   │                                                          │
+│   254 │   │   │   │   if node_results:                                       │
+│   255 │   │   │   │   │   results[f"run{i}"] = node_results                  │
+│                                                                              │
+│ /home/ibd350/sustainabench/sustainabench/core/backends/local.py:15 in run    │
+│                                                                              │
+│   12 │   │   raise RuntimeError(f"Backend {self.name} does not support comma │
+│   13 │                                                                       │
+│   14 │   def run(self, runner):                                              │
+│ ❱ 15 │   │   raw_metrics = self._execute_single(runner, None)                │
+│   16 │   │                                                                   │
+│   17 │   │   metadata = get_node_metadata()                                  │
+│   18 │   │   rank, local_rank = get_mpi_ranks()                              │
+│                                                                              │
+│ /home/ibd350/sustainabench/sustainabench/core/backends/base.py:63 in         │
+│ _execute_single                                                              │
+│                                                                              │
+│   60 │   │   if isinstance(workload, InternalWorkload):                      │
+│   61 │   │   │   workload.run(self.num_processors, context=context)          │
+│   62 │   │   elif isinstance(workload, ExternalWorkload):                    │
+│ ❱ 63 │   │   │   workload.execute()                                          │
+│   64 │   │                                                                   │
+│   65 │   │   if context and context.comm:                                    │
+│   66 │   │   │   context.comm.Barrier()                                      │
+│                                                                              │
+│ /home/ibd350/sustainabench/sustainabench/workloads/external/nvidia-hpcg.py:2 │
+│ 7 in execute                                                                 │
+│                                                                              │
+│    24 │   │   output = subprocess.run(cmd, capture_output=True, text=True)   │
+│    25 │   │                                                                  │
+│    26 │   │   if output.returncode != 0 or output.stdout == "":              │
+│ ❱  27 │   │   │   raise RuntimeError(                                        │
+│    28 │   │   │   │   f"FAILURE: Subprocess executed with command '{' '.join │
+│    29 │   │   │   │   f"STDOUT: {output.stdout}\n\nSTDERR: {output.stderr}"  │
+│    30 │   │   │   )                                                          │
+╰──────────────────────────────────────────────────────────────────────────────╯
+RuntimeError: FAILURE: Subprocess executed with command 
+'/home/ibd350/nvidia_hpc_benchmarks/cuda12/hpcg.sh --nx 384 --ny 384 --nz 384 
+--rt 600' failed with return code 1
+STDOUT: HPCG-NVIDIA 26.2.0  -- NVIDIA accelerated HPCG benchmark -- NVIDIA
+Build v0.6.0 
+
+Start of application (GPU-Only) ...
+Initial Residual = 8482.53
+Iteration = 1   Scaled Residual = 0.185789
+Iteration = 2   Scaled Residual = 0.101928
+Iteration = 3   Scaled Residual = 0.0702991
+Iteration = 4   Scaled Residual = 0.0536577
+Iteration = 5   Scaled Residual = 0.0433497
+Iteration = 6   Scaled Residual = 0.0363326
+Iteration = 7   Scaled Residual = 0.0312554
+Iteration = 8   Scaled Residual = 0.0274258
+Iteration = 9   Scaled Residual = 0.0244455
+Iteration = 10   Scaled Residual = 0.0220622
+Iteration = 11   Scaled Residual = 0.0201064
+Iteration = 12   Scaled Residual = 0.0184619
+Iteration = 13   Scaled Residual = 0.0170484
+Iteration = 14   Scaled Residual = 0.0158152
+Iteration = 15   Scaled Residual = 0.0147313
+Iteration = 16   Scaled Residual = 0.0137768
+Iteration = 17   Scaled Residual = 0.0129374
+Iteration = 18   Scaled Residual = 0.0121997
+Iteration = 19   Scaled Residual = 0.0115478
+Iteration = 20   Scaled Residual = 0.0109654
+Iteration = 21   Scaled Residual = 0.0104366
+Iteration = 22   Scaled Residual = 0.00994799
+Iteration = 23   Scaled Residual = 0.00949211
+Iteration = 24   Scaled Residual = 0.00906665
+Iteration = 25   Scaled Residual = 0.00867233
+Iteration = 26   Scaled Residual = 0.00831144
+Iteration = 27   Scaled Residual = 0.00798454
+Iteration = 28   Scaled Residual = 0.00768887
+Iteration = 29   Scaled Residual = 0.00741926
+Iteration = 30   Scaled Residual = 0.00716846
+Iteration = 31   Scaled Residual = 0.00692947
+Iteration = 32   Scaled Residual = 0.00669852
+Iteration = 33   Scaled Residual = 0.00647518
+Iteration = 34   Scaled Residual = 0.00626175
+Iteration = 35   Scaled Residual = 0.00606181
+Iteration = 36   Scaled Residual = 0.00587721
+Iteration = 37   Scaled Residual = 0.005707
+Iteration = 38   Scaled Residual = 0.00554767
+Iteration = 39   Scaled Residual = 0.00539363
+Iteration = 40   Scaled Residual = 0.00523979
+Iteration = 41   Scaled Residual = 0.00508401
+Iteration = 42   Scaled Residual = 0.00492712
+Iteration = 43   Scaled Residual = 0.00477229
+Iteration = 44   Scaled Residual = 0.00462331
+Iteration = 45   Scaled Residual = 0.00448213
+Iteration = 46   Scaled Residual = 0.00434846
+Iteration = 47   Scaled Residual = 0.00422034
+Iteration = 48   Scaled Residual = 0.00409504
+Iteration = 49   Scaled Residual = 0.00397208
+Iteration = 50   Scaled Residual = 0.00385646
+GPU Rank Info:
+ | cuSPARSE version 12.5
+ | Reference CPU memory = 25266.20 MB
+ | GPU Name: 'NVIDIA RTX A6000'
+ | Number of SMs: 84
+ | GPU Memory Use: 47683 MB / 48787 MB
+ | Process Grid: 1x1x1
+ | Local Domain: 384x384x384
+ | Number of CPU Threads: 1
+ | Slice Size: 4096
+
+
+STDERR: CUDART: cudaMalloc(&tmp, sizeof(double) * length) = 2 (out of memory) on
+node004 at (../src/CudaKernels.cu:2058)
+
+
+--------------------------------------------------------------------------
+Primary job  terminated normally, but 1 process returned
+a non-zero exit code. Per user-direction, the job has been aborted.
+--------------------------------------------------------------------------
+--------------------------------------------------------------------------
+mpirun detected that one or more processes exited with non-zero status, thus 
+causing
+the job to be terminated. The first process to do so was:
+
+  Process name: [[5869,1],0]
+  Exit code:    1
+--------------------------------------------------------------------------
+

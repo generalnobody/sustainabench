@@ -1,0 +1,1007 @@
+{
+    "workload": "nvidia-hpl",
+    "backend": "mpi",
+    "results": {
+        "run0": [
+            {
+                "node_id": "node015:0:0",
+                "metrics": {
+                    "execution_time": 454.30013037193567,
+                    "gpu_nv": [
+                        {
+                            "gpu_id": 0,
+                            "energy": {
+                                "j": 58108.882015881056,
+                                "kwh": 0.016141356115522514
+                            },
+                            "power": {
+                                "avg_w": 128.17621983249634
+                            },
+                            "util": {
+                                "avg": 99.38498789346247,
+                                "max": 100
+                            },
+                            "temp": {
+                                "avg": 47.041382346467095,
+                                "max": 48
+                            },
+                            "clock": {
+                                "avg": 1907.179176755448,
+                                "max": 1935
+                            }
+                        }
+                    ],
+                    "likwid": {
+                        "Info": {
+                            "CPU_name:": [
+                                "AMD EPYC 7402P 24-Core Processor               "
+                            ],
+                            "CPU_type:": [
+                                "AMD K17 (Zen2) architecture"
+                            ],
+                            "CPU_clock:": [
+                                "2.79472905 GHz"
+                            ]
+                        },
+                        "ENERGY": {
+                            "Group_1_Raw": {
+                                "Counter": {
+                                    "ACTUAL_CPU_CLOCK": "FIXC1",
+                                    "MAX_CPU_CLOCK": "FIXC2",
+                                    "RETIRED_INSTRUCTIONS": "PMC0",
+                                    "CPU_CLOCKS_UNHALTED": "PMC1",
+                                    "RAPL_CORE_ENERGY": "PWR0",
+                                    "RAPL_PKG_ENERGY": "PWR1"
+                                },
+                                "HWThread_0": {
+                                    "ACTUAL_CPU_CLOCK": "1514402659543",
+                                    "MAX_CPU_CLOCK": "1270521597492",
+                                    "RETIRED_INSTRUCTIONS": "-",
+                                    "CPU_CLOCKS_UNHALTED": "1508595345966",
+                                    "RAPL_CORE_ENERGY": "1900.0479",
+                                    "RAPL_PKG_ENERGY": "24693.2384"
+                                },
+                                "HWThread_24": {
+                                    "ACTUAL_CPU_CLOCK": "1513530743096",
+                                    "MAX_CPU_CLOCK": "1269815110396",
+                                    "RETIRED_INSTRUCTIONS": "-",
+                                    "CPU_CLOCKS_UNHALTED": "1508124432584",
+                                    "RAPL_CORE_ENERGY": "0",
+                                    "RAPL_PKG_ENERGY": "0"
+                                }
+                            },
+                            "Group_1_Raw_STAT": {
+                                "Counter": {
+                                    "ACTUAL_CPU_CLOCK_STAT": "FIXC1",
+                                    "MAX_CPU_CLOCK_STAT": "FIXC2",
+                                    "RETIRED_INSTRUCTIONS_STAT": "PMC0",
+                                    "CPU_CLOCKS_UNHALTED_STAT": "PMC1",
+                                    "RAPL_CORE_ENERGY_STAT": "PWR0",
+                                    "RAPL_PKG_ENERGY_STAT": "PWR1"
+                                },
+                                "Sum": {
+                                    "ACTUAL_CPU_CLOCK_STAT": "3027933402639",
+                                    "MAX_CPU_CLOCK_STAT": "2540336707888",
+                                    "RETIRED_INSTRUCTIONS_STAT": "0",
+                                    "CPU_CLOCKS_UNHALTED_STAT": "3016719778550",
+                                    "RAPL_CORE_ENERGY_STAT": "1900.0479",
+                                    "RAPL_PKG_ENERGY_STAT": "24693.2384"
+                                },
+                                "Min": {
+                                    "ACTUAL_CPU_CLOCK_STAT": "1513530743096",
+                                    "MAX_CPU_CLOCK_STAT": "1269815110396",
+                                    "RETIRED_INSTRUCTIONS_STAT": "inf",
+                                    "CPU_CLOCKS_UNHALTED_STAT": "1508124432584",
+                                    "RAPL_CORE_ENERGY_STAT": "0",
+                                    "RAPL_PKG_ENERGY_STAT": "0"
+                                },
+                                "Max": {
+                                    "ACTUAL_CPU_CLOCK_STAT": "1514402659543",
+                                    "MAX_CPU_CLOCK_STAT": "1270521597492",
+                                    "RETIRED_INSTRUCTIONS_STAT": "0",
+                                    "CPU_CLOCKS_UNHALTED_STAT": "1508595345966",
+                                    "RAPL_CORE_ENERGY_STAT": "1900.0479",
+                                    "RAPL_PKG_ENERGY_STAT": "24693.2384"
+                                },
+                                "Avg": {
+                                    "ACTUAL_CPU_CLOCK_STAT": "1.513967e+12",
+                                    "MAX_CPU_CLOCK_STAT": "1270168353944",
+                                    "RETIRED_INSTRUCTIONS_STAT": "0",
+                                    "CPU_CLOCKS_UNHALTED_STAT": "1508359889275",
+                                    "RAPL_CORE_ENERGY_STAT": "950.0240",
+                                    "RAPL_PKG_ENERGY_STAT": "12346.6192"
+                                }
+                            },
+                            "Group_1_Metric": {
+                                "HWThread_0": {
+                                    "Runtime_(RDTSC)_[s]": "459.7283",
+                                    "Runtime_unhalted_[s]": "541.8782",
+                                    "Clock_[MHz]": "3331.1871",
+                                    "CPI": "inf",
+                                    "Energy_Core_[J]": "1900.0479",
+                                    "Power_Core_[W]": "4.1330",
+                                    "Energy_PKG_[J]": "24693.2384",
+                                    "Power_PKG_[W]": "53.7127"
+                                },
+                                "HWThread_24": {
+                                    "Runtime_(RDTSC)_[s]": "459.7283",
+                                    "Runtime_unhalted_[s]": "541.5662",
+                                    "Clock_[MHz]": "3331.1214",
+                                    "CPI": "inf",
+                                    "Energy_Core_[J]": "0",
+                                    "Power_Core_[W]": "0",
+                                    "Energy_PKG_[J]": "0",
+                                    "Power_PKG_[W]": "0"
+                                }
+                            },
+                            "Group_1_Metric_STAT": {
+                                "Sum": {
+                                    "Runtime_(RDTSC)_[s]_STAT": "919.4566",
+                                    "Runtime_unhalted_[s]_STAT": "1083.4444",
+                                    "Clock_[MHz]_STAT": "6662.3085",
+                                    "CPI_STAT": "0",
+                                    "Energy_Core_[J]_STAT": "1900.0479",
+                                    "Power_Core_[W]_STAT": "4.1330",
+                                    "Energy_PKG_[J]_STAT": "24693.2384",
+                                    "Power_PKG_[W]_STAT": "53.7127"
+                                },
+                                "Min": {
+                                    "Runtime_(RDTSC)_[s]_STAT": "459.7283",
+                                    "Runtime_unhalted_[s]_STAT": "541.5662",
+                                    "Clock_[MHz]_STAT": "3331.1214",
+                                    "CPI_STAT": "inf",
+                                    "Energy_Core_[J]_STAT": "0",
+                                    "Power_Core_[W]_STAT": "0",
+                                    "Energy_PKG_[J]_STAT": "0",
+                                    "Power_PKG_[W]_STAT": "0"
+                                },
+                                "Max": {
+                                    "Runtime_(RDTSC)_[s]_STAT": "459.7283",
+                                    "Runtime_unhalted_[s]_STAT": "541.8782",
+                                    "Clock_[MHz]_STAT": "3331.1871",
+                                    "CPI_STAT": "0",
+                                    "Energy_Core_[J]_STAT": "1900.0479",
+                                    "Power_Core_[W]_STAT": "4.1330",
+                                    "Energy_PKG_[J]_STAT": "24693.2384",
+                                    "Power_PKG_[W]_STAT": "53.7127"
+                                },
+                                "Avg": {
+                                    "Runtime_(RDTSC)_[s]_STAT": "459.7283",
+                                    "Runtime_unhalted_[s]_STAT": "541.7222",
+                                    "Clock_[MHz]_STAT": "3331.1543",
+                                    "CPI_STAT": "0",
+                                    "Energy_Core_[J]_STAT": "950.0240",
+                                    "Power_Core_[W]_STAT": "2.0665",
+                                    "Energy_PKG_[J]_STAT": "12346.6192",
+                                    "Power_PKG_[W]_STAT": "26.8563"
+                                }
+                            }
+                        }
+                    }
+                },
+                "metadata": {
+                    "hostname": "node015",
+                    "local_ip": "10.141.0.15",
+                    "public_ip": "130.37.14.6"
+                }
+            },
+            {
+                "node_id": "local",
+                "metrics": {
+                    "nvidia_hpl": {
+                        "T/V": "WC0",
+                        "N": 35840,
+                        "NB": 1024,
+                        "P": 1,
+                        "Q": 1,
+                        "Time": 73.99,
+                        "Gflops": 414.8,
+                        "per_GPU": 414.8
+                    }
+                },
+                "metadata": {}
+            }
+        ],
+        "run1": [
+            {
+                "node_id": "node015:0:0",
+                "metrics": {
+                    "execution_time": 452.7001830339432,
+                    "gpu_nv": [
+                        {
+                            "gpu_id": 0,
+                            "energy": {
+                                "j": 58788.35288614359,
+                                "kwh": 0.016330098023928777
+                            },
+                            "power": {
+                                "avg_w": 130.13412232007863
+                            },
+                            "util": {
+                                "avg": 99.26529710625138,
+                                "max": 100
+                            },
+                            "temp": {
+                                "avg": 47.6121051468964,
+                                "max": 49
+                            },
+                            "clock": {
+                                "avg": 1914.8442677269716,
+                                "max": 1935
+                            }
+                        }
+                    ],
+                    "likwid": {
+                        "Info": {
+                            "CPU_name:": [
+                                "AMD EPYC 7402P 24-Core Processor               "
+                            ],
+                            "CPU_type:": [
+                                "AMD K17 (Zen2) architecture"
+                            ],
+                            "CPU_clock:": [
+                                "2.794766731 GHz"
+                            ]
+                        },
+                        "ENERGY": {
+                            "Group_1_Raw": {
+                                "Counter": {
+                                    "ACTUAL_CPU_CLOCK": "FIXC1",
+                                    "MAX_CPU_CLOCK": "FIXC2",
+                                    "RETIRED_INSTRUCTIONS": "PMC0",
+                                    "CPU_CLOCKS_UNHALTED": "PMC1",
+                                    "RAPL_CORE_ENERGY": "PWR0",
+                                    "RAPL_PKG_ENERGY": "PWR1"
+                                },
+                                "HWThread_0": {
+                                    "ACTUAL_CPU_CLOCK": "1505602636918",
+                                    "MAX_CPU_CLOCK": "1261283294768",
+                                    "RETIRED_INSTRUCTIONS": "-",
+                                    "CPU_CLOCKS_UNHALTED": "1502446288494",
+                                    "RAPL_CORE_ENERGY": "1899.2023",
+                                    "RAPL_PKG_ENERGY": "24542.8933"
+                                },
+                                "HWThread_24": {
+                                    "ACTUAL_CPU_CLOCK": "1512670820630",
+                                    "MAX_CPU_CLOCK": "1269324709044",
+                                    "RETIRED_INSTRUCTIONS": "-",
+                                    "CPU_CLOCKS_UNHALTED": "1504855435070",
+                                    "RAPL_CORE_ENERGY": "0",
+                                    "RAPL_PKG_ENERGY": "0"
+                                }
+                            },
+                            "Group_1_Raw_STAT": {
+                                "Counter": {
+                                    "ACTUAL_CPU_CLOCK_STAT": "FIXC1",
+                                    "MAX_CPU_CLOCK_STAT": "FIXC2",
+                                    "RETIRED_INSTRUCTIONS_STAT": "PMC0",
+                                    "CPU_CLOCKS_UNHALTED_STAT": "PMC1",
+                                    "RAPL_CORE_ENERGY_STAT": "PWR0",
+                                    "RAPL_PKG_ENERGY_STAT": "PWR1"
+                                },
+                                "Sum": {
+                                    "ACTUAL_CPU_CLOCK_STAT": "3018273457548",
+                                    "MAX_CPU_CLOCK_STAT": "2530608003812",
+                                    "RETIRED_INSTRUCTIONS_STAT": "0",
+                                    "CPU_CLOCKS_UNHALTED_STAT": "3007301723564",
+                                    "RAPL_CORE_ENERGY_STAT": "1899.2023",
+                                    "RAPL_PKG_ENERGY_STAT": "24542.8933"
+                                },
+                                "Min": {
+                                    "ACTUAL_CPU_CLOCK_STAT": "1505602636918",
+                                    "MAX_CPU_CLOCK_STAT": "1261283294768",
+                                    "RETIRED_INSTRUCTIONS_STAT": "inf",
+                                    "CPU_CLOCKS_UNHALTED_STAT": "1502446288494",
+                                    "RAPL_CORE_ENERGY_STAT": "0",
+                                    "RAPL_PKG_ENERGY_STAT": "0"
+                                },
+                                "Max": {
+                                    "ACTUAL_CPU_CLOCK_STAT": "1512670820630",
+                                    "MAX_CPU_CLOCK_STAT": "1269324709044",
+                                    "RETIRED_INSTRUCTIONS_STAT": "0",
+                                    "CPU_CLOCKS_UNHALTED_STAT": "1504855435070",
+                                    "RAPL_CORE_ENERGY_STAT": "1899.2023",
+                                    "RAPL_PKG_ENERGY_STAT": "24542.8933"
+                                },
+                                "Avg": {
+                                    "ACTUAL_CPU_CLOCK_STAT": "1509136728774",
+                                    "MAX_CPU_CLOCK_STAT": "1265304001906",
+                                    "RETIRED_INSTRUCTIONS_STAT": "0",
+                                    "CPU_CLOCKS_UNHALTED_STAT": "1503650861782",
+                                    "RAPL_CORE_ENERGY_STAT": "949.6011",
+                                    "RAPL_PKG_ENERGY_STAT": "12271.4466"
+                                }
+                            },
+                            "Group_1_Metric": {
+                                "HWThread_0": {
+                                    "Runtime_(RDTSC)_[s]": "456.5853",
+                                    "Runtime_unhalted_[s]": "538.7221",
+                                    "Clock_[MHz]": "3336.1325",
+                                    "CPI": "inf",
+                                    "Energy_Core_[J]": "1899.2023",
+                                    "Power_Core_[W]": "4.1596",
+                                    "Energy_PKG_[J]": "24542.8933",
+                                    "Power_PKG_[W]": "53.7531"
+                                },
+                                "HWThread_24": {
+                                    "Runtime_(RDTSC)_[s]": "456.5853",
+                                    "Runtime_unhalted_[s]": "541.2512",
+                                    "Clock_[MHz]": "3330.5600",
+                                    "CPI": "inf",
+                                    "Energy_Core_[J]": "0",
+                                    "Power_Core_[W]": "0",
+                                    "Energy_PKG_[J]": "0",
+                                    "Power_PKG_[W]": "0"
+                                }
+                            },
+                            "Group_1_Metric_STAT": {
+                                "Sum": {
+                                    "Runtime_(RDTSC)_[s]_STAT": "913.1706",
+                                    "Runtime_unhalted_[s]_STAT": "1079.9733",
+                                    "Clock_[MHz]_STAT": "6666.6925",
+                                    "CPI_STAT": "0",
+                                    "Energy_Core_[J]_STAT": "1899.2023",
+                                    "Power_Core_[W]_STAT": "4.1596",
+                                    "Energy_PKG_[J]_STAT": "24542.8933",
+                                    "Power_PKG_[W]_STAT": "53.7531"
+                                },
+                                "Min": {
+                                    "Runtime_(RDTSC)_[s]_STAT": "456.5853",
+                                    "Runtime_unhalted_[s]_STAT": "538.7221",
+                                    "Clock_[MHz]_STAT": "3330.5600",
+                                    "CPI_STAT": "inf",
+                                    "Energy_Core_[J]_STAT": "0",
+                                    "Power_Core_[W]_STAT": "0",
+                                    "Energy_PKG_[J]_STAT": "0",
+                                    "Power_PKG_[W]_STAT": "0"
+                                },
+                                "Max": {
+                                    "Runtime_(RDTSC)_[s]_STAT": "456.5853",
+                                    "Runtime_unhalted_[s]_STAT": "541.2512",
+                                    "Clock_[MHz]_STAT": "3336.1325",
+                                    "CPI_STAT": "0",
+                                    "Energy_Core_[J]_STAT": "1899.2023",
+                                    "Power_Core_[W]_STAT": "4.1596",
+                                    "Energy_PKG_[J]_STAT": "24542.8933",
+                                    "Power_PKG_[W]_STAT": "53.7531"
+                                },
+                                "Avg": {
+                                    "Runtime_(RDTSC)_[s]_STAT": "456.5853",
+                                    "Runtime_unhalted_[s]_STAT": "539.9867",
+                                    "Clock_[MHz]_STAT": "3333.3463",
+                                    "CPI_STAT": "0",
+                                    "Energy_Core_[J]_STAT": "949.6011",
+                                    "Power_Core_[W]_STAT": "2.0798",
+                                    "Energy_PKG_[J]_STAT": "12271.4466",
+                                    "Power_PKG_[W]_STAT": "26.8766"
+                                }
+                            }
+                        }
+                    }
+                },
+                "metadata": {
+                    "hostname": "node015",
+                    "local_ip": "10.141.0.15",
+                    "public_ip": "130.37.14.6"
+                }
+            },
+            {
+                "node_id": "local",
+                "metrics": {
+                    "nvidia_hpl": {
+                        "T/V": "WC0",
+                        "N": 35840,
+                        "NB": 1024,
+                        "P": 1,
+                        "Q": 1,
+                        "Time": 73.51,
+                        "Gflops": 417.5,
+                        "per_GPU": 417.5
+                    }
+                },
+                "metadata": {}
+            }
+        ],
+        "run2": [
+            {
+                "node_id": "node015:0:0",
+                "metrics": {
+                    "execution_time": 452.7001548949629,
+                    "gpu_nv": [
+                        {
+                            "gpu_id": 0,
+                            "energy": {
+                                "j": 58789.86548970372,
+                                "kwh": 0.016330518191584365
+                            },
+                            "power": {
+                                "avg_w": 130.13722531765686
+                            },
+                            "util": {
+                                "avg": 99.25955378838083,
+                                "max": 100
+                            },
+                            "temp": {
+                                "avg": 47.650762094102056,
+                                "max": 49
+                            },
+                            "clock": {
+                                "avg": 1914.7614314115308,
+                                "max": 1920
+                            }
+                        }
+                    ],
+                    "likwid": {
+                        "Info": {
+                            "CPU_name:": [
+                                "AMD EPYC 7402P 24-Core Processor               "
+                            ],
+                            "CPU_type:": [
+                                "AMD K17 (Zen2) architecture"
+                            ],
+                            "CPU_clock:": [
+                                "2.79474515 GHz"
+                            ]
+                        },
+                        "ENERGY": {
+                            "Group_1_Raw": {
+                                "Counter": {
+                                    "ACTUAL_CPU_CLOCK": "FIXC1",
+                                    "MAX_CPU_CLOCK": "FIXC2",
+                                    "RETIRED_INSTRUCTIONS": "PMC0",
+                                    "CPU_CLOCKS_UNHALTED": "PMC1",
+                                    "RAPL_CORE_ENERGY": "PWR0",
+                                    "RAPL_PKG_ENERGY": "PWR1"
+                                },
+                                "HWThread_0": {
+                                    "ACTUAL_CPU_CLOCK": "1506778555130",
+                                    "MAX_CPU_CLOCK": "1262926270872",
+                                    "RETIRED_INSTRUCTIONS": "-",
+                                    "CPU_CLOCKS_UNHALTED": "1500903357292",
+                                    "RAPL_CORE_ENERGY": "1890.5838",
+                                    "RAPL_PKG_ENERGY": "24538.5718"
+                                },
+                                "HWThread_24": {
+                                    "ACTUAL_CPU_CLOCK": "1511602837823",
+                                    "MAX_CPU_CLOCK": "1267690713828",
+                                    "RETIRED_INSTRUCTIONS": "-",
+                                    "CPU_CLOCKS_UNHALTED": "1506296089197",
+                                    "RAPL_CORE_ENERGY": "0",
+                                    "RAPL_PKG_ENERGY": "0"
+                                }
+                            },
+                            "Group_1_Raw_STAT": {
+                                "Counter": {
+                                    "ACTUAL_CPU_CLOCK_STAT": "FIXC1",
+                                    "MAX_CPU_CLOCK_STAT": "FIXC2",
+                                    "RETIRED_INSTRUCTIONS_STAT": "PMC0",
+                                    "CPU_CLOCKS_UNHALTED_STAT": "PMC1",
+                                    "RAPL_CORE_ENERGY_STAT": "PWR0",
+                                    "RAPL_PKG_ENERGY_STAT": "PWR1"
+                                },
+                                "Sum": {
+                                    "ACTUAL_CPU_CLOCK_STAT": "3018381392953",
+                                    "MAX_CPU_CLOCK_STAT": "2530616984700",
+                                    "RETIRED_INSTRUCTIONS_STAT": "0",
+                                    "CPU_CLOCKS_UNHALTED_STAT": "3007199446489",
+                                    "RAPL_CORE_ENERGY_STAT": "1890.5838",
+                                    "RAPL_PKG_ENERGY_STAT": "24538.5718"
+                                },
+                                "Min": {
+                                    "ACTUAL_CPU_CLOCK_STAT": "1506778555130",
+                                    "MAX_CPU_CLOCK_STAT": "1262926270872",
+                                    "RETIRED_INSTRUCTIONS_STAT": "inf",
+                                    "CPU_CLOCKS_UNHALTED_STAT": "1500903357292",
+                                    "RAPL_CORE_ENERGY_STAT": "0",
+                                    "RAPL_PKG_ENERGY_STAT": "0"
+                                },
+                                "Max": {
+                                    "ACTUAL_CPU_CLOCK_STAT": "1511602837823",
+                                    "MAX_CPU_CLOCK_STAT": "1267690713828",
+                                    "RETIRED_INSTRUCTIONS_STAT": "0",
+                                    "CPU_CLOCKS_UNHALTED_STAT": "1506296089197",
+                                    "RAPL_CORE_ENERGY_STAT": "1890.5838",
+                                    "RAPL_PKG_ENERGY_STAT": "24538.5718"
+                                },
+                                "Avg": {
+                                    "ACTUAL_CPU_CLOCK_STAT": "1.509191e+12",
+                                    "MAX_CPU_CLOCK_STAT": "1265308492350",
+                                    "RETIRED_INSTRUCTIONS_STAT": "0",
+                                    "CPU_CLOCKS_UNHALTED_STAT": "1.503600e+12",
+                                    "RAPL_CORE_ENERGY_STAT": "945.2919",
+                                    "RAPL_PKG_ENERGY_STAT": "12269.2859"
+                                }
+                            },
+                            "Group_1_Metric": {
+                                "HWThread_0": {
+                                    "Runtime_(RDTSC)_[s]": "456.6493",
+                                    "Runtime_unhalted_[s]": "539.1470",
+                                    "Clock_[MHz]": "3334.3689",
+                                    "CPI": "inf",
+                                    "Energy_Core_[J]": "1890.5838",
+                                    "Power_Core_[W]": "4.1401",
+                                    "Energy_PKG_[J]": "24538.5718",
+                                    "Power_PKG_[W]": "53.7361"
+                                },
+                                "HWThread_24": {
+                                    "Runtime_(RDTSC)_[s]": "456.6493",
+                                    "Runtime_unhalted_[s]": "540.8732",
+                                    "Clock_[MHz]": "3332.4727",
+                                    "CPI": "inf",
+                                    "Energy_Core_[J]": "0",
+                                    "Power_Core_[W]": "0",
+                                    "Energy_PKG_[J]": "0",
+                                    "Power_PKG_[W]": "0"
+                                }
+                            },
+                            "Group_1_Metric_STAT": {
+                                "Sum": {
+                                    "Runtime_(RDTSC)_[s]_STAT": "913.2986",
+                                    "Runtime_unhalted_[s]_STAT": "1080.0202",
+                                    "Clock_[MHz]_STAT": "6666.8416",
+                                    "CPI_STAT": "0",
+                                    "Energy_Core_[J]_STAT": "1890.5838",
+                                    "Power_Core_[W]_STAT": "4.1401",
+                                    "Energy_PKG_[J]_STAT": "24538.5718",
+                                    "Power_PKG_[W]_STAT": "53.7361"
+                                },
+                                "Min": {
+                                    "Runtime_(RDTSC)_[s]_STAT": "456.6493",
+                                    "Runtime_unhalted_[s]_STAT": "539.1470",
+                                    "Clock_[MHz]_STAT": "3332.4727",
+                                    "CPI_STAT": "inf",
+                                    "Energy_Core_[J]_STAT": "0",
+                                    "Power_Core_[W]_STAT": "0",
+                                    "Energy_PKG_[J]_STAT": "0",
+                                    "Power_PKG_[W]_STAT": "0"
+                                },
+                                "Max": {
+                                    "Runtime_(RDTSC)_[s]_STAT": "456.6493",
+                                    "Runtime_unhalted_[s]_STAT": "540.8732",
+                                    "Clock_[MHz]_STAT": "3334.3689",
+                                    "CPI_STAT": "0",
+                                    "Energy_Core_[J]_STAT": "1890.5838",
+                                    "Power_Core_[W]_STAT": "4.1401",
+                                    "Energy_PKG_[J]_STAT": "24538.5718",
+                                    "Power_PKG_[W]_STAT": "53.7361"
+                                },
+                                "Avg": {
+                                    "Runtime_(RDTSC)_[s]_STAT": "456.6493",
+                                    "Runtime_unhalted_[s]_STAT": "540.0101",
+                                    "Clock_[MHz]_STAT": "3333.4208",
+                                    "CPI_STAT": "0",
+                                    "Energy_Core_[J]_STAT": "945.2919",
+                                    "Power_Core_[W]_STAT": "2.0701",
+                                    "Energy_PKG_[J]_STAT": "12269.2859",
+                                    "Power_PKG_[W]_STAT": "26.8681"
+                                }
+                            }
+                        }
+                    }
+                },
+                "metadata": {
+                    "hostname": "node015",
+                    "local_ip": "10.141.0.15",
+                    "public_ip": "130.37.14.6"
+                }
+            },
+            {
+                "node_id": "local",
+                "metrics": {
+                    "nvidia_hpl": {
+                        "T/V": "WC0",
+                        "N": 35840,
+                        "NB": 1024,
+                        "P": 1,
+                        "Q": 1,
+                        "Time": 73.51,
+                        "Gflops": 417.5,
+                        "per_GPU": 417.5
+                    }
+                },
+                "metadata": {}
+            }
+        ],
+        "run3": [
+            {
+                "node_id": "node015:0:0",
+                "metrics": {
+                    "execution_time": 452.6001932108775,
+                    "gpu_nv": [
+                        {
+                            "gpu_id": 0,
+                            "energy": {
+                                "j": 58772.48627825242,
+                                "kwh": 0.016325690632847896
+                            },
+                            "power": {
+                                "avg_w": 130.1278143299469
+                            },
+                            "util": {
+                                "avg": 99.28811312417146,
+                                "max": 100
+                            },
+                            "temp": {
+                                "avg": 47.666372072470175,
+                                "max": 49
+                            },
+                            "clock": {
+                                "avg": 1914.7967300044188,
+                                "max": 1935
+                            }
+                        }
+                    ],
+                    "likwid": {
+                        "Info": {
+                            "CPU_name:": [
+                                "AMD EPYC 7402P 24-Core Processor               "
+                            ],
+                            "CPU_type:": [
+                                "AMD K17 (Zen2) architecture"
+                            ],
+                            "CPU_clock:": [
+                                "2.794717903 GHz"
+                            ]
+                        },
+                        "ENERGY": {
+                            "Group_1_Raw": {
+                                "Counter": {
+                                    "ACTUAL_CPU_CLOCK": "FIXC1",
+                                    "MAX_CPU_CLOCK": "FIXC2",
+                                    "RETIRED_INSTRUCTIONS": "PMC0",
+                                    "CPU_CLOCKS_UNHALTED": "PMC1",
+                                    "RAPL_CORE_ENERGY": "PWR0",
+                                    "RAPL_PKG_ENERGY": "PWR1"
+                                },
+                                "HWThread_0": {
+                                    "ACTUAL_CPU_CLOCK": "1505666833165",
+                                    "MAX_CPU_CLOCK": "1261861450220",
+                                    "RETIRED_INSTRUCTIONS": "-",
+                                    "CPU_CLOCKS_UNHALTED": "1500330570762",
+                                    "RAPL_CORE_ENERGY": "1892.0373",
+                                    "RAPL_PKG_ENERGY": "24528.3193"
+                                },
+                                "HWThread_24": {
+                                    "ACTUAL_CPU_CLOCK": "1512718350269",
+                                    "MAX_CPU_CLOCK": "1268718018036",
+                                    "RETIRED_INSTRUCTIONS": "-",
+                                    "CPU_CLOCKS_UNHALTED": "1506910880502",
+                                    "RAPL_CORE_ENERGY": "0",
+                                    "RAPL_PKG_ENERGY": "0"
+                                }
+                            },
+                            "Group_1_Raw_STAT": {
+                                "Counter": {
+                                    "ACTUAL_CPU_CLOCK_STAT": "FIXC1",
+                                    "MAX_CPU_CLOCK_STAT": "FIXC2",
+                                    "RETIRED_INSTRUCTIONS_STAT": "PMC0",
+                                    "CPU_CLOCKS_UNHALTED_STAT": "PMC1",
+                                    "RAPL_CORE_ENERGY_STAT": "PWR0",
+                                    "RAPL_PKG_ENERGY_STAT": "PWR1"
+                                },
+                                "Sum": {
+                                    "ACTUAL_CPU_CLOCK_STAT": "3018385183434",
+                                    "MAX_CPU_CLOCK_STAT": "2530579468256",
+                                    "RETIRED_INSTRUCTIONS_STAT": "0",
+                                    "CPU_CLOCKS_UNHALTED_STAT": "3007241451264",
+                                    "RAPL_CORE_ENERGY_STAT": "1892.0373",
+                                    "RAPL_PKG_ENERGY_STAT": "24528.3193"
+                                },
+                                "Min": {
+                                    "ACTUAL_CPU_CLOCK_STAT": "1505666833165",
+                                    "MAX_CPU_CLOCK_STAT": "1261861450220",
+                                    "RETIRED_INSTRUCTIONS_STAT": "inf",
+                                    "CPU_CLOCKS_UNHALTED_STAT": "1500330570762",
+                                    "RAPL_CORE_ENERGY_STAT": "0",
+                                    "RAPL_PKG_ENERGY_STAT": "0"
+                                },
+                                "Max": {
+                                    "ACTUAL_CPU_CLOCK_STAT": "1512718350269",
+                                    "MAX_CPU_CLOCK_STAT": "1268718018036",
+                                    "RETIRED_INSTRUCTIONS_STAT": "0",
+                                    "CPU_CLOCKS_UNHALTED_STAT": "1506910880502",
+                                    "RAPL_CORE_ENERGY_STAT": "1892.0373",
+                                    "RAPL_PKG_ENERGY_STAT": "24528.3193"
+                                },
+                                "Avg": {
+                                    "ACTUAL_CPU_CLOCK_STAT": "1509192591717",
+                                    "MAX_CPU_CLOCK_STAT": "1265289734128",
+                                    "RETIRED_INSTRUCTIONS_STAT": "0",
+                                    "CPU_CLOCKS_UNHALTED_STAT": "1503620725632",
+                                    "RAPL_CORE_ENERGY_STAT": "946.0186",
+                                    "RAPL_PKG_ENERGY_STAT": "12264.1596"
+                                }
+                            },
+                            "Group_1_Metric": {
+                                "HWThread_0": {
+                                    "Runtime_(RDTSC)_[s]": "456.4406",
+                                    "Runtime_unhalted_[s]": "538.7545",
+                                    "Clock_[MHz]": "3334.6879",
+                                    "CPI": "inf",
+                                    "Energy_Core_[J]": "1892.0373",
+                                    "Power_Core_[W]": "4.1452",
+                                    "Energy_PKG_[J]": "24528.3193",
+                                    "Power_PKG_[W]": "53.7383"
+                                },
+                                "HWThread_24": {
+                                    "Runtime_(RDTSC)_[s]": "456.4406",
+                                    "Runtime_unhalted_[s]": "541.2777",
+                                    "Clock_[MHz]": "3332.1991",
+                                    "CPI": "inf",
+                                    "Energy_Core_[J]": "0",
+                                    "Power_Core_[W]": "0",
+                                    "Energy_PKG_[J]": "0",
+                                    "Power_PKG_[W]": "0"
+                                }
+                            },
+                            "Group_1_Metric_STAT": {
+                                "Sum": {
+                                    "Runtime_(RDTSC)_[s]_STAT": "912.8812",
+                                    "Runtime_unhalted_[s]_STAT": "1080.0322",
+                                    "Clock_[MHz]_STAT": "6666.8870",
+                                    "CPI_STAT": "0",
+                                    "Energy_Core_[J]_STAT": "1892.0373",
+                                    "Power_Core_[W]_STAT": "4.1452",
+                                    "Energy_PKG_[J]_STAT": "24528.3193",
+                                    "Power_PKG_[W]_STAT": "53.7383"
+                                },
+                                "Min": {
+                                    "Runtime_(RDTSC)_[s]_STAT": "456.4406",
+                                    "Runtime_unhalted_[s]_STAT": "538.7545",
+                                    "Clock_[MHz]_STAT": "3332.1991",
+                                    "CPI_STAT": "inf",
+                                    "Energy_Core_[J]_STAT": "0",
+                                    "Power_Core_[W]_STAT": "0",
+                                    "Energy_PKG_[J]_STAT": "0",
+                                    "Power_PKG_[W]_STAT": "0"
+                                },
+                                "Max": {
+                                    "Runtime_(RDTSC)_[s]_STAT": "456.4406",
+                                    "Runtime_unhalted_[s]_STAT": "541.2777",
+                                    "Clock_[MHz]_STAT": "3334.6879",
+                                    "CPI_STAT": "0",
+                                    "Energy_Core_[J]_STAT": "1892.0373",
+                                    "Power_Core_[W]_STAT": "4.1452",
+                                    "Energy_PKG_[J]_STAT": "24528.3193",
+                                    "Power_PKG_[W]_STAT": "53.7383"
+                                },
+                                "Avg": {
+                                    "Runtime_(RDTSC)_[s]_STAT": "456.4406",
+                                    "Runtime_unhalted_[s]_STAT": "540.0161",
+                                    "Clock_[MHz]_STAT": "3333.4435",
+                                    "CPI_STAT": "0",
+                                    "Energy_Core_[J]_STAT": "946.0186",
+                                    "Power_Core_[W]_STAT": "2.0726",
+                                    "Energy_PKG_[J]_STAT": "12264.1596",
+                                    "Power_PKG_[W]_STAT": "26.8692"
+                                }
+                            }
+                        }
+                    }
+                },
+                "metadata": {
+                    "hostname": "node015",
+                    "local_ip": "10.141.0.15",
+                    "public_ip": "130.37.14.6"
+                }
+            },
+            {
+                "node_id": "local",
+                "metrics": {
+                    "nvidia_hpl": {
+                        "T/V": "WC0",
+                        "N": 35840,
+                        "NB": 1024,
+                        "P": 1,
+                        "Q": 1,
+                        "Time": 73.51,
+                        "Gflops": 417.5,
+                        "per_GPU": 417.5
+                    }
+                },
+                "metadata": {}
+            }
+        ],
+        "run4": [
+            {
+                "node_id": "node015:0:0",
+                "metrics": {
+                    "execution_time": 452.60020242165774,
+                    "gpu_nv": [
+                        {
+                            "gpu_id": 0,
+                            "energy": {
+                                "j": 58768.247809878034,
+                                "kwh": 0.016324513280521678
+                            },
+                            "power": {
+                                "avg_w": 130.1182837041009
+                            },
+                            "util": {
+                                "avg": 99.28988068935043,
+                                "max": 100
+                            },
+                            "temp": {
+                                "avg": 47.674988952717634,
+                                "max": 49
+                            },
+                            "clock": {
+                                "avg": 1914.780159080866,
+                                "max": 1920
+                            }
+                        }
+                    ],
+                    "likwid": {
+                        "Info": {
+                            "CPU_name:": [
+                                "AMD EPYC 7402P 24-Core Processor               "
+                            ],
+                            "CPU_type:": [
+                                "AMD K17 (Zen2) architecture"
+                            ],
+                            "CPU_clock:": [
+                                "2.794748499 GHz"
+                            ]
+                        },
+                        "ENERGY": {
+                            "Group_1_Raw": {
+                                "Counter": {
+                                    "ACTUAL_CPU_CLOCK": "FIXC1",
+                                    "MAX_CPU_CLOCK": "FIXC2",
+                                    "RETIRED_INSTRUCTIONS": "PMC0",
+                                    "CPU_CLOCKS_UNHALTED": "PMC1",
+                                    "RAPL_CORE_ENERGY": "PWR0",
+                                    "RAPL_PKG_ENERGY": "PWR1"
+                                },
+                                "HWThread_0": {
+                                    "ACTUAL_CPU_CLOCK": "1509570754450",
+                                    "MAX_CPU_CLOCK": "1266435325652",
+                                    "RETIRED_INSTRUCTIONS": "-",
+                                    "CPU_CLOCKS_UNHALTED": "1505225566671",
+                                    "RAPL_CORE_ENERGY": "1875.1321",
+                                    "RAPL_PKG_ENERGY": "24517.4225"
+                                },
+                                "HWThread_24": {
+                                    "ACTUAL_CPU_CLOCK": "1508484772555",
+                                    "MAX_CPU_CLOCK": "1264197199832",
+                                    "RETIRED_INSTRUCTIONS": "-",
+                                    "CPU_CLOCKS_UNHALTED": "1501773708998",
+                                    "RAPL_CORE_ENERGY": "0",
+                                    "RAPL_PKG_ENERGY": "0"
+                                }
+                            },
+                            "Group_1_Raw_STAT": {
+                                "Counter": {
+                                    "ACTUAL_CPU_CLOCK_STAT": "FIXC1",
+                                    "MAX_CPU_CLOCK_STAT": "FIXC2",
+                                    "RETIRED_INSTRUCTIONS_STAT": "PMC0",
+                                    "CPU_CLOCKS_UNHALTED_STAT": "PMC1",
+                                    "RAPL_CORE_ENERGY_STAT": "PWR0",
+                                    "RAPL_PKG_ENERGY_STAT": "PWR1"
+                                },
+                                "Sum": {
+                                    "ACTUAL_CPU_CLOCK_STAT": "3018055527005",
+                                    "MAX_CPU_CLOCK_STAT": "2530632525484",
+                                    "RETIRED_INSTRUCTIONS_STAT": "0",
+                                    "CPU_CLOCKS_UNHALTED_STAT": "3006999275669",
+                                    "RAPL_CORE_ENERGY_STAT": "1875.1321",
+                                    "RAPL_PKG_ENERGY_STAT": "24517.4225"
+                                },
+                                "Min": {
+                                    "ACTUAL_CPU_CLOCK_STAT": "1508484772555",
+                                    "MAX_CPU_CLOCK_STAT": "1264197199832",
+                                    "RETIRED_INSTRUCTIONS_STAT": "inf",
+                                    "CPU_CLOCKS_UNHALTED_STAT": "1501773708998",
+                                    "RAPL_CORE_ENERGY_STAT": "0",
+                                    "RAPL_PKG_ENERGY_STAT": "0"
+                                },
+                                "Max": {
+                                    "ACTUAL_CPU_CLOCK_STAT": "1509570754450",
+                                    "MAX_CPU_CLOCK_STAT": "1266435325652",
+                                    "RETIRED_INSTRUCTIONS_STAT": "0",
+                                    "CPU_CLOCKS_UNHALTED_STAT": "1505225566671",
+                                    "RAPL_CORE_ENERGY_STAT": "1875.1321",
+                                    "RAPL_PKG_ENERGY_STAT": "24517.4225"
+                                },
+                                "Avg": {
+                                    "ACTUAL_CPU_CLOCK_STAT": "1.509028e+12",
+                                    "MAX_CPU_CLOCK_STAT": "1265316262742",
+                                    "RETIRED_INSTRUCTIONS_STAT": "0",
+                                    "CPU_CLOCKS_UNHALTED_STAT": "1.503500e+12",
+                                    "RAPL_CORE_ENERGY_STAT": "937.5661",
+                                    "RAPL_PKG_ENERGY_STAT": "12258.7113"
+                                }
+                            },
+                            "Group_1_Metric": {
+                                "HWThread_0": {
+                                    "Runtime_(RDTSC)_[s]": "456.5340",
+                                    "Runtime_unhalted_[s]": "540.1455",
+                                    "Clock_[MHz]": "3331.2957",
+                                    "CPI": "inf",
+                                    "Energy_Core_[J]": "1875.1321",
+                                    "Power_Core_[W]": "4.1073",
+                                    "Energy_PKG_[J]": "24517.4225",
+                                    "Power_PKG_[W]": "53.7034"
+                                },
+                                "HWThread_24": {
+                                    "Runtime_(RDTSC)_[s]": "456.5340",
+                                    "Runtime_unhalted_[s]": "539.7569",
+                                    "Clock_[MHz]": "3334.7927",
+                                    "CPI": "inf",
+                                    "Energy_Core_[J]": "0",
+                                    "Power_Core_[W]": "0",
+                                    "Energy_PKG_[J]": "0",
+                                    "Power_PKG_[W]": "0"
+                                }
+                            },
+                            "Group_1_Metric_STAT": {
+                                "Sum": {
+                                    "Runtime_(RDTSC)_[s]_STAT": "913.0680",
+                                    "Runtime_unhalted_[s]_STAT": "1079.9024",
+                                    "Clock_[MHz]_STAT": "6666.0884",
+                                    "CPI_STAT": "0",
+                                    "Energy_Core_[J]_STAT": "1875.1321",
+                                    "Power_Core_[W]_STAT": "4.1073",
+                                    "Energy_PKG_[J]_STAT": "24517.4225",
+                                    "Power_PKG_[W]_STAT": "53.7034"
+                                },
+                                "Min": {
+                                    "Runtime_(RDTSC)_[s]_STAT": "456.5340",
+                                    "Runtime_unhalted_[s]_STAT": "539.7569",
+                                    "Clock_[MHz]_STAT": "3331.2957",
+                                    "CPI_STAT": "inf",
+                                    "Energy_Core_[J]_STAT": "0",
+                                    "Power_Core_[W]_STAT": "0",
+                                    "Energy_PKG_[J]_STAT": "0",
+                                    "Power_PKG_[W]_STAT": "0"
+                                },
+                                "Max": {
+                                    "Runtime_(RDTSC)_[s]_STAT": "456.5340",
+                                    "Runtime_unhalted_[s]_STAT": "540.1455",
+                                    "Clock_[MHz]_STAT": "3334.7927",
+                                    "CPI_STAT": "0",
+                                    "Energy_Core_[J]_STAT": "1875.1321",
+                                    "Power_Core_[W]_STAT": "4.1073",
+                                    "Energy_PKG_[J]_STAT": "24517.4225",
+                                    "Power_PKG_[W]_STAT": "53.7034"
+                                },
+                                "Avg": {
+                                    "Runtime_(RDTSC)_[s]_STAT": "456.5340",
+                                    "Runtime_unhalted_[s]_STAT": "539.9512",
+                                    "Clock_[MHz]_STAT": "3333.0442",
+                                    "CPI_STAT": "0",
+                                    "Energy_Core_[J]_STAT": "937.5661",
+                                    "Power_Core_[W]_STAT": "2.0537",
+                                    "Energy_PKG_[J]_STAT": "12258.7113",
+                                    "Power_PKG_[W]_STAT": "26.8517"
+                                }
+                            }
+                        }
+                    }
+                },
+                "metadata": {
+                    "hostname": "node015",
+                    "local_ip": "10.141.0.15",
+                    "public_ip": "130.37.14.6"
+                }
+            },
+            {
+                "node_id": "local",
+                "metrics": {
+                    "nvidia_hpl": {
+                        "T/V": "WC0",
+                        "N": 35840,
+                        "NB": 1024,
+                        "P": 1,
+                        "Q": 1,
+                        "Time": 73.51,
+                        "Gflops": 417.6,
+                        "per_GPU": 417.6
+                    }
+                },
+                "metadata": {}
+            }
+        ]
+    },
+    "metadata": {}
+}

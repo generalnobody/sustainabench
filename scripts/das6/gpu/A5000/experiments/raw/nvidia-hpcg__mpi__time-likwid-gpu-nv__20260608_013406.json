@@ -1,0 +1,1742 @@
+{
+    "workload": "nvidia-hpcg",
+    "backend": "mpi",
+    "results": {
+        "run0": [
+            {
+                "node_id": "node015:0:0",
+                "metrics": {
+                    "execution_time": 833.1002041189931,
+                    "gpu_nv": [
+                        {
+                            "gpu_id": 0,
+                            "energy": {
+                                "j": 154586.13433372672,
+                                "kwh": 0.042940592870479646
+                            },
+                            "power": {
+                                "avg_w": 185.76615692442758
+                            },
+                            "util": {
+                                "avg": 73.65406313767855,
+                                "max": 100
+                            },
+                            "temp": {
+                                "avg": 57.10779018125075,
+                                "max": 66
+                            },
+                            "clock": {
+                                "avg": 1726.1379186172128,
+                                "max": 1935
+                            }
+                        }
+                    ],
+                    "likwid": {
+                        "Info": {
+                            "CPU_name:": [
+                                "AMD EPYC 7402P 24-Core Processor               "
+                            ],
+                            "CPU_type:": [
+                                "AMD K17 (Zen2) architecture"
+                            ],
+                            "CPU_clock:": [
+                                "2.794703079 GHz"
+                            ]
+                        },
+                        "ENERGY": {
+                            "Group_1_Raw": {
+                                "Counter": {
+                                    "ACTUAL_CPU_CLOCK": "FIXC1",
+                                    "MAX_CPU_CLOCK": "FIXC2",
+                                    "RETIRED_INSTRUCTIONS": "PMC0",
+                                    "CPU_CLOCKS_UNHALTED": "PMC1",
+                                    "RAPL_CORE_ENERGY": "PWR0",
+                                    "RAPL_PKG_ENERGY": "PWR1"
+                                },
+                                "HWThread_0": {
+                                    "ACTUAL_CPU_CLOCK": "1220528118498",
+                                    "MAX_CPU_CLOCK": "1022385113232",
+                                    "RETIRED_INSTRUCTIONS": "-",
+                                    "CPU_CLOCKS_UNHALTED": "1211861908163",
+                                    "RAPL_CORE_ENERGY": "2911.3441",
+                                    "RAPL_PKG_ENERGY": "48223.4805"
+                                },
+                                "HWThread_24": {
+                                    "ACTUAL_CPU_CLOCK": "1572486967575",
+                                    "MAX_CPU_CLOCK": "1318146848900",
+                                    "RETIRED_INSTRUCTIONS": "-",
+                                    "CPU_CLOCKS_UNHALTED": "1564042368321",
+                                    "RAPL_CORE_ENERGY": "0",
+                                    "RAPL_PKG_ENERGY": "0"
+                                }
+                            },
+                            "Group_1_Raw_STAT": {
+                                "Counter": {
+                                    "ACTUAL_CPU_CLOCK_STAT": "FIXC1",
+                                    "MAX_CPU_CLOCK_STAT": "FIXC2",
+                                    "RETIRED_INSTRUCTIONS_STAT": "PMC0",
+                                    "CPU_CLOCKS_UNHALTED_STAT": "PMC1",
+                                    "RAPL_CORE_ENERGY_STAT": "PWR0",
+                                    "RAPL_PKG_ENERGY_STAT": "PWR1"
+                                },
+                                "Sum": {
+                                    "ACTUAL_CPU_CLOCK_STAT": "2793015086073",
+                                    "MAX_CPU_CLOCK_STAT": "2340531962132",
+                                    "RETIRED_INSTRUCTIONS_STAT": "0",
+                                    "CPU_CLOCKS_UNHALTED_STAT": "2775904276484",
+                                    "RAPL_CORE_ENERGY_STAT": "2911.3441",
+                                    "RAPL_PKG_ENERGY_STAT": "48223.4805"
+                                },
+                                "Min": {
+                                    "ACTUAL_CPU_CLOCK_STAT": "1220528118498",
+                                    "MAX_CPU_CLOCK_STAT": "1022385113232",
+                                    "RETIRED_INSTRUCTIONS_STAT": "inf",
+                                    "CPU_CLOCKS_UNHALTED_STAT": "1211861908163",
+                                    "RAPL_CORE_ENERGY_STAT": "0",
+                                    "RAPL_PKG_ENERGY_STAT": "0"
+                                },
+                                "Max": {
+                                    "ACTUAL_CPU_CLOCK_STAT": "1572486967575",
+                                    "MAX_CPU_CLOCK_STAT": "1318146848900",
+                                    "RETIRED_INSTRUCTIONS_STAT": "0",
+                                    "CPU_CLOCKS_UNHALTED_STAT": "1564042368321",
+                                    "RAPL_CORE_ENERGY_STAT": "2911.3441",
+                                    "RAPL_PKG_ENERGY_STAT": "48223.4805"
+                                },
+                                "Avg": {
+                                    "ACTUAL_CPU_CLOCK_STAT": "1.396508e+12",
+                                    "MAX_CPU_CLOCK_STAT": "1170265981066",
+                                    "RETIRED_INSTRUCTIONS_STAT": "0",
+                                    "CPU_CLOCKS_UNHALTED_STAT": "1387952138242",
+                                    "RAPL_CORE_ENERGY_STAT": "1455.6720",
+                                    "RAPL_PKG_ENERGY_STAT": "24111.7402"
+                                }
+                            },
+                            "Group_1_Metric": {
+                                "HWThread_0": {
+                                    "Runtime_(RDTSC)_[s]": "836.9921",
+                                    "Runtime_unhalted_[s]": "436.7291",
+                                    "Clock_[MHz]": "3336.3296",
+                                    "CPI": "inf",
+                                    "Energy_Core_[J]": "2911.3441",
+                                    "Power_Core_[W]": "3.4783",
+                                    "Energy_PKG_[J]": "48223.4805",
+                                    "Power_PKG_[W]": "57.6152"
+                                },
+                                "HWThread_24": {
+                                    "Runtime_(RDTSC)_[s]": "836.9921",
+                                    "Runtime_unhalted_[s]": "562.6669",
+                                    "Clock_[MHz]": "3333.9488",
+                                    "CPI": "inf",
+                                    "Energy_Core_[J]": "0",
+                                    "Power_Core_[W]": "0",
+                                    "Energy_PKG_[J]": "0",
+                                    "Power_PKG_[W]": "0"
+                                }
+                            },
+                            "Group_1_Metric_STAT": {
+                                "Sum": {
+                                    "Runtime_(RDTSC)_[s]_STAT": "1673.9842",
+                                    "Runtime_unhalted_[s]_STAT": "999.3960",
+                                    "Clock_[MHz]_STAT": "6670.2784",
+                                    "CPI_STAT": "0",
+                                    "Energy_Core_[J]_STAT": "2911.3441",
+                                    "Power_Core_[W]_STAT": "3.4783",
+                                    "Energy_PKG_[J]_STAT": "48223.4805",
+                                    "Power_PKG_[W]_STAT": "57.6152"
+                                },
+                                "Min": {
+                                    "Runtime_(RDTSC)_[s]_STAT": "836.9921",
+                                    "Runtime_unhalted_[s]_STAT": "436.7291",
+                                    "Clock_[MHz]_STAT": "3333.9488",
+                                    "CPI_STAT": "inf",
+                                    "Energy_Core_[J]_STAT": "0",
+                                    "Power_Core_[W]_STAT": "0",
+                                    "Energy_PKG_[J]_STAT": "0",
+                                    "Power_PKG_[W]_STAT": "0"
+                                },
+                                "Max": {
+                                    "Runtime_(RDTSC)_[s]_STAT": "836.9921",
+                                    "Runtime_unhalted_[s]_STAT": "562.6669",
+                                    "Clock_[MHz]_STAT": "3336.3296",
+                                    "CPI_STAT": "0",
+                                    "Energy_Core_[J]_STAT": "2911.3441",
+                                    "Power_Core_[W]_STAT": "3.4783",
+                                    "Energy_PKG_[J]_STAT": "48223.4805",
+                                    "Power_PKG_[W]_STAT": "57.6152"
+                                },
+                                "Avg": {
+                                    "Runtime_(RDTSC)_[s]_STAT": "836.9921",
+                                    "Runtime_unhalted_[s]_STAT": "499.6980",
+                                    "Clock_[MHz]_STAT": "3335.1392",
+                                    "CPI_STAT": "0",
+                                    "Energy_Core_[J]_STAT": "1455.6720",
+                                    "Power_Core_[W]_STAT": "1.7391",
+                                    "Energy_PKG_[J]_STAT": "24111.7402",
+                                    "Power_PKG_[W]_STAT": "28.8076"
+                                }
+                            }
+                        }
+                    }
+                },
+                "metadata": {
+                    "hostname": "node015",
+                    "local_ip": "10.141.0.15",
+                    "public_ip": "130.37.14.6"
+                }
+            },
+            {
+                "node_id": "local",
+                "metrics": {
+                    "nvidia_hpcg": {
+                        "Initial_Residual_": 6366.16,
+                        "Iteration_": "58   Scaled Residual = 0.00164206",
+                        "|_Reference_CPU_memory_": "10659.18 MB",
+                        "Departure_from_symmetry_(scaled)_for_SpMV_abs(x'*A*y_y'*A*x)_": 0.0459237,
+                        "Departure_from_symmetry_(scaled)_for_MG_abs(x'*Minv*y_y'*Minv*x)_": 0.000689265,
+                        "version": 3.1,
+                        "Release_date": "March 28, 2019",
+                        "Machine_Summary": {
+                            "_value": "",
+                            "Distributed_Processes": 1,
+                            "Threads_per_processes": 1
+                        },
+                        "Global_Problem_Dimensions": {
+                            "_value": "",
+                            "Global_nx": 288,
+                            "Global_ny": 288,
+                            "Global_nz": 288
+                        },
+                        "Processor_Dimensions": {
+                            "_value": "",
+                            "npx": 1,
+                            "npy": 1,
+                            "npz": 1
+                        },
+                        "Local_Domain_Dimensions": {
+                            "_value": "",
+                            "nx": 288,
+                            "ny": 288
+                        },
+                        "##########_Problem_Summary_##########": "",
+                        "Setup_Information": {
+                            "_value": "",
+                            "Setup_Time": 0.106405
+                        },
+                        "Linear_System_Information": {
+                            "_value": "",
+                            "Number_of_Equations": 23887872,
+                            "Number_of_Nonzero_Terms": 640503928
+                        },
+                        "Multigrid_Information": {
+                            "_value": "",
+                            "Number_of_coarse_grid_levels": 3,
+                            "Coarse_Grids": {
+                                "_value": "",
+                                "Grid_Level": 3,
+                                "Number_of_Equations": 46656,
+                                "Number_of_Nonzero_Terms": 1191016,
+                                "Number_of_Presmoother_Steps": 1,
+                                "Number_of_Postsmoother_Steps": 1
+                            }
+                        },
+                        "##########_Memory_Use_Summary_##########": "",
+                        "Memory_Use_Information": {
+                            "_value": "",
+                            "Total_memory_used_for_data_(Gbytes)": 17.0724,
+                            "Memory_used_for_OptimizeProblem_data_(Gbytes)": 0,
+                            "Bytes_per_equation_(Total_memory_/_Number_of_Equations)": 714.69,
+                            "Memory_used_for_linear_system_and_CG_(Gbytes)": 15.0255,
+                            "Coarse_Grids": {
+                                "_value": "",
+                                "Grid_Level": 3,
+                                "Memory_used": 0.0280413
+                            }
+                        },
+                        "##########_V&V_Testing_Summary_##########": "",
+                        "Spectral_Convergence_Tests": {
+                            "_value": "",
+                            "Result": "PASSED",
+                            "Unpreconditioned": {
+                                "_value": "",
+                                "Maximum_iteration_count": 11,
+                                "Expected_iteration_count": 12
+                            },
+                            "Preconditioned": {
+                                "_value": "",
+                                "Maximum_iteration_count": 1,
+                                "Expected_iteration_count": 2
+                            }
+                        },
+                        "Departure_from_Symmetry_|x'Ay_y'Ax|/(2*||x||*||A||*||y||)/epsilon": {
+                            "_value": "",
+                            "Result": "PASSED",
+                            "Departure_for_SpMV": 0.0459237,
+                            "Departure_for_MG": 0.000689265
+                        },
+                        "##########_Iterations_Summary_##########": "",
+                        "Iteration_Count_Information": {
+                            "_value": "",
+                            "Result": "PASSED",
+                            "Reference_CG_iterations_per_set": 50,
+                            "Optimized_CG_iterations_per_set": 58,
+                            "Total_number_of_reference_iterations": 7550,
+                            "Total_number_of_optimized_iterations": 8758
+                        },
+                        "##########_Reproducibility_Summary_##########": "",
+                        "Reproducibility_Information": {
+                            "_value": "",
+                            "Result": "PASSED",
+                            "Scaled_residual_mean": 0.00164206,
+                            "Scaled_residual_variance": 0
+                        },
+                        "##########_Performance_Summary_(times_in_sec)_##########": "",
+                        "Benchmark_Time_Summary": {
+                            "_value": "",
+                            "Optimization_phase": 0.149877,
+                            "DDOT": 12.5325,
+                            "WAXPBY": 22.1217,
+                            "SpMV": 104.178,
+                            "MG": 463.38,
+                            "Total": 602.218
+                        },
+                        "Floating_Point_Operations_Summary": {
+                            "_value": "",
+                            "Raw_DDOT": 1262470000000.0,
+                            "Raw_WAXPBY": 1262470000000.0,
+                            "Raw_SpMV": 11412500000000.0,
+                            "Raw_MG": 63958600000000.0,
+                            "Total": 77896000000000.0,
+                            "Total_with_convergence_overhead": 67151800000000.0
+                        },
+                        "GB/s_Summary": {
+                            "_value": "",
+                            "Raw_Read_B/W": 796.82,
+                            "Raw_Write_B/W": 184.205,
+                            "Raw_Total_B/W": 981.025,
+                            "Total_with_convergence_and_optimization_phase_overhead": 840.312
+                        },
+                        "GFLOP/s_Summary": {
+                            "_value": "",
+                            "Raw_DDOT": 100.736,
+                            "Raw_WAXPBY": 57.0695,
+                            "Raw_SpMV": 109.548,
+                            "Raw_MG": 138.026,
+                            "Raw_Total": 129.349,
+                            "Total_with_convergence_overhead": 111.507,
+                            "Total_with_convergence_and_optimization_phase_overhead": 110.795
+                        },
+                        "User_Optimization_Overheads": {
+                            "_value": "",
+                            "Optimization_phase_time_(sec)": 0.149877,
+                            "Optimization_phase_time_vs_reference_SpMV+MG_time": 0.0433744
+                        },
+                        "DDOT_Timing_Variations": {
+                            "_value": "",
+                            "Min_DDOT_MPI_Allreduce_time": 0.0379397,
+                            "Max_DDOT_MPI_Allreduce_time": 0.0379397,
+                            "Avg_DDOT_MPI_Allreduce_time": 0.0379397
+                        },
+                        "Final_Summary": {
+                            "_value": "",
+                            "HPCG_result_is_VALID_with_a_GFLOP/s_rating_of": 110.795,
+                            "HPCG_2.4_rating_for_historical_reasons_is": 111.09,
+                            "Results_are_valid_but_execution_time_(sec)_is": 602.218,
+                            "Official_results_execution_time_(sec)_must_be_at_least": 1800
+                        }
+                    }
+                },
+                "metadata": {}
+            }
+        ],
+        "run1": [
+            {
+                "node_id": "node015:0:0",
+                "metrics": {
+                    "execution_time": 832.5002363836393,
+                    "gpu_nv": [
+                        {
+                            "gpu_id": 0,
+                            "energy": {
+                                "j": 154530.38189169916,
+                                "kwh": 0.04292510608102754
+                            },
+                            "power": {
+                                "avg_w": 185.83351191779875
+                            },
+                            "util": {
+                                "avg": 72.43267267267267,
+                                "max": 100
+                            },
+                            "temp": {
+                                "avg": 57.22882882882883,
+                                "max": 66
+                            },
+                            "clock": {
+                                "avg": 1735.3423423423424,
+                                "max": 1935
+                            }
+                        }
+                    ],
+                    "likwid": {
+                        "Info": {
+                            "CPU_name:": [
+                                "AMD EPYC 7402P 24-Core Processor               "
+                            ],
+                            "CPU_type:": [
+                                "AMD K17 (Zen2) architecture"
+                            ],
+                            "CPU_clock:": [
+                                "2.794744671 GHz"
+                            ]
+                        },
+                        "ENERGY": {
+                            "Group_1_Raw": {
+                                "Counter": {
+                                    "ACTUAL_CPU_CLOCK": "FIXC1",
+                                    "MAX_CPU_CLOCK": "FIXC2",
+                                    "RETIRED_INSTRUCTIONS": "PMC0",
+                                    "CPU_CLOCKS_UNHALTED": "PMC1",
+                                    "RAPL_CORE_ENERGY": "PWR0",
+                                    "RAPL_PKG_ENERGY": "PWR1"
+                                },
+                                "HWThread_0": {
+                                    "ACTUAL_CPU_CLOCK": "920203186835",
+                                    "MAX_CPU_CLOCK": "772385966072",
+                                    "RETIRED_INSTRUCTIONS": "-",
+                                    "CPU_CLOCKS_UNHALTED": "912910981248",
+                                    "RAPL_CORE_ENERGY": "2894.7670",
+                                    "RAPL_PKG_ENERGY": "48168.8357"
+                                },
+                                "HWThread_24": {
+                                    "ACTUAL_CPU_CLOCK": "1870541341363",
+                                    "MAX_CPU_CLOCK": "1566442665760",
+                                    "RETIRED_INSTRUCTIONS": "-",
+                                    "CPU_CLOCKS_UNHALTED": "1860699793722",
+                                    "RAPL_CORE_ENERGY": "0",
+                                    "RAPL_PKG_ENERGY": "0"
+                                }
+                            },
+                            "Group_1_Raw_STAT": {
+                                "Counter": {
+                                    "ACTUAL_CPU_CLOCK_STAT": "FIXC1",
+                                    "MAX_CPU_CLOCK_STAT": "FIXC2",
+                                    "RETIRED_INSTRUCTIONS_STAT": "PMC0",
+                                    "CPU_CLOCKS_UNHALTED_STAT": "PMC1",
+                                    "RAPL_CORE_ENERGY_STAT": "PWR0",
+                                    "RAPL_PKG_ENERGY_STAT": "PWR1"
+                                },
+                                "Sum": {
+                                    "ACTUAL_CPU_CLOCK_STAT": "2790744528198",
+                                    "MAX_CPU_CLOCK_STAT": "2338828631832",
+                                    "RETIRED_INSTRUCTIONS_STAT": "0",
+                                    "CPU_CLOCKS_UNHALTED_STAT": "2773610774970",
+                                    "RAPL_CORE_ENERGY_STAT": "2894.7670",
+                                    "RAPL_PKG_ENERGY_STAT": "48168.8357"
+                                },
+                                "Min": {
+                                    "ACTUAL_CPU_CLOCK_STAT": "920203186835",
+                                    "MAX_CPU_CLOCK_STAT": "772385966072",
+                                    "RETIRED_INSTRUCTIONS_STAT": "inf",
+                                    "CPU_CLOCKS_UNHALTED_STAT": "912910981248",
+                                    "RAPL_CORE_ENERGY_STAT": "0",
+                                    "RAPL_PKG_ENERGY_STAT": "0"
+                                },
+                                "Max": {
+                                    "ACTUAL_CPU_CLOCK_STAT": "1870541341363",
+                                    "MAX_CPU_CLOCK_STAT": "1566442665760",
+                                    "RETIRED_INSTRUCTIONS_STAT": "0",
+                                    "CPU_CLOCKS_UNHALTED_STAT": "1860699793722",
+                                    "RAPL_CORE_ENERGY_STAT": "2894.7670",
+                                    "RAPL_PKG_ENERGY_STAT": "48168.8357"
+                                },
+                                "Avg": {
+                                    "ACTUAL_CPU_CLOCK_STAT": "1395372264099",
+                                    "MAX_CPU_CLOCK_STAT": "1169414315916",
+                                    "RETIRED_INSTRUCTIONS_STAT": "0",
+                                    "CPU_CLOCKS_UNHALTED_STAT": "1386805387485",
+                                    "RAPL_CORE_ENERGY_STAT": "1447.3835",
+                                    "RAPL_PKG_ENERGY_STAT": "24084.4179"
+                                }
+                            },
+                            "Group_1_Metric": {
+                                "HWThread_0": {
+                                    "Runtime_(RDTSC)_[s]": "836.3785",
+                                    "Runtime_unhalted_[s]": "329.2620",
+                                    "Clock_[MHz]": "3329.5956",
+                                    "CPI": "inf",
+                                    "Energy_Core_[J]": "2894.7670",
+                                    "Power_Core_[W]": "3.4611",
+                                    "Energy_PKG_[J]": "48168.8357",
+                                    "Power_PKG_[W]": "57.5922"
+                                },
+                                "HWThread_24": {
+                                    "Runtime_(RDTSC)_[s]": "836.3785",
+                                    "Runtime_unhalted_[s]": "669.3067",
+                                    "Clock_[MHz]": "3337.2977",
+                                    "CPI": "inf",
+                                    "Energy_Core_[J]": "0",
+                                    "Power_Core_[W]": "0",
+                                    "Energy_PKG_[J]": "0",
+                                    "Power_PKG_[W]": "0"
+                                }
+                            },
+                            "Group_1_Metric_STAT": {
+                                "Sum": {
+                                    "Runtime_(RDTSC)_[s]_STAT": "1672.7570",
+                                    "Runtime_unhalted_[s]_STAT": "998.5687",
+                                    "Clock_[MHz]_STAT": "6666.8933",
+                                    "CPI_STAT": "0",
+                                    "Energy_Core_[J]_STAT": "2894.7670",
+                                    "Power_Core_[W]_STAT": "3.4611",
+                                    "Energy_PKG_[J]_STAT": "48168.8357",
+                                    "Power_PKG_[W]_STAT": "57.5922"
+                                },
+                                "Min": {
+                                    "Runtime_(RDTSC)_[s]_STAT": "836.3785",
+                                    "Runtime_unhalted_[s]_STAT": "329.2620",
+                                    "Clock_[MHz]_STAT": "3329.5956",
+                                    "CPI_STAT": "inf",
+                                    "Energy_Core_[J]_STAT": "0",
+                                    "Power_Core_[W]_STAT": "0",
+                                    "Energy_PKG_[J]_STAT": "0",
+                                    "Power_PKG_[W]_STAT": "0"
+                                },
+                                "Max": {
+                                    "Runtime_(RDTSC)_[s]_STAT": "836.3785",
+                                    "Runtime_unhalted_[s]_STAT": "669.3067",
+                                    "Clock_[MHz]_STAT": "3337.2977",
+                                    "CPI_STAT": "0",
+                                    "Energy_Core_[J]_STAT": "2894.7670",
+                                    "Power_Core_[W]_STAT": "3.4611",
+                                    "Energy_PKG_[J]_STAT": "48168.8357",
+                                    "Power_PKG_[W]_STAT": "57.5922"
+                                },
+                                "Avg": {
+                                    "Runtime_(RDTSC)_[s]_STAT": "836.3785",
+                                    "Runtime_unhalted_[s]_STAT": "499.2844",
+                                    "Clock_[MHz]_STAT": "3333.4466",
+                                    "CPI_STAT": "0",
+                                    "Energy_Core_[J]_STAT": "1447.3835",
+                                    "Power_Core_[W]_STAT": "1.7306",
+                                    "Energy_PKG_[J]_STAT": "24084.4179",
+                                    "Power_PKG_[W]_STAT": "28.7961"
+                                }
+                            }
+                        }
+                    }
+                },
+                "metadata": {
+                    "hostname": "node015",
+                    "local_ip": "10.141.0.15",
+                    "public_ip": "130.37.14.6"
+                }
+            },
+            {
+                "node_id": "local",
+                "metrics": {
+                    "nvidia_hpcg": {
+                        "Initial_Residual_": 6366.16,
+                        "Iteration_": "58   Scaled Residual = 0.00164218",
+                        "|_Reference_CPU_memory_": "10659.18 MB",
+                        "Departure_from_symmetry_(scaled)_for_SpMV_abs(x'*A*y_y'*A*x)_": 0.0379286,
+                        "Departure_from_symmetry_(scaled)_for_MG_abs(x'*Minv*y_y'*Minv*x)_": 0.000765748,
+                        "version": 3.1,
+                        "Release_date": "March 28, 2019",
+                        "Machine_Summary": {
+                            "_value": "",
+                            "Distributed_Processes": 1,
+                            "Threads_per_processes": 1
+                        },
+                        "Global_Problem_Dimensions": {
+                            "_value": "",
+                            "Global_nx": 288,
+                            "Global_ny": 288,
+                            "Global_nz": 288
+                        },
+                        "Processor_Dimensions": {
+                            "_value": "",
+                            "npx": 1,
+                            "npy": 1,
+                            "npz": 1
+                        },
+                        "Local_Domain_Dimensions": {
+                            "_value": "",
+                            "nx": 288,
+                            "ny": 288
+                        },
+                        "##########_Problem_Summary_##########": "",
+                        "Setup_Information": {
+                            "_value": "",
+                            "Setup_Time": 0.106408
+                        },
+                        "Linear_System_Information": {
+                            "_value": "",
+                            "Number_of_Equations": 23887872,
+                            "Number_of_Nonzero_Terms": 640503928
+                        },
+                        "Multigrid_Information": {
+                            "_value": "",
+                            "Number_of_coarse_grid_levels": 3,
+                            "Coarse_Grids": {
+                                "_value": "",
+                                "Grid_Level": 3,
+                                "Number_of_Equations": 46656,
+                                "Number_of_Nonzero_Terms": 1191016,
+                                "Number_of_Presmoother_Steps": 1,
+                                "Number_of_Postsmoother_Steps": 1
+                            }
+                        },
+                        "##########_Memory_Use_Summary_##########": "",
+                        "Memory_Use_Information": {
+                            "_value": "",
+                            "Total_memory_used_for_data_(Gbytes)": 17.0724,
+                            "Memory_used_for_OptimizeProblem_data_(Gbytes)": 0,
+                            "Bytes_per_equation_(Total_memory_/_Number_of_Equations)": 714.69,
+                            "Memory_used_for_linear_system_and_CG_(Gbytes)": 15.0255,
+                            "Coarse_Grids": {
+                                "_value": "",
+                                "Grid_Level": 3,
+                                "Memory_used": 0.0280413
+                            }
+                        },
+                        "##########_V&V_Testing_Summary_##########": "",
+                        "Spectral_Convergence_Tests": {
+                            "_value": "",
+                            "Result": "PASSED",
+                            "Unpreconditioned": {
+                                "_value": "",
+                                "Maximum_iteration_count": 11,
+                                "Expected_iteration_count": 12
+                            },
+                            "Preconditioned": {
+                                "_value": "",
+                                "Maximum_iteration_count": 1,
+                                "Expected_iteration_count": 2
+                            }
+                        },
+                        "Departure_from_Symmetry_|x'Ay_y'Ax|/(2*||x||*||A||*||y||)/epsilon": {
+                            "_value": "",
+                            "Result": "PASSED",
+                            "Departure_for_SpMV": 0.0379286,
+                            "Departure_for_MG": 0.000765748
+                        },
+                        "##########_Iterations_Summary_##########": "",
+                        "Iteration_Count_Information": {
+                            "_value": "",
+                            "Result": "PASSED",
+                            "Reference_CG_iterations_per_set": 50,
+                            "Optimized_CG_iterations_per_set": 58,
+                            "Total_number_of_reference_iterations": 7550,
+                            "Total_number_of_optimized_iterations": 8758
+                        },
+                        "##########_Reproducibility_Summary_##########": "",
+                        "Reproducibility_Information": {
+                            "_value": "",
+                            "Result": "PASSED",
+                            "Scaled_residual_mean": 0.00164218,
+                            "Scaled_residual_variance": 0
+                        },
+                        "##########_Performance_Summary_(times_in_sec)_##########": "",
+                        "Benchmark_Time_Summary": {
+                            "_value": "",
+                            "Optimization_phase": 0.153284,
+                            "DDOT": 12.5272,
+                            "WAXPBY": 22.1251,
+                            "SpMV": 104.182,
+                            "MG": 463.374,
+                            "Total": 602.213
+                        },
+                        "Floating_Point_Operations_Summary": {
+                            "_value": "",
+                            "Raw_DDOT": 1262470000000.0,
+                            "Raw_WAXPBY": 1262470000000.0,
+                            "Raw_SpMV": 11412500000000.0,
+                            "Raw_MG": 63958600000000.0,
+                            "Total": 77896000000000.0,
+                            "Total_with_convergence_overhead": 67151800000000.0
+                        },
+                        "GB/s_Summary": {
+                            "_value": "",
+                            "Raw_Read_B/W": 796.826,
+                            "Raw_Write_B/W": 184.207,
+                            "Raw_Total_B/W": 981.032,
+                            "Total_with_convergence_and_optimization_phase_overhead": 840.246
+                        },
+                        "GFLOP/s_Summary": {
+                            "_value": "",
+                            "Raw_DDOT": 100.779,
+                            "Raw_WAXPBY": 57.0608,
+                            "Raw_SpMV": 109.544,
+                            "Raw_MG": 138.028,
+                            "Raw_Total": 129.35,
+                            "Total_with_convergence_overhead": 111.508,
+                            "Total_with_convergence_and_optimization_phase_overhead": 110.787
+                        },
+                        "User_Optimization_Overheads": {
+                            "_value": "",
+                            "Optimization_phase_time_(sec)": 0.153284,
+                            "Optimization_phase_time_vs_reference_SpMV+MG_time": 0.0443827
+                        },
+                        "DDOT_Timing_Variations": {
+                            "_value": "",
+                            "Min_DDOT_MPI_Allreduce_time": 0.0359697,
+                            "Max_DDOT_MPI_Allreduce_time": 0.0359697,
+                            "Avg_DDOT_MPI_Allreduce_time": 0.0359697
+                        },
+                        "Final_Summary": {
+                            "_value": "",
+                            "HPCG_result_is_VALID_with_a_GFLOP/s_rating_of": 110.787,
+                            "HPCG_2.4_rating_for_historical_reasons_is": 111.081,
+                            "Results_are_valid_but_execution_time_(sec)_is": 602.213,
+                            "Official_results_execution_time_(sec)_must_be_at_least": 1800
+                        }
+                    }
+                },
+                "metadata": {}
+            }
+        ],
+        "run2": [
+            {
+                "node_id": "node015:0:0",
+                "metrics": {
+                    "execution_time": 832.7002047989517,
+                    "gpu_nv": [
+                        {
+                            "gpu_id": 0,
+                            "energy": {
+                                "j": 154759.9736683906,
+                                "kwh": 0.04298888157455294
+                            },
+                            "power": {
+                                "avg_w": 186.0647435554972
+                            },
+                            "util": {
+                                "avg": 73.78671790560826,
+                                "max": 100
+                            },
+                            "temp": {
+                                "avg": 57.22985468956407,
+                                "max": 66
+                            },
+                            "clock": {
+                                "avg": 1731.9316680677314,
+                                "max": 1935
+                            }
+                        }
+                    ],
+                    "likwid": {
+                        "Info": {
+                            "CPU_name:": [
+                                "AMD EPYC 7402P 24-Core Processor               "
+                            ],
+                            "CPU_type:": [
+                                "AMD K17 (Zen2) architecture"
+                            ],
+                            "CPU_clock:": [
+                                "2.794734917 GHz"
+                            ]
+                        },
+                        "ENERGY": {
+                            "Group_1_Raw": {
+                                "Counter": {
+                                    "ACTUAL_CPU_CLOCK": "FIXC1",
+                                    "MAX_CPU_CLOCK": "FIXC2",
+                                    "RETIRED_INSTRUCTIONS": "PMC0",
+                                    "CPU_CLOCKS_UNHALTED": "PMC1",
+                                    "RAPL_CORE_ENERGY": "PWR0",
+                                    "RAPL_PKG_ENERGY": "PWR1"
+                                },
+                                "HWThread_0": {
+                                    "ACTUAL_CPU_CLOCK": "939639520029",
+                                    "MAX_CPU_CLOCK": "789519150644",
+                                    "RETIRED_INSTRUCTIONS": "-",
+                                    "CPU_CLOCKS_UNHALTED": "932641620197",
+                                    "RAPL_CORE_ENERGY": "2876.4049",
+                                    "RAPL_PKG_ENERGY": "48176.7015"
+                                },
+                                "HWThread_24": {
+                                    "ACTUAL_CPU_CLOCK": "1851884924688",
+                                    "MAX_CPU_CLOCK": "1549879710232",
+                                    "RETIRED_INSTRUCTIONS": "-",
+                                    "CPU_CLOCKS_UNHALTED": "1841898671977",
+                                    "RAPL_CORE_ENERGY": "0",
+                                    "RAPL_PKG_ENERGY": "0"
+                                }
+                            },
+                            "Group_1_Raw_STAT": {
+                                "Counter": {
+                                    "ACTUAL_CPU_CLOCK_STAT": "FIXC1",
+                                    "MAX_CPU_CLOCK_STAT": "FIXC2",
+                                    "RETIRED_INSTRUCTIONS_STAT": "PMC0",
+                                    "CPU_CLOCKS_UNHALTED_STAT": "PMC1",
+                                    "RAPL_CORE_ENERGY_STAT": "PWR0",
+                                    "RAPL_PKG_ENERGY_STAT": "PWR1"
+                                },
+                                "Sum": {
+                                    "ACTUAL_CPU_CLOCK_STAT": "2791524444717",
+                                    "MAX_CPU_CLOCK_STAT": "2339398860876",
+                                    "RETIRED_INSTRUCTIONS_STAT": "0",
+                                    "CPU_CLOCKS_UNHALTED_STAT": "2774540292174",
+                                    "RAPL_CORE_ENERGY_STAT": "2876.4049",
+                                    "RAPL_PKG_ENERGY_STAT": "48176.7015"
+                                },
+                                "Min": {
+                                    "ACTUAL_CPU_CLOCK_STAT": "939639520029",
+                                    "MAX_CPU_CLOCK_STAT": "789519150644",
+                                    "RETIRED_INSTRUCTIONS_STAT": "inf",
+                                    "CPU_CLOCKS_UNHALTED_STAT": "932641620197",
+                                    "RAPL_CORE_ENERGY_STAT": "0",
+                                    "RAPL_PKG_ENERGY_STAT": "0"
+                                },
+                                "Max": {
+                                    "ACTUAL_CPU_CLOCK_STAT": "1851884924688",
+                                    "MAX_CPU_CLOCK_STAT": "1549879710232",
+                                    "RETIRED_INSTRUCTIONS_STAT": "0",
+                                    "CPU_CLOCKS_UNHALTED_STAT": "1841898671977",
+                                    "RAPL_CORE_ENERGY_STAT": "2876.4049",
+                                    "RAPL_PKG_ENERGY_STAT": "48176.7015"
+                                },
+                                "Avg": {
+                                    "ACTUAL_CPU_CLOCK_STAT": "1.395762e+12",
+                                    "MAX_CPU_CLOCK_STAT": "1169699430438",
+                                    "RETIRED_INSTRUCTIONS_STAT": "0",
+                                    "CPU_CLOCKS_UNHALTED_STAT": "1387270146087",
+                                    "RAPL_CORE_ENERGY_STAT": "1438.2024",
+                                    "RAPL_PKG_ENERGY_STAT": "24088.3508"
+                                }
+                            },
+                            "Group_1_Metric": {
+                                "HWThread_0": {
+                                    "Runtime_(RDTSC)_[s]": "836.7565",
+                                    "Runtime_unhalted_[s]": "336.2178",
+                                    "Clock_[MHz]": "3326.1301",
+                                    "CPI": "inf",
+                                    "Energy_Core_[J]": "2876.4049",
+                                    "Power_Core_[W]": "3.4376",
+                                    "Energy_PKG_[J]": "48176.7015",
+                                    "Power_PKG_[W]": "57.5755"
+                                },
+                                "HWThread_24": {
+                                    "Runtime_(RDTSC)_[s]": "836.7565",
+                                    "Runtime_unhalted_[s]": "662.6335",
+                                    "Clock_[MHz]": "3339.3091",
+                                    "CPI": "inf",
+                                    "Energy_Core_[J]": "0",
+                                    "Power_Core_[W]": "0",
+                                    "Energy_PKG_[J]": "0",
+                                    "Power_PKG_[W]": "0"
+                                }
+                            },
+                            "Group_1_Metric_STAT": {
+                                "Sum": {
+                                    "Runtime_(RDTSC)_[s]_STAT": "1673.5130",
+                                    "Runtime_unhalted_[s]_STAT": "998.8513",
+                                    "Clock_[MHz]_STAT": "6665.4392",
+                                    "CPI_STAT": "0",
+                                    "Energy_Core_[J]_STAT": "2876.4049",
+                                    "Power_Core_[W]_STAT": "3.4376",
+                                    "Energy_PKG_[J]_STAT": "48176.7015",
+                                    "Power_PKG_[W]_STAT": "57.5755"
+                                },
+                                "Min": {
+                                    "Runtime_(RDTSC)_[s]_STAT": "836.7565",
+                                    "Runtime_unhalted_[s]_STAT": "336.2178",
+                                    "Clock_[MHz]_STAT": "3326.1301",
+                                    "CPI_STAT": "inf",
+                                    "Energy_Core_[J]_STAT": "0",
+                                    "Power_Core_[W]_STAT": "0",
+                                    "Energy_PKG_[J]_STAT": "0",
+                                    "Power_PKG_[W]_STAT": "0"
+                                },
+                                "Max": {
+                                    "Runtime_(RDTSC)_[s]_STAT": "836.7565",
+                                    "Runtime_unhalted_[s]_STAT": "662.6335",
+                                    "Clock_[MHz]_STAT": "3339.3091",
+                                    "CPI_STAT": "0",
+                                    "Energy_Core_[J]_STAT": "2876.4049",
+                                    "Power_Core_[W]_STAT": "3.4376",
+                                    "Energy_PKG_[J]_STAT": "48176.7015",
+                                    "Power_PKG_[W]_STAT": "57.5755"
+                                },
+                                "Avg": {
+                                    "Runtime_(RDTSC)_[s]_STAT": "836.7565",
+                                    "Runtime_unhalted_[s]_STAT": "499.4257",
+                                    "Clock_[MHz]_STAT": "3332.7196",
+                                    "CPI_STAT": "0",
+                                    "Energy_Core_[J]_STAT": "1438.2024",
+                                    "Power_Core_[W]_STAT": "1.7188",
+                                    "Energy_PKG_[J]_STAT": "24088.3508",
+                                    "Power_PKG_[W]_STAT": "28.7877"
+                                }
+                            }
+                        }
+                    }
+                },
+                "metadata": {
+                    "hostname": "node015",
+                    "local_ip": "10.141.0.15",
+                    "public_ip": "130.37.14.6"
+                }
+            },
+            {
+                "node_id": "local",
+                "metrics": {
+                    "nvidia_hpcg": {
+                        "Initial_Residual_": 6366.16,
+                        "Iteration_": "58   Scaled Residual = 0.00164141",
+                        "|_Reference_CPU_memory_": "10659.18 MB",
+                        "Departure_from_symmetry_(scaled)_for_SpMV_abs(x'*A*y_y'*A*x)_": 0.0396832,
+                        "Departure_from_symmetry_(scaled)_for_MG_abs(x'*Minv*y_y'*Minv*x)_": 6.77623e-05,
+                        "version": 3.1,
+                        "Release_date": "March 28, 2019",
+                        "Machine_Summary": {
+                            "_value": "",
+                            "Distributed_Processes": 1,
+                            "Threads_per_processes": 1
+                        },
+                        "Global_Problem_Dimensions": {
+                            "_value": "",
+                            "Global_nx": 288,
+                            "Global_ny": 288,
+                            "Global_nz": 288
+                        },
+                        "Processor_Dimensions": {
+                            "_value": "",
+                            "npx": 1,
+                            "npy": 1,
+                            "npz": 1
+                        },
+                        "Local_Domain_Dimensions": {
+                            "_value": "",
+                            "nx": 288,
+                            "ny": 288
+                        },
+                        "##########_Problem_Summary_##########": "",
+                        "Setup_Information": {
+                            "_value": "",
+                            "Setup_Time": 0.106309
+                        },
+                        "Linear_System_Information": {
+                            "_value": "",
+                            "Number_of_Equations": 23887872,
+                            "Number_of_Nonzero_Terms": 640503928
+                        },
+                        "Multigrid_Information": {
+                            "_value": "",
+                            "Number_of_coarse_grid_levels": 3,
+                            "Coarse_Grids": {
+                                "_value": "",
+                                "Grid_Level": 3,
+                                "Number_of_Equations": 46656,
+                                "Number_of_Nonzero_Terms": 1191016,
+                                "Number_of_Presmoother_Steps": 1,
+                                "Number_of_Postsmoother_Steps": 1
+                            }
+                        },
+                        "##########_Memory_Use_Summary_##########": "",
+                        "Memory_Use_Information": {
+                            "_value": "",
+                            "Total_memory_used_for_data_(Gbytes)": 17.0724,
+                            "Memory_used_for_OptimizeProblem_data_(Gbytes)": 0,
+                            "Bytes_per_equation_(Total_memory_/_Number_of_Equations)": 714.69,
+                            "Memory_used_for_linear_system_and_CG_(Gbytes)": 15.0255,
+                            "Coarse_Grids": {
+                                "_value": "",
+                                "Grid_Level": 3,
+                                "Memory_used": 0.0280413
+                            }
+                        },
+                        "##########_V&V_Testing_Summary_##########": "",
+                        "Spectral_Convergence_Tests": {
+                            "_value": "",
+                            "Result": "PASSED",
+                            "Unpreconditioned": {
+                                "_value": "",
+                                "Maximum_iteration_count": 11,
+                                "Expected_iteration_count": 12
+                            },
+                            "Preconditioned": {
+                                "_value": "",
+                                "Maximum_iteration_count": 1,
+                                "Expected_iteration_count": 2
+                            }
+                        },
+                        "Departure_from_Symmetry_|x'Ay_y'Ax|/(2*||x||*||A||*||y||)/epsilon": {
+                            "_value": "",
+                            "Result": "PASSED",
+                            "Departure_for_SpMV": 0.0396832,
+                            "Departure_for_MG": 6.77623e-05
+                        },
+                        "##########_Iterations_Summary_##########": "",
+                        "Iteration_Count_Information": {
+                            "_value": "",
+                            "Result": "PASSED",
+                            "Reference_CG_iterations_per_set": 50,
+                            "Optimized_CG_iterations_per_set": 58,
+                            "Total_number_of_reference_iterations": 7550,
+                            "Total_number_of_optimized_iterations": 8758
+                        },
+                        "##########_Reproducibility_Summary_##########": "",
+                        "Reproducibility_Information": {
+                            "_value": "",
+                            "Result": "PASSED",
+                            "Scaled_residual_mean": 0.00164141,
+                            "Scaled_residual_variance": 0
+                        },
+                        "##########_Performance_Summary_(times_in_sec)_##########": "",
+                        "Benchmark_Time_Summary": {
+                            "_value": "",
+                            "Optimization_phase": 0.152417,
+                            "DDOT": 12.5337,
+                            "WAXPBY": 22.124,
+                            "SpMV": 104.181,
+                            "MG": 463.362,
+                            "Total": 602.206
+                        },
+                        "Floating_Point_Operations_Summary": {
+                            "_value": "",
+                            "Raw_DDOT": 1262470000000.0,
+                            "Raw_WAXPBY": 1262470000000.0,
+                            "Raw_SpMV": 11412500000000.0,
+                            "Raw_MG": 63958600000000.0,
+                            "Total": 77896000000000.0,
+                            "Total_with_convergence_overhead": 67151800000000.0
+                        },
+                        "GB/s_Summary": {
+                            "_value": "",
+                            "Raw_Read_B/W": 796.835,
+                            "Raw_Write_B/W": 184.209,
+                            "Raw_Total_B/W": 981.044,
+                            "Total_with_convergence_and_optimization_phase_overhead": 840.276
+                        },
+                        "GFLOP/s_Summary": {
+                            "_value": "",
+                            "Raw_DDOT": 100.726,
+                            "Raw_WAXPBY": 57.0635,
+                            "Raw_SpMV": 109.545,
+                            "Raw_MG": 138.032,
+                            "Raw_Total": 129.351,
+                            "Total_with_convergence_overhead": 111.51,
+                            "Total_with_convergence_and_optimization_phase_overhead": 110.791
+                        },
+                        "User_Optimization_Overheads": {
+                            "_value": "",
+                            "Optimization_phase_time_(sec)": 0.152417,
+                            "Optimization_phase_time_vs_reference_SpMV+MG_time": 0.0440961
+                        },
+                        "DDOT_Timing_Variations": {
+                            "_value": "",
+                            "Min_DDOT_MPI_Allreduce_time": 0.0360195,
+                            "Max_DDOT_MPI_Allreduce_time": 0.0360195,
+                            "Avg_DDOT_MPI_Allreduce_time": 0.0360195
+                        },
+                        "Final_Summary": {
+                            "_value": "",
+                            "HPCG_result_is_VALID_with_a_GFLOP/s_rating_of": 110.791,
+                            "HPCG_2.4_rating_for_historical_reasons_is": 111.085,
+                            "Results_are_valid_but_execution_time_(sec)_is": 602.206,
+                            "Official_results_execution_time_(sec)_must_be_at_least": 1800
+                        }
+                    }
+                },
+                "metadata": {}
+            }
+        ],
+        "run3": [
+            {
+                "node_id": "node015:0:0",
+                "metrics": {
+                    "execution_time": 832.7002281919122,
+                    "gpu_nv": [
+                        {
+                            "gpu_id": 0,
+                            "energy": {
+                                "j": 154744.9602933038,
+                                "kwh": 0.04298471119258439
+                            },
+                            "power": {
+                                "avg_w": 186.04658523213385
+                            },
+                            "util": {
+                                "avg": 73.7960850246187,
+                                "max": 100
+                            },
+                            "temp": {
+                                "avg": 57.314519034466194,
+                                "max": 66
+                            },
+                            "clock": {
+                                "avg": 1732.1316200312237,
+                                "max": 1935
+                            }
+                        }
+                    ],
+                    "likwid": {
+                        "Info": {
+                            "CPU_name:": [
+                                "AMD EPYC 7402P 24-Core Processor               "
+                            ],
+                            "CPU_type:": [
+                                "AMD K17 (Zen2) architecture"
+                            ],
+                            "CPU_clock:": [
+                                "2.794736453 GHz"
+                            ]
+                        },
+                        "ENERGY": {
+                            "Group_1_Raw": {
+                                "Counter": {
+                                    "ACTUAL_CPU_CLOCK": "FIXC1",
+                                    "MAX_CPU_CLOCK": "FIXC2",
+                                    "RETIRED_INSTRUCTIONS": "PMC0",
+                                    "CPU_CLOCKS_UNHALTED": "PMC1",
+                                    "RAPL_CORE_ENERGY": "PWR0",
+                                    "RAPL_PKG_ENERGY": "PWR1"
+                                },
+                                "HWThread_0": {
+                                    "ACTUAL_CPU_CLOCK": "943008504577",
+                                    "MAX_CPU_CLOCK": "791671653556",
+                                    "RETIRED_INSTRUCTIONS": "-",
+                                    "CPU_CLOCKS_UNHALTED": "934907022925",
+                                    "RAPL_CORE_ENERGY": "2919.7232",
+                                    "RAPL_PKG_ENERGY": "48216.7930"
+                                },
+                                "HWThread_24": {
+                                    "ACTUAL_CPU_CLOCK": "1847889261015",
+                                    "MAX_CPU_CLOCK": "1547398678336",
+                                    "RETIRED_INSTRUCTIONS": "-",
+                                    "CPU_CLOCKS_UNHALTED": "1839003303465",
+                                    "RAPL_CORE_ENERGY": "0",
+                                    "RAPL_PKG_ENERGY": "0"
+                                }
+                            },
+                            "Group_1_Raw_STAT": {
+                                "Counter": {
+                                    "ACTUAL_CPU_CLOCK_STAT": "FIXC1",
+                                    "MAX_CPU_CLOCK_STAT": "FIXC2",
+                                    "RETIRED_INSTRUCTIONS_STAT": "PMC0",
+                                    "CPU_CLOCKS_UNHALTED_STAT": "PMC1",
+                                    "RAPL_CORE_ENERGY_STAT": "PWR0",
+                                    "RAPL_PKG_ENERGY_STAT": "PWR1"
+                                },
+                                "Sum": {
+                                    "ACTUAL_CPU_CLOCK_STAT": "2790897765592",
+                                    "MAX_CPU_CLOCK_STAT": "2339070331892",
+                                    "RETIRED_INSTRUCTIONS_STAT": "0",
+                                    "CPU_CLOCKS_UNHALTED_STAT": "2773910326390",
+                                    "RAPL_CORE_ENERGY_STAT": "2919.7232",
+                                    "RAPL_PKG_ENERGY_STAT": "48216.7930"
+                                },
+                                "Min": {
+                                    "ACTUAL_CPU_CLOCK_STAT": "943008504577",
+                                    "MAX_CPU_CLOCK_STAT": "791671653556",
+                                    "RETIRED_INSTRUCTIONS_STAT": "inf",
+                                    "CPU_CLOCKS_UNHALTED_STAT": "934907022925",
+                                    "RAPL_CORE_ENERGY_STAT": "0",
+                                    "RAPL_PKG_ENERGY_STAT": "0"
+                                },
+                                "Max": {
+                                    "ACTUAL_CPU_CLOCK_STAT": "1847889261015",
+                                    "MAX_CPU_CLOCK_STAT": "1547398678336",
+                                    "RETIRED_INSTRUCTIONS_STAT": "0",
+                                    "CPU_CLOCKS_UNHALTED_STAT": "1839003303465",
+                                    "RAPL_CORE_ENERGY_STAT": "2919.7232",
+                                    "RAPL_PKG_ENERGY_STAT": "48216.7930"
+                                },
+                                "Avg": {
+                                    "ACTUAL_CPU_CLOCK_STAT": "1395448882796",
+                                    "MAX_CPU_CLOCK_STAT": "1169535165946",
+                                    "RETIRED_INSTRUCTIONS_STAT": "0",
+                                    "CPU_CLOCKS_UNHALTED_STAT": "1386955163195",
+                                    "RAPL_CORE_ENERGY_STAT": "1459.8616",
+                                    "RAPL_PKG_ENERGY_STAT": "24108.3965"
+                                }
+                            },
+                            "Group_1_Metric": {
+                                "HWThread_0": {
+                                    "Runtime_(RDTSC)_[s]": "836.7154",
+                                    "Runtime_unhalted_[s]": "337.4231",
+                                    "Clock_[MHz]": "3328.9814",
+                                    "CPI": "inf",
+                                    "Energy_Core_[J]": "2919.7232",
+                                    "Power_Core_[W]": "3.4895",
+                                    "Energy_PKG_[J]": "48216.7930",
+                                    "Power_PKG_[W]": "57.6263"
+                                },
+                                "HWThread_24": {
+                                    "Runtime_(RDTSC)_[s]": "836.7154",
+                                    "Runtime_unhalted_[s]": "661.2034",
+                                    "Clock_[MHz]": "3337.4486",
+                                    "CPI": "inf",
+                                    "Energy_Core_[J]": "0",
+                                    "Power_Core_[W]": "0",
+                                    "Energy_PKG_[J]": "0",
+                                    "Power_PKG_[W]": "0"
+                                }
+                            },
+                            "Group_1_Metric_STAT": {
+                                "Sum": {
+                                    "Runtime_(RDTSC)_[s]_STAT": "1673.4308",
+                                    "Runtime_unhalted_[s]_STAT": "998.6265",
+                                    "Clock_[MHz]_STAT": "6666.4300",
+                                    "CPI_STAT": "0",
+                                    "Energy_Core_[J]_STAT": "2919.7232",
+                                    "Power_Core_[W]_STAT": "3.4895",
+                                    "Energy_PKG_[J]_STAT": "48216.7930",
+                                    "Power_PKG_[W]_STAT": "57.6263"
+                                },
+                                "Min": {
+                                    "Runtime_(RDTSC)_[s]_STAT": "836.7154",
+                                    "Runtime_unhalted_[s]_STAT": "337.4231",
+                                    "Clock_[MHz]_STAT": "3328.9814",
+                                    "CPI_STAT": "inf",
+                                    "Energy_Core_[J]_STAT": "0",
+                                    "Power_Core_[W]_STAT": "0",
+                                    "Energy_PKG_[J]_STAT": "0",
+                                    "Power_PKG_[W]_STAT": "0"
+                                },
+                                "Max": {
+                                    "Runtime_(RDTSC)_[s]_STAT": "836.7154",
+                                    "Runtime_unhalted_[s]_STAT": "661.2034",
+                                    "Clock_[MHz]_STAT": "3337.4486",
+                                    "CPI_STAT": "0",
+                                    "Energy_Core_[J]_STAT": "2919.7232",
+                                    "Power_Core_[W]_STAT": "3.4895",
+                                    "Energy_PKG_[J]_STAT": "48216.7930",
+                                    "Power_PKG_[W]_STAT": "57.6263"
+                                },
+                                "Avg": {
+                                    "Runtime_(RDTSC)_[s]_STAT": "836.7154",
+                                    "Runtime_unhalted_[s]_STAT": "499.3132",
+                                    "Clock_[MHz]_STAT": "3333.2150",
+                                    "CPI_STAT": "0",
+                                    "Energy_Core_[J]_STAT": "1459.8616",
+                                    "Power_Core_[W]_STAT": "1.7448",
+                                    "Energy_PKG_[J]_STAT": "24108.3965",
+                                    "Power_PKG_[W]_STAT": "28.8132"
+                                }
+                            }
+                        }
+                    }
+                },
+                "metadata": {
+                    "hostname": "node015",
+                    "local_ip": "10.141.0.15",
+                    "public_ip": "130.37.14.6"
+                }
+            },
+            {
+                "node_id": "local",
+                "metrics": {
+                    "nvidia_hpcg": {
+                        "Initial_Residual_": 6366.16,
+                        "Iteration_": "58   Scaled Residual = 0.00164029",
+                        "|_Reference_CPU_memory_": "10659.18 MB",
+                        "Departure_from_symmetry_(scaled)_for_SpMV_abs(x'*A*y_y'*A*x)_": 0.0856791,
+                        "Departure_from_symmetry_(scaled)_for_MG_abs(x'*Minv*y_y'*Minv*x)_": 0.00136791,
+                        "version": 3.1,
+                        "Release_date": "March 28, 2019",
+                        "Machine_Summary": {
+                            "_value": "",
+                            "Distributed_Processes": 1,
+                            "Threads_per_processes": 1
+                        },
+                        "Global_Problem_Dimensions": {
+                            "_value": "",
+                            "Global_nx": 288,
+                            "Global_ny": 288,
+                            "Global_nz": 288
+                        },
+                        "Processor_Dimensions": {
+                            "_value": "",
+                            "npx": 1,
+                            "npy": 1,
+                            "npz": 1
+                        },
+                        "Local_Domain_Dimensions": {
+                            "_value": "",
+                            "nx": 288,
+                            "ny": 288
+                        },
+                        "##########_Problem_Summary_##########": "",
+                        "Setup_Information": {
+                            "_value": "",
+                            "Setup_Time": 0.106398
+                        },
+                        "Linear_System_Information": {
+                            "_value": "",
+                            "Number_of_Equations": 23887872,
+                            "Number_of_Nonzero_Terms": 640503928
+                        },
+                        "Multigrid_Information": {
+                            "_value": "",
+                            "Number_of_coarse_grid_levels": 3,
+                            "Coarse_Grids": {
+                                "_value": "",
+                                "Grid_Level": 3,
+                                "Number_of_Equations": 46656,
+                                "Number_of_Nonzero_Terms": 1191016,
+                                "Number_of_Presmoother_Steps": 1,
+                                "Number_of_Postsmoother_Steps": 1
+                            }
+                        },
+                        "##########_Memory_Use_Summary_##########": "",
+                        "Memory_Use_Information": {
+                            "_value": "",
+                            "Total_memory_used_for_data_(Gbytes)": 17.0724,
+                            "Memory_used_for_OptimizeProblem_data_(Gbytes)": 0,
+                            "Bytes_per_equation_(Total_memory_/_Number_of_Equations)": 714.69,
+                            "Memory_used_for_linear_system_and_CG_(Gbytes)": 15.0255,
+                            "Coarse_Grids": {
+                                "_value": "",
+                                "Grid_Level": 3,
+                                "Memory_used": 0.0280413
+                            }
+                        },
+                        "##########_V&V_Testing_Summary_##########": "",
+                        "Spectral_Convergence_Tests": {
+                            "_value": "",
+                            "Result": "PASSED",
+                            "Unpreconditioned": {
+                                "_value": "",
+                                "Maximum_iteration_count": 11,
+                                "Expected_iteration_count": 12
+                            },
+                            "Preconditioned": {
+                                "_value": "",
+                                "Maximum_iteration_count": 1,
+                                "Expected_iteration_count": 2
+                            }
+                        },
+                        "Departure_from_Symmetry_|x'Ay_y'Ax|/(2*||x||*||A||*||y||)/epsilon": {
+                            "_value": "",
+                            "Result": "PASSED",
+                            "Departure_for_SpMV": 0.0856791,
+                            "Departure_for_MG": 0.00136791
+                        },
+                        "##########_Iterations_Summary_##########": "",
+                        "Iteration_Count_Information": {
+                            "_value": "",
+                            "Result": "PASSED",
+                            "Reference_CG_iterations_per_set": 50,
+                            "Optimized_CG_iterations_per_set": 58,
+                            "Total_number_of_reference_iterations": 7550,
+                            "Total_number_of_optimized_iterations": 8758
+                        },
+                        "##########_Reproducibility_Summary_##########": "",
+                        "Reproducibility_Information": {
+                            "_value": "",
+                            "Result": "PASSED",
+                            "Scaled_residual_mean": 0.00164029,
+                            "Scaled_residual_variance": 0
+                        },
+                        "##########_Performance_Summary_(times_in_sec)_##########": "",
+                        "Benchmark_Time_Summary": {
+                            "_value": "",
+                            "Optimization_phase": 0.153079,
+                            "DDOT": 12.5344,
+                            "WAXPBY": 22.1252,
+                            "SpMV": 104.18,
+                            "MG": 463.38,
+                            "Total": 602.224
+                        },
+                        "Floating_Point_Operations_Summary": {
+                            "_value": "",
+                            "Raw_DDOT": 1262470000000.0,
+                            "Raw_WAXPBY": 1262470000000.0,
+                            "Raw_SpMV": 11412500000000.0,
+                            "Raw_MG": 63958600000000.0,
+                            "Total": 77896000000000.0,
+                            "Total_with_convergence_overhead": 67151800000000.0
+                        },
+                        "GB/s_Summary": {
+                            "_value": "",
+                            "Raw_Read_B/W": 796.811,
+                            "Raw_Write_B/W": 184.203,
+                            "Raw_Total_B/W": 981.014,
+                            "Total_with_convergence_and_optimization_phase_overhead": 840.235
+                        },
+                        "GFLOP/s_Summary": {
+                            "_value": "",
+                            "Raw_DDOT": 100.721,
+                            "Raw_WAXPBY": 57.0605,
+                            "Raw_SpMV": 109.546,
+                            "Raw_MG": 138.026,
+                            "Raw_Total": 129.347,
+                            "Total_with_convergence_overhead": 111.506,
+                            "Total_with_convergence_and_optimization_phase_overhead": 110.785
+                        },
+                        "User_Optimization_Overheads": {
+                            "_value": "",
+                            "Optimization_phase_time_(sec)": 0.153079,
+                            "Optimization_phase_time_vs_reference_SpMV+MG_time": 0.0443919
+                        },
+                        "DDOT_Timing_Variations": {
+                            "_value": "",
+                            "Min_DDOT_MPI_Allreduce_time": 0.0383088,
+                            "Max_DDOT_MPI_Allreduce_time": 0.0383088,
+                            "Avg_DDOT_MPI_Allreduce_time": 0.0383088
+                        },
+                        "Final_Summary": {
+                            "_value": "",
+                            "HPCG_result_is_VALID_with_a_GFLOP/s_rating_of": 110.785,
+                            "HPCG_2.4_rating_for_historical_reasons_is": 111.08,
+                            "Results_are_valid_but_execution_time_(sec)_is": 602.224,
+                            "Official_results_execution_time_(sec)_must_be_at_least": 1800
+                        }
+                    }
+                },
+                "metadata": {}
+            }
+        ],
+        "run4": [
+            {
+                "node_id": "node015:0:0",
+                "metrics": {
+                    "execution_time": 832.8002010523342,
+                    "gpu_nv": [
+                        {
+                            "gpu_id": 0,
+                            "energy": {
+                                "j": 154750.02147778668,
+                                "kwh": 0.04298611707716297
+                            },
+                            "power": {
+                                "avg_w": 186.03066178255423
+                            },
+                            "util": {
+                                "avg": 73.78025936599424,
+                                "max": 100
+                            },
+                            "temp": {
+                                "avg": 57.348823246878,
+                                "max": 66
+                            },
+                            "clock": {
+                                "avg": 1731.781340057637,
+                                "max": 1935
+                            }
+                        }
+                    ],
+                    "likwid": {
+                        "Info": {
+                            "CPU_name:": [
+                                "AMD EPYC 7402P 24-Core Processor               "
+                            ],
+                            "CPU_type:": [
+                                "AMD K17 (Zen2) architecture"
+                            ],
+                            "CPU_clock:": [
+                                "2.794763753 GHz"
+                            ]
+                        },
+                        "ENERGY": {
+                            "Group_1_Raw": {
+                                "Counter": {
+                                    "ACTUAL_CPU_CLOCK": "FIXC1",
+                                    "MAX_CPU_CLOCK": "FIXC2",
+                                    "RETIRED_INSTRUCTIONS": "PMC0",
+                                    "CPU_CLOCKS_UNHALTED": "PMC1",
+                                    "RAPL_CORE_ENERGY": "PWR0",
+                                    "RAPL_PKG_ENERGY": "PWR1"
+                                },
+                                "HWThread_0": {
+                                    "ACTUAL_CPU_CLOCK": "814099547510",
+                                    "MAX_CPU_CLOCK": "682354325968",
+                                    "RETIRED_INSTRUCTIONS": "-",
+                                    "CPU_CLOCKS_UNHALTED": "807810874563",
+                                    "RAPL_CORE_ENERGY": "2884.6704",
+                                    "RAPL_PKG_ENERGY": "48178.9068"
+                                },
+                                "HWThread_24": {
+                                    "ACTUAL_CPU_CLOCK": "1977779660625",
+                                    "MAX_CPU_CLOCK": "1657156217696",
+                                    "RETIRED_INSTRUCTIONS": "-",
+                                    "CPU_CLOCKS_UNHALTED": "1967010692891",
+                                    "RAPL_CORE_ENERGY": "0",
+                                    "RAPL_PKG_ENERGY": "0"
+                                }
+                            },
+                            "Group_1_Raw_STAT": {
+                                "Counter": {
+                                    "ACTUAL_CPU_CLOCK_STAT": "FIXC1",
+                                    "MAX_CPU_CLOCK_STAT": "FIXC2",
+                                    "RETIRED_INSTRUCTIONS_STAT": "PMC0",
+                                    "CPU_CLOCKS_UNHALTED_STAT": "PMC1",
+                                    "RAPL_CORE_ENERGY_STAT": "PWR0",
+                                    "RAPL_PKG_ENERGY_STAT": "PWR1"
+                                },
+                                "Sum": {
+                                    "ACTUAL_CPU_CLOCK_STAT": "2791879208135",
+                                    "MAX_CPU_CLOCK_STAT": "2339510543664",
+                                    "RETIRED_INSTRUCTIONS_STAT": "0",
+                                    "CPU_CLOCKS_UNHALTED_STAT": "2774821567454",
+                                    "RAPL_CORE_ENERGY_STAT": "2884.6704",
+                                    "RAPL_PKG_ENERGY_STAT": "48178.9068"
+                                },
+                                "Min": {
+                                    "ACTUAL_CPU_CLOCK_STAT": "814099547510",
+                                    "MAX_CPU_CLOCK_STAT": "682354325968",
+                                    "RETIRED_INSTRUCTIONS_STAT": "inf",
+                                    "CPU_CLOCKS_UNHALTED_STAT": "807810874563",
+                                    "RAPL_CORE_ENERGY_STAT": "0",
+                                    "RAPL_PKG_ENERGY_STAT": "0"
+                                },
+                                "Max": {
+                                    "ACTUAL_CPU_CLOCK_STAT": "1977779660625",
+                                    "MAX_CPU_CLOCK_STAT": "1657156217696",
+                                    "RETIRED_INSTRUCTIONS_STAT": "0",
+                                    "CPU_CLOCKS_UNHALTED_STAT": "1967010692891",
+                                    "RAPL_CORE_ENERGY_STAT": "2884.6704",
+                                    "RAPL_PKG_ENERGY_STAT": "48178.9068"
+                                },
+                                "Avg": {
+                                    "ACTUAL_CPU_CLOCK_STAT": "1.395940e+12",
+                                    "MAX_CPU_CLOCK_STAT": "1169755271832",
+                                    "RETIRED_INSTRUCTIONS_STAT": "0",
+                                    "CPU_CLOCKS_UNHALTED_STAT": "1387410783727",
+                                    "RAPL_CORE_ENERGY_STAT": "1442.3352",
+                                    "RAPL_PKG_ENERGY_STAT": "24089.4534"
+                                }
+                            },
+                            "Group_1_Metric": {
+                                "HWThread_0": {
+                                    "Runtime_(RDTSC)_[s]": "836.6413",
+                                    "Runtime_unhalted_[s]": "291.2946",
+                                    "Clock_[MHz]": "3334.3614",
+                                    "CPI": "inf",
+                                    "Energy_Core_[J]": "2884.6704",
+                                    "Power_Core_[W]": "3.4479",
+                                    "Energy_PKG_[J]": "48178.9068",
+                                    "Power_PKG_[W]": "57.5861"
+                                },
+                                "HWThread_24": {
+                                    "Runtime_(RDTSC)_[s]": "836.6413",
+                                    "Runtime_unhalted_[s]": "707.6733",
+                                    "Clock_[MHz]": "3335.4893",
+                                    "CPI": "inf",
+                                    "Energy_Core_[J]": "0",
+                                    "Power_Core_[W]": "0",
+                                    "Energy_PKG_[J]": "0",
+                                    "Power_PKG_[W]": "0"
+                                }
+                            },
+                            "Group_1_Metric_STAT": {
+                                "Sum": {
+                                    "Runtime_(RDTSC)_[s]_STAT": "1673.2826",
+                                    "Runtime_unhalted_[s]_STAT": "998.9679",
+                                    "Clock_[MHz]_STAT": "6669.8507",
+                                    "CPI_STAT": "0",
+                                    "Energy_Core_[J]_STAT": "2884.6704",
+                                    "Power_Core_[W]_STAT": "3.4479",
+                                    "Energy_PKG_[J]_STAT": "48178.9068",
+                                    "Power_PKG_[W]_STAT": "57.5861"
+                                },
+                                "Min": {
+                                    "Runtime_(RDTSC)_[s]_STAT": "836.6413",
+                                    "Runtime_unhalted_[s]_STAT": "291.2946",
+                                    "Clock_[MHz]_STAT": "3334.3614",
+                                    "CPI_STAT": "inf",
+                                    "Energy_Core_[J]_STAT": "0",
+                                    "Power_Core_[W]_STAT": "0",
+                                    "Energy_PKG_[J]_STAT": "0",
+                                    "Power_PKG_[W]_STAT": "0"
+                                },
+                                "Max": {
+                                    "Runtime_(RDTSC)_[s]_STAT": "836.6413",
+                                    "Runtime_unhalted_[s]_STAT": "707.6733",
+                                    "Clock_[MHz]_STAT": "3335.4893",
+                                    "CPI_STAT": "0",
+                                    "Energy_Core_[J]_STAT": "2884.6704",
+                                    "Power_Core_[W]_STAT": "3.4479",
+                                    "Energy_PKG_[J]_STAT": "48178.9068",
+                                    "Power_PKG_[W]_STAT": "57.5861"
+                                },
+                                "Avg": {
+                                    "Runtime_(RDTSC)_[s]_STAT": "836.6413",
+                                    "Runtime_unhalted_[s]_STAT": "499.4840",
+                                    "Clock_[MHz]_STAT": "3334.9253",
+                                    "CPI_STAT": "0",
+                                    "Energy_Core_[J]_STAT": "1442.3352",
+                                    "Power_Core_[W]_STAT": "1.7240",
+                                    "Energy_PKG_[J]_STAT": "24089.4534",
+                                    "Power_PKG_[W]_STAT": "28.7931"
+                                }
+                            }
+                        }
+                    }
+                },
+                "metadata": {
+                    "hostname": "node015",
+                    "local_ip": "10.141.0.15",
+                    "public_ip": "130.37.14.6"
+                }
+            },
+            {
+                "node_id": "local",
+                "metrics": {
+                    "nvidia_hpcg": {
+                        "Initial_Residual_": 6366.16,
+                        "Iteration_": "58   Scaled Residual = 0.00164193",
+                        "|_Reference_CPU_memory_": "10659.18 MB",
+                        "Departure_from_symmetry_(scaled)_for_SpMV_abs(x'*A*y_y'*A*x)_": 0.0368955,
+                        "Departure_from_symmetry_(scaled)_for_MG_abs(x'*Minv*y_y'*Minv*x)_": 0.00037318,
+                        "version": 3.1,
+                        "Release_date": "March 28, 2019",
+                        "Machine_Summary": {
+                            "_value": "",
+                            "Distributed_Processes": 1,
+                            "Threads_per_processes": 1
+                        },
+                        "Global_Problem_Dimensions": {
+                            "_value": "",
+                            "Global_nx": 288,
+                            "Global_ny": 288,
+                            "Global_nz": 288
+                        },
+                        "Processor_Dimensions": {
+                            "_value": "",
+                            "npx": 1,
+                            "npy": 1,
+                            "npz": 1
+                        },
+                        "Local_Domain_Dimensions": {
+                            "_value": "",
+                            "nx": 288,
+                            "ny": 288
+                        },
+                        "##########_Problem_Summary_##########": "",
+                        "Setup_Information": {
+                            "_value": "",
+                            "Setup_Time": 0.106507
+                        },
+                        "Linear_System_Information": {
+                            "_value": "",
+                            "Number_of_Equations": 23887872,
+                            "Number_of_Nonzero_Terms": 640503928
+                        },
+                        "Multigrid_Information": {
+                            "_value": "",
+                            "Number_of_coarse_grid_levels": 3,
+                            "Coarse_Grids": {
+                                "_value": "",
+                                "Grid_Level": 3,
+                                "Number_of_Equations": 46656,
+                                "Number_of_Nonzero_Terms": 1191016,
+                                "Number_of_Presmoother_Steps": 1,
+                                "Number_of_Postsmoother_Steps": 1
+                            }
+                        },
+                        "##########_Memory_Use_Summary_##########": "",
+                        "Memory_Use_Information": {
+                            "_value": "",
+                            "Total_memory_used_for_data_(Gbytes)": 17.0724,
+                            "Memory_used_for_OptimizeProblem_data_(Gbytes)": 0,
+                            "Bytes_per_equation_(Total_memory_/_Number_of_Equations)": 714.69,
+                            "Memory_used_for_linear_system_and_CG_(Gbytes)": 15.0255,
+                            "Coarse_Grids": {
+                                "_value": "",
+                                "Grid_Level": 3,
+                                "Memory_used": 0.0280413
+                            }
+                        },
+                        "##########_V&V_Testing_Summary_##########": "",
+                        "Spectral_Convergence_Tests": {
+                            "_value": "",
+                            "Result": "PASSED",
+                            "Unpreconditioned": {
+                                "_value": "",
+                                "Maximum_iteration_count": 11,
+                                "Expected_iteration_count": 12
+                            },
+                            "Preconditioned": {
+                                "_value": "",
+                                "Maximum_iteration_count": 1,
+                                "Expected_iteration_count": 2
+                            }
+                        },
+                        "Departure_from_Symmetry_|x'Ay_y'Ax|/(2*||x||*||A||*||y||)/epsilon": {
+                            "_value": "",
+                            "Result": "PASSED",
+                            "Departure_for_SpMV": 0.0368955,
+                            "Departure_for_MG": 0.00037318
+                        },
+                        "##########_Iterations_Summary_##########": "",
+                        "Iteration_Count_Information": {
+                            "_value": "",
+                            "Result": "PASSED",
+                            "Reference_CG_iterations_per_set": 50,
+                            "Optimized_CG_iterations_per_set": 58,
+                            "Total_number_of_reference_iterations": 7550,
+                            "Total_number_of_optimized_iterations": 8758
+                        },
+                        "##########_Reproducibility_Summary_##########": "",
+                        "Reproducibility_Information": {
+                            "_value": "",
+                            "Result": "PASSED",
+                            "Scaled_residual_mean": 0.00164193,
+                            "Scaled_residual_variance": 0
+                        },
+                        "##########_Performance_Summary_(times_in_sec)_##########": "",
+                        "Benchmark_Time_Summary": {
+                            "_value": "",
+                            "Optimization_phase": 0.152613,
+                            "DDOT": 12.5327,
+                            "WAXPBY": 22.1237,
+                            "SpMV": 104.183,
+                            "MG": 463.38,
+                            "Total": 602.224
+                        },
+                        "Floating_Point_Operations_Summary": {
+                            "_value": "",
+                            "Raw_DDOT": 1262470000000.0,
+                            "Raw_WAXPBY": 1262470000000.0,
+                            "Raw_SpMV": 11412500000000.0,
+                            "Raw_MG": 63958600000000.0,
+                            "Total": 77896000000000.0,
+                            "Total_with_convergence_overhead": 67151800000000.0
+                        },
+                        "GB/s_Summary": {
+                            "_value": "",
+                            "Raw_Read_B/W": 796.811,
+                            "Raw_Write_B/W": 184.203,
+                            "Raw_Total_B/W": 981.014,
+                            "Total_with_convergence_and_optimization_phase_overhead": 840.243
+                        },
+                        "GFLOP/s_Summary": {
+                            "_value": "",
+                            "Raw_DDOT": 100.734,
+                            "Raw_WAXPBY": 57.0644,
+                            "Raw_SpMV": 109.543,
+                            "Raw_MG": 138.026,
+                            "Raw_Total": 129.347,
+                            "Total_with_convergence_overhead": 111.506,
+                            "Total_with_convergence_and_optimization_phase_overhead": 110.786
+                        },
+                        "User_Optimization_Overheads": {
+                            "_value": "",
+                            "Optimization_phase_time_(sec)": 0.152613,
+                            "Optimization_phase_time_vs_reference_SpMV+MG_time": 0.0441683
+                        },
+                        "DDOT_Timing_Variations": {
+                            "_value": "",
+                            "Min_DDOT_MPI_Allreduce_time": 0.0359912,
+                            "Max_DDOT_MPI_Allreduce_time": 0.0359912,
+                            "Avg_DDOT_MPI_Allreduce_time": 0.0359912
+                        },
+                        "Final_Summary": {
+                            "_value": "",
+                            "HPCG_result_is_VALID_with_a_GFLOP/s_rating_of": 110.786,
+                            "HPCG_2.4_rating_for_historical_reasons_is": 111.081,
+                            "Results_are_valid_but_execution_time_(sec)_is": 602.224,
+                            "Official_results_execution_time_(sec)_must_be_at_least": 1800
+                        }
+                    }
+                },
+                "metadata": {}
+            }
+        ]
+    },
+    "metadata": {}
+}
