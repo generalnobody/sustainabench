@@ -17,7 +17,7 @@ module load CUDA/12.9.1
 # Answer the question: GPU HPC scaling?
 # Number of repetitions: 3. Low variability.
 
-RUNS=3
+RUNS=5
 
 
 echo "Warmup"

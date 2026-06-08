@@ -17,7 +17,7 @@ module load CUDA/12.9.1
 # No scaling. Run on a full node, running on a single GPU.
 # Number of repetitions: 3. Low variability.
 
-RUNS=3
+RUNS=5
 
 
 echo "Warming GPU up"

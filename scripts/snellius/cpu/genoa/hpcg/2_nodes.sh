@@ -19,7 +19,7 @@ module load 2025
 
 module load HPCG/3.1-foss-2025b
 
-RUNS=3
+RUNS=5
 
 
 export OMP_NUM_THREADS=$SLURM_CPUS_PER_TASK
