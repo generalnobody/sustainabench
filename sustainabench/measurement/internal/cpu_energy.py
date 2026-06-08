@@ -1,6 +1,7 @@
 from sustainabench.measurement.base import InternalMeasurement, register_measurement
 import os
 import time
+from sustainabench.utils.system_info import get_mpi_ranks
 
 @register_measurement
 class RAPLMeasurement(InternalMeasurement):
@@ -94,6 +95,10 @@ class RAPLMeasurement(InternalMeasurement):
         if self.start_energy is None or self.end_energy is None or self.start_time is None or self.end_time is None:
             return {}
         
+        _, local_mpi_rank = get_mpi_ranks()
+        if local_mpi_rank is None or local_mpi_rank != 0:
+            return {}
+
         diffs_uj = self._energy_diff(self.start_energy, self.end_energy)
         total_energy_j = sum(diffs_uj) / 1e6
 
