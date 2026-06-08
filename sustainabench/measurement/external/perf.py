@@ -19,12 +19,13 @@ class PerfEnergyMeasurement(ExternalMeasurement):
         cmd = [
             "perf",
             "stat",
-            "-e", "power/energy-pkg/"
+            "-e", "power/energy-pkg/",
+            "2>&1"
         ]
 
         return cmd
 
-    def _parse_likwid_output(self, results: list[str]):
+    def _parse_perf_output(self, results: list[str]):
         energy_line = ""
         time_line = ""
         for i in range(len(results)):
@@ -41,7 +42,7 @@ class PerfEnergyMeasurement(ExternalMeasurement):
         }
 
     def process_results(self, output: str, nodeids: list[str]) -> dict:
-        parsed = self._parse_likwid_output(output.splitlines())
+        parsed = self._parse_perf_output(output.splitlines())
 
         metadata = get_node_metadata()
         rank, local_rank = get_mpi_ranks()
