@@ -36,8 +36,12 @@ class PerfEnergyMeasurement(ExternalMeasurement):
         if energy_line == "" or time_line == "":
             return {}
         
+        joules = float(energy_line.split()[0])
+        kwh = joules / 3.6e6
+
         return {
-            "joules": float(energy_line.split()[0]),
+            "joules": joules,
+            "kwh": kwh,
             "time": float(time_line.split()[0])
         }
 
