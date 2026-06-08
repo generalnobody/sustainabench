@@ -1,7 +1,6 @@
 from sustainabench.measurement.base import InternalMeasurement, register_measurement
 import os
 import time
-from sustainabench.utils.system_info import get_mpi_ranks
 
 @register_measurement
 class RAPLMeasurement(InternalMeasurement):
@@ -9,6 +8,7 @@ class RAPLMeasurement(InternalMeasurement):
     poll_interval = None
     scope = "node"
     require_file = False
+    only_once_per_node = True
 
     def _discover_domains(self, base_path="/sys/class/powercap/intel-rapl"): # Handles cases where multiple packages are present in system.
         domains = []
@@ -93,10 +93,6 @@ class RAPLMeasurement(InternalMeasurement):
 
     def result(self):
         if self.start_energy is None or self.end_energy is None or self.start_time is None or self.end_time is None:
-            return {}
-        
-        _, local_mpi_rank = get_mpi_ranks()
-        if local_mpi_rank is None or local_mpi_rank != 0:
             return {}
 
         diffs_uj = self._energy_diff(self.start_energy, self.end_energy)

@@ -1,10 +1,12 @@
 import threading
 import time
+from sustainabench.utils.system_info import get_mpi_ranks
 
 class MeasurementManager:
 
     def __init__(self, measurements):
-        self.measurements = measurements
+        _, local_rank = get_mpi_ranks()
+        self.measurements = [m for m in measurements if not m.only_once_per_node or local_rank is None or local_rank == "0"]
         self._running = False
         self._thread = None
 
