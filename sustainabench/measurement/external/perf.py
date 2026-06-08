@@ -13,10 +13,7 @@ class PerfEnergyMeasurement(ExternalMeasurement):
     replace_wrapper = []
     wrapper_conflicts = ["likwid"]
 
-    def get_wrap_command(self, backend_name, node_processors):
-        if not self.config:
-            raise RuntimeError(f"Measurement {self.name} expects a config to be provided")
-        
+    def get_wrap_command(self, backend_name, node_processors):        
         self.backend_name = backend_name
 
         cmd = [
