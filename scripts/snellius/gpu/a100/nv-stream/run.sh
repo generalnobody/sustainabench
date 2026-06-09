@@ -5,7 +5,7 @@
 #SBATCH --nodes=1
 #SBATCH --partition=gpu_a100
 #SBATCH --gpus=1
-#SBATCH --time=1:00:00
+#SBATCH --time=0:20:00
 #SBATCH --exclusive
 #SBATCH --constraint=hwperf
 

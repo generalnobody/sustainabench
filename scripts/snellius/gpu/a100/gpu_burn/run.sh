@@ -5,7 +5,7 @@
 #SBATCH --nodes=1
 #SBATCH --partition=gpu_a100
 #SBATCH --gpus=1
-#SBATCH --time=1:00:00
+#SBATCH --time=0:30:00
 #SBATCH --exclusive
 #SBATCH --constraint=hwperf
 
@@ -21,6 +21,6 @@ RUNS=3
 
 
 echo "Warming GPU up"
-/home/ibiemond/gpu-burn/gpu_burn 60
+sustainabench run benchmark -w gpu-burn -m none -c configs/gpu-burn.yaml -s -nof
 echo "Running gpu-burn experiments"
 sustainabench run benchmark -w gpu-burn -m time -m perf-energy -m cpu-energy -m gpu-nv -r $RUNS -c configs/gpu-burn.yaml -s
