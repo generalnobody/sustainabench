@@ -1,0 +1,1027 @@
+{
+    "workload": "hpcg",
+    "backend": "mpi",
+    "results": {
+        "run0": [
+            {
+                "node_id": "tcn1099.local.snellius.surf.nl:5:1",
+                "metrics": {
+                    "execution_time": 364.1331099019999,
+                    "perf_energy": {}
+                },
+                "metadata": {
+                    "hostname": "tcn1099.local.snellius.surf.nl",
+                    "local_ip": "172.18.60.85",
+                    "public_ip": "145.136.60.85"
+                }
+            },
+            {
+                "node_id": "tcn1101.local.snellius.surf.nl:7:1",
+                "metrics": {
+                    "execution_time": 364.52848045993596,
+                    "perf_energy": {}
+                },
+                "metadata": {
+                    "hostname": "tcn1101.local.snellius.surf.nl",
+                    "local_ip": "172.18.60.87",
+                    "public_ip": "145.136.60.87"
+                }
+            },
+            {
+                "node_id": "tcn1082.local.snellius.surf.nl:1:1",
+                "metrics": {
+                    "execution_time": 367.2745073179249,
+                    "perf_energy": {}
+                },
+                "metadata": {
+                    "hostname": "tcn1082.local.snellius.surf.nl",
+                    "local_ip": "172.18.60.68",
+                    "public_ip": "145.136.60.68"
+                }
+            },
+            {
+                "node_id": "tcn1099.local.snellius.surf.nl:4:0",
+                "metrics": {
+                    "execution_time": 363.9962721519996,
+                    "cpu_energy": {
+                        "energy": {
+                            "j": 83527.930548,
+                            "kwh": 0.023202202930000002
+                        },
+                        "power": {
+                            "w": 229.47478591776186
+                        },
+                        "per_domain": [
+                            {
+                                "energy": {
+                                    "j": 38496.13536,
+                                    "kwh": 0.010693370933333333
+                                },
+                                "power": {
+                                    "w": 105.75974242915925
+                                }
+                            },
+                            {
+                                "energy": {
+                                    "j": 45031.795188,
+                                    "kwh": 0.012508831996666667
+                                },
+                                "power": {
+                                    "w": 123.7150434886026
+                                }
+                            }
+                        ]
+                    },
+                    "perf_energy": {
+                        "joules": 84126.8,
+                        "kwh": 0.023368555555555556,
+                        "time": 366.661842233
+                    }
+                },
+                "metadata": {
+                    "hostname": "tcn1099.local.snellius.surf.nl",
+                    "local_ip": "172.18.60.85",
+                    "public_ip": "145.136.60.85"
+                }
+            },
+            {
+                "node_id": "tcn1101.local.snellius.surf.nl:6:0",
+                "metrics": {
+                    "execution_time": 364.34338538511656,
+                    "cpu_energy": {
+                        "energy": {
+                            "j": 83744.168175,
+                            "kwh": 0.0232622689375
+                        },
+                        "power": {
+                            "w": 229.84966119034408
+                        },
+                        "per_domain": [
+                            {
+                                "energy": {
+                                    "j": 38991.626825,
+                                    "kwh": 0.010831007451388888
+                                },
+                                "power": {
+                                    "w": 107.01894126237265
+                                }
+                            },
+                            {
+                                "energy": {
+                                    "j": 44752.54135,
+                                    "kwh": 0.01243126148611111
+                                },
+                                "power": {
+                                    "w": 122.83071992797144
+                                }
+                            }
+                        ]
+                    },
+                    "perf_energy": {
+                        "joules": 84363.87,
+                        "kwh": 0.023434408333333333,
+                        "time": 367.090358219
+                    }
+                },
+                "metadata": {
+                    "hostname": "tcn1101.local.snellius.surf.nl",
+                    "local_ip": "172.18.60.87",
+                    "public_ip": "145.136.60.87"
+                }
+            },
+            {
+                "node_id": "tcn1082.local.snellius.surf.nl:0:0",
+                "metrics": {
+                    "execution_time": 367.1258725770749,
+                    "cpu_energy": {
+                        "energy": {
+                            "j": 83581.364125,
+                            "kwh": 0.023217045590277777
+                        },
+                        "power": {
+                            "w": 227.66418477852775
+                        },
+                        "per_domain": [
+                            {
+                                "energy": {
+                                    "j": 38557.011133,
+                                    "kwh": 0.010710280870277778
+                                },
+                                "power": {
+                                    "w": 105.0240158076753
+                                }
+                            },
+                            {
+                                "energy": {
+                                    "j": 45024.352992,
+                                    "kwh": 0.01250676472
+                                },
+                                "power": {
+                                    "w": 122.64016897085249
+                                }
+                            }
+                        ]
+                    },
+                    "perf_energy": {
+                        "joules": 84190.66,
+                        "kwh": 0.023386294444444445,
+                        "time": 369.856176408
+                    }
+                },
+                "metadata": {
+                    "hostname": "tcn1082.local.snellius.surf.nl",
+                    "local_ip": "172.18.60.68",
+                    "public_ip": "145.136.60.68"
+                }
+            },
+            {
+                "node_id": "local",
+                "metrics": {
+                    "hpcg": {
+                        "version": 3.1,
+                        "Release_date": "March 28, 2019",
+                        "Machine_Summary": {
+                            "_value": "",
+                            "Distributed_Processes": 8,
+                            "Threads_per_processes": 96
+                        },
+                        "Global_Problem_Dimensions": {
+                            "_value": "",
+                            "Global_nx": 256,
+                            "Global_ny": 256,
+                            "Global_nz": 256
+                        },
+                        "Processor_Dimensions": {
+                            "_value": "",
+                            "npx": 2,
+                            "npy": 2,
+                            "npz": 2
+                        },
+                        "Local_Domain_Dimensions": {
+                            "_value": "",
+                            "nx": 128,
+                            "ny": 128,
+                            "Lower_ipz": 0,
+                            "Upper_ipz": 1,
+                            "nz": 128
+                        },
+                        "##########_Problem_Summary_##########": "",
+                        "Setup_Information": {
+                            "_value": "",
+                            "Setup_Time": 3.73517
+                        },
+                        "Linear_System_Information": {
+                            "_value": "",
+                            "Number_of_Equations": 16777216,
+                            "Number_of_Nonzero_Terms": 449455096
+                        },
+                        "Multigrid_Information": {
+                            "_value": "",
+                            "Number_of_coarse_grid_levels": 3,
+                            "Coarse_Grids": {
+                                "_value": "",
+                                "Grid_Level": 3,
+                                "Number_of_Equations": 32768,
+                                "Number_of_Nonzero_Terms": 830584,
+                                "Number_of_Presmoother_Steps": 1,
+                                "Number_of_Postsmoother_Steps": 1
+                            }
+                        },
+                        "##########_Memory_Use_Summary_##########": "",
+                        "Memory_Use_Information": {
+                            "_value": "",
+                            "Total_memory_used_for_data_(Gbytes)": 11.9991,
+                            "Memory_used_for_OptimizeProblem_data_(Gbytes)": 0,
+                            "Bytes_per_equation_(Total_memory_/_Number_of_Equations)": 715.205,
+                            "Memory_used_for_linear_system_and_CG_(Gbytes)": 10.5592,
+                            "Coarse_Grids": {
+                                "_value": "",
+                                "Grid_Level": 3,
+                                "Memory_used": 0.0198085
+                            }
+                        },
+                        "##########_V&V_Testing_Summary_##########": "",
+                        "Spectral_Convergence_Tests": {
+                            "_value": "",
+                            "Result": "PASSED",
+                            "Unpreconditioned": {
+                                "_value": "",
+                                "Maximum_iteration_count": 11,
+                                "Expected_iteration_count": 12
+                            },
+                            "Preconditioned": {
+                                "_value": "",
+                                "Maximum_iteration_count": 2,
+                                "Expected_iteration_count": 2
+                            }
+                        },
+                        "Departure_from_Symmetry_|x'Ay_y'Ax|/(2*||x||*||A||*||y||)/epsilon": {
+                            "_value": "",
+                            "Result": "PASSED",
+                            "Departure_for_SpMV": 2.36815e-10,
+                            "Departure_for_MG": 5.26255e-11
+                        },
+                        "##########_Iterations_Summary_##########": "",
+                        "Iteration_Count_Information": {
+                            "_value": "",
+                            "Result": "PASSED",
+                            "Reference_CG_iterations_per_set": 50,
+                            "Optimized_CG_iterations_per_set": 50,
+                            "Total_number_of_reference_iterations": 700,
+                            "Total_number_of_optimized_iterations": 700
+                        },
+                        "##########_Reproducibility_Summary_##########": "",
+                        "Reproducibility_Information": {
+                            "_value": "",
+                            "Result": "PASSED",
+                            "Scaled_residual_mean": 0.0011907,
+                            "Scaled_residual_variance": 4.07393e-36
+                        },
+                        "##########_Performance_Summary_(times_in_sec)_##########": "",
+                        "Benchmark_Time_Summary": {
+                            "_value": "",
+                            "Optimization_phase": 9e-08,
+                            "DDOT": 9.29555,
+                            "WAXPBY": 5.20809,
+                            "SpMV": 34.8936,
+                            "MG": 255.913,
+                            "Total": 305.336
+                        },
+                        "Floating_Point_Operations_Summary": {
+                            "_value": "",
+                            "Raw_DDOT": 70934100000.0,
+                            "Raw_WAXPBY": 70934100000.0,
+                            "Raw_SpMV": 641822000000.0,
+                            "Raw_MG": 3586730000000.0,
+                            "Total": 4370420000000.0,
+                            "Total_with_convergence_overhead": 4370420000000.0
+                        },
+                        "GB/s_Summary": {
+                            "_value": "",
+                            "Raw_Read_B/W": 88.1775,
+                            "Raw_Write_B/W": 20.3774,
+                            "Raw_Total_B/W": 108.555,
+                            "Total_with_convergence_and_optimization_phase_overhead": 106.727
+                        },
+                        "GFLOP/s_Summary": {
+                            "_value": "",
+                            "Raw_DDOT": 7.63097,
+                            "Raw_WAXPBY": 13.62,
+                            "Raw_SpMV": 18.3937,
+                            "Raw_MG": 14.0154,
+                            "Raw_Total": 14.3135,
+                            "Total_with_convergence_overhead": 14.3135,
+                            "Total_with_convergence_and_optimization_phase_overhead": 14.0725
+                        },
+                        "User_Optimization_Overheads": {
+                            "_value": "",
+                            "Optimization_phase_time_(sec)": 9e-08,
+                            "Optimization_phase_time_vs_reference_SpMV+MG_time": 2.10811e-07
+                        },
+                        "DDOT_Timing_Variations": {
+                            "_value": "",
+                            "Min_DDOT_MPI_Allreduce_time": 1.36449,
+                            "Max_DDOT_MPI_Allreduce_time": 5.67664,
+                            "Avg_DDOT_MPI_Allreduce_time": 4.45024
+                        },
+                        "Final_Summary": {
+                            "_value": "",
+                            "HPCG_result_is_VALID_with_a_GFLOP/s_rating_of": 14.0725,
+                            "HPCG_2.4_rating_for_historical_reasons_is": 14.3135,
+                            "Reference_version_of_ComputeDotProduct_used": "Performance results are most likely suboptimal",
+                            "Reference_version_of_ComputeSPMV_used": "Performance results are most likely suboptimal",
+                            "Reference_version_of_ComputeMG_used_and_number_of_threads_greater_than_1": "Performance results are severely suboptimal",
+                            "Reference_version_of_ComputeWAXPBY_used": "Performance results are most likely suboptimal",
+                            "Results_are_valid_but_execution_time_(sec)_is": 305.336,
+                            "Official_results_execution_time_(sec)_must_be_at_least": 1800
+                        }
+                    }
+                },
+                "metadata": {}
+            },
+            {
+                "node_id": "tcn1094.local.snellius.surf.nl:3:1",
+                "metrics": {
+                    "execution_time": 363.77490189499986,
+                    "perf_energy": {}
+                },
+                "metadata": {
+                    "hostname": "tcn1094.local.snellius.surf.nl",
+                    "local_ip": "172.18.60.80",
+                    "public_ip": "145.136.60.80"
+                }
+            },
+            {
+                "node_id": "tcn1094.local.snellius.surf.nl:2:0",
+                "metrics": {
+                    "execution_time": 363.6155941249999,
+                    "cpu_energy": {
+                        "energy": {
+                            "j": 83439.41802,
+                            "kwh": 0.023177616116666667
+                        },
+                        "power": {
+                            "w": 229.4715938400021
+                        },
+                        "per_domain": [
+                            {
+                                "energy": {
+                                    "j": 38740.189252,
+                                    "kwh": 0.010761163681111111
+                                },
+                                "power": {
+                                    "w": 106.54164643369067
+                                }
+                            },
+                            {
+                                "energy": {
+                                    "j": 44699.228768,
+                                    "kwh": 0.012416452435555555
+                                },
+                                "power": {
+                                    "w": 122.92994740631143
+                                }
+                            }
+                        ]
+                    },
+                    "perf_energy": {
+                        "joules": 84055.3,
+                        "kwh": 0.023348694444444446,
+                        "time": 366.362182134
+                    }
+                },
+                "metadata": {
+                    "hostname": "tcn1094.local.snellius.surf.nl",
+                    "local_ip": "172.18.60.80",
+                    "public_ip": "145.136.60.80"
+                }
+            }
+        ],
+        "run1": [
+            {
+                "node_id": "tcn1099.local.snellius.surf.nl:5:1",
+                "metrics": {
+                    "execution_time": 370.02279825700043,
+                    "perf_energy": {}
+                },
+                "metadata": {
+                    "hostname": "tcn1099.local.snellius.surf.nl",
+                    "local_ip": "172.18.60.85",
+                    "public_ip": "145.136.60.85"
+                }
+            },
+            {
+                "node_id": "tcn1094.local.snellius.surf.nl:2:0",
+                "metrics": {
+                    "execution_time": 369.95187807099956,
+                    "cpu_energy": {
+                        "energy": {
+                            "j": 84968.399436,
+                            "kwh": 0.023602333176666667
+                        },
+                        "power": {
+                            "w": 229.67427791437385
+                        },
+                        "per_domain": [
+                            {
+                                "energy": {
+                                    "j": 39454.3608,
+                                    "kwh": 0.010959544666666666
+                                },
+                                "power": {
+                                    "w": 106.64731697268941
+                                }
+                            },
+                            {
+                                "energy": {
+                                    "j": 45514.038636,
+                                    "kwh": 0.01264278851
+                                },
+                                "power": {
+                                    "w": 123.0269609416844
+                                }
+                            }
+                        ]
+                    },
+                    "perf_energy": {
+                        "joules": 85542.2,
+                        "kwh": 0.023761722222222222,
+                        "time": 372.496593291
+                    }
+                },
+                "metadata": {
+                    "hostname": "tcn1094.local.snellius.surf.nl",
+                    "local_ip": "172.18.60.80",
+                    "public_ip": "145.136.60.80"
+                }
+            },
+            {
+                "node_id": "tcn1094.local.snellius.surf.nl:3:1",
+                "metrics": {
+                    "execution_time": 369.9510064320002,
+                    "perf_energy": {}
+                },
+                "metadata": {
+                    "hostname": "tcn1094.local.snellius.surf.nl",
+                    "local_ip": "172.18.60.80",
+                    "public_ip": "145.136.60.80"
+                }
+            },
+            {
+                "node_id": "tcn1082.local.snellius.surf.nl:1:1",
+                "metrics": {
+                    "execution_time": 370.0114792359527,
+                    "perf_energy": {}
+                },
+                "metadata": {
+                    "hostname": "tcn1082.local.snellius.surf.nl",
+                    "local_ip": "172.18.60.68",
+                    "public_ip": "145.136.60.68"
+                }
+            },
+            {
+                "node_id": "tcn1082.local.snellius.surf.nl:0:0",
+                "metrics": {
+                    "execution_time": 370.01098615210503,
+                    "cpu_energy": {
+                        "energy": {
+                            "j": 84305.604534,
+                            "kwh": 0.023418223481666667
+                        },
+                        "power": {
+                            "w": 227.8463336308258
+                        },
+                        "per_domain": [
+                            {
+                                "energy": {
+                                    "j": 38861.597341,
+                                    "kwh": 0.010794888150277777
+                                },
+                                "power": {
+                                    "w": 105.02827803830452
+                                }
+                            },
+                            {
+                                "energy": {
+                                    "j": 45444.007193,
+                                    "kwh": 0.01262333533138889
+                                },
+                                "power": {
+                                    "w": 122.81805559252126
+                                }
+                            }
+                        ]
+                    },
+                    "perf_energy": {
+                        "joules": 84879.47,
+                        "kwh": 0.023577630555555555,
+                        "time": 372.565227972
+                    }
+                },
+                "metadata": {
+                    "hostname": "tcn1082.local.snellius.surf.nl",
+                    "local_ip": "172.18.60.68",
+                    "public_ip": "145.136.60.68"
+                }
+            },
+            {
+                "node_id": "tcn1099.local.snellius.surf.nl:4:0",
+                "metrics": {
+                    "execution_time": 370.01899101600065,
+                    "cpu_energy": {
+                        "energy": {
+                            "j": 84995.916063,
+                            "kwh": 0.023609976684166666
+                        },
+                        "power": {
+                            "w": 229.7069863977676
+                        },
+                        "per_domain": [
+                            {
+                                "energy": {
+                                    "j": 39190.392074,
+                                    "kwh": 0.010886220020555556
+                                },
+                                "power": {
+                                    "w": 105.91458126520902
+                                }
+                            },
+                            {
+                                "energy": {
+                                    "j": 45805.523989,
+                                    "kwh": 0.012723756663611112
+                                },
+                                "power": {
+                                    "w": 123.7924051325586
+                                }
+                            }
+                        ]
+                    },
+                    "perf_energy": {
+                        "joules": 85569.95,
+                        "kwh": 0.023769430555555554,
+                        "time": 372.55416616
+                    }
+                },
+                "metadata": {
+                    "hostname": "tcn1099.local.snellius.surf.nl",
+                    "local_ip": "172.18.60.85",
+                    "public_ip": "145.136.60.85"
+                }
+            },
+            {
+                "node_id": "tcn1101.local.snellius.surf.nl:6:0",
+                "metrics": {
+                    "execution_time": 369.98574515315704,
+                    "cpu_energy": {
+                        "energy": {
+                            "j": 84988.794666,
+                            "kwh": 0.023607998518333333
+                        },
+                        "power": {
+                            "w": 229.70836157694094
+                        },
+                        "per_domain": [
+                            {
+                                "energy": {
+                                    "j": 39561.168798,
+                                    "kwh": 0.010989213555
+                                },
+                                "power": {
+                                    "w": 106.92622836187687
+                                }
+                            },
+                            {
+                                "energy": {
+                                    "j": 45427.625868,
+                                    "kwh": 0.012618784963333334
+                                },
+                                "power": {
+                                    "w": 122.78213321506409
+                                }
+                            }
+                        ]
+                    },
+                    "perf_energy": {
+                        "joules": 85570.29,
+                        "kwh": 0.023769525,
+                        "time": 372.556251599
+                    }
+                },
+                "metadata": {
+                    "hostname": "tcn1101.local.snellius.surf.nl",
+                    "local_ip": "172.18.60.87",
+                    "public_ip": "145.136.60.87"
+                }
+            },
+            {
+                "node_id": "tcn1101.local.snellius.surf.nl:7:1",
+                "metrics": {
+                    "execution_time": 369.9895244638901,
+                    "perf_energy": {}
+                },
+                "metadata": {
+                    "hostname": "tcn1101.local.snellius.surf.nl",
+                    "local_ip": "172.18.60.87",
+                    "public_ip": "145.136.60.87"
+                }
+            }
+        ],
+        "run2": [
+            {
+                "node_id": "tcn1082.local.snellius.surf.nl:1:1",
+                "metrics": {
+                    "execution_time": 366.1216225370299,
+                    "perf_energy": {}
+                },
+                "metadata": {
+                    "hostname": "tcn1082.local.snellius.surf.nl",
+                    "local_ip": "172.18.60.68",
+                    "public_ip": "145.136.60.68"
+                }
+            },
+            {
+                "node_id": "tcn1094.local.snellius.surf.nl:2:0",
+                "metrics": {
+                    "execution_time": 366.1316559329998,
+                    "cpu_energy": {
+                        "energy": {
+                            "j": 84072.398043,
+                            "kwh": 0.023353443900833333
+                        },
+                        "power": {
+                            "w": 229.62347251977613
+                        },
+                        "per_domain": [
+                            {
+                                "energy": {
+                                    "j": 39016.563494,
+                                    "kwh": 0.010837934303888888
+                                },
+                                "power": {
+                                    "w": 106.56433031324198
+                                }
+                            },
+                            {
+                                "energy": {
+                                    "j": 45055.834549,
+                                    "kwh": 0.012515509596944445
+                                },
+                                "power": {
+                                    "w": 123.05914220653416
+                                }
+                            }
+                        ]
+                    },
+                    "perf_energy": {
+                        "joules": 84648.43,
+                        "kwh": 0.023513452777777777,
+                        "time": 368.671035918
+                    }
+                },
+                "metadata": {
+                    "hostname": "tcn1094.local.snellius.surf.nl",
+                    "local_ip": "172.18.60.80",
+                    "public_ip": "145.136.60.80"
+                }
+            },
+            {
+                "node_id": "tcn1094.local.snellius.surf.nl:3:1",
+                "metrics": {
+                    "execution_time": 366.13678725499994,
+                    "perf_energy": {}
+                },
+                "metadata": {
+                    "hostname": "tcn1094.local.snellius.surf.nl",
+                    "local_ip": "172.18.60.80",
+                    "public_ip": "145.136.60.80"
+                }
+            },
+            {
+                "node_id": "tcn1099.local.snellius.surf.nl:4:0",
+                "metrics": {
+                    "execution_time": 366.14269551300004,
+                    "cpu_energy": {
+                        "energy": {
+                            "j": 84077.631322,
+                            "kwh": 0.023354897589444444
+                        },
+                        "power": {
+                            "w": 229.63083325376107
+                        },
+                        "per_domain": [
+                            {
+                                "energy": {
+                                    "j": 38743.467021,
+                                    "kwh": 0.0107620741725
+                                },
+                                "power": {
+                                    "w": 105.81523855137324
+                                }
+                            },
+                            {
+                                "energy": {
+                                    "j": 45334.164301,
+                                    "kwh": 0.012592823416944444
+                                },
+                                "power": {
+                                    "w": 123.8155947023878
+                                }
+                            }
+                        ]
+                    },
+                    "perf_energy": {
+                        "joules": 84651.37,
+                        "kwh": 0.023514269444444444,
+                        "time": 368.671814759
+                    }
+                },
+                "metadata": {
+                    "hostname": "tcn1099.local.snellius.surf.nl",
+                    "local_ip": "172.18.60.85",
+                    "public_ip": "145.136.60.85"
+                }
+            },
+            {
+                "node_id": "tcn1099.local.snellius.surf.nl:5:1",
+                "metrics": {
+                    "execution_time": 366.14435941600004,
+                    "perf_energy": {}
+                },
+                "metadata": {
+                    "hostname": "tcn1099.local.snellius.surf.nl",
+                    "local_ip": "172.18.60.85",
+                    "public_ip": "145.136.60.85"
+                }
+            },
+            {
+                "node_id": "tcn1082.local.snellius.surf.nl:0:0",
+                "metrics": {
+                    "execution_time": 366.11724348412827,
+                    "cpu_energy": {
+                        "energy": {
+                            "j": 83450.693484,
+                            "kwh": 0.02318074819
+                        },
+                        "power": {
+                            "w": 227.9344588129113
+                        },
+                        "per_domain": [
+                            {
+                                "energy": {
+                                    "j": 38463.275258,
+                                    "kwh": 0.010684243127222222
+                                },
+                                "power": {
+                                    "w": 105.05731545280912
+                                }
+                            },
+                            {
+                                "energy": {
+                                    "j": 44987.418226,
+                                    "kwh": 0.012496505062777778
+                                },
+                                "power": {
+                                    "w": 122.87714336010217
+                                }
+                            }
+                        ]
+                    },
+                    "perf_energy": {
+                        "joules": 84023.98,
+                        "kwh": 0.023339994444444442,
+                        "time": 368.668244556
+                    }
+                },
+                "metadata": {
+                    "hostname": "tcn1082.local.snellius.surf.nl",
+                    "local_ip": "172.18.60.68",
+                    "public_ip": "145.136.60.68"
+                }
+            },
+            {
+                "node_id": "local",
+                "metrics": {
+                    "hpcg": {
+                        "version": 3.1,
+                        "Release_date": "March 28, 2019",
+                        "Machine_Summary": {
+                            "_value": "",
+                            "Distributed_Processes": 8,
+                            "Threads_per_processes": 96
+                        },
+                        "Global_Problem_Dimensions": {
+                            "_value": "",
+                            "Global_nx": 256,
+                            "Global_ny": 256,
+                            "Global_nz": 256
+                        },
+                        "Processor_Dimensions": {
+                            "_value": "",
+                            "npx": 2,
+                            "npy": 2,
+                            "npz": 2
+                        },
+                        "Local_Domain_Dimensions": {
+                            "_value": "",
+                            "nx": 128,
+                            "ny": 128,
+                            "Lower_ipz": 0,
+                            "Upper_ipz": 1,
+                            "nz": 128
+                        },
+                        "##########_Problem_Summary_##########": "",
+                        "Setup_Information": {
+                            "_value": "",
+                            "Setup_Time": 3.72743
+                        },
+                        "Linear_System_Information": {
+                            "_value": "",
+                            "Number_of_Equations": 16777216,
+                            "Number_of_Nonzero_Terms": 449455096
+                        },
+                        "Multigrid_Information": {
+                            "_value": "",
+                            "Number_of_coarse_grid_levels": 3,
+                            "Coarse_Grids": {
+                                "_value": "",
+                                "Grid_Level": 3,
+                                "Number_of_Equations": 32768,
+                                "Number_of_Nonzero_Terms": 830584,
+                                "Number_of_Presmoother_Steps": 1,
+                                "Number_of_Postsmoother_Steps": 1
+                            }
+                        },
+                        "##########_Memory_Use_Summary_##########": "",
+                        "Memory_Use_Information": {
+                            "_value": "",
+                            "Total_memory_used_for_data_(Gbytes)": 11.9991,
+                            "Memory_used_for_OptimizeProblem_data_(Gbytes)": 0,
+                            "Bytes_per_equation_(Total_memory_/_Number_of_Equations)": 715.205,
+                            "Memory_used_for_linear_system_and_CG_(Gbytes)": 10.5592,
+                            "Coarse_Grids": {
+                                "_value": "",
+                                "Grid_Level": 3,
+                                "Memory_used": 0.0198085
+                            }
+                        },
+                        "##########_V&V_Testing_Summary_##########": "",
+                        "Spectral_Convergence_Tests": {
+                            "_value": "",
+                            "Result": "PASSED",
+                            "Unpreconditioned": {
+                                "_value": "",
+                                "Maximum_iteration_count": 11,
+                                "Expected_iteration_count": 12
+                            },
+                            "Preconditioned": {
+                                "_value": "",
+                                "Maximum_iteration_count": 2,
+                                "Expected_iteration_count": 2
+                            }
+                        },
+                        "Departure_from_Symmetry_|x'Ay_y'Ax|/(2*||x||*||A||*||y||)/epsilon": {
+                            "_value": "",
+                            "Result": "PASSED",
+                            "Departure_for_SpMV": 2.36815e-10,
+                            "Departure_for_MG": 1.05251e-10
+                        },
+                        "##########_Iterations_Summary_##########": "",
+                        "Iteration_Count_Information": {
+                            "_value": "",
+                            "Result": "PASSED",
+                            "Reference_CG_iterations_per_set": 50,
+                            "Optimized_CG_iterations_per_set": 51,
+                            "Total_number_of_reference_iterations": 700,
+                            "Total_number_of_optimized_iterations": 714
+                        },
+                        "##########_Reproducibility_Summary_##########": "",
+                        "Reproducibility_Information": {
+                            "_value": "",
+                            "Result": "PASSED",
+                            "Scaled_residual_mean": 0.00111722,
+                            "Scaled_residual_variance": 1.20807e-35
+                        },
+                        "##########_Performance_Summary_(times_in_sec)_##########": "",
+                        "Benchmark_Time_Summary": {
+                            "_value": "",
+                            "Optimization_phase": 8e-08,
+                            "DDOT": 9.956,
+                            "WAXPBY": 5.27392,
+                            "SpMV": 34.9734,
+                            "MG": 256.65,
+                            "Total": 306.879
+                        },
+                        "Floating_Point_Operations_Summary": {
+                            "_value": "",
+                            "Raw_DDOT": 72343400000.0,
+                            "Raw_WAXPBY": 72343400000.0,
+                            "Raw_SpMV": 654407000000.0,
+                            "Raw_MG": 3658460000000.0,
+                            "Total": 4457550000000.0,
+                            "Total_with_convergence_overhead": 4370150000000.0
+                        },
+                        "GB/s_Summary": {
+                            "_value": "",
+                            "Raw_Read_B/W": 89.4833,
+                            "Raw_Write_B/W": 20.6802,
+                            "Raw_Total_B/W": 110.163,
+                            "Total_with_convergence_and_optimization_phase_overhead": 106.198
+                        },
+                        "GFLOP/s_Summary": {
+                            "_value": "",
+                            "Raw_DDOT": 7.26631,
+                            "Raw_WAXPBY": 13.7172,
+                            "Raw_SpMV": 18.7115,
+                            "Raw_MG": 14.2547,
+                            "Raw_Total": 14.5255,
+                            "Total_with_convergence_overhead": 14.2406,
+                            "Total_with_convergence_and_optimization_phase_overhead": 14.0025
+                        },
+                        "User_Optimization_Overheads": {
+                            "_value": "",
+                            "Optimization_phase_time_(sec)": 8e-08,
+                            "Optimization_phase_time_vs_reference_SpMV+MG_time": 1.60427e-07
+                        },
+                        "DDOT_Timing_Variations": {
+                            "_value": "",
+                            "Min_DDOT_MPI_Allreduce_time": 1.77426,
+                            "Max_DDOT_MPI_Allreduce_time": 3.25379,
+                            "Avg_DDOT_MPI_Allreduce_time": 2.60999
+                        },
+                        "Final_Summary": {
+                            "_value": "",
+                            "HPCG_result_is_VALID_with_a_GFLOP/s_rating_of": 14.0025,
+                            "HPCG_2.4_rating_for_historical_reasons_is": 14.2406,
+                            "Reference_version_of_ComputeDotProduct_used": "Performance results are most likely suboptimal",
+                            "Reference_version_of_ComputeSPMV_used": "Performance results are most likely suboptimal",
+                            "Reference_version_of_ComputeMG_used_and_number_of_threads_greater_than_1": "Performance results are severely suboptimal",
+                            "Reference_version_of_ComputeWAXPBY_used": "Performance results are most likely suboptimal",
+                            "Results_are_valid_but_execution_time_(sec)_is": 306.879,
+                            "Official_results_execution_time_(sec)_must_be_at_least": 1800
+                        }
+                    }
+                },
+                "metadata": {}
+            },
+            {
+                "node_id": "tcn1101.local.snellius.surf.nl:6:0",
+                "metrics": {
+                    "execution_time": 366.08792502991855,
+                    "cpu_energy": {
+                        "energy": {
+                            "j": 84185.184569,
+                            "kwh": 0.02338477349138889
+                        },
+                        "power": {
+                            "w": 229.95899376760894
+                        },
+                        "per_domain": [
+                            {
+                                "energy": {
+                                    "j": 39183.059553,
+                                    "kwh": 0.010884183209166667
+                                },
+                                "power": {
+                                    "w": 107.03186069704437
+                                }
+                            },
+                            {
+                                "energy": {
+                                    "j": 45002.125016,
+                                    "kwh": 0.012500590282222222
+                                },
+                                "power": {
+                                    "w": 122.92713307056457
+                                }
+                            }
+                        ]
+                    },
+                    "perf_energy": {
+                        "joules": 84770.66,
+                        "kwh": 0.023547405555555557,
+                        "time": 368.65912982
+                    }
+                },
+                "metadata": {
+                    "hostname": "tcn1101.local.snellius.surf.nl",
+                    "local_ip": "172.18.60.87",
+                    "public_ip": "145.136.60.87"
+                }
+            },
+            {
+                "node_id": "tcn1101.local.snellius.surf.nl:7:1",
+                "metrics": {
+                    "execution_time": 366.0880907641258,
+                    "perf_energy": {}
+                },
+                "metadata": {
+                    "hostname": "tcn1101.local.snellius.surf.nl",
+                    "local_ip": "172.18.60.87",
+                    "public_ip": "145.136.60.87"
+                }
+            }
+        ]
+    },
+    "metadata": {}
+}
