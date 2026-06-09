@@ -1,0 +1,679 @@
+{
+    "workload": "hpcg",
+    "backend": "mpi",
+    "results": {
+        "run0": [
+            {
+                "node_id": "tcn207.local.snellius.surf.nl:0:0",
+                "metrics": {
+                    "execution_time": 370.06495523802005,
+                    "cpu_energy": {
+                        "energy": {
+                            "j": 69261.390094,
+                            "kwh": 0.019239275026111113
+                        },
+                        "power": {
+                            "w": 187.1602137057353
+                        },
+                        "per_domain": [
+                            {
+                                "energy": {
+                                    "j": 31870.283846,
+                                    "kwh": 0.00885285662388889
+                                },
+                                "power": {
+                                    "w": 86.12084059220358
+                                }
+                            },
+                            {
+                                "energy": {
+                                    "j": 37391.106248,
+                                    "kwh": 0.010386418402222222
+                                },
+                                "power": {
+                                    "w": 101.03937311353167
+                                }
+                            }
+                        ]
+                    },
+                    "perf_energy": {
+                        "joules": 69823.3,
+                        "kwh": 0.019395361111111113,
+                        "time": 373.131680117
+                    }
+                },
+                "metadata": {
+                    "hostname": "tcn207.local.snellius.surf.nl",
+                    "local_ip": "172.18.56.217",
+                    "public_ip": "145.136.56.217"
+                }
+            },
+            {
+                "node_id": "local",
+                "metrics": {
+                    "hpcg": {
+                        "version": 3.1,
+                        "Release_date": "March 28, 2019",
+                        "Machine_Summary": {
+                            "_value": "",
+                            "Distributed_Processes": 2,
+                            "Threads_per_processes": 64
+                        },
+                        "Global_Problem_Dimensions": {
+                            "_value": "",
+                            "Global_nx": 256,
+                            "Global_ny": 128,
+                            "Global_nz": 128
+                        },
+                        "Processor_Dimensions": {
+                            "_value": "",
+                            "npx": 2,
+                            "npy": 1,
+                            "npz": 1
+                        },
+                        "Local_Domain_Dimensions": {
+                            "_value": "",
+                            "nx": 128,
+                            "ny": 128,
+                            "Lower_ipz": 0,
+                            "Upper_ipz": 0,
+                            "nz": 128
+                        },
+                        "##########_Problem_Summary_##########": "",
+                        "Setup_Information": {
+                            "_value": "",
+                            "Setup_Time": 6.36783
+                        },
+                        "Linear_System_Information": {
+                            "_value": "",
+                            "Number_of_Equations": 4194304,
+                            "Number_of_Nonzero_Terms": 111777784
+                        },
+                        "Multigrid_Information": {
+                            "_value": "",
+                            "Number_of_coarse_grid_levels": 3,
+                            "Coarse_Grids": {
+                                "_value": "",
+                                "Grid_Level": 3,
+                                "Number_of_Equations": 8192,
+                                "Number_of_Nonzero_Terms": 198904,
+                                "Number_of_Presmoother_Steps": 1,
+                                "Number_of_Postsmoother_Steps": 1
+                            }
+                        },
+                        "##########_Memory_Use_Summary_##########": "",
+                        "Memory_Use_Information": {
+                            "_value": "",
+                            "Total_memory_used_for_data_(Gbytes)": 2.99839,
+                            "Memory_used_for_OptimizeProblem_data_(Gbytes)": 0,
+                            "Bytes_per_equation_(Total_memory_/_Number_of_Equations)": 714.871,
+                            "Memory_used_for_linear_system_and_CG_(Gbytes)": 2.63874,
+                            "Coarse_Grids": {
+                                "_value": "",
+                                "Grid_Level": 3,
+                                "Memory_used": 0.00493517
+                            }
+                        },
+                        "##########_V&V_Testing_Summary_##########": "",
+                        "Spectral_Convergence_Tests": {
+                            "_value": "",
+                            "Result": "PASSED",
+                            "Unpreconditioned": {
+                                "_value": "",
+                                "Maximum_iteration_count": 11,
+                                "Expected_iteration_count": 12
+                            },
+                            "Preconditioned": {
+                                "_value": "",
+                                "Maximum_iteration_count": 2,
+                                "Expected_iteration_count": 2
+                            }
+                        },
+                        "Departure_from_Symmetry_|x'Ay_y'Ax|/(2*||x||*||A||*||y||)/epsilon": {
+                            "_value": "",
+                            "Result": "PASSED",
+                            "Departure_for_SpMV": 5.47339e-09,
+                            "Departure_for_MG": 2.10515e-10
+                        },
+                        "##########_Iterations_Summary_##########": "",
+                        "Iteration_Count_Information": {
+                            "_value": "",
+                            "Result": "PASSED",
+                            "Reference_CG_iterations_per_set": 50,
+                            "Optimized_CG_iterations_per_set": 50,
+                            "Total_number_of_reference_iterations": 650,
+                            "Total_number_of_optimized_iterations": 650
+                        },
+                        "##########_Reproducibility_Summary_##########": "",
+                        "Reproducibility_Information": {
+                            "_value": "",
+                            "Result": "PASSED",
+                            "Scaled_residual_mean": 5.87254e-05,
+                            "Scaled_residual_variance": 1.40551e-37
+                        },
+                        "##########_Performance_Summary_(times_in_sec)_##########": "",
+                        "Benchmark_Time_Summary": {
+                            "_value": "",
+                            "Optimization_phase": 1.7e-07,
+                            "DDOT": 6.95774,
+                            "WAXPBY": 6.61277,
+                            "SpMV": 39.5195,
+                            "MG": 251.864,
+                            "Total": 304.994
+                        },
+                        "Floating_Point_Operations_Summary": {
+                            "_value": "",
+                            "Raw_DDOT": 16466800000.0,
+                            "Raw_WAXPBY": 16466800000.0,
+                            "Raw_SpMV": 148217000000.0,
+                            "Raw_MG": 827622000000.0,
+                            "Total": 1008770000000.0,
+                            "Total_with_convergence_overhead": 1008770000000.0
+                        },
+                        "GB/s_Summary": {
+                            "_value": "",
+                            "Raw_Read_B/W": 20.3788,
+                            "Raw_Write_B/W": 4.7096,
+                            "Raw_Total_B/W": 25.0884,
+                            "Total_with_convergence_and_optimization_phase_overhead": 24.4255
+                        },
+                        "GFLOP/s_Summary": {
+                            "_value": "",
+                            "Raw_DDOT": 2.36669,
+                            "Raw_WAXPBY": 2.49016,
+                            "Raw_SpMV": 3.75049,
+                            "Raw_MG": 3.28598,
+                            "Raw_Total": 3.30751,
+                            "Total_with_convergence_overhead": 3.30751,
+                            "Total_with_convergence_and_optimization_phase_overhead": 3.22011
+                        },
+                        "User_Optimization_Overheads": {
+                            "_value": "",
+                            "Optimization_phase_time_(sec)": 1.7e-07,
+                            "Optimization_phase_time_vs_reference_SpMV+MG_time": 3.78721e-07
+                        },
+                        "DDOT_Timing_Variations": {
+                            "_value": "",
+                            "Min_DDOT_MPI_Allreduce_time": 0.123272,
+                            "Max_DDOT_MPI_Allreduce_time": 3.26477,
+                            "Avg_DDOT_MPI_Allreduce_time": 1.69402
+                        },
+                        "Final_Summary": {
+                            "_value": "",
+                            "HPCG_result_is_VALID_with_a_GFLOP/s_rating_of": 3.22011,
+                            "HPCG_2.4_rating_for_historical_reasons_is": 3.30751,
+                            "Reference_version_of_ComputeDotProduct_used": "Performance results are most likely suboptimal",
+                            "Reference_version_of_ComputeSPMV_used": "Performance results are most likely suboptimal",
+                            "Reference_version_of_ComputeMG_used_and_number_of_threads_greater_than_1": "Performance results are severely suboptimal",
+                            "Reference_version_of_ComputeWAXPBY_used": "Performance results are most likely suboptimal",
+                            "Results_are_valid_but_execution_time_(sec)_is": 304.994,
+                            "Official_results_execution_time_(sec)_must_be_at_least": 1800
+                        }
+                    }
+                },
+                "metadata": {}
+            },
+            {
+                "node_id": "tcn207.local.snellius.surf.nl:1:1",
+                "metrics": {
+                    "execution_time": 370.10198125615716,
+                    "perf_energy": {}
+                },
+                "metadata": {
+                    "hostname": "tcn207.local.snellius.surf.nl",
+                    "local_ip": "172.18.56.217",
+                    "public_ip": "145.136.56.217"
+                }
+            }
+        ],
+        "run1": [
+            {
+                "node_id": "tcn207.local.snellius.surf.nl:0:0",
+                "metrics": {
+                    "execution_time": 370.5282693009358,
+                    "cpu_energy": {
+                        "energy": {
+                            "j": 69367.127804,
+                            "kwh": 0.019268646612222225
+                        },
+                        "power": {
+                            "w": 187.2115538470986
+                        },
+                        "per_domain": [
+                            {
+                                "energy": {
+                                    "j": 31916.660414,
+                                    "kwh": 0.008865739003888888
+                                },
+                                "power": {
+                                    "w": 86.13831621511318
+                                }
+                            },
+                            {
+                                "energy": {
+                                    "j": 37450.46739,
+                                    "kwh": 0.010402907608333333
+                                },
+                                "power": {
+                                    "w": 101.0732376319854
+                                }
+                            }
+                        ]
+                    },
+                    "perf_energy": {
+                        "joules": 69928.07,
+                        "kwh": 0.019424463888888892,
+                        "time": 373.569257272
+                    }
+                },
+                "metadata": {
+                    "hostname": "tcn207.local.snellius.surf.nl",
+                    "local_ip": "172.18.56.217",
+                    "public_ip": "145.136.56.217"
+                }
+            },
+            {
+                "node_id": "local",
+                "metrics": {
+                    "hpcg": {
+                        "version": 3.1,
+                        "Release_date": "March 28, 2019",
+                        "Machine_Summary": {
+                            "_value": "",
+                            "Distributed_Processes": 2,
+                            "Threads_per_processes": 64
+                        },
+                        "Global_Problem_Dimensions": {
+                            "_value": "",
+                            "Global_nx": 256,
+                            "Global_ny": 128,
+                            "Global_nz": 128
+                        },
+                        "Processor_Dimensions": {
+                            "_value": "",
+                            "npx": 2,
+                            "npy": 1,
+                            "npz": 1
+                        },
+                        "Local_Domain_Dimensions": {
+                            "_value": "",
+                            "nx": 128,
+                            "ny": 128,
+                            "Lower_ipz": 0,
+                            "Upper_ipz": 0,
+                            "nz": 128
+                        },
+                        "##########_Problem_Summary_##########": "",
+                        "Setup_Information": {
+                            "_value": "",
+                            "Setup_Time": 6.34614
+                        },
+                        "Linear_System_Information": {
+                            "_value": "",
+                            "Number_of_Equations": 4194304,
+                            "Number_of_Nonzero_Terms": 111777784
+                        },
+                        "Multigrid_Information": {
+                            "_value": "",
+                            "Number_of_coarse_grid_levels": 3,
+                            "Coarse_Grids": {
+                                "_value": "",
+                                "Grid_Level": 3,
+                                "Number_of_Equations": 8192,
+                                "Number_of_Nonzero_Terms": 198904,
+                                "Number_of_Presmoother_Steps": 1,
+                                "Number_of_Postsmoother_Steps": 1
+                            }
+                        },
+                        "##########_Memory_Use_Summary_##########": "",
+                        "Memory_Use_Information": {
+                            "_value": "",
+                            "Total_memory_used_for_data_(Gbytes)": 2.99839,
+                            "Memory_used_for_OptimizeProblem_data_(Gbytes)": 0,
+                            "Bytes_per_equation_(Total_memory_/_Number_of_Equations)": 714.871,
+                            "Memory_used_for_linear_system_and_CG_(Gbytes)": 2.63874,
+                            "Coarse_Grids": {
+                                "_value": "",
+                                "Grid_Level": 3,
+                                "Memory_used": 0.00493517
+                            }
+                        },
+                        "##########_V&V_Testing_Summary_##########": "",
+                        "Spectral_Convergence_Tests": {
+                            "_value": "",
+                            "Result": "PASSED",
+                            "Unpreconditioned": {
+                                "_value": "",
+                                "Maximum_iteration_count": 11,
+                                "Expected_iteration_count": 12
+                            },
+                            "Preconditioned": {
+                                "_value": "",
+                                "Maximum_iteration_count": 2,
+                                "Expected_iteration_count": 2
+                            }
+                        },
+                        "Departure_from_Symmetry_|x'Ay_y'Ax|/(2*||x||*||A||*||y||)/epsilon": {
+                            "_value": "",
+                            "Result": "PASSED",
+                            "Departure_for_SpMV": 6.10493e-09,
+                            "Departure_for_MG": 8.4206e-10
+                        },
+                        "##########_Iterations_Summary_##########": "",
+                        "Iteration_Count_Information": {
+                            "_value": "",
+                            "Result": "PASSED",
+                            "Reference_CG_iterations_per_set": 50,
+                            "Optimized_CG_iterations_per_set": 50,
+                            "Total_number_of_reference_iterations": 650,
+                            "Total_number_of_optimized_iterations": 650
+                        },
+                        "##########_Reproducibility_Summary_##########": "",
+                        "Reproducibility_Information": {
+                            "_value": "",
+                            "Result": "PASSED",
+                            "Scaled_residual_mean": 5.87254e-05,
+                            "Scaled_residual_variance": 6.41683e-38
+                        },
+                        "##########_Performance_Summary_(times_in_sec)_##########": "",
+                        "Benchmark_Time_Summary": {
+                            "_value": "",
+                            "Optimization_phase": 1.71e-07,
+                            "DDOT": 7.78937,
+                            "WAXPBY": 6.61367,
+                            "SpMV": 39.2771,
+                            "MG": 251.877,
+                            "Total": 305.597
+                        },
+                        "Floating_Point_Operations_Summary": {
+                            "_value": "",
+                            "Raw_DDOT": 16466800000.0,
+                            "Raw_WAXPBY": 16466800000.0,
+                            "Raw_SpMV": 148217000000.0,
+                            "Raw_MG": 827622000000.0,
+                            "Total": 1008770000000.0,
+                            "Total_with_convergence_overhead": 1008770000000.0
+                        },
+                        "GB/s_Summary": {
+                            "_value": "",
+                            "Raw_Read_B/W": 20.3386,
+                            "Raw_Write_B/W": 4.70031,
+                            "Raw_Total_B/W": 25.0389,
+                            "Total_with_convergence_and_optimization_phase_overhead": 24.3807
+                        },
+                        "GFLOP/s_Summary": {
+                            "_value": "",
+                            "Raw_DDOT": 2.11401,
+                            "Raw_WAXPBY": 2.48982,
+                            "Raw_SpMV": 3.77363,
+                            "Raw_MG": 3.28582,
+                            "Raw_Total": 3.30099,
+                            "Total_with_convergence_overhead": 3.30099,
+                            "Total_with_convergence_and_optimization_phase_overhead": 3.21421
+                        },
+                        "User_Optimization_Overheads": {
+                            "_value": "",
+                            "Optimization_phase_time_(sec)": 1.71e-07,
+                            "Optimization_phase_time_vs_reference_SpMV+MG_time": 3.77274e-07
+                        },
+                        "DDOT_Timing_Variations": {
+                            "_value": "",
+                            "Min_DDOT_MPI_Allreduce_time": 0.743754,
+                            "Max_DDOT_MPI_Allreduce_time": 0.844278,
+                            "Avg_DDOT_MPI_Allreduce_time": 0.794016
+                        },
+                        "Final_Summary": {
+                            "_value": "",
+                            "HPCG_result_is_VALID_with_a_GFLOP/s_rating_of": 3.21421,
+                            "HPCG_2.4_rating_for_historical_reasons_is": 3.30099,
+                            "Reference_version_of_ComputeDotProduct_used": "Performance results are most likely suboptimal",
+                            "Reference_version_of_ComputeSPMV_used": "Performance results are most likely suboptimal",
+                            "Reference_version_of_ComputeMG_used_and_number_of_threads_greater_than_1": "Performance results are severely suboptimal",
+                            "Reference_version_of_ComputeWAXPBY_used": "Performance results are most likely suboptimal",
+                            "Results_are_valid_but_execution_time_(sec)_is": 305.597,
+                            "Official_results_execution_time_(sec)_must_be_at_least": 1800
+                        }
+                    }
+                },
+                "metadata": {}
+            },
+            {
+                "node_id": "tcn207.local.snellius.surf.nl:1:1",
+                "metrics": {
+                    "execution_time": 370.52346055186354,
+                    "perf_energy": {}
+                },
+                "metadata": {
+                    "hostname": "tcn207.local.snellius.surf.nl",
+                    "local_ip": "172.18.56.217",
+                    "public_ip": "145.136.56.217"
+                }
+            }
+        ],
+        "run2": [
+            {
+                "node_id": "tcn207.local.snellius.surf.nl:1:1",
+                "metrics": {
+                    "execution_time": 377.71734809991904,
+                    "perf_energy": {}
+                },
+                "metadata": {
+                    "hostname": "tcn207.local.snellius.surf.nl",
+                    "local_ip": "172.18.56.217",
+                    "public_ip": "145.136.56.217"
+                }
+            },
+            {
+                "node_id": "tcn207.local.snellius.surf.nl:0:0",
+                "metrics": {
+                    "execution_time": 377.7206609027926,
+                    "cpu_energy": {
+                        "energy": {
+                            "j": 70707.931909,
+                            "kwh": 0.019641092196944446
+                        },
+                        "power": {
+                            "w": 187.19648079143508
+                        },
+                        "per_domain": [
+                            {
+                                "energy": {
+                                    "j": 32518.570968,
+                                    "kwh": 0.00903293638
+                                },
+                                "power": {
+                                    "w": 86.09164320362912
+                                }
+                            },
+                            {
+                                "energy": {
+                                    "j": 38189.360941,
+                                    "kwh": 0.010608155816944444
+                                },
+                                "power": {
+                                    "w": 101.10483758780595
+                                }
+                            }
+                        ]
+                    },
+                    "perf_energy": {
+                        "joules": 71266.01,
+                        "kwh": 0.019796113888888887,
+                        "time": 380.763304783
+                    }
+                },
+                "metadata": {
+                    "hostname": "tcn207.local.snellius.surf.nl",
+                    "local_ip": "172.18.56.217",
+                    "public_ip": "145.136.56.217"
+                }
+            },
+            {
+                "node_id": "local",
+                "metrics": {
+                    "hpcg": {
+                        "version": 3.1,
+                        "Release_date": "March 28, 2019",
+                        "Machine_Summary": {
+                            "_value": "",
+                            "Distributed_Processes": 2,
+                            "Threads_per_processes": 64
+                        },
+                        "Global_Problem_Dimensions": {
+                            "_value": "",
+                            "Global_nx": 256,
+                            "Global_ny": 128,
+                            "Global_nz": 128
+                        },
+                        "Processor_Dimensions": {
+                            "_value": "",
+                            "npx": 2,
+                            "npy": 1,
+                            "npz": 1
+                        },
+                        "Local_Domain_Dimensions": {
+                            "_value": "",
+                            "nx": 128,
+                            "ny": 128,
+                            "Lower_ipz": 0,
+                            "Upper_ipz": 0,
+                            "nz": 128
+                        },
+                        "##########_Problem_Summary_##########": "",
+                        "Setup_Information": {
+                            "_value": "",
+                            "Setup_Time": 6.35183
+                        },
+                        "Linear_System_Information": {
+                            "_value": "",
+                            "Number_of_Equations": 4194304,
+                            "Number_of_Nonzero_Terms": 111777784
+                        },
+                        "Multigrid_Information": {
+                            "_value": "",
+                            "Number_of_coarse_grid_levels": 3,
+                            "Coarse_Grids": {
+                                "_value": "",
+                                "Grid_Level": 3,
+                                "Number_of_Equations": 8192,
+                                "Number_of_Nonzero_Terms": 198904,
+                                "Number_of_Presmoother_Steps": 1,
+                                "Number_of_Postsmoother_Steps": 1
+                            }
+                        },
+                        "##########_Memory_Use_Summary_##########": "",
+                        "Memory_Use_Information": {
+                            "_value": "",
+                            "Total_memory_used_for_data_(Gbytes)": 2.99839,
+                            "Memory_used_for_OptimizeProblem_data_(Gbytes)": 0,
+                            "Bytes_per_equation_(Total_memory_/_Number_of_Equations)": 714.871,
+                            "Memory_used_for_linear_system_and_CG_(Gbytes)": 2.63874,
+                            "Coarse_Grids": {
+                                "_value": "",
+                                "Grid_Level": 3,
+                                "Memory_used": 0.00493517
+                            }
+                        },
+                        "##########_V&V_Testing_Summary_##########": "",
+                        "Spectral_Convergence_Tests": {
+                            "_value": "",
+                            "Result": "PASSED",
+                            "Unpreconditioned": {
+                                "_value": "",
+                                "Maximum_iteration_count": 11,
+                                "Expected_iteration_count": 12
+                            },
+                            "Preconditioned": {
+                                "_value": "",
+                                "Maximum_iteration_count": 2,
+                                "Expected_iteration_count": 2
+                            }
+                        },
+                        "Departure_from_Symmetry_|x'Ay_y'Ax|/(2*||x||*||A||*||y||)/epsilon": {
+                            "_value": "",
+                            "Result": "PASSED",
+                            "Departure_for_SpMV": 5.47339e-09,
+                            "Departure_for_MG": 4.2103e-10
+                        },
+                        "##########_Iterations_Summary_##########": "",
+                        "Iteration_Count_Information": {
+                            "_value": "",
+                            "Result": "PASSED",
+                            "Reference_CG_iterations_per_set": 50,
+                            "Optimized_CG_iterations_per_set": 51,
+                            "Total_number_of_reference_iterations": 650,
+                            "Total_number_of_optimized_iterations": 663
+                        },
+                        "##########_Reproducibility_Summary_##########": "",
+                        "Reproducibility_Information": {
+                            "_value": "",
+                            "Result": "PASSED",
+                            "Scaled_residual_mean": 4.40045e-05,
+                            "Scaled_residual_variance": 6.31263e-38
+                        },
+                        "##########_Performance_Summary_(times_in_sec)_##########": "",
+                        "Benchmark_Time_Summary": {
+                            "_value": "",
+                            "Optimization_phase": 2.81e-07,
+                            "DDOT": 7.72427,
+                            "WAXPBY": 6.75002,
+                            "SpMV": 40.4758,
+                            "MG": 256.896,
+                            "Total": 311.886
+                        },
+                        "Floating_Point_Operations_Summary": {
+                            "_value": "",
+                            "Raw_DDOT": 16794000000.0,
+                            "Raw_WAXPBY": 16794000000.0,
+                            "Raw_SpMV": 151124000000.0,
+                            "Raw_MG": 844174000000.0,
+                            "Total": 1028890000000.0,
+                            "Total_with_convergence_overhead": 1008710000000.0
+                        },
+                        "GB/s_Summary": {
+                            "_value": "",
+                            "Raw_Read_B/W": 20.3258,
+                            "Raw_Write_B/W": 4.69759,
+                            "Raw_Total_B/W": 25.0234,
+                            "Total_with_convergence_and_optimization_phase_overhead": 23.9
+                        },
+                        "GFLOP/s_Summary": {
+                            "_value": "",
+                            "Raw_DDOT": 2.17419,
+                            "Raw_WAXPBY": 2.48799,
+                            "Raw_SpMV": 3.73367,
+                            "Raw_MG": 3.28605,
+                            "Raw_Total": 3.29892,
+                            "Total_with_convergence_overhead": 3.23423,
+                            "Total_with_convergence_and_optimization_phase_overhead": 3.15081
+                        },
+                        "User_Optimization_Overheads": {
+                            "_value": "",
+                            "Optimization_phase_time_(sec)": 2.81e-07,
+                            "Optimization_phase_time_vs_reference_SpMV+MG_time": 6.23016e-07
+                        },
+                        "DDOT_Timing_Variations": {
+                            "_value": "",
+                            "Min_DDOT_MPI_Allreduce_time": 0.673497,
+                            "Max_DDOT_MPI_Allreduce_time": 0.82917,
+                            "Avg_DDOT_MPI_Allreduce_time": 0.751333
+                        },
+                        "Final_Summary": {
+                            "_value": "",
+                            "HPCG_result_is_VALID_with_a_GFLOP/s_rating_of": 3.15081,
+                            "HPCG_2.4_rating_for_historical_reasons_is": 3.23423,
+                            "Reference_version_of_ComputeDotProduct_used": "Performance results are most likely suboptimal",
+                            "Reference_version_of_ComputeSPMV_used": "Performance results are most likely suboptimal",
+                            "Reference_version_of_ComputeMG_used_and_number_of_threads_greater_than_1": "Performance results are severely suboptimal",
+                            "Reference_version_of_ComputeWAXPBY_used": "Performance results are most likely suboptimal",
+                            "Results_are_valid_but_execution_time_(sec)_is": 311.886,
+                            "Official_results_execution_time_(sec)_must_be_at_least": 1800
+                        }
+                    }
+                },
+                "metadata": {}
+            }
+        ]
+    },
+    "metadata": {}
+}

@@ -1,0 +1,226 @@
+{
+    "workload": "stress-ng",
+    "backend": "local",
+    "results": {
+        "run0": [
+            {
+                "node_id": "tcn338.local.snellius.surf.nl:0:0",
+                "metrics": {
+                    "execution_time": 120.0946932870429,
+                    "cpu_energy": {
+                        "energy": {
+                            "j": 48332.728714,
+                            "kwh": 0.01342575797611111
+                        },
+                        "power": {
+                            "w": 402.45588485645703
+                        },
+                        "per_domain": [
+                            {
+                                "energy": {
+                                    "j": 23886.682585,
+                                    "kwh": 0.006635189606944444
+                                },
+                                "power": {
+                                    "w": 198.89909450212585
+                                }
+                            },
+                            {
+                                "energy": {
+                                    "j": 24446.046129,
+                                    "kwh": 0.006790568369166666
+                                },
+                                "power": {
+                                    "w": 203.55679035433118
+                                }
+                            }
+                        ]
+                    },
+                    "perf_energy": {
+                        "joules": 48922.98,
+                        "kwh": 0.013589716666666668,
+                        "time": 123.267881762
+                    }
+                },
+                "metadata": {
+                    "hostname": "tcn338.local.snellius.surf.nl",
+                    "local_ip": "172.18.57.92",
+                    "public_ip": "145.136.57.92"
+                }
+            },
+            {
+                "node_id": "local",
+                "metrics": {
+                    "stress_ng": {
+                        "workers": 128,
+                        "stressor": "cpu",
+                        "metrics": {
+                            "bogo_ops": 12339063,
+                            "real_time_seconds": 119.99,
+                            "user_time_seconds": 15284.63,
+                            "system_time_seconds": 0.61,
+                            "bogo_ops_per_sec_real": 102835.01,
+                            "bogo_ops_per_sec_cpu": 807.25
+                        },
+                        "skipped": 0,
+                        "passed": {
+                            "count": 128,
+                            "name": "cpu",
+                            "workers": 128
+                        },
+                        "failed": 0,
+                        "metrics_untrustworthy": 0
+                    }
+                },
+                "metadata": {}
+            }
+        ],
+        "run1": [
+            {
+                "node_id": "tcn338.local.snellius.surf.nl:0:0",
+                "metrics": {
+                    "execution_time": 120.08589343703352,
+                    "cpu_energy": {
+                        "energy": {
+                            "j": 48513.319916,
+                            "kwh": 0.01347592219888889
+                        },
+                        "power": {
+                            "w": 403.9892333120535
+                        },
+                        "per_domain": [
+                            {
+                                "energy": {
+                                    "j": 23993.43474,
+                                    "kwh": 0.006664842983333333
+                                },
+                                "power": {
+                                    "w": 199.80263816038175
+                                }
+                            },
+                            {
+                                "energy": {
+                                    "j": 24519.885176,
+                                    "kwh": 0.0068110792155555554
+                                },
+                                "power": {
+                                    "w": 204.18659515167172
+                                }
+                            }
+                        ]
+                    },
+                    "perf_energy": {
+                        "joules": 49199.08,
+                        "kwh": 0.013666411111111111,
+                        "time": 123.672056729
+                    }
+                },
+                "metadata": {
+                    "hostname": "tcn338.local.snellius.surf.nl",
+                    "local_ip": "172.18.57.92",
+                    "public_ip": "145.136.57.92"
+                }
+            },
+            {
+                "node_id": "local",
+                "metrics": {
+                    "stress_ng": {
+                        "workers": 128,
+                        "stressor": "cpu",
+                        "metrics": {
+                            "bogo_ops": 12337415,
+                            "real_time_seconds": 119.99,
+                            "user_time_seconds": 15286.81,
+                            "system_time_seconds": 0.32,
+                            "bogo_ops_per_sec_real": 102822.38,
+                            "bogo_ops_per_sec_cpu": 807.05
+                        },
+                        "skipped": 0,
+                        "passed": {
+                            "count": 128,
+                            "name": "cpu",
+                            "workers": 128
+                        },
+                        "failed": 0,
+                        "metrics_untrustworthy": 0
+                    }
+                },
+                "metadata": {}
+            }
+        ],
+        "run2": [
+            {
+                "node_id": "tcn338.local.snellius.surf.nl:0:0",
+                "metrics": {
+                    "execution_time": 120.0852047719527,
+                    "cpu_energy": {
+                        "energy": {
+                            "j": 48472.650937,
+                            "kwh": 0.013464625260277778
+                        },
+                        "power": {
+                            "w": 403.6528327396929
+                        },
+                        "per_domain": [
+                            {
+                                "energy": {
+                                    "j": 23944.444277,
+                                    "kwh": 0.006651234521388889
+                                },
+                                "power": {
+                                    "w": 199.39579482357408
+                                }
+                            },
+                            {
+                                "energy": {
+                                    "j": 24528.20666,
+                                    "kwh": 0.006813390738888889
+                                },
+                                "power": {
+                                    "w": 204.25703791611883
+                                }
+                            }
+                        ]
+                    },
+                    "perf_energy": {
+                        "joules": 49163.32,
+                        "kwh": 0.013656477777777778,
+                        "time": 123.675783234
+                    }
+                },
+                "metadata": {
+                    "hostname": "tcn338.local.snellius.surf.nl",
+                    "local_ip": "172.18.57.92",
+                    "public_ip": "145.136.57.92"
+                }
+            },
+            {
+                "node_id": "local",
+                "metrics": {
+                    "stress_ng": {
+                        "workers": 128,
+                        "stressor": "cpu",
+                        "metrics": {
+                            "bogo_ops": 12315575,
+                            "real_time_seconds": 119.99,
+                            "user_time_seconds": 15256.41,
+                            "system_time_seconds": 0.39,
+                            "bogo_ops_per_sec_real": 102639.77,
+                            "bogo_ops_per_sec_cpu": 807.22
+                        },
+                        "skipped": 0,
+                        "passed": {
+                            "count": 128,
+                            "name": "cpu",
+                            "workers": 128
+                        },
+                        "failed": 0,
+                        "metrics_untrustworthy": 0
+                    }
+                },
+                "metadata": {}
+            }
+        ]
+    },
+    "metadata": {}
+}
