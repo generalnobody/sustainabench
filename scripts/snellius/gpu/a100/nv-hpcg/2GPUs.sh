@@ -1,6 +1,6 @@
 #!/bin/bash
 
-#SBATCH --job-name=sustainabench_gpu_nv-hpcg_1gpu
+#SBATCH --job-name=sustainabench_gpu_nv-hpcg_2gpus
 #SBATCH --output=logs/%x_%j.out
 #SBATCH --nodes=1
 #SBATCH --partition=gpu_a100

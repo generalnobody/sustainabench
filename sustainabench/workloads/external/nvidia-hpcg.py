@@ -1,4 +1,5 @@
 from sustainabench.workloads.base import ExternalWorkload, register_workload
+from sustainabench.utils.system_info import get_mpi_ranks
 from pydantic import BaseModel
 import subprocess
 
@@ -23,7 +24,8 @@ class NvidiaHPCGWorkload(ExternalWorkload):
 
         output = subprocess.run(cmd, capture_output=True, text=True)
 
-        if output.returncode != 0 or output.stdout == "":
+        global_mpi_rank, _ = get_mpi_ranks()
+        if (output.returncode != 0 or output.stdout == "") and (global_mpi_rank is None or global_mpi_rank == 0):
             raise RuntimeError(
                 f"FAILURE: Subprocess executed with command '{' '.join(cmd)}' failed with return code {output.returncode}\n"
                 f"STDOUT: {output.stdout}\n\nSTDERR: {output.stderr}"
