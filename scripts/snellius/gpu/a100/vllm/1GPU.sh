@@ -17,6 +17,7 @@ module load CUDA/12.8.0
 
 RUNS=3
 
+export CUDA_VISIBLE_DEVICES=$(echo "$CUDA_VISIBLE_DEVICES" | cut -d, -f1)
 
 echo "Warmup"
 sustainabench run benchmark -w vllm -m none -c configs/vllm/1GPU.yaml -s -nof

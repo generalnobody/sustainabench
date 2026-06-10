@@ -18,6 +18,7 @@ module load CUDA/12.8.0
 
 RUNS=3
 
+export CUDA_VISIBLE_DEVICES=$(echo "$CUDA_VISIBLE_DEVICES" | cut -d, -f1-2)
 
 echo "Warmup"
 sustainabench run benchmark -w nvidia-hpcg -m none -b mpi -np $SLURM_NTASKS -c configs/nv-hpcg.yaml -s -nof
