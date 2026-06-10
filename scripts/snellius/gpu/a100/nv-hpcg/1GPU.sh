@@ -20,6 +20,6 @@ RUNS=3
 
 
 echo "Warmup"
-/home/ibiemond/nvidia_hpc_benchmarks/cuda12/hpcg.sh --nx 640 --ny 640 --nz 640 --rt 300
+sustainabench run benchmark -w nvidia-hpcg -m none -b mpi -np $SLURM_NTASKS -c configs/nv-hpcg.yaml -s -nof
 echo "Running Nvidia HPCG experiments"
 sustainabench run benchmark -w nvidia-hpcg -m time -m perf-energy -m cpu-energy -m gpu-nv -r $RUNS -b mpi -np $SLURM_NTASKS -c configs/nv-hpcg.yaml -s
