@@ -11,7 +11,7 @@
 #SBATCH --constraint=hwperf
 
 module load 2025
-module load CUDA/12.9.1
+module load CUDA/12.8.0
 
 
 # Answer the question: realistic GPU HPC scaling?
