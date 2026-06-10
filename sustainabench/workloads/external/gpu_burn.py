@@ -27,7 +27,7 @@ class GPUBurnWorkload(ExternalWorkload):
 
         if output.returncode != 0:
             raise RuntimeError(
-                f"FAILURE: Subprocess 'vllm' failed with return code {output.returncode}\n"
+                f"FAILURE: Subprocess '{self.name}' failed with return code {output.returncode}\n"
                 f"STDOUT: {output.stdout}\n\nSTDERR: {output.stderr}"
             )
         
