@@ -12,7 +12,7 @@
 
 module load 2025
 module load CUDA/12.8.0
-
+module load OpenMPI/5.0.7-NVHPC-25.3-CUDA-12.8.0
 
 # Answer the question: realistic GPU HPC scaling?
 
