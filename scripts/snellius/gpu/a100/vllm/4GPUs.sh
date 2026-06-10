@@ -21,4 +21,4 @@ RUNS=3
 echo "Warmup"
 sustainabench run benchmark -w vllm -m none -c configs/vllm/4GPUs.yaml -s -nof
 echo "Running VLLM experiments"
-sustainabench run benchmark -w vllm -m time -m perf-energy -m cpu-energy -m gpu-nv -r $RUNS -c configs/vllm/4GPUs   .yaml -s
+sustainabench run benchmark -w vllm -m time -m perf-energy -m cpu-energy -m gpu-nv -r $RUNS -c configs/vllm/4GPUs.yaml -s
