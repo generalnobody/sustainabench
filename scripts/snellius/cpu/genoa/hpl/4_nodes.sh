@@ -3,9 +3,7 @@
 #SBATCH --job-name=sustainabench_cpu_hpl_4nodes
 #SBATCH --output=logs/%x_%j.out
 #SBATCH --nodes=4
-#SBATCH --ntasks-per-node=2
-#SBATCH --ntasks-per-socket=1
-#SBATCH --cpus-per-task=96
+#SBATCH --ntasks-per-node=192
 #SBATCH --partition=genoa
 #SBATCH --time=1:00:00
 #SBATCH --exclusive
@@ -21,11 +19,6 @@ module load 2025
 module load HPL/2.3-foss-2025b
 
 RUNS=3
-
-
-export OMP_NUM_THREADS=$SLURM_CPUS_PER_TASK
-export OMP_PLACES=cores
-export OMP_PROC_BIND=close
 
 echo "Running HPL experiments (4 nodes)"
 sustainabench run benchmark -w hpl -m time -m perf-energy -m cpu-energy -r $RUNS -b mpi -np $SLURM_NTASKS -c configs/hpl/4nodes/config.yaml -s
