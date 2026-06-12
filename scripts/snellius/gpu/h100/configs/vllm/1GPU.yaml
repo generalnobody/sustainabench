@@ -1,0 +1,11 @@
+workloads:
+  - name: "vllm"
+    params:
+      args: [
+        "--model", "/projects/2/managed_datasets/hf_cache_dir/models--mistralai--Mistral-7B-v0.1/snapshots/26bca36bde8333b5d7f72e9ed20ccda6a618af24/",
+        "--num-prompts", "500",
+        "--input-len", "4096",
+        "--output-len", "512",
+        "--max-num-seqs", "64",
+        "--tensor-parallel-size", "1"
+      ]

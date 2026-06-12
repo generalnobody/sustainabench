@@ -1,0 +1,8 @@
+workloads:
+  - name: "nvidia-stream"
+    params:
+      executable: "/home/ibiemond/nvidia_hpc_benchmarks/cuda12/stream-gpu-test.sh"
+      flags:
+        - ["--n", "268435456"]
+        # For either A100 or H100:
+        # 3 × 268,435,456 × 8 ≈ 6.0 GiB -> definitely memory-bound
