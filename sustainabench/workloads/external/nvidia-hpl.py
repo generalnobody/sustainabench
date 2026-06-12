@@ -76,6 +76,10 @@ class NvidiaHPLWorkload(ExternalWorkload):
     def process(self, backend_name: str):
         # Process the results obtained from the execute() method. Please make sure to turn them into a format that fits what this suite expects.
 
+        global_mpi_rank, _ = get_mpi_ranks()
+        if global_mpi_rank is not None and global_mpi_rank != 0:
+            return {}
+
         results = {
             self.name: self._parse_results(self.results)
         }
