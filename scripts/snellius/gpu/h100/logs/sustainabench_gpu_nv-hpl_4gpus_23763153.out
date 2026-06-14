@@ -1,0 +1,11 @@
+SLURM_NTASKS=4
+CUDA_VISIBLE_DEVICES=0,1,2,3
+GPU 0: NVIDIA H100 (UUID: GPU-2908b943-fb11-eb52-a212-d7bebd973bfe)
+GPU 1: NVIDIA H100 (UUID: GPU-60b8e128-10f6-369e-230a-bbeab0e7cb6b)
+GPU 2: NVIDIA H100 (UUID: GPU-795c951b-903f-d02c-f747-d0f57439730d)
+GPU 3: NVIDIA H100 (UUID: GPU-fb584839-a744-d57a-507d-f42512069363)
+Warmup
+Running workload: nvidia-hpl
+Running Nvidia HPL experiments  (4 GPUs)
+Running workload: nvidia-hpl
+Outputted results to: experiments/raw/nvidia-hpl__mpi__time-perf-energy-cpu-energy-gpu-nv__20260613_115617.json
