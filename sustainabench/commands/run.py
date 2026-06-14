@@ -83,7 +83,6 @@ def benchmark(
 def benchmark_list(
     workload: Annotated[bool, typer.Option(..., "--workload", "-w", help="View available workloads")] = False,
     measurement_names: Annotated[bool, typer.Option(..., "--measure", "-m", help="View available measurements")]  = False,
-    # indicator_names: Annotated[bool, typer.Option(..., "--indicator", "-i", help="View available indicators")] = False,
     backends: Annotated[bool, typer.Option(..., "--backend", "-b", help="View available backends")] = False
 ):
     """Command to see benchmark command options. Lists all if none are selected."""

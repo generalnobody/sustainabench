@@ -1,0 +1,12 @@
+metrics:     # Top-level metrics object, must always exist
+  metricA:   # For each metric to configure through this file, define as 'metrics' sub-object. Name here must match metric's object, as defined in the corresponding metric file in 'sustainabench/metrics/'
+    params:     # The parameters to configure per metric. Has to be checked within each metric's script.
+      m: 1000
+      n: 2000
+      p: 5
+  
+  metricB:   # Example when supporting multiple metrics in a single config
+    params:
+      x: 5
+      y: 10
+      z: 15

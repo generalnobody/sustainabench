@@ -16,7 +16,7 @@ class Measurement(ABC):
     name: str
     poll_interval: float | None = None # Seconds
     scope: str
-    require_file: bool # Control whether this indicator should require a file path to be included or not.
+    require_file: bool # Control whether this metric should require a file path to be included or not.
     config: MeasurementConfig | None = None
     filename: str | None = None
     only_once_per_node: bool = False # Only execute this measurement once per node. Especially useful for energy measurements in MPI situations, to prevent duplicate measurements.

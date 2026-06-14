@@ -1,7 +1,7 @@
 import pandas as pd
 from pathlib import Path
 import requests
-from sustainabench.indicators.base import Indicator, register_indicator
+from sustainabench.metrics.base import Metric, register_metric
 from pydantic import BaseModel, model_validator, ConfigDict, field_validator
 from typing import Literal
 from sustainabench.schemas.results.metrics_dict import MetricsDict
@@ -60,13 +60,13 @@ class TimeWindow(BaseModel):
     def offset(self) -> pd.DateOffset:
         return pd.DateOffset(**self.model_dump())
 
-class IndicatorValues(BaseModel):
+class MetricValues(BaseModel):
     reference_time: ReferenceTime
     window: TimeWindow
     fallback_country: str | None
 
-@register_indicator
-class CarbonIndicator(Indicator):
+@register_metric
+class CarbonMetric(Metric):
     name = "carbon"
     require_file = True
 
@@ -75,12 +75,12 @@ class CarbonIndicator(Indicator):
         # If it is a dir, filenames are used to automatically determine selected .parquet files based on county (and possibly region) code using metadata public IP.
         self.metrics_dict = metrics_dict
 
-    def setup(self, indicator_config):
-        raw_config = indicator_config.indicators.get(self.name) if indicator_config else None
+    def setup(self, metric_config):
+        raw_config = metric_config.metrics.get(self.name) if metric_config else None
         if raw_config:
-            self.config = IndicatorValues.model_validate(raw_config.params)
+            self.config = MetricValues.model_validate(raw_config.params)
         else:
-            self.config = IndicatorValues(
+            self.config = MetricValues(
                 reference_time=ReferenceTime(),
                 window=TimeWindow(),
                 fallback_country=None

@@ -41,7 +41,7 @@ sustainabench run benchmark <options>       # Runs the benchmark
 sustainabench run benchmark-list <options>  # Lists available benchmarking options
 ```
 
-To calculate the indicators, run:
+To calculate the metrics, run:
 
 ```bash
 sustainabench result generate <options>     # Generates results based on input file
@@ -51,7 +51,7 @@ Please note: This benchmark suite assumes exclusive access to the node that the 
 
 ## Expand
 
-To expand this project with additional modules, please ensure the project was installed in the editable configuration. It is possible to add new workloads, new measurement modules and additional indicators.
+To expand this project with additional modules, please ensure the project was installed in the editable configuration. It is possible to add new workloads, new measurement modules and additional metrics.
 
 ### Workloads
 
@@ -100,13 +100,13 @@ class Measurement(ABC):
 
 Here, `poll_interval` is defined if the measurement should measure over time, polling every `<poll_interval>` seconds. The `sample` function is only called if `poll_interval` is set. 
 
-### Indicators
+### Metrics
 
-Additional indicators are added similarly to the other two aspects, by adding a new Python file with the desired logic to `sustainabench/indicators`. Each indicator should extend the base `Indicator` class defined in `sustainabench/indicators/base.py`:
+Additional metrics are added similarly to the other two aspects, by adding a new Python file with the desired logic to `sustainabench/metrics`. Each metric should extend the base `Metric` class defined in `sustainabench/metrics/base.py`:
 
 ```python
-class Indicator(ABC):
-    """Base Indicator class"""
+class Metric(ABC):
+    """Base Metric class"""
     name: str
 
     @abstractmethod
