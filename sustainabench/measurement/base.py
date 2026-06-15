@@ -15,7 +15,6 @@ class Measurement(ABC):
     """Base Measurement class"""
     name: str
     poll_interval: float | None = None # Seconds
-    scope: str
     require_file: bool # Control whether this metric should require a file path to be included or not.
     config: MeasurementConfig | None = None
     filename: str | None = None

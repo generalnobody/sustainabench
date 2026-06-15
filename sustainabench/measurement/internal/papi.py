@@ -7,7 +7,7 @@ from pydantic import BaseModel
 class PapiMeasurement(InternalMeasurement):
     name = "papi"
     poll_interval = None
-    scope = "node"
+    
     require_file = True
 
     class MeasurementParams(BaseModel):

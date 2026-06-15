@@ -6,7 +6,7 @@ import time
 class RAPLMeasurement(InternalMeasurement):
     name = "cpu-energy"
     poll_interval = None
-    scope = "node"
+    
     require_file = False
     only_once_per_node = True
 

@@ -5,7 +5,7 @@ from sustainabench.utils.system_info import get_mpi_ranks, get_node_metadata
 class PerfEnergyMeasurement(ExternalMeasurement):
     name = "perf-energy"
     poll_interval = None
-    scope = "node"
+    
     require_file = False
     rank_priority = 100
     within_wrapper = True

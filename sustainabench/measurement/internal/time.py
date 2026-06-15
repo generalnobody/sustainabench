@@ -6,7 +6,7 @@ from sustainabench.measurement.base import  InternalMeasurement, register_measur
 class TimeMeasurement(InternalMeasurement):
     name = "time"
     poll_interval = None
-    scope = "node"
+    
     require_file = False
 
     def start(self):

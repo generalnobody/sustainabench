@@ -6,7 +6,7 @@ import pypmt # type: ignore # Only works on Snellius
 class RaplPypmtMeasurement(InternalMeasurement):
     name = "rapl-pypmt"
     poll_interval = None
-    scope = "node"
+    
     require_file = False
     
     def start(self):

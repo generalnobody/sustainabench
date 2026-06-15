@@ -6,7 +6,7 @@ from sustainabench.measurement.base import InternalMeasurement, register_measure
 class IOMeasurement(InternalMeasurement):
     name = "io"
     poll_interval = None
-    scope = "node"
+    
     require_file = False
 
     def _delta(self, start, end, bits=64):

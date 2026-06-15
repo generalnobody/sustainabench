@@ -74,7 +74,7 @@ class NvidiaDCGMMeasurement(InternalMeasurement):
 
     name = "nvidia-dcgm"
     poll_interval = None
-    scope = "node"
+    
     require_file = False
 
     def start(self):

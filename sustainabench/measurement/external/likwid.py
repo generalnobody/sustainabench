@@ -8,7 +8,7 @@ from pydantic import BaseModel
 class LikwidMeasurement(ExternalMeasurement):
     name = "likwid"
     poll_interval = None
-    scope = "node"
+    
     require_file = True
     rank_priority = 100
     within_wrapper = True

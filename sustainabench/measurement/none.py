@@ -6,7 +6,7 @@ class NoneMeasurement(InternalMeasurement): # Technically run as an internal mea
     """Dummy measurement. Useful when running external workloads that have their own measurement systems."""
     name = "none"
     poll_interval = None
-    scope = "node"
+    
     require_file = False
 
     def start(self):

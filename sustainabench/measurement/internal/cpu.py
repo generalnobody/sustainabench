@@ -6,7 +6,7 @@ from sustainabench.measurement.base import InternalMeasurement, register_measure
 class CPUMeasurement(InternalMeasurement):
     name = "cpu"
     poll_interval = 0.1
-    scope = "node"
+    
     require_file = False
 
     def _get_cpu_temp(self):

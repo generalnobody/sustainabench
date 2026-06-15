@@ -8,7 +8,7 @@ class NvidiaGPUMeasurement(InternalMeasurement):
 
     name = "gpu-nv"
     poll_interval = 0.1
-    scope = "node"
+    
     require_file = False
 
     def start(self):
