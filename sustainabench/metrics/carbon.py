@@ -86,7 +86,7 @@ class CarbonMetric(Metric):
                 fallback_country=None
         )
 
-    def compute(self, measurements, metadata):
+    def compute(self, node_id, measurements, metadata):
         # Load carbon tracefile
         df = None
         # Auto-region selection logic
@@ -96,7 +96,7 @@ class CarbonMetric(Metric):
         elif datapath.is_dir():
             public_ip = metadata.get("public_ip")
             if not public_ip and not self.config.fallback_country:
-                raise ValueError("Missing 'public_ip' in metadata and no fallback country configured. Either is required for auto-selection of carbon traces.")
+                return {}
 
             if public_ip:
                 response = requests.get(f"http://ip-api.com/json/{public_ip}")
@@ -182,15 +182,8 @@ class CarbonMetric(Metric):
         if not sources:
             raise ValueError("Provided metrics dictionary does not contain sources for paths leading to kwh data. Please provide this, otherwise no carbon output can be calculated.")
 
-        # max_prio = max(source.priority for source in sources)
-        # selected_groups = {}
-        # for source in sorted(sources, key=lambda x: x.priority):
-        #     pass
-
-
         contribution_groups = {}
         results = {}
-        total_g = 0.0
 
         for source_name, source_def in sources.items():
             curr_measurements = measurements.get(source_name)
@@ -244,8 +237,10 @@ class CarbonMetric(Metric):
                             else idx
                         )
 
+                        label_title = metric.label_path if metric.label_path else "label"
+
                         values.append({
-                            "label": label,
+                            label_title: label,
                             "g": value * avg_intensity
                         })
 

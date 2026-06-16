@@ -25,5 +25,5 @@ class Metric(ABC):
         pass
 
     @abstractmethod
-    def compute(self, measurements: dict, metadata: dict) -> dict:
+    def compute(self, node_id: str, measurements: dict, metadata: dict) -> dict:
         pass

@@ -41,7 +41,7 @@ class ResultProcessor:
             for node_result in node_results:
                 node_metrics = {}
                 for metric in self.metrics:
-                    node_metrics.update(metric.compute(node_result.metrics, node_result.metadata))
+                    node_metrics.update(metric.compute(node_result.node_id, node_result.metrics, node_result.metadata))
                 run_results.append(NodeResult(node_id=node_result.node_id, metrics=node_metrics, metadata=node_result.metadata))
             results.update({run: run_results})
 
