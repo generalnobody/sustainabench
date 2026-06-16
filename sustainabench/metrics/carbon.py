@@ -243,18 +243,11 @@ class CarbonMetric(Metric):
 
                         value = float(value)
 
-                        label = (
-                            jmespath.search(metric.label_path, item)
-                            if metric.label_path
-                            else idx
-                        )
-
-                        label_title = metric.label_path if metric.label_path else "label"
-
-                        values.append({
-                            label_title: label,
-                            "g": value * avg_intensity
-                        })
+                        entry = {}
+                        if metric.label_path:
+                            entry[metric.label_path] = jmespath.search(metric.label_path, item)
+                        entry["g"] = value * avg_intensity
+                        values.append(entry)
 
                     sum_g = sum(v["g"] for v in values)
 
