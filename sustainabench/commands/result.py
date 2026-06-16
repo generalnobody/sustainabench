@@ -52,3 +52,40 @@ def generate(
     with output_file.open("w", encoding="utf-8") as f: # If other benchmarks can export to this format, then further analysis can be done using 'sustainabench generate' on third-party results
         json.dump(results, f, indent=4, ensure_ascii=False)
         print("Outputted results to:", output_file)
+
+@app.command()
+def merge(
+    results_files: Annotated[list[Path], typer.Option(..., "--results", "-r", help="File or files containing direct benchmarking results. If using multiple files, it is recommended to ensure the all have the same results fields for each run. This is not checked, but could cause weird issues if not adhered to.")],
+    output_dir: Annotated[Path, typer.Option(..., "--output-dir", "-od", help="Which directory to output to.")] = Path("experiments/merged/"),
+    output_name: Annotated[str | None, typer.Option(..., "--output", "-o", help="Which name to output to. If not set, will take the name of the first results_file provided.")] = None
+):
+    """Merge 2 or more results files. Meant to be used to gather multiple separate multi-run benchmarking runs into a single file"""
+
+    raw_results_dicts: list[BenchmarkResult] = []
+    for rf in results_files:
+        with open(rf) as f:
+            raw = yaml.safe_load(f)
+            raw_results_dicts.append(BenchmarkResult.model_validate(raw))
+
+    raw_results_dict = raw_results_dicts[0]
+    last_run_key = list(raw_results_dict.results.keys())[-1] # Select last run key, which is always the highest run number
+    last_run_idx = int(last_run_key[3]) # Select the number from the last_run_key
+    for i in range(1, len(raw_results_dicts)):
+        for run_idx in raw_results_dicts[i].results:
+            last_run_idx += 1
+            raw_results_dict.results.update({
+                f"run{last_run_idx}": raw_results_dicts[i].results[run_idx]
+            })
+
+    output_dir.mkdir(parents=True, exist_ok=True)
+    if output_name:
+        filename = f"{output_name}.json"
+    else:
+        filename = f"{results_files[0].stem}.json"
+
+    filepath = output_dir / filename
+
+    with filepath.open("w", encoding="utf-8") as f:
+        json.dump(raw_results_dict.model_dump(), f, indent=4, ensure_ascii=False)
+        print("Outputted results to:", filepath)
+
