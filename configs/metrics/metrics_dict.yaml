@@ -9,6 +9,24 @@ metrics_dict:
             contributes_to_total: true
             contribution_group: cpu_energy_j
 
+      gpu_nv:
+        priority: 100
+        metrics:
+          - kind: collection
+            collection_path: "[:]"
+            value_path: energy.j
+            label_path: gpu_id
+            contributes_to_total: true
+            contribution_group: gpu_energy_j
+
+      perf_energy:
+        priority: 0
+        metrics:
+          - kind: scalar
+            path: joules
+            contributes_to_total: true
+            contribution_group: cpu_energy_j
+
   - unit: kwh
     sources:
       cpu_energy:
