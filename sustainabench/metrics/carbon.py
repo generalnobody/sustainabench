@@ -74,6 +74,9 @@ class CarbonMetric(Metric):
         self.parquets = filename # Can be either a .parquet file containing all the traces, or can be a dir containing lots of .parquet traces. 
         # If it is a dir, filenames are used to automatically determine selected .parquet files based on county (and possibly region) code using metadata public IP.
         self.metrics_dict = metrics_dict
+        self.cache = { # Store some data, in this case geolocation data, to not get rate limited by the IP resolve API
+            "geolocation": {} # For each public IP, store its region data
+        }
 
     def setup(self, metric_config):
         raw_config = metric_config.metrics.get(self.name) if metric_config else None
@@ -99,10 +102,19 @@ class CarbonMetric(Metric):
                 return {}
 
             if public_ip:
-                response = requests.get(f"http://ip-api.com/json/{public_ip}")
-                data = response.json()
-                country_code = data.get("countryCode")
-                region_code = data.get("region")
+                cache_store = self.cache["geolocation"].get(public_ip)
+                if cache_store:
+                    country_code = cache_store["country"]
+                    region_code = cache_store["region"]
+                else:
+                    response = requests.get(f"http://ip-api.com/json/{public_ip}")
+                    data = response.json()
+                    country_code = data.get("countryCode")
+                    region_code = data.get("region")
+                    self.cache["geolocation"][public_ip] = {
+                        "country": country_code,
+                        "region": region_code
+                    }
             else:
                 country_code = self.config.fallback_country
                 region_code = ""
@@ -188,7 +200,7 @@ class CarbonMetric(Metric):
         for source_name, source_def in sources.items():
             curr_measurements = measurements.get(source_name)
             if curr_measurements is None: # Measurement source not present
-                continue 
+                continue
 
             priority = source_def.priority
 
@@ -290,7 +302,7 @@ class CarbonMetric(Metric):
             group_data["value"]
             for group_data in contribution_groups.values()
         )
-        
+
         return {
             self.name: results
         }
