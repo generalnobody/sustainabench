@@ -14,7 +14,6 @@ def register_measurement(cls):
 class Measurement(ABC):
     """Base Measurement class"""
     name: str
-    poll_interval: float | None = None # Seconds
     require_file: bool # Control whether this metric should require a file path to be included or not.
     config: MeasurementConfig | None = None
     filename: str | None = None
@@ -32,6 +31,7 @@ class Measurement(ABC):
     
 
 class InternalMeasurement(Measurement):
+    poll_interval: float | None = None # Seconds
     @abstractmethod
     def start(self):
         pass
