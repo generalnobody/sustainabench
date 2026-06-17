@@ -13,7 +13,7 @@ class EnergyToSolutionMetric(Metric):
     def setup(self, metric_config):
         pass
 
-    def compute(self, node_id, measurements, metadata):
+    def compute(self, node_id, measurements, metadata, run_metrics, node_results):
         contribution_groups = {}
         results = {}
 
@@ -39,9 +39,7 @@ class EnergyToSolutionMetric(Metric):
                     if resolved is None:
                         continue
 
-                    metric_value = float(resolved)
-
-                    contribution_value = metric_value
+                    contribution_value = float(resolved)
 
                 elif metric.kind == "collection":
                     items = jmespath.search(
@@ -66,9 +64,7 @@ class EnergyToSolutionMetric(Metric):
                         value = float(value)
                         values.append(value)
 
-                    sum_g = sum(values)
-
-                    contribution_value = sum_g
+                    contribution_value = sum(values)
                 else:
                     continue
 

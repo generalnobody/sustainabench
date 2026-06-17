@@ -70,3 +70,135 @@ metrics_dict:
             path: "."
             contributes_to_total: true
             contribution_group: execution_time
+
+  - unit: carbon
+    sources:
+      carbon:
+        priority: 0
+        metrics:
+          - kind: scalar
+            path: total_g
+            contributes_to_total: true
+            contribution_group: total_carbon
+
+  - unit: performance
+    sources: # All sources: hpcg, hpl, stream, stress_ng; gpu_burn, nvidia_hpcg, nvidia_hpl, nvidia_stream, vllm
+      stress_ng:
+        priority: 0
+        metrics:
+          - kind: scalar
+            path: "metrics.bogo_ops_per_sec_real"
+            contributes_to_total: false
+            contribution_group: null
+
+      stream:
+        priority: 0
+        metrics:
+          - kind: scalar
+            path: 'Function."Copy:"."Best_Rate_MB/s"'
+            contributes_to_total: false
+            contribution_group: null
+
+          - kind: scalar
+            path: 'Function."Scale:"."Best_Rate_MB/s"'
+            contributes_to_total: false
+            contribution_group: null
+
+          - kind: scalar
+            path: 'Function."Add:"."Best_Rate_MB/s"'
+            contributes_to_total: false
+            contribution_group: null
+
+          - kind: scalar
+            path: 'Function."Triad:"."Best_Rate_MB/s"'
+            contributes_to_total: false
+            contribution_group: null
+        
+
+      hpl:
+        priority: 0
+        metrics:
+          - kind: scalar
+            path: "Gflops"
+            contributes_to_total: false
+            contribution_group: null
+      
+      hpcg:
+        priority: 0
+        metrics:
+          - kind: scalar
+            path: 'Final_Summary."HPCG_result_is_VALID_with_a_GFLOP/s_rating_of"'
+            contributes_to_total: false
+            contribution_group: null
+
+      # -------------------------------
+
+      # gpu_burn: # Unknown rn; TODO: fix this
+      #   priority: 0
+      #   metrics:
+      #     - kind: scalar
+      #       path: ""
+      #       contributes_to_total: false
+      #       contribution_group: null
+
+      nvidia_stream:
+        priority: 0
+        metrics:
+          - kind: scalar
+            path: 'Function."Copy:"."Rate_(MB/s)"'
+            contributes_to_total: false
+            contribution_group: null
+
+          - kind: scalar
+            path: 'Function."Scale:"."Rate_(MB/s)"'
+            contributes_to_total: false
+            contribution_group: null
+
+          - kind: scalar
+            path: 'Function."Add:"."Rate_(MB/s)"'
+            contributes_to_total: false
+            contribution_group: null
+
+          - kind: scalar
+            path: 'Function."Triad:"."Rate_(MB/s)"'
+            contributes_to_total: false
+            contribution_group: null
+
+      nvidia_hpl:
+        priority: 0
+        metrics:
+          - kind: scalar
+            path: "Gflops"
+            contributes_to_total: false
+            contribution_group: null
+
+          - kind: scalar
+            path: "per_GPU"
+            contributes_to_total: false
+            contribution_group: null
+
+      nvidia_hpcg:
+        priority: 0
+        metrics:
+          - kind: scalar
+            path: 'Final_Summary."HPCG_result_is_VALID_with_a_GFLOP/s_rating_of"'
+            contributes_to_total: false
+            contribution_group: null
+
+      vllm:
+        priority: 0
+        metrics:
+          - kind: scalar
+            path: 'throughput."requests/s"'
+            contributes_to_total: false
+            contribution_group: null
+
+          - kind: scalar
+            path: 'throughput."total_tokens/s"'
+            contributes_to_total: false
+            contribution_group: null
+
+          - kind: scalar
+            path: 'throughput."output_tokens/s"'
+            contributes_to_total: false
+            contribution_group: null

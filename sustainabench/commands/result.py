@@ -23,7 +23,7 @@ def generate(
     with open(metrics_dict_file) as f:
         raw_metrics_dict = yaml.safe_load(f)
     metrics_dict = MetricsDict.model_validate(raw_metrics_dict)
-    
+
     processor = ResultProcessor(metric_names, metrics_dict) # Initialize processor
 
     with results_file.open("r", encoding="utf-8") as f: # If other benchmarks can export to this format, then further analysis can be done using 'sustainabench generate' on third-party results
@@ -49,7 +49,7 @@ def generate(
     filename = f"{results_file.stem}___{'-'.join(processor.get_loaded_metrics())}.json"
     output_file = output_dir / filename
 
-    with output_file.open("w", encoding="utf-8") as f: # If other benchmarks can export to this format, then further analysis can be done using 'sustainabench generate' on third-party results
+    with output_file.open("w", encoding="utf-8") as f:
         json.dump(results, f, indent=4, ensure_ascii=False)
         print("Outputted results to:", output_file)
 
@@ -89,3 +89,6 @@ def merge(
         json.dump(raw_results_dict.model_dump(), f, indent=4, ensure_ascii=False)
         print("Outputted results to:", filepath)
 
+@app.command()
+def plot():
+    """Plot results."""

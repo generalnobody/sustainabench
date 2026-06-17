@@ -89,7 +89,7 @@ class CarbonMetric(Metric):
                 fallback_country=None
         )
 
-    def compute(self, node_id, measurements, metadata):
+    def compute(self, node_id, measurements, metadata, run_metrics, node_results):
         # Load carbon tracefile
         df = None
         # Auto-region selection logic
