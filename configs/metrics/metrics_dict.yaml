@@ -133,13 +133,15 @@ metrics_dict:
 
       # -------------------------------
 
-      # gpu_burn: # Unknown rn; TODO: fix this
-      #   priority: 0
-      #   metrics:
-      #     - kind: scalar
-      #       path: ""
-      #       contributes_to_total: false
-      #       contribution_group: null
+      gpu_burn: # Unknown rn; TODO: fix this
+        priority: 0
+        metrics:
+          - kind: collection
+            collection_path: "gpus"
+            value_path: stats.gflops
+            label_path: null
+            contributes_to_total: false
+            contribution_group: null
 
       nvidia_stream:
         priority: 0

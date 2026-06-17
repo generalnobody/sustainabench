@@ -42,8 +42,22 @@ class PerformancePerCarbonMetric(Metric):
 
                     perf_results[metric.path] = perf_value
 
+                elif metric.kind == "collection":
+                    items = jmespath.search(metric.collection_path, perf_measurements)
+                    if items is None:
+                        continue
+
+                    perf_value = 0
+                    for idx, item in enumerate(items):
+                        value = jmespath.search(metric.value_path, item)
+                        if value is None:
+                            continue
+                        
+                        perf_value += float(value)
+                        
+                    perf_results[f"{metric.collection_path}.{metric.value_path}"] = perf_value
+
                 else:
-                    print(f"Metric kind {metric.kind} is currently unsupported by metric {self.name}. Skipping...")
                     continue
 
         if len(performance_metrics) == 0:
@@ -116,8 +130,12 @@ class PerformancePerCarbonMetric(Metric):
             "all_nodes_carbon_g": all_node_total_g,
             **{
                 outer_k: {
-                    f"({inner_k})/g".replace('"', ''): inner_v / all_node_total_g
+                    k: v
                     for inner_k, inner_v in inner_dict.items()
+                    for k, v in (
+                        (inner_k.replace('"', ''), inner_v), # Show this, mainly for the collection-originated performance metrics
+                        (f"({inner_k})/g".replace('"', ''), inner_v / all_node_total_g),
+                    )
                 }
                 for outer_k, inner_dict in performance_metrics.items()
             }
