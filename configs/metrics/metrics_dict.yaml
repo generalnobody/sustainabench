@@ -81,6 +81,16 @@ metrics_dict:
             contributes_to_total: true
             contribution_group: total_carbon
 
+  - unit: energy-to-solution
+    sources:
+      energy_to_solution:
+        priority: 0
+        metrics:
+          - kind: scalar
+            path: j
+            contributes_to_total: false
+            contribution_group: null
+
   - unit: performance
     sources: # All sources: hpcg, hpl, stream, stress_ng; gpu_burn, nvidia_hpcg, nvidia_hpl, nvidia_stream, vllm
       stress_ng:
