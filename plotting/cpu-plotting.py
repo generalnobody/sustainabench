@@ -73,14 +73,15 @@ df = pd.concat([rome_df, genoa_df], ignore_index=True)
 stats_df = compute_statistics(df)
 
 stats_df.to_csv(
-    OUTPUT_DIR / "benchmark_statistics.csv",
+    OUTPUT_DIR / "cpu_benchmark_statistics.csv",
     index=False
 )
 
 # print(stats_df)
-print(f"Stats saved to: {OUTPUT_DIR.resolve()}.benchmark_statistics.csv")
+print(f"Stats saved to: {OUTPUT_DIR.resolve()}.cpu_benchmark_statistics.csv")
 
-plot_structure(stats_df, "rome", OUTPUT_DIR)
-plot_structure(stats_df, "genoa", OUTPUT_DIR)
+config_order = ["1 node", "2 nodes", "4 nodes"]
+plot_structure(stats_df, "rome", OUTPUT_DIR, config_order=config_order)
+plot_structure(stats_df, "genoa", OUTPUT_DIR, config_order=config_order)
 
 print(f"Plots saved to: {OUTPUT_DIR.resolve()}")

@@ -84,14 +84,15 @@ df = pd.concat([a100_df, h100_df], ignore_index=True)
 stats_df = compute_statistics(df)
 
 stats_df.to_csv(
-    OUTPUT_DIR / "benchmark_statistics.csv",
+    OUTPUT_DIR / "gpu_benchmark_statistics.csv",
     index=False
 )
 
 # print(stats_df)
-print(f"Stats saved to: {OUTPUT_DIR.resolve()}.benchmark_statistics.csv")
+print(f"Stats saved to: {OUTPUT_DIR.resolve()}.gpu_benchmark_statistics.csv")
 
-plot_structure(stats_df, "a100", OUTPUT_DIR)
-plot_structure(stats_df, "h100", OUTPUT_DIR)
+config_order = ["1 GPU", "2 GPUs", "4 GPUs"]
+plot_structure(stats_df, "a100", OUTPUT_DIR, config_order=config_order)
+plot_structure(stats_df, "h100", OUTPUT_DIR, config_order=config_order)
 
 print(f"Plots saved to: {OUTPUT_DIR.resolve()}")

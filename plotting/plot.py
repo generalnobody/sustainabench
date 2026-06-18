@@ -32,7 +32,7 @@ def build_dataframe(total_carbon, total_energy, arch_name):
     rows += flatten_results(total_energy, arch_name, "energy")
     return pd.DataFrame(rows)
 
-def plot_structure(stats_df, arch_name, output_dir):
+def plot_structure(stats_df, arch_name, output_dir, config_order=None):
     sns.set_theme(style="whitegrid", context="talk")
 
     arch_df = stats_df[
@@ -48,10 +48,11 @@ def plot_structure(stats_df, arch_name, output_dir):
         if metric_df.empty:
             continue
 
-        config_order = ["1 GPU", "2 GPUs", "4 GPUs"]
         benchmarks = metric_df["benchmark"].unique()
-        # configs = metric_df["config"].unique()
-        configs = [c for c in config_order if c in metric_df["config"].unique()]
+        if not config_order:
+            configs = metric_df["config"].unique()
+        else:
+            configs = [c for c in config_order if c in metric_df["config"].unique()]
 
         x = np.arange(len(benchmarks))
         width = 0.8 / len(configs)
