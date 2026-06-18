@@ -75,7 +75,8 @@ class CarbonMetric(Metric):
         # If it is a dir, filenames are used to automatically determine selected .parquet files based on county (and possibly region) code using metadata public IP.
         self.metrics_dict = metrics_dict
         self.cache = { # Store some data, in this case geolocation data, to not get rate limited by the IP resolve API
-            "geolocation": {} # For each public IP, store its region data
+            "geolocation": {}, # For each public IP, store its region data
+            "dataframes": {}
         }
 
     def setup(self, metric_config):
@@ -134,11 +135,19 @@ class CarbonMetric(Metric):
                 if p.stem.startswith(f"{country_code}_")
             ]
             if region_match:
-                print(f"Loading carbon traces for region {region_code} in country {country_code}")
-                df = pd.read_parquet(region_match[0])
+                # print(f"Loading carbon traces for region {region_code} in country {country_code}")
+                df = self.cache["dataframes"].get(region_match[0])
+                if df is None:
+                    df = pd.read_parquet(region_match[0])
+                    self.cache["dataframes"].update({region_match[0]: df})
+                # df = pd.read_parquet(region_match[0])
             elif country_match:
-                print(f"Loading carbon traces for country {country_code}")
-                df = pd.read_parquet(country_match[0])
+                # print(f"Loading carbon traces for country {country_code}")
+                df = self.cache["dataframes"].get(country_match[0])
+                if df is None:
+                    df = pd.read_parquet(country_match[0])
+                    self.cache["dataframes"].update({country_match[0]: df})
+                # df = pd.read_parquet(country_match[0])
             else:
                 raise FileNotFoundError(
                     f"No carbon traces found for country '{country_code}' "

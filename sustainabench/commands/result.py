@@ -16,7 +16,8 @@ def generate(
     metric_names: Annotated[list[str], typer.Option(..., "--metric", "-m", help="Which metrics to derive from the raw measurements after the workload has been completed (multiple allowed). Some (e.g. carbon), may require files to function correctly. Provide files separated with '=', e.g. carbon=traces/carbon/traces/trace.parquet.")],
     metrics_dict_file: Annotated[Path, typer.Option(..., "--metrics-dict", "-md", help="Path to a config file (YAML) that specifies JSON paths to standardized element names for metrics (e.g. J, kWh, time, ...)")],
     output_dir: Annotated[Path, typer.Option(..., "--output", "-o", help="Benchmark output directory")] = Path("./experiments/results/"),
-    config_file: Annotated[Path, typer.Option(..., "--config", "-c", help="Path to the config file for the benchmark")] = Path("")
+    config_file: Annotated[Path, typer.Option(..., "--config", "-c", help="Path to the config file for the benchmark")] = Path(""),
+    silent: Annotated[bool, typer.Option(..., "--silent", "-s", help="Disable JSON output to stdout.")] = False
 ):
     """Generate derived metrics based on benchmarking results"""
 
@@ -42,11 +43,13 @@ def generate(
 
     results = processor.process(raw_results, metric_cfg).model_dump()
 
-    print("Results:")
-    print(json.dumps(results, indent=4))
+    if not silent:
+        print("Results:")
+        print(json.dumps(results, indent=4))
 
     output_dir.mkdir(parents=True, exist_ok=True)
-    filename = f"{results_file.stem}___{'-'.join(processor.get_loaded_metrics())}.json"
+    # filename = f"{results_file.stem}___{'-'.join(processor.get_loaded_metrics())}.json"
+    filename = f"{results_file.stem}.json"
     output_file = output_dir / filename
 
     with output_file.open("w", encoding="utf-8") as f:
