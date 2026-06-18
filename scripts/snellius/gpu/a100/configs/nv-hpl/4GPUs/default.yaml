@@ -4,3 +4,4 @@ workloads:
       executable: "/home/ibiemond/nvidia_hpc_benchmarks/cuda12/hpl.sh"
       flags:
         - ["--dat", "/home/ibiemond/sustainabench/scripts/snellius/gpu/a100/configs/nv-hpl/4GPUs/HPL-4GPUs.dat"] # Arguments for the Nvidia HPL executable
+        - ["--no-multinode"]

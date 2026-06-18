@@ -1,0 +1,11 @@
+SLURM_NTASKS=4
+CUDA_VISIBLE_DEVICES=0,1,2,3
+GPU 0: NVIDIA A100-SXM4-40GB (UUID: GPU-cad04cfc-3b7f-06a5-9d69-fb3e548c0144)
+GPU 1: NVIDIA A100-SXM4-40GB (UUID: GPU-8321f051-b3c1-2ee9-6844-8ebd0aa0894a)
+GPU 2: NVIDIA A100-SXM4-40GB (UUID: GPU-730b1caf-0056-c75e-abba-d84399379026)
+GPU 3: NVIDIA A100-SXM4-40GB (UUID: GPU-22125206-10cc-aa29-c111-2fe33b61e615)
+Warmup
+Running workload: nvidia-hpl
+Running Nvidia HPL experiments  (4 GPUs)
+Running workload: nvidia-hpl
+Outputted results to: experiments/raw/nvidia-hpl__mpi__time-perf-energy-cpu-energy-gpu-nv__20260618_204215.json
