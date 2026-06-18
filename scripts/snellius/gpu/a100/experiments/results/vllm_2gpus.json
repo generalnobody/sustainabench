@@ -1,0 +1,517 @@
+{
+    "workload": "vllm",
+    "backend": "local",
+    "results": {
+        "run0": [
+            {
+                "node_id": "gcn72.local.snellius.surf.nl:0:0",
+                "metrics": {
+                    "carbon": {
+                        "cpu_energy": {
+                            "energy.kwh": {
+                                "g": 1.8662677937622751
+                            },
+                            "per_domain": {
+                                "values": [
+                                    {
+                                        "g": 0.9135906972072175
+                                    },
+                                    {
+                                        "g": 0.9526770965550577
+                                    }
+                                ],
+                                "sum_g": 1.8662677937622751
+                            }
+                        },
+                        "gpu_nv": {
+                            "[:]": {
+                                "values": [
+                                    {
+                                        "gpu_id": 0,
+                                        "g": 1.417723998693555
+                                    },
+                                    {
+                                        "gpu_id": 1,
+                                        "g": 1.385148886514567
+                                    },
+                                    {
+                                        "gpu_id": 2,
+                                        "g": 0.37382055092183264
+                                    },
+                                    {
+                                        "gpu_id": 3,
+                                        "g": 0.36244428667585493
+                                    }
+                                ],
+                                "sum_g": 3.5391377228058096
+                            }
+                        },
+                        "perf_energy": {
+                            "kwh": {
+                                "g": 1.9190697311258964
+                            }
+                        },
+                        "total_g": 5.405405516568084
+                    },
+                    "energy-to-solution": {
+                        "j": 71339.80316036714
+                    }
+                },
+                "metadata": {
+                    "hostname": "gcn72.local.snellius.surf.nl",
+                    "local_ip": "172.18.62.72",
+                    "public_ip": "145.136.62.72"
+                }
+            },
+            {
+                "node_id": "local",
+                "metrics": {
+                    "carbon": {
+                        "total_g": 0
+                    },
+                    "energy-to-solution": {
+                        "j": 0
+                    },
+                    "performance-per-carbon": {
+                        "all_nodes_carbon_g": 5.405405516568084,
+                        "vllm": {
+                            "throughput.requests/s": 11.31,
+                            "(throughput.requests/s)/g": 2.092349956970623,
+                            "throughput.total_tokens/s": 13032.09,
+                            "(throughput.total_tokens/s)/g": 2410.9366004188582,
+                            "throughput.output_tokens/s": 1448.01,
+                            "(throughput.output_tokens/s)/g": 267.88184449098424
+                        }
+                    }
+                },
+                "metadata": {}
+            }
+        ],
+        "run1": [
+            {
+                "node_id": "gcn72.local.snellius.surf.nl:0:0",
+                "metrics": {
+                    "carbon": {
+                        "cpu_energy": {
+                            "energy.kwh": {
+                                "g": 1.8760014138908458
+                            },
+                            "per_domain": {
+                                "values": [
+                                    {
+                                        "g": 0.8887587909947238
+                                    },
+                                    {
+                                        "g": 0.9872426228961221
+                                    }
+                                ],
+                                "sum_g": 1.8760014138908458
+                            }
+                        },
+                        "gpu_nv": {
+                            "[:]": {
+                                "values": [
+                                    {
+                                        "gpu_id": 0,
+                                        "g": 1.4181876836332232
+                                    },
+                                    {
+                                        "gpu_id": 1,
+                                        "g": 1.3912651797640256
+                                    },
+                                    {
+                                        "gpu_id": 2,
+                                        "g": 0.3742400161259477
+                                    },
+                                    {
+                                        "gpu_id": 3,
+                                        "g": 0.36318023552294115
+                                    }
+                                ],
+                                "sum_g": 3.5468731150461377
+                            }
+                        },
+                        "perf_energy": {
+                            "kwh": {
+                                "g": 1.936399051378088
+                            }
+                        },
+                        "total_g": 5.422874528936983
+                    },
+                    "energy-to-solution": {
+                        "j": 71570.35679782939
+                    }
+                },
+                "metadata": {
+                    "hostname": "gcn72.local.snellius.surf.nl",
+                    "local_ip": "172.18.62.72",
+                    "public_ip": "145.136.62.72"
+                }
+            },
+            {
+                "node_id": "local",
+                "metrics": {
+                    "carbon": {
+                        "total_g": 0
+                    },
+                    "energy-to-solution": {
+                        "j": 0
+                    },
+                    "performance-per-carbon": {
+                        "all_nodes_carbon_g": 5.422874528936983,
+                        "vllm": {
+                            "throughput.requests/s": 11.31,
+                            "(throughput.requests/s)/g": 2.085609751737523,
+                            "throughput.total_tokens/s": 13025.57,
+                            "(throughput.total_tokens/s)/g": 2401.967799641002,
+                            "throughput.output_tokens/s": 1447.29,
+                            "(throughput.output_tokens/s)/g": 266.88613064475686
+                        }
+                    }
+                },
+                "metadata": {}
+            }
+        ],
+        "run2": [
+            {
+                "node_id": "gcn72.local.snellius.surf.nl:0:0",
+                "metrics": {
+                    "carbon": {
+                        "cpu_energy": {
+                            "energy.kwh": {
+                                "g": 1.8685647183689695
+                            },
+                            "per_domain": {
+                                "values": [
+                                    {
+                                        "g": 0.9152040255539825
+                                    },
+                                    {
+                                        "g": 0.9533606928149873
+                                    }
+                                ],
+                                "sum_g": 1.8685647183689698
+                            }
+                        },
+                        "gpu_nv": {
+                            "[:]": {
+                                "values": [
+                                    {
+                                        "gpu_id": 0,
+                                        "g": 1.421938409623739
+                                    },
+                                    {
+                                        "gpu_id": 1,
+                                        "g": 1.3840295658367485
+                                    },
+                                    {
+                                        "gpu_id": 2,
+                                        "g": 0.3732723324532709
+                                    },
+                                    {
+                                        "gpu_id": 3,
+                                        "g": 0.3621296456338965
+                                    }
+                                ],
+                                "sum_g": 3.5413699535476546
+                            }
+                        },
+                        "perf_energy": {
+                            "kwh": {
+                                "g": 1.9264330442390438
+                            }
+                        },
+                        "total_g": 5.409934671916624
+                    },
+                    "energy-to-solution": {
+                        "j": 71399.57833358165
+                    }
+                },
+                "metadata": {
+                    "hostname": "gcn72.local.snellius.surf.nl",
+                    "local_ip": "172.18.62.72",
+                    "public_ip": "145.136.62.72"
+                }
+            },
+            {
+                "node_id": "local",
+                "metrics": {
+                    "carbon": {
+                        "total_g": 0
+                    },
+                    "energy-to-solution": {
+                        "j": 0
+                    },
+                    "performance-per-carbon": {
+                        "all_nodes_carbon_g": 5.409934671916624,
+                        "vllm": {
+                            "throughput.requests/s": 11.3,
+                            "(throughput.requests/s)/g": 2.088749806658322,
+                            "throughput.total_tokens/s": 13018.98,
+                            "(throughput.total_tokens/s)/g": 2406.4948635299606,
+                            "throughput.output_tokens/s": 1446.55,
+                            "(throughput.output_tokens/s)/g": 267.3877020196102
+                        }
+                    }
+                },
+                "metadata": {}
+            }
+        ],
+        "run3": [
+            {
+                "node_id": "gcn41.local.snellius.surf.nl:0:0",
+                "metrics": {
+                    "carbon": {
+                        "cpu_energy": {
+                            "energy.kwh": {
+                                "g": 1.8113950261929375
+                            },
+                            "per_domain": {
+                                "values": [
+                                    {
+                                        "g": 0.9039235650380364
+                                    },
+                                    {
+                                        "g": 0.9074714611549011
+                                    }
+                                ],
+                                "sum_g": 1.8113950261929375
+                            }
+                        },
+                        "gpu_nv": {
+                            "[:]": {
+                                "values": [
+                                    {
+                                        "gpu_id": 0,
+                                        "g": 1.4281890117292653
+                                    },
+                                    {
+                                        "gpu_id": 1,
+                                        "g": 1.4209228472373452
+                                    },
+                                    {
+                                        "gpu_id": 2,
+                                        "g": 0.355392498394165
+                                    },
+                                    {
+                                        "gpu_id": 3,
+                                        "g": 0.35560449285190243
+                                    }
+                                ],
+                                "sum_g": 3.560108850212678
+                            }
+                        },
+                        "perf_energy": {
+                            "kwh": {
+                                "g": 1.8638729176183269
+                            }
+                        },
+                        "total_g": 5.371503876405615
+                    },
+                    "energy-to-solution": {
+                        "j": 70892.3739474078
+                    }
+                },
+                "metadata": {
+                    "hostname": "gcn41.local.snellius.surf.nl",
+                    "local_ip": "172.18.62.41",
+                    "public_ip": "145.136.62.41"
+                }
+            },
+            {
+                "node_id": "local",
+                "metrics": {
+                    "carbon": {
+                        "total_g": 0
+                    },
+                    "energy-to-solution": {
+                        "j": 0
+                    },
+                    "performance-per-carbon": {
+                        "all_nodes_carbon_g": 5.371503876405615,
+                        "vllm": {
+                            "throughput.requests/s": 11.31,
+                            "(throughput.requests/s)/g": 2.1055555874546212,
+                            "throughput.total_tokens/s": 13031.11,
+                            "(throughput.total_tokens/s)/g": 2425.970510277258,
+                            "throughput.output_tokens/s": 1447.9,
+                            "(throughput.output_tokens/s)/g": 269.55207206680336
+                        }
+                    }
+                },
+                "metadata": {}
+            }
+        ],
+        "run4": [
+            {
+                "node_id": "gcn41.local.snellius.surf.nl:0:0",
+                "metrics": {
+                    "carbon": {
+                        "cpu_energy": {
+                            "energy.kwh": {
+                                "g": 1.8216960863549625
+                            },
+                            "per_domain": {
+                                "values": [
+                                    {
+                                        "g": 0.9079998416081975
+                                    },
+                                    {
+                                        "g": 0.9136962447467651
+                                    }
+                                ],
+                                "sum_g": 1.8216960863549625
+                            }
+                        },
+                        "gpu_nv": {
+                            "[:]": {
+                                "values": [
+                                    {
+                                        "gpu_id": 0,
+                                        "g": 1.43519093824762
+                                    },
+                                    {
+                                        "gpu_id": 1,
+                                        "g": 1.4253144885665654
+                                    },
+                                    {
+                                        "gpu_id": 2,
+                                        "g": 0.35780335970759464
+                                    },
+                                    {
+                                        "gpu_id": 3,
+                                        "g": 0.35806525933166483
+                                    }
+                                ],
+                                "sum_g": 3.576374045853445
+                            }
+                        },
+                        "perf_energy": {
+                            "kwh": {
+                                "g": 1.8784373963856575
+                            }
+                        },
+                        "total_g": 5.3980701322084075
+                    },
+                    "energy-to-solution": {
+                        "j": 71242.99176023794
+                    }
+                },
+                "metadata": {
+                    "hostname": "gcn41.local.snellius.surf.nl",
+                    "local_ip": "172.18.62.41",
+                    "public_ip": "145.136.62.41"
+                }
+            },
+            {
+                "node_id": "local",
+                "metrics": {
+                    "carbon": {
+                        "total_g": 0
+                    },
+                    "energy-to-solution": {
+                        "j": 0
+                    },
+                    "performance-per-carbon": {
+                        "all_nodes_carbon_g": 5.3980701322084075,
+                        "vllm": {
+                            "throughput.requests/s": 11.31,
+                            "(throughput.requests/s)/g": 2.0951932307283605,
+                            "throughput.total_tokens/s": 13025.5,
+                            "(throughput.total_tokens/s)/g": 2412.991991764125,
+                            "throughput.output_tokens/s": 1447.28,
+                            "(throughput.output_tokens/s)/g": 268.1106329768825
+                        }
+                    }
+                },
+                "metadata": {}
+            }
+        ],
+        "run5": [
+            {
+                "node_id": "gcn41.local.snellius.surf.nl:0:0",
+                "metrics": {
+                    "carbon": {
+                        "cpu_energy": {
+                            "energy.kwh": {
+                                "g": 1.8155087576138016
+                            },
+                            "per_domain": {
+                                "values": [
+                                    {
+                                        "g": 0.9117117727622963
+                                    },
+                                    {
+                                        "g": 0.9037969848515056
+                                    }
+                                ],
+                                "sum_g": 1.8155087576138018
+                            }
+                        },
+                        "gpu_nv": {
+                            "[:]": {
+                                "values": [
+                                    {
+                                        "gpu_id": 0,
+                                        "g": 1.4258085251004438
+                                    },
+                                    {
+                                        "gpu_id": 1,
+                                        "g": 1.4210078163951563
+                                    },
+                                    {
+                                        "gpu_id": 2,
+                                        "g": 0.35628412047354946
+                                    },
+                                    {
+                                        "gpu_id": 3,
+                                        "g": 0.3567918031968772
+                                    }
+                                ],
+                                "sum_g": 3.559892265166027
+                            }
+                        },
+                        "perf_energy": {
+                            "kwh": {
+                                "g": 1.8724705214354584
+                            }
+                        },
+                        "total_g": 5.375401022779829
+                    },
+                    "energy-to-solution": {
+                        "j": 70943.80795256639
+                    }
+                },
+                "metadata": {
+                    "hostname": "gcn41.local.snellius.surf.nl",
+                    "local_ip": "172.18.62.41",
+                    "public_ip": "145.136.62.41"
+                }
+            },
+            {
+                "node_id": "local",
+                "metrics": {
+                    "carbon": {
+                        "total_g": 0
+                    },
+                    "energy-to-solution": {
+                        "j": 0
+                    },
+                    "performance-per-carbon": {
+                        "all_nodes_carbon_g": 5.375401022779829,
+                        "vllm": {
+                            "throughput.requests/s": 11.32,
+                            "(throughput.requests/s)/g": 2.1058893935593272,
+                            "throughput.total_tokens/s": 13035.51,
+                            "(throughput.total_tokens/s)/g": 2425.0302339784935,
+                            "throughput.output_tokens/s": 1448.39,
+                            "(throughput.output_tokens/s)/g": 269.44780377538814
+                        }
+                    }
+                },
+                "metadata": {}
+            }
+        ]
+    },
+    "metadata": {}
+}

@@ -1,0 +1,781 @@
+{
+    "workload": "hpcg",
+    "backend": "mpi",
+    "results": {
+        "run0": [
+            {
+                "node_id": "tcn207.local.snellius.surf.nl:1:1",
+                "metrics": {
+                    "carbon": {
+                        "perf_energy": {},
+                        "total_g": 0
+                    },
+                    "energy-to-solution": {
+                        "j": 0
+                    }
+                },
+                "metadata": {
+                    "hostname": "tcn207.local.snellius.surf.nl",
+                    "local_ip": "172.18.56.217",
+                    "public_ip": "145.136.56.217"
+                }
+            },
+            {
+                "node_id": "tcn207.local.snellius.surf.nl:0:0",
+                "metrics": {
+                    "carbon": {
+                        "cpu_energy": {
+                            "energy.kwh": {
+                                "g": 5.444787785598781
+                            },
+                            "per_domain": {
+                                "values": [
+                                    {
+                                        "g": 2.508220365698102
+                                    },
+                                    {
+                                        "g": 2.9365674199006784
+                                    }
+                                ],
+                                "sum_g": 5.4447877855987805
+                            }
+                        },
+                        "perf_energy": {
+                            "kwh": {
+                                "g": 5.487215489440638
+                            }
+                        },
+                        "total_g": 5.444787785598781
+                    },
+                    "energy-to-solution": {
+                        "j": 71859.564964
+                    }
+                },
+                "metadata": {
+                    "hostname": "tcn207.local.snellius.surf.nl",
+                    "local_ip": "172.18.56.217",
+                    "public_ip": "145.136.56.217"
+                }
+            },
+            {
+                "node_id": "local",
+                "metrics": {
+                    "carbon": {
+                        "total_g": 0
+                    },
+                    "energy-to-solution": {
+                        "j": 0
+                    },
+                    "performance-per-carbon": {
+                        "all_nodes_carbon_g": 10.847909218095708,
+                        "hpcg": {
+                            "Final_Summary.HPCG_result_is_VALID_with_a_GFLOP/s_rating_of": 6.27586,
+                            "(Final_Summary.HPCG_result_is_VALID_with_a_GFLOP/s_rating_of)/g": 0.578531758869355
+                        }
+                    }
+                },
+                "metadata": {}
+            },
+            {
+                "node_id": "tcn211.local.snellius.surf.nl:3:1",
+                "metrics": {
+                    "carbon": {
+                        "perf_energy": {},
+                        "total_g": 0
+                    },
+                    "energy-to-solution": {
+                        "j": 0
+                    }
+                },
+                "metadata": {
+                    "hostname": "tcn211.local.snellius.surf.nl",
+                    "local_ip": "172.18.56.221",
+                    "public_ip": "145.136.56.221"
+                }
+            },
+            {
+                "node_id": "tcn211.local.snellius.surf.nl:2:0",
+                "metrics": {
+                    "carbon": {
+                        "cpu_energy": {
+                            "energy.kwh": {
+                                "g": 5.403121432496926
+                            },
+                            "per_domain": {
+                                "values": [
+                                    {
+                                        "g": 2.5035629361929583
+                                    },
+                                    {
+                                        "g": 2.899558496303967
+                                    }
+                                ],
+                                "sum_g": 5.403121432496926
+                            }
+                        },
+                        "perf_energy": {
+                            "kwh": {
+                                "g": 5.4477871374681275
+                            }
+                        },
+                        "total_g": 5.403121432496926
+                    },
+                    "energy-to-solution": {
+                        "j": 71309.658131
+                    }
+                },
+                "metadata": {
+                    "hostname": "tcn211.local.snellius.surf.nl",
+                    "local_ip": "172.18.56.221",
+                    "public_ip": "145.136.56.221"
+                }
+            }
+        ],
+        "run1": [
+            {
+                "node_id": "tcn207.local.snellius.surf.nl:1:1",
+                "metrics": {
+                    "carbon": {
+                        "perf_energy": {},
+                        "total_g": 0
+                    },
+                    "energy-to-solution": {
+                        "j": 0
+                    }
+                },
+                "metadata": {
+                    "hostname": "tcn207.local.snellius.surf.nl",
+                    "local_ip": "172.18.56.217",
+                    "public_ip": "145.136.56.217"
+                }
+            },
+            {
+                "node_id": "tcn207.local.snellius.surf.nl:0:0",
+                "metrics": {
+                    "carbon": {
+                        "cpu_energy": {
+                            "energy.kwh": {
+                                "g": 5.31273950341586
+                            },
+                            "per_domain": {
+                                "values": [
+                                    {
+                                        "g": 2.4439936132397078
+                                    },
+                                    {
+                                        "g": 2.8687458901761516
+                                    }
+                                ],
+                                "sum_g": 5.312739503415859
+                            }
+                        },
+                        "perf_energy": {
+                            "kwh": {
+                                "g": 5.355175176653785
+                            }
+                        },
+                        "total_g": 5.31273950341586
+                    },
+                    "energy-to-solution": {
+                        "j": 70116.809785
+                    }
+                },
+                "metadata": {
+                    "hostname": "tcn207.local.snellius.surf.nl",
+                    "local_ip": "172.18.56.217",
+                    "public_ip": "145.136.56.217"
+                }
+            },
+            {
+                "node_id": "local",
+                "metrics": {
+                    "carbon": {
+                        "total_g": 0
+                    },
+                    "energy-to-solution": {
+                        "j": 0
+                    },
+                    "performance-per-carbon": {
+                        "all_nodes_carbon_g": 10.644840884427724,
+                        "hpcg": {
+                            "Final_Summary.HPCG_result_is_VALID_with_a_GFLOP/s_rating_of": 6.3871,
+                            "(Final_Summary.HPCG_result_is_VALID_with_a_GFLOP/s_rating_of)/g": 0.6000183628243473
+                        }
+                    }
+                },
+                "metadata": {}
+            },
+            {
+                "node_id": "tcn211.local.snellius.surf.nl:3:1",
+                "metrics": {
+                    "carbon": {
+                        "perf_energy": {},
+                        "total_g": 0
+                    },
+                    "energy-to-solution": {
+                        "j": 0
+                    }
+                },
+                "metadata": {
+                    "hostname": "tcn211.local.snellius.surf.nl",
+                    "local_ip": "172.18.56.221",
+                    "public_ip": "145.136.56.221"
+                }
+            },
+            {
+                "node_id": "tcn211.local.snellius.surf.nl:2:0",
+                "metrics": {
+                    "carbon": {
+                        "cpu_energy": {
+                            "energy.kwh": {
+                                "g": 5.3321013810118645
+                            },
+                            "per_domain": {
+                                "values": [
+                                    {
+                                        "g": 2.4710066108392517
+                                    },
+                                    {
+                                        "g": 2.8610947701726124
+                                    }
+                                ],
+                                "sum_g": 5.332101381011864
+                            }
+                        },
+                        "perf_energy": {
+                            "kwh": {
+                                "g": 5.374519974666932
+                            }
+                        },
+                        "total_g": 5.3321013810118645
+                    },
+                    "energy-to-solution": {
+                        "j": 70372.345199
+                    }
+                },
+                "metadata": {
+                    "hostname": "tcn211.local.snellius.surf.nl",
+                    "local_ip": "172.18.56.221",
+                    "public_ip": "145.136.56.221"
+                }
+            }
+        ],
+        "run2": [
+            {
+                "node_id": "tcn192.local.snellius.surf.nl:1:1",
+                "metrics": {
+                    "carbon": {
+                        "perf_energy": {},
+                        "total_g": 0
+                    },
+                    "energy-to-solution": {
+                        "j": 0
+                    }
+                },
+                "metadata": {
+                    "hostname": "tcn192.local.snellius.surf.nl",
+                    "local_ip": "172.18.56.202",
+                    "public_ip": "145.136.56.202"
+                }
+            },
+            {
+                "node_id": "tcn192.local.snellius.surf.nl:0:0",
+                "metrics": {
+                    "carbon": {
+                        "cpu_energy": {
+                            "energy.kwh": {
+                                "g": 5.336697410350878
+                            },
+                            "per_domain": {
+                                "values": [
+                                    {
+                                        "g": 2.454355026201356
+                                    },
+                                    {
+                                        "g": 2.8823423841495215
+                                    }
+                                ],
+                                "sum_g": 5.336697410350878
+                            }
+                        },
+                        "perf_energy": {
+                            "kwh": {
+                                "g": 5.378612303759762
+                            }
+                        },
+                        "total_g": 5.336697410350878
+                    },
+                    "energy-to-solution": {
+                        "j": 70433.002966
+                    }
+                },
+                "metadata": {
+                    "hostname": "tcn192.local.snellius.surf.nl",
+                    "local_ip": "172.18.56.202",
+                    "public_ip": "145.136.56.202"
+                }
+            },
+            {
+                "node_id": "local",
+                "metrics": {
+                    "carbon": {
+                        "total_g": 0
+                    },
+                    "energy-to-solution": {
+                        "j": 0
+                    },
+                    "performance-per-carbon": {
+                        "all_nodes_carbon_g": 10.401967706632245,
+                        "hpcg": {
+                            "Final_Summary.HPCG_result_is_VALID_with_a_GFLOP/s_rating_of": 6.29505,
+                            "(Final_Summary.HPCG_result_is_VALID_with_a_GFLOP/s_rating_of)/g": 0.605178767858153
+                        }
+                    }
+                },
+                "metadata": {}
+            },
+            {
+                "node_id": "tcn203.local.snellius.surf.nl:3:1",
+                "metrics": {
+                    "carbon": {
+                        "perf_energy": {},
+                        "total_g": 0
+                    },
+                    "energy-to-solution": {
+                        "j": 0
+                    }
+                },
+                "metadata": {
+                    "hostname": "tcn203.local.snellius.surf.nl",
+                    "local_ip": "172.18.56.213",
+                    "public_ip": "145.136.56.213"
+                }
+            },
+            {
+                "node_id": "tcn203.local.snellius.surf.nl:2:0",
+                "metrics": {
+                    "carbon": {
+                        "cpu_energy": {
+                            "energy.kwh": {
+                                "g": 5.065270296281368
+                            },
+                            "per_domain": {
+                                "values": [
+                                    {
+                                        "g": 2.308002855538969
+                                    },
+                                    {
+                                        "g": 2.7572674407423996
+                                    }
+                                ],
+                                "sum_g": 5.065270296281369
+                            }
+                        },
+                        "perf_energy": {
+                            "kwh": {
+                                "g": 5.106960755709562
+                            }
+                        },
+                        "total_g": 5.065270296281368
+                    },
+                    "energy-to-solution": {
+                        "j": 66850.745015
+                    }
+                },
+                "metadata": {
+                    "hostname": "tcn203.local.snellius.surf.nl",
+                    "local_ip": "172.18.56.213",
+                    "public_ip": "145.136.56.213"
+                }
+            }
+        ],
+        "run3": [
+            {
+                "node_id": "tcn203.local.snellius.surf.nl:2:0",
+                "metrics": {
+                    "carbon": {
+                        "cpu_energy": {
+                            "energy.kwh": {
+                                "g": 5.0977048533638145
+                            },
+                            "per_domain": {
+                                "values": [
+                                    {
+                                        "g": 2.3191031331007843
+                                    },
+                                    {
+                                        "g": 2.7786017202630298
+                                    }
+                                ],
+                                "sum_g": 5.097704853363814
+                            }
+                        },
+                        "perf_energy": {
+                            "kwh": {
+                                "g": 5.138004417117131
+                            }
+                        },
+                        "total_g": 5.0977048533638145
+                    },
+                    "energy-to-solution": {
+                        "j": 67278.811866
+                    }
+                },
+                "metadata": {
+                    "hostname": "tcn203.local.snellius.surf.nl",
+                    "local_ip": "172.18.56.213",
+                    "public_ip": "145.136.56.213"
+                }
+            },
+            {
+                "node_id": "tcn203.local.snellius.surf.nl:3:1",
+                "metrics": {
+                    "carbon": {
+                        "perf_energy": {},
+                        "total_g": 0
+                    },
+                    "energy-to-solution": {
+                        "j": 0
+                    }
+                },
+                "metadata": {
+                    "hostname": "tcn203.local.snellius.surf.nl",
+                    "local_ip": "172.18.56.213",
+                    "public_ip": "145.136.56.213"
+                }
+            },
+            {
+                "node_id": "tcn192.local.snellius.surf.nl:1:1",
+                "metrics": {
+                    "carbon": {
+                        "perf_energy": {},
+                        "total_g": 0
+                    },
+                    "energy-to-solution": {
+                        "j": 0
+                    }
+                },
+                "metadata": {
+                    "hostname": "tcn192.local.snellius.surf.nl",
+                    "local_ip": "172.18.56.202",
+                    "public_ip": "145.136.56.202"
+                }
+            },
+            {
+                "node_id": "tcn192.local.snellius.surf.nl:0:0",
+                "metrics": {
+                    "carbon": {
+                        "cpu_energy": {
+                            "energy.kwh": {
+                                "g": 5.3312561786684824
+                            },
+                            "per_domain": {
+                                "values": [
+                                    {
+                                        "g": 2.4522956812638537
+                                    },
+                                    {
+                                        "g": 2.878960497404629
+                                    }
+                                ],
+                                "sum_g": 5.3312561786684824
+                            }
+                        },
+                        "perf_energy": {
+                            "kwh": {
+                                "g": 5.373018216425499
+                            }
+                        },
+                        "total_g": 5.3312561786684824
+                    },
+                    "energy-to-solution": {
+                        "j": 70361.190334
+                    }
+                },
+                "metadata": {
+                    "hostname": "tcn192.local.snellius.surf.nl",
+                    "local_ip": "172.18.56.202",
+                    "public_ip": "145.136.56.202"
+                }
+            },
+            {
+                "node_id": "local",
+                "metrics": {
+                    "carbon": {
+                        "total_g": 0
+                    },
+                    "energy-to-solution": {
+                        "j": 0
+                    },
+                    "performance-per-carbon": {
+                        "all_nodes_carbon_g": 10.428961032032298,
+                        "hpcg": {
+                            "Final_Summary.HPCG_result_is_VALID_with_a_GFLOP/s_rating_of": 6.26348,
+                            "(Final_Summary.HPCG_result_is_VALID_with_a_GFLOP/s_rating_of)/g": 0.6005852338274038
+                        }
+                    }
+                },
+                "metadata": {}
+            }
+        ],
+        "run4": [
+            {
+                "node_id": "tcn203.local.snellius.surf.nl:3:1",
+                "metrics": {
+                    "carbon": {
+                        "perf_energy": {},
+                        "total_g": 0
+                    },
+                    "energy-to-solution": {
+                        "j": 0
+                    }
+                },
+                "metadata": {
+                    "hostname": "tcn203.local.snellius.surf.nl",
+                    "local_ip": "172.18.56.213",
+                    "public_ip": "145.136.56.213"
+                }
+            },
+            {
+                "node_id": "tcn203.local.snellius.surf.nl:2:0",
+                "metrics": {
+                    "carbon": {
+                        "cpu_energy": {
+                            "energy.kwh": {
+                                "g": 5.083912536404658
+                            },
+                            "per_domain": {
+                                "values": [
+                                    {
+                                        "g": 2.3148072841702176
+                                    },
+                                    {
+                                        "g": 2.7691052522344397
+                                    }
+                                ],
+                                "sum_g": 5.083912536404657
+                            }
+                        },
+                        "perf_energy": {
+                            "kwh": {
+                                "g": 5.124199152152988
+                            }
+                        },
+                        "total_g": 5.083912536404658
+                    },
+                    "energy-to-solution": {
+                        "j": 67096.782752
+                    }
+                },
+                "metadata": {
+                    "hostname": "tcn203.local.snellius.surf.nl",
+                    "local_ip": "172.18.56.213",
+                    "public_ip": "145.136.56.213"
+                }
+            },
+            {
+                "node_id": "tcn192.local.snellius.surf.nl:1:1",
+                "metrics": {
+                    "carbon": {
+                        "perf_energy": {},
+                        "total_g": 0
+                    },
+                    "energy-to-solution": {
+                        "j": 0
+                    }
+                },
+                "metadata": {
+                    "hostname": "tcn192.local.snellius.surf.nl",
+                    "local_ip": "172.18.56.202",
+                    "public_ip": "145.136.56.202"
+                }
+            },
+            {
+                "node_id": "tcn192.local.snellius.surf.nl:0:0",
+                "metrics": {
+                    "carbon": {
+                        "cpu_energy": {
+                            "energy.kwh": {
+                                "g": 5.302175363017467
+                            },
+                            "per_domain": {
+                                "values": [
+                                    {
+                                        "g": 2.437281368166595
+                                    },
+                                    {
+                                        "g": 2.864893994850872
+                                    }
+                                ],
+                                "sum_g": 5.302175363017467
+                            }
+                        },
+                        "perf_energy": {
+                            "kwh": {
+                                "g": 5.343870316430678
+                            }
+                        },
+                        "total_g": 5.302175363017467
+                    },
+                    "energy-to-solution": {
+                        "j": 69977.385704
+                    }
+                },
+                "metadata": {
+                    "hostname": "tcn192.local.snellius.surf.nl",
+                    "local_ip": "172.18.56.202",
+                    "public_ip": "145.136.56.202"
+                }
+            },
+            {
+                "node_id": "local",
+                "metrics": {
+                    "carbon": {
+                        "total_g": 0
+                    },
+                    "energy-to-solution": {
+                        "j": 0
+                    },
+                    "performance-per-carbon": {
+                        "all_nodes_carbon_g": 10.386087899422126,
+                        "hpcg": {
+                            "Final_Summary.HPCG_result_is_VALID_with_a_GFLOP/s_rating_of": 6.28952,
+                            "(Final_Summary.HPCG_result_is_VALID_with_a_GFLOP/s_rating_of)/g": 0.6055716128061986
+                        }
+                    }
+                },
+                "metadata": {}
+            }
+        ],
+        "run5": [
+            {
+                "node_id": "tcn203.local.snellius.surf.nl:3:1",
+                "metrics": {
+                    "carbon": {
+                        "perf_energy": {},
+                        "total_g": 0
+                    },
+                    "energy-to-solution": {
+                        "j": 0
+                    }
+                },
+                "metadata": {
+                    "hostname": "tcn203.local.snellius.surf.nl",
+                    "local_ip": "172.18.56.213",
+                    "public_ip": "145.136.56.213"
+                }
+            },
+            {
+                "node_id": "tcn192.local.snellius.surf.nl:1:1",
+                "metrics": {
+                    "carbon": {
+                        "perf_energy": {},
+                        "total_g": 0
+                    },
+                    "energy-to-solution": {
+                        "j": 0
+                    }
+                },
+                "metadata": {
+                    "hostname": "tcn192.local.snellius.surf.nl",
+                    "local_ip": "172.18.56.202",
+                    "public_ip": "145.136.56.202"
+                }
+            },
+            {
+                "node_id": "tcn192.local.snellius.surf.nl:0:0",
+                "metrics": {
+                    "carbon": {
+                        "cpu_energy": {
+                            "energy.kwh": {
+                                "g": 5.296385897845231
+                            },
+                            "per_domain": {
+                                "values": [
+                                    {
+                                        "g": 2.4348126818931672
+                                    },
+                                    {
+                                        "g": 2.861573215952064
+                                    }
+                                ],
+                                "sum_g": 5.296385897845232
+                            }
+                        },
+                        "perf_energy": {
+                            "kwh": {
+                                "g": 5.338330783381673
+                            }
+                        },
+                        "total_g": 5.296385897845231
+                    },
+                    "energy-to-solution": {
+                        "j": 69900.977134
+                    }
+                },
+                "metadata": {
+                    "hostname": "tcn192.local.snellius.surf.nl",
+                    "local_ip": "172.18.56.202",
+                    "public_ip": "145.136.56.202"
+                }
+            },
+            {
+                "node_id": "local",
+                "metrics": {
+                    "carbon": {
+                        "total_g": 0
+                    },
+                    "energy-to-solution": {
+                        "j": 0
+                    },
+                    "performance-per-carbon": {
+                        "all_nodes_carbon_g": 10.372068144738485,
+                        "hpcg": {
+                            "Final_Summary.HPCG_result_is_VALID_with_a_GFLOP/s_rating_of": 6.29926,
+                            "(Final_Summary.HPCG_result_is_VALID_with_a_GFLOP/s_rating_of)/g": 0.6073292145882663
+                        }
+                    }
+                },
+                "metadata": {}
+            },
+            {
+                "node_id": "tcn203.local.snellius.surf.nl:2:0",
+                "metrics": {
+                    "carbon": {
+                        "cpu_energy": {
+                            "energy.kwh": {
+                                "g": 5.075682246893255
+                            },
+                            "per_domain": {
+                                "values": [
+                                    {
+                                        "g": 2.3084673171608623
+                                    },
+                                    {
+                                        "g": 2.7672149297323916
+                                    }
+                                ],
+                                "sum_g": 5.075682246893254
+                            }
+                        },
+                        "perf_energy": {
+                            "kwh": {
+                                "g": 5.116096325395219
+                            }
+                        },
+                        "total_g": 5.075682246893255
+                    },
+                    "energy-to-solution": {
+                        "j": 66988.160516
+                    }
+                },
+                "metadata": {
+                    "hostname": "tcn203.local.snellius.surf.nl",
+                    "local_ip": "172.18.56.213",
+                    "public_ip": "145.136.56.213"
+                }
+            }
+        ]
+    },
+    "metadata": {}
+}
