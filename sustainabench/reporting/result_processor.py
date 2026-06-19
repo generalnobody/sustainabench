@@ -60,13 +60,13 @@ class ResultProcessor:
             for metric in self.metrics:
                 for source, result in zip(node_results, run_results):
                     result.metrics.update(
-                        metric.compute(
+                        NodeResult.normalize_metric_keys(metric.compute(
                             source.node_id,
                             source.metrics,
                             source.metadata,
                             run_results,
                             node_results,
-                        )
+                        ))
                     )
 
             results.update({run: run_results})
