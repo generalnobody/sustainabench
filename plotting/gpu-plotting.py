@@ -13,6 +13,12 @@ with open(Path("configs/metrics/metrics_dict.yaml")) as f:
     raw_metrics_dict = yaml.safe_load(f)
 metrics_dict = MetricsDict.model_validate(raw_metrics_dict)
 
+metrics_to_plot = [
+    "all-carbon",
+    "energy-to-solution",
+    "carbon-per-second",
+]
+
 a100_files = {
     "gpu-burn": {
         "4 GPUs": "scripts/snellius/gpu/a100/experiments/results/gpu-burn.json"
@@ -76,12 +82,14 @@ h100_results = load_results(h100_files)
 
 a100_metrics = get_results(
     a100_results,
-    metrics_dict
+    metrics_dict,
+    metrics_to_extract=metrics_to_plot
 )
 
 h100_metrics = get_results(
-    a100_results,
-    metrics_dict
+    h100_results,
+    metrics_dict,
+    metrics_to_extract=metrics_to_plot
 )
 
 a100_df = build_dataframe(
@@ -111,8 +119,9 @@ stats_df.to_csv(
 # print(stats_df)
 print(f"Stats saved to: {OUTPUT_DIR.resolve()}.gpu_benchmark_statistics.csv")
 
+
 config_order = ["1 GPU", "2 GPUs", "4 GPUs"]
-plot_structure(stats_df, "a100", OUTPUT_DIR, config_order=config_order)
-plot_structure(stats_df, "h100", OUTPUT_DIR, config_order=config_order)
+plot_structure(stats_df, "a100", OUTPUT_DIR, config_order=config_order, metrics_to_plot=metrics_to_plot)
+plot_structure(stats_df, "h100", OUTPUT_DIR, config_order=config_order, metrics_to_plot=metrics_to_plot)
 
 print(f"Plots saved to: {OUTPUT_DIR.resolve()}")

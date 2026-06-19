@@ -16,11 +16,17 @@ def load_results(files: dict):
 
     return results
 
-def get_results(results, metrics_dict):
+def get_results(results, metrics_dict, metrics_to_extract=None):
 
     metric_sources = {}
 
     for unitdef in metrics_dict.metrics_dict:
+        if (
+            metrics_to_extract is not None
+            and unitdef.unit not in metrics_to_extract
+        ):
+            continue
+
         metric_sources[unitdef.unit] = unitdef.sources
 
     full_results = {}

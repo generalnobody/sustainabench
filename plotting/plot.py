@@ -44,14 +44,19 @@ def build_dataframe(all_metrics, arch_name):
 
     return pd.DataFrame(rows)
 
-def plot_structure(stats_df, arch_name, output_dir, config_order=None):
+def plot_structure(stats_df, arch_name, output_dir, config_order=None, metrics_to_plot=None,):
     sns.set_theme(style="whitegrid", context="talk")
 
     arch_df = stats_df[
         stats_df["arch"] == arch_name
     ]
 
-    for metric in ["carbon", "energy"]:
+    if metrics_to_plot is None:
+        metrics = arch_df["metric"].unique()
+    else:
+        metrics = metrics_to_plot
+
+    for metric in metrics:
 
         metric_df = arch_df[
             arch_df["metric"] == metric
@@ -104,16 +109,28 @@ def plot_structure(stats_df, arch_name, output_dir, config_order=None):
             )
 
         ylabel_map = {
-            "carbon": "gCO₂eq",
-            "energy": "J",
-            "carbon-per-second": "gCO₂eq/s"
+            "carbon": "gCO2eq",
+            "all-carbon": "gCO2eq",
+            "energy-to-solution": "Joule",
+            "carbon-per-second": "gCO2eq/s",
         }
 
         ax.set_xticks(x)
         ax.set_xticklabels(benchmarks, rotation=20)
-        ax.set_ylabel(ylabel_map.get(metric, metric))
+        ylabel = ylabel_map.get(metric)
+
+        if ylabel is None:
+            ylabel = metric
+
+        ax.set_ylabel(ylabel)
         ax.set_xlabel("Benchmark")
-        ax.set_yscale("log")
+        log_metrics = {
+            "all-carbon",
+            "energy-to-solution",
+        }
+
+        if metric in log_metrics:
+            ax.set_yscale("log")
 
         ax.legend(
             loc="upper center",
@@ -122,13 +139,13 @@ def plot_structure(stats_df, arch_name, output_dir, config_order=None):
             frameon=False
         )
 
+        pretty_metric = metric.replace("-", " ").title()
+
         ax.set_title(
-            f"{arch_name.upper()} - {metric.capitalize()}",
+            f"{arch_name.upper()} - {pretty_metric}",
             pad=40
         )
-
         plt.tight_layout()
         plt.savefig(output_dir / f"{arch_name}_{metric}.pdf")
-        plt.savefig(output_dir / f"{arch_name}_{metric}.eps")
 
         plt.close()

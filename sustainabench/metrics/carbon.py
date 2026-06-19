@@ -205,6 +205,7 @@ class CarbonMetric(Metric):
         )
 
         avg_intensity = filtered["carbon_intensity"].mean()
+        spatial_temporal_data["location"]["carbon_intensity"] = avg_intensity
 
         sources = None
         for unitdef in self.metrics_dict.metrics_dict:

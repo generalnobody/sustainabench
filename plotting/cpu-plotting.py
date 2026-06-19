@@ -13,6 +13,12 @@ with open(Path("configs/metrics/metrics_dict.yaml")) as f:
     raw_metrics_dict = yaml.safe_load(f)
 metrics_dict = MetricsDict.model_validate(raw_metrics_dict)
 
+metrics_to_plot = [
+    "all-carbon",
+    "energy-to-solution",
+    "carbon-per-second",
+]
+
 rome_files = {
     "stress-ng": {
         "1 node": "scripts/snellius/cpu/rome/experiments/results/stress-ng.json"
@@ -65,12 +71,14 @@ genoa_results = load_results(genoa_files)
 
 rome_metrics = get_results(
     rome_results,
-    metrics_dict
+    metrics_dict,
+    metrics_to_extract=metrics_to_plot
 )
 
 genoa_metrics = get_results(
     genoa_results,
-    metrics_dict
+    metrics_dict,
+    metrics_to_extract=metrics_to_plot
 )
 
 rome_df = build_dataframe(
@@ -100,8 +108,9 @@ stats_df.to_csv(
 # print(stats_df)
 print(f"Stats saved to: {OUTPUT_DIR.resolve()}.cpu_benchmark_statistics.csv")
 
+
 config_order = ["1 node", "2 nodes", "4 nodes"]
-plot_structure(stats_df, "rome", OUTPUT_DIR, config_order=config_order)
-plot_structure(stats_df, "genoa", OUTPUT_DIR, config_order=config_order)
+plot_structure(stats_df, "rome", OUTPUT_DIR, config_order=config_order, metrics_to_plot=metrics_to_plot)
+plot_structure(stats_df, "genoa", OUTPUT_DIR, config_order=config_order, metrics_to_plot=metrics_to_plot)
 
 print(f"Plots saved to: {OUTPUT_DIR.resolve()}")
