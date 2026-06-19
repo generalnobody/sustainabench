@@ -2,7 +2,7 @@ import pandas as pd
 from pathlib import Path
 import requests
 from sustainabench.metrics.base import Metric, register_metric
-from pydantic import BaseModel, model_validator, ConfigDict, field_validator
+from pydantic import BaseModel, model_validator, ConfigDict, field_validator, field_serializer
 from typing import Literal
 from sustainabench.schemas.results.metrics_dict import MetricsDict
 import jmespath
@@ -20,6 +20,10 @@ class ReferenceTime(BaseModel):
         if v is None:
             return None
         return pd.to_datetime(v, utc=True)
+    
+    @field_serializer("value", "start", "end")
+    def serialize_timestamp(self, value):
+        return value.isoformat() if value is not None else None
 
     @model_validator(mode="after")
     def validate_mode_constraints(self):
@@ -91,12 +95,18 @@ class CarbonMetric(Metric):
         )
 
     def compute(self, node_id, measurements, metadata, run_metrics, node_results):
+        spatial_temporal_data = {
+            "config": self.config.model_dump(),
+            "location": {}
+        }
+
         # Load carbon tracefile
         df = None
         # Auto-region selection logic
         datapath = Path(self.parquets)
         if datapath.is_file():
             df = pd.read_parquet(datapath)
+            spatial_temporal_data["location"]["filename"] = datapath.name
         elif datapath.is_dir():
             public_ip = metadata.get("public_ip")
             if not public_ip and not self.config.fallback_country:
@@ -137,6 +147,7 @@ class CarbonMetric(Metric):
             if region_match:
                 # print(f"Loading carbon traces for region {region_code} in country {country_code}")
                 df = self.cache["dataframes"].get(region_match[0])
+                spatial_temporal_data["location"]["filename"] = region_match[0].name
                 if df is None:
                     df = pd.read_parquet(region_match[0])
                     self.cache["dataframes"].update({region_match[0]: df})
@@ -144,6 +155,7 @@ class CarbonMetric(Metric):
             elif country_match:
                 # print(f"Loading carbon traces for country {country_code}")
                 df = self.cache["dataframes"].get(country_match[0])
+                spatial_temporal_data["location"]["filename"] = country_match[0].name
                 if df is None:
                     df = pd.read_parquet(country_match[0])
                     self.cache["dataframes"].update({country_match[0]: df})
@@ -304,6 +316,7 @@ class CarbonMetric(Metric):
             group_data["value"]
             for group_data in contribution_groups.values()
         )
+        results["spatial_temporal_data"] = spatial_temporal_data
 
         return {
             self.name: results
