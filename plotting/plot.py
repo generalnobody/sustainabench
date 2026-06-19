@@ -2,6 +2,7 @@ import pandas as pd
 import matplotlib.pyplot as plt
 import seaborn as sns
 import numpy as np
+from determine_ranges import determine_metric_ranges
 
 # ----------------------------
 # FLATTEN FUNCTION
@@ -22,16 +23,6 @@ def flatten_results(data, arch_name, metric_name):
 
     return rows
 
-
-# ----------------------------
-# DATAFRAME BUILDER
-# ----------------------------
-# def build_dataframe(total_carbon, total_energy, arch_name):
-#     rows = []
-#     rows += flatten_results(total_carbon, arch_name, "carbon")
-#     rows += flatten_results(total_energy, arch_name, "energy")
-#     return pd.DataFrame(rows)
-
 def build_dataframe(all_metrics, arch_name):
     rows = []
 
@@ -46,6 +37,17 @@ def build_dataframe(all_metrics, arch_name):
 
 def plot_structure(stats_df, arch_name, output_dir, config_order=None, metrics_to_plot=None, title_addition=None):
     sns.set_theme(style="whitegrid", context="talk")
+
+    stats_files = [
+        "experiments/plots/cpu_benchmark_statistics.csv",
+        "experiments/plots/gpu_benchmark_statistics.csv",
+        "experiments/plots/PL/cpu_benchmark_statistics.csv",
+        "experiments/plots/PL/gpu_benchmark_statistics.csv",
+        "experiments/plots/2023/cpu_benchmark_statistics.csv",
+        "experiments/plots/2023/gpu_benchmark_statistics.csv",
+    ]
+
+    y_limits = determine_metric_ranges(stats_files)
 
     arch_df = stats_df[
         stats_df["arch"] == arch_name
@@ -122,8 +124,6 @@ def plot_structure(stats_df, arch_name, output_dir, config_order=None, metrics_t
         if ylabel is None:
             ylabel = metric
 
-        ax.set_ylabel(ylabel)
-        ax.set_xlabel("Benchmark")
         log_metrics = {
             "all-carbon",
             "energy-to-solution",
@@ -131,6 +131,13 @@ def plot_structure(stats_df, arch_name, output_dir, config_order=None, metrics_t
 
         if metric in log_metrics:
             ax.set_yscale("log")
+            ylabel = f"{ylabel} (log)"
+
+        if metric in y_limits:
+            ax.set_ylim(y_limits[metric])
+
+        ax.set_ylabel(ylabel)
+        ax.set_xlabel("Benchmark")
 
         ax.legend(
             loc="upper center",
