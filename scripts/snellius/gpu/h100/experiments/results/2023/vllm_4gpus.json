@@ -9,18 +9,18 @@
                     "carbon": {
                         "cpu_energy": {
                             "energy.kwh": {
-                                "g": 1.732728728220487
+                                "g": 1.8417784871281468
                             },
                             "per_domain": {
                                 "values": [
                                     {
-                                        "g": 0.811948913521446
+                                        "g": 0.863049141631465
                                     },
                                     {
-                                        "g": 0.920779814699041
+                                        "g": 0.9787293454966818
                                     }
                                 ],
-                                "sum_g": 1.732728728220487
+                                "sum_g": 1.8417784871281468
                             }
                         },
                         "gpu_nv": {
@@ -28,35 +28,35 @@
                                 "values": [
                                     {
                                         "gpu_id": 0,
-                                        "g": 6.6931926157983135
+                                        "g": 7.114430533302534
                                     },
                                     {
                                         "gpu_id": 1,
-                                        "g": 6.956803617471168
+                                        "g": 7.394631965842979
                                     },
                                     {
                                         "gpu_id": 2,
-                                        "g": 7.02139866418656
+                                        "g": 7.463292319583191
                                     },
                                     {
                                         "gpu_id": 3,
-                                        "g": 6.6277937987282325
+                                        "g": 7.0449158236993705
                                     }
                                 ],
-                                "sum_g": 27.299188696184274
+                                "sum_g": 29.017270642428073
                             }
                         },
                         "perf_energy": {
                             "kwh": {
-                                "g": 11.703415646447809
+                                "g": 12.439973327898603
                             }
                         },
-                        "total_g": 29.03191742440476,
+                        "total_g": 30.85904912955622,
                         "spatial_temporal_data": {
                             "config": {
                                 "reference_time": {
-                                    "mode": "auto",
-                                    "value": "2024-12-31T23:59:59+00:00",
+                                    "mode": "fixed",
+                                    "value": "2023-12-31T23:59:59+00:00",
                                     "start": "2023-12-31T23:59:59+00:00",
                                     "end": "2024-12-31T23:59:59+00:00"
                                 },
@@ -70,7 +70,7 @@
                             },
                             "location": {
                                 "filename": "NL_2021-2024.parquet",
-                                "carbon_intensity": 272.77142629482074
+                                "carbon_intensity": 289.9383710045662
                             }
                         }
                     },
@@ -92,8 +92,8 @@
                         "spatial_temporal_data": {
                             "config": {
                                 "reference_time": {
-                                    "mode": "auto",
-                                    "value": "2024-12-31T23:59:59+00:00",
+                                    "mode": "fixed",
+                                    "value": "2023-12-31T23:59:59+00:00",
                                     "start": "2023-12-31T23:59:59+00:00",
                                     "end": "2024-12-31T23:59:59+00:00"
                                 },
@@ -107,7 +107,7 @@
                             },
                             "location": {
                                 "filename": "NL_2021-2024.parquet",
-                                "carbon_intensity": 272.77142629482074
+                                "carbon_intensity": 289.9383710045662
                             }
                         }
                     },
@@ -116,19 +116,19 @@
                     },
                     "max_execution_time": 678.7001718080137,
                     "all_carbon": {
-                        "g": 29.03191742440476
+                        "g": 30.85904912955622
                     },
                     "carbon_per_second": {
-                        "g": 0.04277576259788707
+                        "g": 0.045467866977769715
                     },
                     "performance_per_carbon": {
                         "vllm": {
                             "throughput.requests/s": 51.71,
-                            "(throughput.requests/s)/g": 1.7811431206583561,
+                            "(throughput.requests/s)/g": 1.6756835177553522,
                             "throughput.total_tokens/s": 59574.16,
-                            "(throughput.total_tokens/s)/g": 2052.022921156454,
+                            "(throughput.total_tokens/s)/g": 1930.5248113734324,
                             "throughput.output_tokens/s": 6619.35,
-                            "(throughput.output_tokens/s)/g": 228.00250852310754
+                            "(throughput.output_tokens/s)/g": 214.50272081326418
                         }
                     }
                 },
@@ -142,18 +142,18 @@
                     "carbon": {
                         "cpu_energy": {
                             "energy.kwh": {
-                                "g": 1.5593844042417158
+                                "g": 1.6575246904604162
                             },
                             "per_domain": {
                                 "values": [
                                     {
-                                        "g": 0.7401074973394862
+                                        "g": 0.7866863661699869
                                     },
                                     {
-                                        "g": 0.8192769069022295
+                                        "g": 0.8708383242904294
                                     }
                                 ],
-                                "sum_g": 1.5593844042417158
+                                "sum_g": 1.6575246904604164
                             }
                         },
                         "gpu_nv": {
@@ -161,35 +161,35 @@
                                 "values": [
                                     {
                                         "gpu_id": 0,
-                                        "g": 6.674961395290429
+                                        "g": 7.0950519259194875
                                     },
                                     {
                                         "gpu_id": 1,
-                                        "g": 6.941590017507478
+                                        "g": 7.378460893782742
                                     },
                                     {
                                         "gpu_id": 2,
-                                        "g": 6.9836609767955915
+                                        "g": 7.423179600460658
                                     },
                                     {
                                         "gpu_id": 3,
-                                        "g": 6.62846934711509
+                                        "g": 7.045633887909692
                                     }
                                 ],
-                                "sum_g": 27.228681736708587
+                                "sum_g": 28.942326308072577
                             }
                         },
                         "perf_energy": {
                             "kwh": {
-                                "g": 11.534311000716336
+                                "g": 12.260226034794323
                             }
                         },
-                        "total_g": 28.788066140950303,
+                        "total_g": 30.599850998532993,
                         "spatial_temporal_data": {
                             "config": {
                                 "reference_time": {
-                                    "mode": "auto",
-                                    "value": "2024-12-31T23:59:59+00:00",
+                                    "mode": "fixed",
+                                    "value": "2023-12-31T23:59:59+00:00",
                                     "start": "2023-12-31T23:59:59+00:00",
                                     "end": "2024-12-31T23:59:59+00:00"
                                 },
@@ -203,7 +203,7 @@
                             },
                             "location": {
                                 "filename": "NL_2021-2024.parquet",
-                                "carbon_intensity": 272.77142629482074
+                                "carbon_intensity": 289.9383710045662
                             }
                         }
                     },
@@ -225,8 +225,8 @@
                         "spatial_temporal_data": {
                             "config": {
                                 "reference_time": {
-                                    "mode": "auto",
-                                    "value": "2024-12-31T23:59:59+00:00",
+                                    "mode": "fixed",
+                                    "value": "2023-12-31T23:59:59+00:00",
                                     "start": "2023-12-31T23:59:59+00:00",
                                     "end": "2024-12-31T23:59:59+00:00"
                                 },
@@ -240,7 +240,7 @@
                             },
                             "location": {
                                 "filename": "NL_2021-2024.parquet",
-                                "carbon_intensity": 272.77142629482074
+                                "carbon_intensity": 289.9383710045662
                             }
                         }
                     },
@@ -249,19 +249,19 @@
                     },
                     "max_execution_time": 675.0002375468612,
                     "all_carbon": {
-                        "g": 28.788066140950303
+                        "g": 30.599850998532993
                     },
                     "carbon_per_second": {
-                        "g": 0.04264897186640134
+                        "g": 0.04533309663673805
                     },
                     "performance_per_carbon": {
                         "vllm": {
                             "throughput.requests/s": 51.81,
-                            "(throughput.requests/s)/g": 1.799704076902254,
+                            "(throughput.requests/s)/g": 1.6931454993844204,
                             "throughput.total_tokens/s": 59685.66,
-                            "(throughput.total_tokens/s)/g": 2073.277854364057,
+                            "(throughput.total_tokens/s)/g": 1950.5212624356056,
                             "throughput.output_tokens/s": 6631.74,
-                            "(throughput.output_tokens/s)/g": 230.36420604045077
+                            "(throughput.output_tokens/s)/g": 216.72458471506727
                         }
                     }
                 },
@@ -275,18 +275,18 @@
                     "carbon": {
                         "cpu_energy": {
                             "energy.kwh": {
-                                "g": 1.6891827810956292
+                                "g": 1.7954919638484466
                             },
                             "per_domain": {
                                 "values": [
                                     {
-                                        "g": 0.807304131593871
+                                        "g": 0.8581120390762399
                                     },
                                     {
-                                        "g": 0.8818786495017581
+                                        "g": 0.9373799247722064
                                     }
                                 ],
-                                "sum_g": 1.6891827810956292
+                                "sum_g": 1.7954919638484463
                             }
                         },
                         "gpu_nv": {
@@ -294,35 +294,35 @@
                                 "values": [
                                     {
                                         "gpu_id": 0,
-                                        "g": 6.650854570159849
+                                        "g": 7.069427931121374
                                     },
                                     {
                                         "gpu_id": 1,
-                                        "g": 6.92998922874963
+                                        "g": 7.3661300061948936
                                     },
                                     {
                                         "gpu_id": 2,
-                                        "g": 6.988137968496348
+                                        "g": 7.427938352865008
                                     },
                                     {
                                         "gpu_id": 3,
-                                        "g": 6.585286650926969
+                                        "g": 6.999733476864304
                                     }
                                 ],
-                                "sum_g": 27.154268418332798
+                                "sum_g": 28.863229767045578
                             }
                         },
                         "perf_energy": {
                             "kwh": {
-                                "g": 11.663938044078884
+                                "g": 12.398011191770603
                             }
                         },
-                        "total_g": 28.843451199428426,
+                        "total_g": 30.658721730894023,
                         "spatial_temporal_data": {
                             "config": {
                                 "reference_time": {
-                                    "mode": "auto",
-                                    "value": "2024-12-31T23:59:59+00:00",
+                                    "mode": "fixed",
+                                    "value": "2023-12-31T23:59:59+00:00",
                                     "start": "2023-12-31T23:59:59+00:00",
                                     "end": "2024-12-31T23:59:59+00:00"
                                 },
@@ -336,7 +336,7 @@
                             },
                             "location": {
                                 "filename": "NL_2021-2024.parquet",
-                                "carbon_intensity": 272.77142629482074
+                                "carbon_intensity": 289.9383710045662
                             }
                         }
                     },
@@ -358,8 +358,8 @@
                         "spatial_temporal_data": {
                             "config": {
                                 "reference_time": {
-                                    "mode": "auto",
-                                    "value": "2024-12-31T23:59:59+00:00",
+                                    "mode": "fixed",
+                                    "value": "2023-12-31T23:59:59+00:00",
                                     "start": "2023-12-31T23:59:59+00:00",
                                     "end": "2024-12-31T23:59:59+00:00"
                                 },
@@ -373,7 +373,7 @@
                             },
                             "location": {
                                 "filename": "NL_2021-2024.parquet",
-                                "carbon_intensity": 272.77142629482074
+                                "carbon_intensity": 289.9383710045662
                             }
                         }
                     },
@@ -382,19 +382,19 @@
                     },
                     "max_execution_time": 675.8001672979444,
                     "all_carbon": {
-                        "g": 28.843451199428426
+                        "g": 30.658721730894023
                     },
                     "carbon_per_second": {
-                        "g": 0.0426804440057382
+                        "g": 0.04536654948381703
                     },
                     "performance_per_carbon": {
                         "vllm": {
                             "throughput.requests/s": 51.79,
-                            "(throughput.requests/s)/g": 1.7955548953526856,
+                            "(throughput.requests/s)/g": 1.6892419864919717,
                             "throughput.total_tokens/s": 59667.18,
-                            "(throughput.total_tokens/s)/g": 2068.6560560125477,
+                            "(throughput.total_tokens/s)/g": 1946.173115882874,
                             "throughput.output_tokens/s": 6629.69,
-                            "(throughput.output_tokens/s)/g": 229.85078845666627
+                            "(throughput.output_tokens/s)/g": 216.241566044139
                         }
                     }
                 },
@@ -408,18 +408,18 @@
                     "carbon": {
                         "cpu_energy": {
                             "energy.kwh": {
-                                "g": 1.6613597438141874
+                                "g": 1.7659178760660206
                             },
                             "per_domain": {
                                 "values": [
                                     {
-                                        "g": 0.8167933382197833
+                                        "g": 0.86819845153012
                                     },
                                     {
-                                        "g": 0.8445664055944041
+                                        "g": 0.8977194245359005
                                     }
                                 ],
-                                "sum_g": 1.6613597438141874
+                                "sum_g": 1.7659178760660206
                             }
                         },
                         "gpu_nv": {
@@ -427,35 +427,35 @@
                                 "values": [
                                     {
                                         "gpu_id": 0,
-                                        "g": 6.332618368608122
+                                        "g": 6.731163446729005
                                     },
                                     {
                                         "gpu_id": 1,
-                                        "g": 6.491588824380428
+                                        "g": 6.90013875184274
                                     },
                                     {
                                         "gpu_id": 2,
-                                        "g": 6.239586362010741
+                                        "g": 6.632276445218162
                                     },
                                     {
                                         "gpu_id": 3,
-                                        "g": 6.489100933418424
+                                        "g": 6.89749428477902
                                     }
                                 ],
-                                "sum_g": 25.552894488417714
+                                "sum_g": 27.161072928568927
                             }
                         },
                         "perf_energy": {
                             "kwh": {
-                                "g": 11.633051226241436
+                                "g": 12.365180503560522
                             }
                         },
-                        "total_g": 27.2142542322319,
+                        "total_g": 28.926990804634947,
                         "spatial_temporal_data": {
                             "config": {
                                 "reference_time": {
-                                    "mode": "auto",
-                                    "value": "2024-12-31T23:59:59+00:00",
+                                    "mode": "fixed",
+                                    "value": "2023-12-31T23:59:59+00:00",
                                     "start": "2023-12-31T23:59:59+00:00",
                                     "end": "2024-12-31T23:59:59+00:00"
                                 },
@@ -469,7 +469,7 @@
                             },
                             "location": {
                                 "filename": "NL_2021-2024.parquet",
-                                "carbon_intensity": 272.77142629482074
+                                "carbon_intensity": 289.9383710045662
                             }
                         }
                     },
@@ -491,8 +491,8 @@
                         "spatial_temporal_data": {
                             "config": {
                                 "reference_time": {
-                                    "mode": "auto",
-                                    "value": "2024-12-31T23:59:59+00:00",
+                                    "mode": "fixed",
+                                    "value": "2023-12-31T23:59:59+00:00",
                                     "start": "2023-12-31T23:59:59+00:00",
                                     "end": "2024-12-31T23:59:59+00:00"
                                 },
@@ -506,7 +506,7 @@
                             },
                             "location": {
                                 "filename": "NL_2021-2024.parquet",
-                                "carbon_intensity": 272.77142629482074
+                                "carbon_intensity": 289.9383710045662
                             }
                         }
                     },
@@ -515,19 +515,19 @@
                     },
                     "max_execution_time": 676.6002197889975,
                     "all_carbon": {
-                        "g": 27.2142542322319
+                        "g": 28.926990804634947
                     },
                     "carbon_per_second": {
-                        "g": 0.040222059402698476
+                        "g": 0.042753445769875796
                     },
                     "performance_per_carbon": {
                         "vllm": {
                             "throughput.requests/s": 52.1,
-                            "(throughput.requests/s)/g": 1.9144379101997961,
+                            "(throughput.requests/s)/g": 1.8010860635960815,
                             "throughput.total_tokens/s": 60019.68,
-                            "(throughput.total_tokens/s)/g": 2205.4501103658445,
+                            "(throughput.total_tokens/s)/g": 2074.867738761928,
                             "throughput.output_tokens/s": 6668.85,
-                            "(throughput.output_tokens/s)/g": 245.04988977804052
+                            "(throughput.output_tokens/s)/g": 230.54074462980284
                         }
                     }
                 },
@@ -541,18 +541,18 @@
                     "carbon": {
                         "cpu_energy": {
                             "energy.kwh": {
-                                "g": 1.6816785559305945
+                                "g": 1.7875154582094357
                             },
                             "per_domain": {
                                 "values": [
                                     {
-                                        "g": 0.8112948232497783
+                                        "g": 0.862353886008714
                                     },
                                     {
-                                        "g": 0.8703837326808161
+                                        "g": 0.9251615722007217
                                     }
                                 ],
-                                "sum_g": 1.6816785559305945
+                                "sum_g": 1.7875154582094357
                             }
                         },
                         "gpu_nv": {
@@ -560,35 +560,35 @@
                                 "values": [
                                     {
                                         "gpu_id": 0,
-                                        "g": 6.356065603128855
+                                        "g": 6.756086339400893
                                     },
                                     {
                                         "gpu_id": 1,
-                                        "g": 6.4772407183292815
+                                        "g": 6.88488764379239
                                     },
                                     {
                                         "gpu_id": 2,
-                                        "g": 6.230482964615615
+                                        "g": 6.622600123005083
                                     },
                                     {
                                         "gpu_id": 3,
-                                        "g": 6.489723661056468
+                                        "g": 6.898156203952177
                                     }
                                 ],
-                                "sum_g": 25.553512947130223
+                                "sum_g": 27.161730310150542
                             }
                         },
                         "perf_energy": {
                             "kwh": {
-                                "g": 11.66910554721036
+                                "g": 12.403503913132415
                             }
                         },
-                        "total_g": 27.23519150306082,
+                        "total_g": 28.94924576835998,
                         "spatial_temporal_data": {
                             "config": {
                                 "reference_time": {
-                                    "mode": "auto",
-                                    "value": "2024-12-31T23:59:59+00:00",
+                                    "mode": "fixed",
+                                    "value": "2023-12-31T23:59:59+00:00",
                                     "start": "2023-12-31T23:59:59+00:00",
                                     "end": "2024-12-31T23:59:59+00:00"
                                 },
@@ -602,7 +602,7 @@
                             },
                             "location": {
                                 "filename": "NL_2021-2024.parquet",
-                                "carbon_intensity": 272.77142629482074
+                                "carbon_intensity": 289.9383710045662
                             }
                         }
                     },
@@ -624,8 +624,8 @@
                         "spatial_temporal_data": {
                             "config": {
                                 "reference_time": {
-                                    "mode": "auto",
-                                    "value": "2024-12-31T23:59:59+00:00",
+                                    "mode": "fixed",
+                                    "value": "2023-12-31T23:59:59+00:00",
                                     "start": "2023-12-31T23:59:59+00:00",
                                     "end": "2024-12-31T23:59:59+00:00"
                                 },
@@ -639,7 +639,7 @@
                             },
                             "location": {
                                 "filename": "NL_2021-2024.parquet",
-                                "carbon_intensity": 272.77142629482074
+                                "carbon_intensity": 289.9383710045662
                             }
                         }
                     },
@@ -648,19 +648,19 @@
                     },
                     "max_execution_time": 675.6001768850037,
                     "all_carbon": {
-                        "g": 27.23519150306082
+                        "g": 28.94924576835998
                     },
                     "carbon_per_second": {
-                        "g": 0.04031258788094814
+                        "g": 0.04284967168279402
                     },
                     "performance_per_carbon": {
                         "vllm": {
                             "throughput.requests/s": 52.14,
-                            "(throughput.requests/s)/g": 1.9144348588164053,
+                            "(throughput.requests/s)/g": 1.8010831928818785,
                             "throughput.total_tokens/s": 60069.87,
-                            "(throughput.total_tokens/s)/g": 2205.5974893089724,
+                            "(throughput.total_tokens/s)/g": 2075.0063915534975,
                             "throughput.output_tokens/s": 6674.43,
-                            "(throughput.output_tokens/s)/g": 245.06638770099696
+                            "(throughput.output_tokens/s)/g": 230.5562657281664
                         }
                     }
                 },
@@ -674,18 +674,18 @@
                     "carbon": {
                         "cpu_energy": {
                             "energy.kwh": {
-                                "g": 1.8313317686606208
+                                "g": 1.946587137028338
                             },
                             "per_domain": {
                                 "values": [
                                     {
-                                        "g": 0.8927293709860606
+                                        "g": 0.9489135393964252
                                     },
                                     {
-                                        "g": 0.9386023976745599
+                                        "g": 0.9976735976319127
                                     }
                                 ],
-                                "sum_g": 1.8313317686606205
+                                "sum_g": 1.9465871370283379
                             }
                         },
                         "gpu_nv": {
@@ -693,35 +693,35 @@
                                 "values": [
                                     {
                                         "gpu_id": 0,
-                                        "g": 6.41087504974264
+                                        "g": 6.814345233606646
                                     },
                                     {
                                         "gpu_id": 1,
-                                        "g": 6.543317403263357
+                                        "g": 6.955122883059942
                                     },
                                     {
                                         "gpu_id": 2,
-                                        "g": 6.295334056893969
+                                        "g": 6.691532636606159
                                     },
                                     {
                                         "gpu_id": 3,
-                                        "g": 6.542616489055527
+                                        "g": 6.954377856623732
                                     }
                                 ],
-                                "sum_g": 25.79214299895549
+                                "sum_g": 27.41537860989648
                             }
                         },
                         "perf_energy": {
                             "kwh": {
-                                "g": 11.801496674359365
+                                "g": 12.544227112268208
                             }
                         },
-                        "total_g": 27.623474767616113,
+                        "total_g": 29.361965746924817,
                         "spatial_temporal_data": {
                             "config": {
                                 "reference_time": {
-                                    "mode": "auto",
-                                    "value": "2024-12-31T23:59:59+00:00",
+                                    "mode": "fixed",
+                                    "value": "2023-12-31T23:59:59+00:00",
                                     "start": "2023-12-31T23:59:59+00:00",
                                     "end": "2024-12-31T23:59:59+00:00"
                                 },
@@ -735,7 +735,7 @@
                             },
                             "location": {
                                 "filename": "NL_2021-2024.parquet",
-                                "carbon_intensity": 272.77142629482074
+                                "carbon_intensity": 289.9383710045662
                             }
                         }
                     },
@@ -757,8 +757,8 @@
                         "spatial_temporal_data": {
                             "config": {
                                 "reference_time": {
-                                    "mode": "auto",
-                                    "value": "2024-12-31T23:59:59+00:00",
+                                    "mode": "fixed",
+                                    "value": "2023-12-31T23:59:59+00:00",
                                     "start": "2023-12-31T23:59:59+00:00",
                                     "end": "2024-12-31T23:59:59+00:00"
                                 },
@@ -772,7 +772,7 @@
                             },
                             "location": {
                                 "filename": "NL_2021-2024.parquet",
-                                "carbon_intensity": 272.77142629482074
+                                "carbon_intensity": 289.9383710045662
                             }
                         }
                     },
@@ -781,19 +781,19 @@
                     },
                     "max_execution_time": 681.2001769099952,
                     "all_carbon": {
-                        "g": 27.623474767616113
+                        "g": 29.361965746924817
                     },
                     "carbon_per_second": {
-                        "g": 0.04055118554566364
+                        "g": 0.04310328555713854
                     },
                     "performance_per_carbon": {
                         "vllm": {
                             "throughput.requests/s": 52.1,
-                            "(throughput.requests/s)/g": 1.8860769848215657,
+                            "(throughput.requests/s)/g": 1.7744043586542437,
                             "throughput.total_tokens/s": 60018.02,
-                            "(throughput.total_tokens/s)/g": 2172.7179692238087,
+                            "(throughput.total_tokens/s)/g": 2044.0736331247133,
                             "throughput.output_tokens/s": 6668.67,
-                            "(throughput.output_tokens/s)/g": 241.4131479149718
+                            "(throughput.output_tokens/s)/g": 227.11933041126287
                         }
                     }
                 },

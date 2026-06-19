@@ -44,7 +44,7 @@ def build_dataframe(all_metrics, arch_name):
 
     return pd.DataFrame(rows)
 
-def plot_structure(stats_df, arch_name, output_dir, config_order=None, metrics_to_plot=None,):
+def plot_structure(stats_df, arch_name, output_dir, config_order=None, metrics_to_plot=None, title_addition=None):
     sns.set_theme(style="whitegrid", context="talk")
 
     arch_df = stats_df[
@@ -141,10 +141,12 @@ def plot_structure(stats_df, arch_name, output_dir, config_order=None, metrics_t
 
         pretty_metric = metric.replace("-", " ").title()
 
-        ax.set_title(
-            f"{arch_name.upper()} - {pretty_metric}",
-            pad=40
-        )
+        if title_addition:
+            title = f"{arch_name.upper()} - {pretty_metric} - {title_addition}"
+        else:
+            title = f"{arch_name.upper()} - {pretty_metric}"
+
+        ax.set_title(title, pad=40)
         plt.tight_layout()
         plt.savefig(output_dir / f"{arch_name}_{metric}.pdf")
 
