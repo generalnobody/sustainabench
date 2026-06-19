@@ -1,0 +1,13 @@
+metrics:
+  carbon:
+    params:
+      reference_time: 
+        mode: fixed                     # 'fixed' to use 'value', 'auto' to select from most recent available date. 'fromto' to select range using 'from' and 'to'
+        value: "2023-12-31T23:59:59Z"   # Date from when to count selected period back. Required ISO 8601 format.
+        start: "2023-12-31T23:59:59Z"
+        end: "2024-12-31T23:59:59Z"
+      window:                           # How many years + months + days to slice from the selected parquet traces.
+        years: 1
+        months: 0
+        days: 0
+      fallback_country: NL # Fallback country to reference in .parquet if parquet dir selected and no local_ip is present (such as with 'global' results from likwid)

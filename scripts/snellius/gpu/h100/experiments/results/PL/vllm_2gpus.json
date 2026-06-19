@@ -1,0 +1,805 @@
+{
+    "workload": "vllm",
+    "backend": "local",
+    "results": {
+        "run0": [
+            {
+                "node_id": "gcn87.local.snellius.surf.nl:0:0",
+                "metrics": {
+                    "carbon": {
+                        "cpu_energy": {
+                            "energy.kwh": {
+                                "g": 16.387982022853503
+                            },
+                            "per_domain": {
+                                "values": [
+                                    {
+                                        "g": 8.20301935913956
+                                    },
+                                    {
+                                        "g": 8.184962663713945
+                                    }
+                                ],
+                                "sum_g": 16.387982022853507
+                            }
+                        },
+                        "gpu_nv": {
+                            "[:]": {
+                                "values": [
+                                    {
+                                        "gpu_id": 0,
+                                        "g": 10.01923345381375
+                                    },
+                                    {
+                                        "gpu_id": 1,
+                                        "g": 9.980386899893755
+                                    },
+                                    {
+                                        "gpu_id": 2,
+                                        "g": 4.891170041995266
+                                    },
+                                    {
+                                        "gpu_id": 3,
+                                        "g": 4.98432059232021
+                                    }
+                                ],
+                                "sum_g": 29.875110988022982
+                            }
+                        },
+                        "perf_energy": {
+                            "kwh": {
+                                "g": 16.49024751271726
+                            }
+                        },
+                        "total_g": 46.26309301087649,
+                        "spatial_temporal_data": {
+                            "config": {
+                                "reference_time": {
+                                    "mode": "auto",
+                                    "value": "2024-12-31T23:59:59+00:00",
+                                    "start": "2023-12-31T23:59:59+00:00",
+                                    "end": "2024-12-31T23:59:59+00:00"
+                                },
+                                "window": {
+                                    "years": 1,
+                                    "months": 0,
+                                    "days": 0,
+                                    "hours": 0
+                                },
+                                "fallback_country": "NL"
+                            },
+                            "location": {
+                                "filename": "PL_2021-2024.parquet",
+                                "carbon_intensity": 703.9198565737051
+                            }
+                        }
+                    },
+                    "energy_to_solution": {
+                        "j": 236599.56923195097
+                    }
+                },
+                "metadata": {
+                    "hostname": "gcn87.local.snellius.surf.nl",
+                    "local_ip": "172.18.62.87",
+                    "public_ip": "145.136.62.87"
+                }
+            },
+            {
+                "node_id": "local",
+                "metrics": {
+                    "carbon": {
+                        "total_g": 0,
+                        "spatial_temporal_data": {
+                            "config": {
+                                "reference_time": {
+                                    "mode": "auto",
+                                    "value": "2024-12-31T23:59:59+00:00",
+                                    "start": "2023-12-31T23:59:59+00:00",
+                                    "end": "2024-12-31T23:59:59+00:00"
+                                },
+                                "window": {
+                                    "years": 1,
+                                    "months": 0,
+                                    "days": 0,
+                                    "hours": 0
+                                },
+                                "fallback_country": "NL"
+                            },
+                            "location": {
+                                "filename": "PL_2021-2024.parquet",
+                                "carbon_intensity": 703.9198565737051
+                            }
+                        }
+                    },
+                    "energy_to_solution": {
+                        "j": 0
+                    },
+                    "max_execution_time": 377.6001928090118,
+                    "all_carbon": {
+                        "g": 46.26309301087649
+                    },
+                    "carbon_per_second": {
+                        "g": 0.12251872189661757
+                    },
+                    "performance_per_carbon": {
+                        "vllm": {
+                            "throughput.requests/s": 31.31,
+                            "(throughput.requests/s)/g": 0.6767813814921323,
+                            "throughput.total_tokens/s": 36066.36,
+                            "(throughput.total_tokens/s)/g": 779.5924926921936,
+                            "throughput.output_tokens/s": 4007.37,
+                            "(throughput.output_tokens/s)/g": 86.62131602523559
+                        }
+                    }
+                },
+                "metadata": {}
+            }
+        ],
+        "run1": [
+            {
+                "node_id": "gcn87.local.snellius.surf.nl:0:0",
+                "metrics": {
+                    "carbon": {
+                        "cpu_energy": {
+                            "energy.kwh": {
+                                "g": 16.336506938329144
+                            },
+                            "per_domain": {
+                                "values": [
+                                    {
+                                        "g": 8.183291235344505
+                                    },
+                                    {
+                                        "g": 8.15321570298464
+                                    }
+                                ],
+                                "sum_g": 16.336506938329144
+                            }
+                        },
+                        "gpu_nv": {
+                            "[:]": {
+                                "values": [
+                                    {
+                                        "gpu_id": 0,
+                                        "g": 9.984337884789154
+                                    },
+                                    {
+                                        "gpu_id": 1,
+                                        "g": 9.944523307205133
+                                    },
+                                    {
+                                        "gpu_id": 2,
+                                        "g": 4.8873342678285
+                                    },
+                                    {
+                                        "gpu_id": 3,
+                                        "g": 4.966024267934327
+                                    }
+                                ],
+                                "sum_g": 29.782219727757113
+                            }
+                        },
+                        "perf_energy": {
+                            "kwh": {
+                                "g": 16.452362937103054
+                            }
+                        },
+                        "total_g": 46.11872666608626,
+                        "spatial_temporal_data": {
+                            "config": {
+                                "reference_time": {
+                                    "mode": "auto",
+                                    "value": "2024-12-31T23:59:59+00:00",
+                                    "start": "2023-12-31T23:59:59+00:00",
+                                    "end": "2024-12-31T23:59:59+00:00"
+                                },
+                                "window": {
+                                    "years": 1,
+                                    "months": 0,
+                                    "days": 0,
+                                    "hours": 0
+                                },
+                                "fallback_country": "NL"
+                            },
+                            "location": {
+                                "filename": "PL_2021-2024.parquet",
+                                "carbon_intensity": 703.9198565737051
+                            }
+                        }
+                    },
+                    "energy_to_solution": {
+                        "j": 235861.24819100957
+                    }
+                },
+                "metadata": {
+                    "hostname": "gcn87.local.snellius.surf.nl",
+                    "local_ip": "172.18.62.87",
+                    "public_ip": "145.136.62.87"
+                }
+            },
+            {
+                "node_id": "local",
+                "metrics": {
+                    "carbon": {
+                        "total_g": 0,
+                        "spatial_temporal_data": {
+                            "config": {
+                                "reference_time": {
+                                    "mode": "auto",
+                                    "value": "2024-12-31T23:59:59+00:00",
+                                    "start": "2023-12-31T23:59:59+00:00",
+                                    "end": "2024-12-31T23:59:59+00:00"
+                                },
+                                "window": {
+                                    "years": 1,
+                                    "months": 0,
+                                    "days": 0,
+                                    "hours": 0
+                                },
+                                "fallback_country": "NL"
+                            },
+                            "location": {
+                                "filename": "PL_2021-2024.parquet",
+                                "carbon_intensity": 703.9198565737051
+                            }
+                        }
+                    },
+                    "energy_to_solution": {
+                        "j": 0
+                    },
+                    "max_execution_time": 376.1001901710406,
+                    "all_carbon": {
+                        "g": 46.11872666608626
+                    },
+                    "carbon_per_second": {
+                        "g": 0.12262351328541649
+                    },
+                    "performance_per_carbon": {
+                        "vllm": {
+                            "throughput.requests/s": 31.28,
+                            "(throughput.requests/s)/g": 0.6782494284041449,
+                            "throughput.total_tokens/s": 36040.19,
+                            "(throughput.total_tokens/s)/g": 781.4654177454213,
+                            "throughput.output_tokens/s": 4004.47,
+                            "(throughput.output_tokens/s)/g": 86.82958723022846
+                        }
+                    }
+                },
+                "metadata": {}
+            }
+        ],
+        "run2": [
+            {
+                "node_id": "gcn87.local.snellius.surf.nl:0:0",
+                "metrics": {
+                    "carbon": {
+                        "cpu_energy": {
+                            "energy.kwh": {
+                                "g": 16.400573025204974
+                            },
+                            "per_domain": {
+                                "values": [
+                                    {
+                                        "g": 8.2217749715069
+                                    },
+                                    {
+                                        "g": 8.178798053698074
+                                    }
+                                ],
+                                "sum_g": 16.400573025204974
+                            }
+                        },
+                        "gpu_nv": {
+                            "[:]": {
+                                "values": [
+                                    {
+                                        "gpu_id": 0,
+                                        "g": 10.018712067376496
+                                    },
+                                    {
+                                        "gpu_id": 1,
+                                        "g": 10.009066313871516
+                                    },
+                                    {
+                                        "gpu_id": 2,
+                                        "g": 4.895682013016288
+                                    },
+                                    {
+                                        "gpu_id": 3,
+                                        "g": 4.983950116930795
+                                    }
+                                ],
+                                "sum_g": 29.907410511195096
+                            }
+                        },
+                        "perf_energy": {
+                            "kwh": {
+                                "g": 16.51378776592085
+                            }
+                        },
+                        "total_g": 46.30798353640007,
+                        "spatial_temporal_data": {
+                            "config": {
+                                "reference_time": {
+                                    "mode": "auto",
+                                    "value": "2024-12-31T23:59:59+00:00",
+                                    "start": "2023-12-31T23:59:59+00:00",
+                                    "end": "2024-12-31T23:59:59+00:00"
+                                },
+                                "window": {
+                                    "years": 1,
+                                    "months": 0,
+                                    "days": 0,
+                                    "hours": 0
+                                },
+                                "fallback_country": "NL"
+                            },
+                            "location": {
+                                "filename": "PL_2021-2024.parquet",
+                                "carbon_intensity": 703.9198565737051
+                            }
+                        }
+                    },
+                    "energy_to_solution": {
+                        "j": 236829.14919105527
+                    }
+                },
+                "metadata": {
+                    "hostname": "gcn87.local.snellius.surf.nl",
+                    "local_ip": "172.18.62.87",
+                    "public_ip": "145.136.62.87"
+                }
+            },
+            {
+                "node_id": "local",
+                "metrics": {
+                    "carbon": {
+                        "total_g": 0,
+                        "spatial_temporal_data": {
+                            "config": {
+                                "reference_time": {
+                                    "mode": "auto",
+                                    "value": "2024-12-31T23:59:59+00:00",
+                                    "start": "2023-12-31T23:59:59+00:00",
+                                    "end": "2024-12-31T23:59:59+00:00"
+                                },
+                                "window": {
+                                    "years": 1,
+                                    "months": 0,
+                                    "days": 0,
+                                    "hours": 0
+                                },
+                                "fallback_country": "NL"
+                            },
+                            "location": {
+                                "filename": "PL_2021-2024.parquet",
+                                "carbon_intensity": 703.9198565737051
+                            }
+                        }
+                    },
+                    "energy_to_solution": {
+                        "j": 0
+                    },
+                    "max_execution_time": 377.6001575491391,
+                    "all_carbon": {
+                        "g": 46.30798353640007
+                    },
+                    "carbon_per_second": {
+                        "g": 0.12263761709467447
+                    },
+                    "performance_per_carbon": {
+                        "vllm": {
+                            "throughput.requests/s": 31.28,
+                            "(throughput.requests/s)/g": 0.6754774795022671,
+                            "throughput.total_tokens/s": 36038.82,
+                            "(throughput.total_tokens/s)/g": 778.2420491635515,
+                            "throughput.output_tokens/s": 4004.31,
+                            "(throughput.output_tokens/s)/g": 86.47126681412158
+                        }
+                    }
+                },
+                "metadata": {}
+            }
+        ],
+        "run3": [
+            {
+                "node_id": "gcn87.local.snellius.surf.nl:0:0",
+                "metrics": {
+                    "carbon": {
+                        "cpu_energy": {
+                            "energy.kwh": {
+                                "g": 12.644155799733854
+                            },
+                            "per_domain": {
+                                "values": [
+                                    {
+                                        "g": 6.334007631888267
+                                    },
+                                    {
+                                        "g": 6.310148167845588
+                                    }
+                                ],
+                                "sum_g": 12.644155799733856
+                            }
+                        },
+                        "gpu_nv": {
+                            "[:]": {
+                                "values": [
+                                    {
+                                        "gpu_id": 0,
+                                        "g": 7.946085754667851
+                                    },
+                                    {
+                                        "gpu_id": 1,
+                                        "g": 7.949174761169636
+                                    },
+                                    {
+                                        "gpu_id": 2,
+                                        "g": 3.765973005028052
+                                    },
+                                    {
+                                        "gpu_id": 3,
+                                        "g": 3.8139947657213455
+                                    }
+                                ],
+                                "sum_g": 23.475228286586887
+                            }
+                        },
+                        "perf_energy": {
+                            "kwh": {
+                                "g": 12.745112307802524
+                            }
+                        },
+                        "total_g": 36.11938408632074,
+                        "spatial_temporal_data": {
+                            "config": {
+                                "reference_time": {
+                                    "mode": "auto",
+                                    "value": "2024-12-31T23:59:59+00:00",
+                                    "start": "2023-12-31T23:59:59+00:00",
+                                    "end": "2024-12-31T23:59:59+00:00"
+                                },
+                                "window": {
+                                    "years": 1,
+                                    "months": 0,
+                                    "days": 0,
+                                    "hours": 0
+                                },
+                                "fallback_country": "NL"
+                            },
+                            "location": {
+                                "filename": "PL_2021-2024.parquet",
+                                "carbon_intensity": 703.9198565737051
+                            }
+                        }
+                    },
+                    "energy_to_solution": {
+                        "j": 184722.42471418285
+                    }
+                },
+                "metadata": {
+                    "hostname": "gcn87.local.snellius.surf.nl",
+                    "local_ip": "172.18.62.87",
+                    "public_ip": "145.136.62.87"
+                }
+            },
+            {
+                "node_id": "local",
+                "metrics": {
+                    "carbon": {
+                        "total_g": 0,
+                        "spatial_temporal_data": {
+                            "config": {
+                                "reference_time": {
+                                    "mode": "auto",
+                                    "value": "2024-12-31T23:59:59+00:00",
+                                    "start": "2023-12-31T23:59:59+00:00",
+                                    "end": "2024-12-31T23:59:59+00:00"
+                                },
+                                "window": {
+                                    "years": 1,
+                                    "months": 0,
+                                    "days": 0,
+                                    "hours": 0
+                                },
+                                "fallback_country": "NL"
+                            },
+                            "location": {
+                                "filename": "PL_2021-2024.parquet",
+                                "carbon_intensity": 703.9198565737051
+                            }
+                        }
+                    },
+                    "energy_to_solution": {
+                        "j": 0
+                    },
+                    "max_execution_time": 290.5001872640569,
+                    "all_carbon": {
+                        "g": 36.11938408632074
+                    },
+                    "carbon_per_second": {
+                        "g": 0.124335149063051
+                    },
+                    "performance_per_carbon": {
+                        "vllm": {
+                            "throughput.requests/s": 31.33,
+                            "(throughput.requests/s)/g": 0.8674012802966207,
+                            "throughput.total_tokens/s": 36093.03,
+                            "(throughput.total_tokens/s)/g": 999.2703616911695,
+                            "throughput.output_tokens/s": 4010.34,
+                            "(throughput.output_tokens/s)/g": 111.03013247445739
+                        }
+                    }
+                },
+                "metadata": {}
+            }
+        ],
+        "run4": [
+            {
+                "node_id": "gcn87.local.snellius.surf.nl:0:0",
+                "metrics": {
+                    "carbon": {
+                        "cpu_energy": {
+                            "energy.kwh": {
+                                "g": 10.331981507681187
+                            },
+                            "per_domain": {
+                                "values": [
+                                    {
+                                        "g": 5.196155025857177
+                                    },
+                                    {
+                                        "g": 5.135826481824009
+                                    }
+                                ],
+                                "sum_g": 10.331981507681185
+                            }
+                        },
+                        "gpu_nv": {
+                            "[:]": {
+                                "values": [
+                                    {
+                                        "gpu_id": 0,
+                                        "g": 6.676487112432311
+                                    },
+                                    {
+                                        "gpu_id": 1,
+                                        "g": 6.7117658139296426
+                                    },
+                                    {
+                                        "gpu_id": 2,
+                                        "g": 3.059887836458698
+                                    },
+                                    {
+                                        "gpu_id": 3,
+                                        "g": 3.095478329651928
+                                    }
+                                ],
+                                "sum_g": 19.543619092472582
+                            }
+                        },
+                        "perf_energy": {
+                            "kwh": {
+                                "g": 10.4418552517664
+                            }
+                        },
+                        "total_g": 29.875600600153767,
+                        "spatial_temporal_data": {
+                            "config": {
+                                "reference_time": {
+                                    "mode": "auto",
+                                    "value": "2024-12-31T23:59:59+00:00",
+                                    "start": "2023-12-31T23:59:59+00:00",
+                                    "end": "2024-12-31T23:59:59+00:00"
+                                },
+                                "window": {
+                                    "years": 1,
+                                    "months": 0,
+                                    "days": 0,
+                                    "hours": 0
+                                },
+                                "fallback_country": "NL"
+                            },
+                            "location": {
+                                "filename": "PL_2021-2024.parquet",
+                                "carbon_intensity": 703.9198565737051
+                            }
+                        }
+                    },
+                    "energy_to_solution": {
+                        "j": 152790.35128240075
+                    }
+                },
+                "metadata": {
+                    "hostname": "gcn87.local.snellius.surf.nl",
+                    "local_ip": "172.18.62.87",
+                    "public_ip": "145.136.62.87"
+                }
+            },
+            {
+                "node_id": "local",
+                "metrics": {
+                    "carbon": {
+                        "total_g": 0,
+                        "spatial_temporal_data": {
+                            "config": {
+                                "reference_time": {
+                                    "mode": "auto",
+                                    "value": "2024-12-31T23:59:59+00:00",
+                                    "start": "2023-12-31T23:59:59+00:00",
+                                    "end": "2024-12-31T23:59:59+00:00"
+                                },
+                                "window": {
+                                    "years": 1,
+                                    "months": 0,
+                                    "days": 0,
+                                    "hours": 0
+                                },
+                                "fallback_country": "NL"
+                            },
+                            "location": {
+                                "filename": "PL_2021-2024.parquet",
+                                "carbon_intensity": 703.9198565737051
+                            }
+                        }
+                    },
+                    "energy_to_solution": {
+                        "j": 0
+                    },
+                    "max_execution_time": 235.80018711998127,
+                    "all_carbon": {
+                        "g": 29.875600600153767
+                    },
+                    "carbon_per_second": {
+                        "g": 0.12669879937352332
+                    },
+                    "performance_per_carbon": {
+                        "vllm": {
+                            "throughput.requests/s": 31.29,
+                            "(throughput.requests/s)/g": 1.0473429611935217,
+                            "throughput.total_tokens/s": 36048.36,
+                            "(throughput.total_tokens/s)/g": 1206.6154077523202,
+                            "throughput.output_tokens/s": 4005.37,
+                            "(throughput.output_tokens/s)/g": 134.0682670653786
+                        }
+                    }
+                },
+                "metadata": {}
+            }
+        ],
+        "run5": [
+            {
+                "node_id": "gcn87.local.snellius.surf.nl:0:0",
+                "metrics": {
+                    "carbon": {
+                        "cpu_energy": {
+                            "energy.kwh": {
+                                "g": 16.30791417873329
+                            },
+                            "per_domain": {
+                                "values": [
+                                    {
+                                        "g": 8.171697426001787
+                                    },
+                                    {
+                                        "g": 8.136216752731507
+                                    }
+                                ],
+                                "sum_g": 16.30791417873329
+                            }
+                        },
+                        "gpu_nv": {
+                            "[:]": {
+                                "values": [
+                                    {
+                                        "gpu_id": 0,
+                                        "g": 9.964694227240278
+                                    },
+                                    {
+                                        "gpu_id": 1,
+                                        "g": 9.96408070563503
+                                    },
+                                    {
+                                        "gpu_id": 2,
+                                        "g": 4.892016374701909
+                                    },
+                                    {
+                                        "gpu_id": 3,
+                                        "g": 4.9443227642948235
+                                    }
+                                ],
+                                "sum_g": 29.76511407187204
+                            }
+                        },
+                        "perf_energy": {
+                            "kwh": {
+                                "g": 16.419841839729347
+                            }
+                        },
+                        "total_g": 46.07302825060533,
+                        "spatial_temporal_data": {
+                            "config": {
+                                "reference_time": {
+                                    "mode": "auto",
+                                    "value": "2024-12-31T23:59:59+00:00",
+                                    "start": "2023-12-31T23:59:59+00:00",
+                                    "end": "2024-12-31T23:59:59+00:00"
+                                },
+                                "window": {
+                                    "years": 1,
+                                    "months": 0,
+                                    "days": 0,
+                                    "hours": 0
+                                },
+                                "fallback_country": "NL"
+                            },
+                            "location": {
+                                "filename": "PL_2021-2024.parquet",
+                                "carbon_intensity": 703.9198565737051
+                            }
+                        }
+                    },
+                    "energy_to_solution": {
+                        "j": 235627.53650608554
+                    }
+                },
+                "metadata": {
+                    "hostname": "gcn87.local.snellius.surf.nl",
+                    "local_ip": "172.18.62.87",
+                    "public_ip": "145.136.62.87"
+                }
+            },
+            {
+                "node_id": "local",
+                "metrics": {
+                    "carbon": {
+                        "total_g": 0,
+                        "spatial_temporal_data": {
+                            "config": {
+                                "reference_time": {
+                                    "mode": "auto",
+                                    "value": "2024-12-31T23:59:59+00:00",
+                                    "start": "2023-12-31T23:59:59+00:00",
+                                    "end": "2024-12-31T23:59:59+00:00"
+                                },
+                                "window": {
+                                    "years": 1,
+                                    "months": 0,
+                                    "days": 0,
+                                    "hours": 0
+                                },
+                                "fallback_country": "NL"
+                            },
+                            "location": {
+                                "filename": "PL_2021-2024.parquet",
+                                "carbon_intensity": 703.9198565737051
+                            }
+                        }
+                    },
+                    "energy_to_solution": {
+                        "j": 0
+                    },
+                    "max_execution_time": 376.4001986228395,
+                    "all_carbon": {
+                        "g": 46.07302825060533
+                    },
+                    "carbon_per_second": {
+                        "g": 0.12240436753002733
+                    },
+                    "performance_per_carbon": {
+                        "vllm": {
+                            "throughput.requests/s": 31.3,
+                            "(throughput.requests/s)/g": 0.6793562565444949,
+                            "throughput.total_tokens/s": 36061.58,
+                            "(throughput.total_tokens/s)/g": 782.7047921367358,
+                            "throughput.output_tokens/s": 4006.84,
+                            "(throughput.output_tokens/s)/g": 86.9671508936979
+                        }
+                    }
+                },
+                "metadata": {}
+            }
+        ]
+    },
+    "metadata": {}
+}
