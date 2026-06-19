@@ -24,7 +24,7 @@ class EnergyToSolutionMetric(Metric):
                 break
 
         if not sources:
-            raise ValueError("Provided metrics dictionary does not contain sources for paths leading to j data. Please provide this, otherwise no energy-to-solution output can be calculated.")
+            raise ValueError(f"Provided metrics dictionary does not contain sources for paths leading to j data. Please provide this, otherwise no {self.name} output can be calculated.")
 
         for source_name, source_def in sources.items():
             curr_measurements = measurements.get(source_name)

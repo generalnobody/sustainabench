@@ -6,7 +6,7 @@ import jmespath
 class CarbonPerSecondMetric(Metric):
     name = "carbon-per-second"
     require_file = False
-    required_metrics = ["carbon"]
+    required_metrics = ["carbon", "max-execution-time"]
 
     def __init__(self, filename, metrics_dict: MetricsDict):
         self.metrics_dict = metrics_dict
@@ -22,7 +22,7 @@ class CarbonPerSecondMetric(Metric):
                 break
 
         if not perf_sources:
-            raise ValueError("Provided metrics dictionary does not contain sources for paths leading to performance data. Please provide this, otherwise no carbon-per-second output can be calculated.")
+            raise ValueError(f"Provided metrics dictionary does not contain sources for paths leading to performance data. Please provide this, otherwise no {self.name} output can be calculated.")
         
         has_performance_data = False
 
@@ -48,143 +48,74 @@ class CarbonPerSecondMetric(Metric):
 
         time_sources = None
         for unitdef in self.metrics_dict.metrics_dict:
-            if unitdef.unit == "time":
+            if unitdef.unit == "max-execution-time":
                 time_sources = unitdef.sources
                 break
 
         if not time_sources:
-            raise ValueError("Provided metrics dictionary does not contain sources for paths leading to time data. Please provide this, otherwise no carbon-per-second output can be calculated.")
-        
-        # execution_time = -1
-        # execution_time_priority = -1
-
-        # for source_name, source_def in time_sources.items():
-        #     if source_def.priority < execution_time_priority:
-        #         continue
-
-        #     for node_res in run_metrics:
-        #         time_metrics = node_res.metrics.get(source_name)
-        #         if time_metrics is None:
-        #             continue
-
-        #         for metric in source_def.metrics:
-        #             if metric.kind == "scalar":
-        #                 resolved = jmespath.search(metric.path, time_metrics)
-        #                 if resolved is None:
-        #                     continue
-
-        #                 value = float(resolved)
-
-        #                 if value > execution_time:
-        #                     execution_time = value
-        #                     execution_time_priority = source_def.priority
-        #             else:
-        #                 continue # Currently not supporting collections as it not necessary right now
-
+            raise ValueError(f"Provided metrics dictionary does not contain sources for paths leading to time data. Please provide this, otherwise no {self.name} output can be calculated.")
+            
         execution_time = None
-        execution_time_priority = -1
-
         for source_name, source_def in time_sources.items():
-            for node_res in node_results:
+            for node_res in run_metrics:
                 time_metrics = node_res.metrics.get(source_name)
                 if time_metrics is None:
-                    continue
-                for metric in source_def.metrics:
-                    if metric.kind != "scalar":
-                        continue
-
-                    resolved = jmespath.search(metric.path, time_metrics)
-                    if resolved is None:
-                        continue
-
-                    value = float(resolved)
-
-                    if (
-                        source_def.priority > execution_time_priority
-                        or (
-                            source_def.priority == execution_time_priority
-                            and (
-                                execution_time is None
-                                or value > execution_time
-                            )
-                        )
-                    ):
-                        execution_time = value
-                        execution_time_priority = source_def.priority
-
-        carbon_sources = None
-        for unitdef in self.metrics_dict.metrics_dict:
-            if unitdef.unit == "carbon":
-                carbon_sources = unitdef.sources
-                break
-        
-        if not carbon_sources:
-            raise ValueError("Provided metrics dictionary does not contain sources for paths leading to carbon data. Please provide this, otherwise no carbon-per-second output can be calculated.")
-    
-
-        contribution_groups = {}
-        for source_name, source_def in carbon_sources.items():
-            for node_res in run_metrics:
-                carbon_metrics = node_res.metrics.get(source_name)
-                if carbon_metrics is None:
                     continue
                 
                 priority = source_def.priority
 
                 for metric in source_def.metrics:
                     if metric.kind == "scalar":
-                        resolved = jmespath.search(metric.path, carbon_metrics)
+                        resolved = jmespath.search(metric.path, time_metrics)
                         if resolved is None:
                             continue
 
-                        carbon_value = float(resolved)
-
-                        contribution_value = carbon_value
+                        execution_time = float(resolved)
 
                     else:
                         print(f"Metric kind {metric.kind} is currently unsupported by metric {self.name}. Skipping...")
                         continue
 
-                    
-                    if (
-                        metric.contributes_to_total and
-                        metric.contribution_group
-                    ):
-                        
-                        group = metric.contribution_group
-                        existing = contribution_groups.get(group)
+        if not execution_time:
+            raise ValueError(f"No max-execution-time metric found, please ensure it has been computed before computing {self.name}")
 
-                        if existing is None:
-                            contribution_groups[group] = {
-                                "priority": priority,
-                                "value": contribution_value
-                            }
+        all_carbon_sources = None
+        for unitdef in self.metrics_dict.metrics_dict:
+            if unitdef.unit == "all-carbon":
+                all_carbon_sources = unitdef.sources
+                break
+        
+        if not all_carbon_sources:
+            raise ValueError(f"Provided metrics dictionary does not contain sources for paths leading to carbon data. Please provide this, otherwise no {self.name} output can be calculated.")
+    
 
-                        else:
-                            existing_priority = existing["priority"]
-                            if priority == existing_priority:
-                                existing["value"] += contribution_value
-                            elif priority > existing_priority:
-                                contribution_groups[group] = {
-                                    "priority": priority,
-                                    "value": contribution_value
-                                }
+        all_node_total_g = None
+        for source_name, source_def in all_carbon_sources.items():
+            for node_res in run_metrics:
+                all_carbon_metrics = node_res.metrics.get(source_name)
+                if all_carbon_metrics is None:
+                    continue
+                
+                priority = source_def.priority
 
-        all_node_total_g = sum(
-            group_data["value"]
-            for group_data in contribution_groups.values()
-        )
+                for metric in source_def.metrics:
+                    if metric.kind == "scalar":
+                        resolved = jmespath.search(metric.path, all_carbon_metrics)
+                        if resolved is None:
+                            continue
 
-        if execution_time is None or execution_time <= 0:
-            return {}
+                        all_node_total_g = float(resolved)
 
-        results = {
-            "all_nodes_carbon_g": all_node_total_g,
-            "max_execution_time_s": execution_time,
-            "g_per_second": all_node_total_g / execution_time,
-        }
+                    else:
+                        print(f"Metric kind {metric.kind} is currently unsupported by metric {self.name}. Skipping...")
+                        continue
+
+        if not all_node_total_g:
+            raise ValueError(f"No all-carbon metric found, please ensure it has been computed before computing {self.name}")
 
         # Then, once those have been selected, locate the gram metrics, and calculate with them, probably per node, if present
         return {
-            self.name: results
+            self.name: {
+                "g": all_node_total_g / execution_time
+            }
         }
