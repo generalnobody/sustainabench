@@ -65,14 +65,34 @@ h100_files = {
 a100_results = load_results(a100_files)
 h100_results = load_results(h100_files)
 
-a100_total_carbon, a100_total_energy = get_results(a100_results, metrics_dict)
-h100_total_carbon, h100_total_energy = get_results(h100_results, metrics_dict)
+# a100_total_carbon, a100_total_energy = get_results(a100_results, metrics_dict)
+# h100_total_carbon, h100_total_energy = get_results(h100_results, metrics_dict)
 
-# ----------------------------
-# BUILD DATASETS
-# ----------------------------
-a100_df = build_dataframe(a100_total_carbon, a100_total_energy, "a100")
-h100_df = build_dataframe(h100_total_carbon, h100_total_energy, "h100")
+# # ----------------------------
+# # BUILD DATASETS
+# # ----------------------------
+# a100_df = build_dataframe(a100_total_carbon, a100_total_energy, "a100")
+# h100_df = build_dataframe(h100_total_carbon, h100_total_energy, "h100")
+
+a100_metrics = get_results(
+    a100_results,
+    metrics_dict
+)
+
+h100_metrics = get_results(
+    a100_results,
+    metrics_dict
+)
+
+a100_df = build_dataframe(
+    a100_metrics,
+    "a100"
+)
+
+h100_df = build_dataframe(
+    h100_metrics,
+    "h100"
+)
 
 df = pd.concat([a100_df, h100_df], ignore_index=True)
 

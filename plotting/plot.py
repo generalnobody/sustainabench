@@ -26,10 +26,22 @@ def flatten_results(data, arch_name, metric_name):
 # ----------------------------
 # DATAFRAME BUILDER
 # ----------------------------
-def build_dataframe(total_carbon, total_energy, arch_name):
+# def build_dataframe(total_carbon, total_energy, arch_name):
+#     rows = []
+#     rows += flatten_results(total_carbon, arch_name, "carbon")
+#     rows += flatten_results(total_energy, arch_name, "energy")
+#     return pd.DataFrame(rows)
+
+def build_dataframe(all_metrics, arch_name):
     rows = []
-    rows += flatten_results(total_carbon, arch_name, "carbon")
-    rows += flatten_results(total_energy, arch_name, "energy")
+
+    for metric_name, metric_data in all_metrics.items():
+        rows += flatten_results(
+            metric_data,
+            arch_name,
+            metric_name
+        )
+
     return pd.DataFrame(rows)
 
 def plot_structure(stats_df, arch_name, output_dir, config_order=None):
@@ -92,8 +104,9 @@ def plot_structure(stats_df, arch_name, output_dir, config_order=None):
             )
 
         ylabel_map = {
-            "carbon": "gCO2eq",
-            "energy": "J"
+            "carbon": "gCO₂eq",
+            "energy": "J",
+            "carbon-per-second": "gCO₂eq/s"
         }
 
         ax.set_xticks(x)

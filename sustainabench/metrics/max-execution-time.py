@@ -38,7 +38,16 @@ class MaxExecutionTimeMetric(Metric):
                     if resolved is not None:
                         has_performance_data = True
                         break
+                elif metric.kind == "collection":
+                    items = jmespath.search(metric.collection_path, perf_measurements)
+                    if items is None:
+                        continue
 
+                    for idx, item in enumerate(items):
+                        value = jmespath.search(metric.value_path, item)
+                        if value is not None:
+                            has_performance_data = True
+                            break
             if has_performance_data:
                 break
 

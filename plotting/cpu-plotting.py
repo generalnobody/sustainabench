@@ -54,14 +54,34 @@ genoa_files = {
 rome_results = load_results(rome_files)
 genoa_results = load_results(genoa_files)
 
-rome_total_carbon, rome_total_energy = get_results(rome_results, metrics_dict)
-genoa_total_carbon, genoa_total_energy = get_results(genoa_results, metrics_dict)
+# rome_total_carbon, rome_total_energy, rome_carbon_per_second = get_results(rome_results, metrics_dict)
+# genoa_total_carbon, genoa_total_energy, genoa_carbon_per_second = get_results(genoa_results, metrics_dict)
 
 # ----------------------------
 # BUILD DATASETS
 # ----------------------------
-rome_df = build_dataframe(rome_total_carbon, rome_total_energy, "rome")
-genoa_df = build_dataframe(genoa_total_carbon, genoa_total_energy, "genoa")
+# rome_df = build_dataframe(rome_total_carbon, rome_total_energy, "rome")
+# genoa_df = build_dataframe(genoa_total_carbon, genoa_total_energy, "genoa")
+
+rome_metrics = get_results(
+    rome_results,
+    metrics_dict
+)
+
+genoa_metrics = get_results(
+    genoa_results,
+    metrics_dict
+)
+
+rome_df = build_dataframe(
+    rome_metrics,
+    "rome"
+)
+
+genoa_df = build_dataframe(
+    genoa_metrics,
+    "genoa"
+)
 
 df = pd.concat([rome_df, genoa_df], ignore_index=True)
 
