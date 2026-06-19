@@ -47,7 +47,7 @@ def plot_structure(stats_df, arch_name, output_dir, config_order=None, metrics_t
         "experiments/plots/2023/gpu_benchmark_statistics.csv",
     ]
 
-    y_limits = determine_metric_ranges(stats_files)
+    xlimits = determine_metric_ranges(stats_files)
 
     arch_df = stats_df[
         stats_df["arch"] == arch_name
@@ -73,8 +73,8 @@ def plot_structure(stats_df, arch_name, output_dir, config_order=None, metrics_t
         else:
             configs = [c for c in config_order if c in metric_df["config"].unique()]
 
-        x = np.arange(len(benchmarks))
-        width = 0.8 / len(configs)
+        y = np.arange(len(benchmarks))
+        height = 0.8 / len(configs)
 
         plt.figure(figsize=(12, 6))
         ax = plt.gca()
@@ -90,39 +90,39 @@ def plot_structure(stats_df, arch_name, output_dir, config_order=None, metrics_t
                 .reset_index()
             )
 
-            xpos = (x + i * width - width * len(configs) / 2)
+            ypos = (y + i * height - height * len(configs) / 2)
 
-            ax.bar(
-                xpos,
+            ax.barh(
+                ypos,
                 sub["mean"],
-                width=width,
+                height=height,
                 label=config,
                 color=palette[i]
             )
 
             ax.errorbar(
-                xpos,
                 sub["mean"],
-                yerr=sub["ci95"],
+                ypos,
+                xerr=sub["ci95"],
                 fmt="none",
                 ecolor="black",
                 capsize=5,
                 linewidth=1.5
             )
 
-        ylabel_map = {
+        xlabel_map = {
             "carbon": "gCO2eq",
             "all-carbon": "gCO2eq",
             "energy-to-solution": "Joule",
             "carbon-per-second": "gCO2eq/s",
         }
 
-        ax.set_xticks(x)
-        ax.set_xticklabels(benchmarks, rotation=20)
-        ylabel = ylabel_map.get(metric)
+        ax.set_yticks(y)
+        ax.set_yticklabels(benchmarks)
+        xlabel = xlabel_map.get(metric)
 
-        if ylabel is None:
-            ylabel = metric
+        if xlabel is None:
+            xlabel = metric
 
         log_metrics = {
             "all-carbon",
@@ -130,14 +130,14 @@ def plot_structure(stats_df, arch_name, output_dir, config_order=None, metrics_t
         }
 
         if metric in log_metrics:
-            ax.set_yscale("log")
-            ylabel = f"{ylabel} (log)"
+            ax.set_xscale("log")
+            xlabel = f"{xlabel} (log)"
 
-        if metric in y_limits:
-            ax.set_ylim(y_limits[metric])
+        if metric in xlimits:
+            ax.set_xlim(xlimits[metric])
 
-        ax.set_ylabel(ylabel)
-        ax.set_xlabel("Benchmark")
+        ax.set_xlabel(xlabel)
+        ax.set_ylabel("Benchmark")
 
         ax.legend(
             loc="upper center",
