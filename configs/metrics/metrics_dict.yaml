@@ -71,6 +71,16 @@ metrics_dict:
             contributes_to_total: true
             contribution_group: execution_time
 
+  - unit: max-execution-time
+    sources:
+      max_execution_time:
+        priority: 0
+        metrics:
+          - kind: scalar
+            path: "@"
+            contributes_to_total: false
+            contribution_group: null
+
   - unit: carbon
     sources:
       carbon:
@@ -80,6 +90,26 @@ metrics_dict:
             path: total_g
             contributes_to_total: true
             contribution_group: total_carbon
+
+  - unit: all-carbon
+    sources:
+      all_carbon:
+        priority: 0
+        metrics:
+          - kind: scalar
+            path: g
+            contributes_to_total: false
+            contribution_group: null
+
+  - unit: carbon-per-second
+    sources:
+      carbon_per_second:
+        priority: 0
+        metrics:
+          - kind: scalar
+            path: g_per_second
+            contributes_to_total: false
+            contribution_group: null
 
   - unit: energy-to-solution
     sources:
