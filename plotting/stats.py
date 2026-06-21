@@ -7,20 +7,19 @@ def compute_statistics(df):
     benchmark/configuration pair.
     """
 
+    group_cols = ["arch", "metric", "benchmark", "config"]
+    if "type" in df.columns:
+        group_cols.insert(1, "type")
+
     summary = (
-        df.groupby(
-            ["arch", "metric", "benchmark", "config"],
-            sort=False
-        )["value"]
-        .agg(
+        df.groupby(group_cols, sort=False)["value"].agg(
             mean="mean",
             median="median",
             std="std",
             min="min",
             max="max",
             n="count",
-        )
-        .reset_index()
+        ).reset_index()
     )
 
     # Standard error

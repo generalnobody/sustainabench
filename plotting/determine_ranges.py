@@ -1,7 +1,7 @@
 from pathlib import Path
 import pandas as pd
 
-def determine_metric_ranges(stats_files, padding=0.10):
+def determine_metric_ranges(stats_files, padding=0.05):
     dfs = [pd.read_csv(f) for f in stats_files]
     stats_df = pd.concat(dfs, ignore_index=True)
 

@@ -305,23 +305,28 @@ def extract_performance_per_carbon_df(results_dict):
                     if ppc is None:
                         continue
 
-                    for _, metrics in ppc.items():
-
+                    for benchmark, metrics in ppc.items():
                         for key, value in metrics.items():
+
+                            # rows.append(
+                            #     {
+                            #         "arch": arch,
+                            #         "metric": key,
+                            #         "benchmark": benchmark,
+                            #         "config": config_name,
+                            #         "run": run_name,
+                            #         "value": value,
+                            #     }
+                            # )
 
                             # performance-per-carbon metric
                             if key.startswith("(") and key.endswith(")/g"):
-
-                                measurement = (
-                                    key.removeprefix("(")
-                                       .removesuffix(")/g")
-                                )
-
                                 rows.append(
                                     {
                                         "arch": arch,
-                                        "metric": "performance_per_g",
-                                        "benchmark": measurement,
+                                        "type": "performance-per-carbon",
+                                        "metric": key,
+                                        "benchmark": benchmark,
                                         "config": config_name,
                                         "run": run_name,
                                         "value": value,
@@ -334,8 +339,9 @@ def extract_performance_per_carbon_df(results_dict):
                                 rows.append(
                                     {
                                         "arch": arch,
-                                        "metric": "performance",
-                                        "benchmark": key,
+                                        "type": "performance",
+                                        "metric": key,
+                                        "benchmark": benchmark,
                                         "config": config_name,
                                         "run": run_name,
                                         "value": value,
