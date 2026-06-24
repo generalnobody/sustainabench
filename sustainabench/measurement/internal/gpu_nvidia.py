@@ -10,6 +10,7 @@ class NvidiaGPUMeasurement(InternalMeasurement):
     poll_interval = 0.1
     
     require_file = False
+    only_once_per_node = True
 
     def start(self):
         pynvml.nvmlInit()
