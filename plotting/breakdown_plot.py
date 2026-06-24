@@ -43,16 +43,6 @@ def plot_energy_breakdown_grouped(
         )
     )
 
-    # benchmark/config -> ci95
-    ci95 = (
-        arch_df
-        .groupby(
-            ["benchmark", "config"]
-        )["ci95"]
-        .first()
-    )
-
-    # y = np.arange(len(benchmarks))
     group_gap = 1.0
 
     bar_positions = []
@@ -133,10 +123,13 @@ def plot_energy_breakdown_grouped(
     ax.set_yticks(bar_positions)
     ax.set_yticklabels(bar_labels)
 
+    xmin, xmax = ax.get_xlim()
+    benchmark_labels_x = xmin + 0.05 * (xmax - xmin)
+
     for benchmark, center in benchmark_centers.items():
 
         ax.text(
-            5000,                  # x-position
+            benchmark_labels_x,                  # x-position
             center + 1.3,       # slightly above group
             benchmark,
             fontweight="bold",
@@ -151,14 +144,14 @@ def plot_energy_breakdown_grouped(
     ax.set_xlabel("Energy (J)")
     ax.set_ylabel("Benchmark")
 
-    ax.set_title(
-        f"{arch_name.upper()} Energy Breakdown"
-    )
+    title = f"{arch_name.upper()} Energy Breakdown"
+    ax.set_title(title, pad=40)
 
     ax.legend(
-        title="Component",
-        bbox_to_anchor=(1.02, 1),
-        loc="upper left",
+        loc="upper center",
+        bbox_to_anchor=(0.5, 1.15),
+        ncol=len(components),
+        frameon=False,
     )
 
     plt.tight_layout()

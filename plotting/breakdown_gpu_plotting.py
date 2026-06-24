@@ -134,3 +134,5 @@ plot_energy_breakdown_grouped(
         "4 GPUs"
     ]
 )
+
+print(f"Plots saved to: {OUTPUT_DIR.resolve()}")

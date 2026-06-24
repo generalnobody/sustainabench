@@ -123,3 +123,5 @@ plot_energy_breakdown_grouped(
         "4 nodes"
     ]
 )
+
+print(f"Plots saved to: {OUTPUT_DIR.resolve()}")
