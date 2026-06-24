@@ -121,10 +121,11 @@ def plot_energy_breakdown_grouped(
             left += values
 
     ax.set_yticks(bar_positions)
+    ax.yaxis.grid(False)
     ax.set_yticklabels(bar_labels)
 
     xmin, xmax = ax.get_xlim()
-    benchmark_labels_x = xmin + 0.05 * (xmax - xmin)
+    benchmark_labels_x = xmin + 0.01 * (xmax - xmin)
 
     for benchmark, center in benchmark_centers.items():
 
@@ -141,7 +142,7 @@ def plot_energy_breakdown_grouped(
     current_y = 0
 
     # ax.set_xscale("log")
-    ax.set_xlabel("Energy (J)")
+    ax.set_xlabel("Joule")
     ax.set_ylabel("Benchmark")
 
     title = f"{arch_name.upper()} Energy Breakdown"

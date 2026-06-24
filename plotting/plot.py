@@ -133,6 +133,7 @@ def plot_structure(stats_df, arch_name, output_dir, config_order=None, metrics_t
 
         ax.set_yticks(y)
         ax.set_yticklabels(benchmarks)
+        ax.yaxis.grid(False)
         xlabel = xlabel_map.get(metric)
 
         if xlabel is None:
