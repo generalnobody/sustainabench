@@ -1,0 +1,61 @@
+Rome,Performance,,,,,,,Genoa,Performance,,,,,,,A100,Performance,,,,,,,H100,Performance,,,,,
+Benchmark,Metric,Nodes,Mean,Std,CI95 Lower,CI95 Upper,,Benchmark,Metric,Nodes,Mean,Std,CI95 Lower,CI95 Upper,,Benchmark,Metric,GPUs,Mean,Std,CI95 Lower,CI95 Upper,,Benchmark,Metric,GPUs,Mean,Std,CI95 Lower,CI95 Upper
+stress_ng,BogoOps/s,1 node,102473.49,350.11,102106.07,102840.90,,stress_ng,BogoOps/s,1 node,144952.12,122.91,144823.13,145081.11,,gpu_burn,Gflops,4 GPUs,76434.17,9.77,76423.92,76444.42,,gpu_burn,Gflops,4 GPUs,204350.17,330.53,204003.29,204697.04
+stream,Copy: Best Rate MB/s,1 node,140494.18,10100.64,129894.21,151094.15,,stream,Copy: Best Rate MB/s,1 node,529312.40,217148.82,301428.69,757196.11,,nvidia_stream,Copy: Rate MB/s,4 GPUs,1404108.27,862.60,1403203.03,1405013.51,,nvidia_stream,Copy: Rate MB/s,4 GPUs,2187256.93,756.45,2186463.09,2188050.78
+stream,Scale: Best Rate MB/s,1 node,124144.17,8487.04,115237.57,133050.76,,stream,Scale: Best Rate MB/s,1 node,464127.60,187421.34,267440.97,660814.23,,nvidia_stream,Scale: Rate MB/s,4 GPUs,1401683.52,382.53,1401282.07,1402084.96,,nvidia_stream,Scale: Rate MB/s,4 GPUs,2180440.38,470.83,2179946.27,2180934.49
+stream,Add: Best Rate MB/s,1 node,118885.10,8128.26,110355.01,127415.19,,stream,Add: Best Rate MB/s,1 node,506516.55,189945.65,307180.81,705852.29,,nvidia_stream,Add: Rate MB/s,4 GPUs,1382841.32,2008.58,1380733.44,1384949.19,,nvidia_stream,Add: Rate MB/s,4 GPUs,2247421.71,1448.39,2245901.72,2248941.70
+stream,Triad: Best Rate MB/s,1 node,119777.32,9145.48,110179.72,129374.91,,stream,Triad: Best Rate MB/s,1 node,485936.27,179933.97,297107.14,674765.39,,nvidia_stream,Triad: Rate MB/s,4 GPUs,1381878.99,1798.30,1379991.79,1383766.19,,nvidia_stream,Triad: Rate MB/s,4 GPUs,2250787.94,596.91,2250161.51,2251414.36
+hpl,Gflops,1 node,2843.92,77.92,2762.14,2925.69,,hpl,Gflops,1 node,4902.22,126.09,4769.89,5034.54,,nvidia_hpl,Gflops,1 GPU,15636.67,49.26,15584.97,15688.36,,nvidia_hpl,Gflops,1 GPU,38026.67,162.69,37855.94,38197.39
+hpl,Gflops,2 nodes,5142.03,228.56,4902.18,5381.89,,hpl,Gflops,2 nodes,8506.67,274.69,8218.40,8794.94,,nvidia_hpl,Gflops,2 GPUs,30600.00,66.63,30530.07,30669.93,,nvidia_hpl,Gflops,2 GPUs,72605.00,311.75,72277.84,72932.16
+hpl,Gflops,4 nodes,10513.20,197.83,10267.56,10758.84,,hpl,Gflops,4 nodes,17221.67,515.63,16680.55,17762.79,,nvidia_hpl,Gflops,4 GPUs,56626.67,182.72,56434.91,56818.42,,nvidia_hpl,Gflops,4 GPUs,120116.67,624.23,119461.57,120771.76
+hpcg,GFLOP/s,1 node,3.20,0.03,3.17,3.24,,hpcg,GFLOP/s,1 node,3.38,0.22,3.14,3.61,,nvidia_hpcg,GFLOP/s,1 GPU,239.71,0.12,239.58,239.83,,nvidia_hpcg,GFLOP/s,1 GPU,377.04,7.00,369.70,384.39
+hpcg,GFLOP/s,2 nodes,6.30,0.04,6.26,6.35,,hpcg,GFLOP/s,2 nodes,7.06,0.12,6.91,7.22,,nvidia_hpcg,GFLOP/s,2 GPUs,476.83,0.07,476.76,476.90,,nvidia_hpcg,GFLOP/s,2 GPUs,762.32,0.33,761.97,762.67
+hpcg,GFLOP/s,4 nodes,12.52,0.19,12.32,12.72,,hpcg,GFLOP/s,4 nodes,14.00,0.10,13.89,14.11,,nvidia_hpcg,GFLOP/s,4 GPUs,915.96,0.38,915.56,916.36,,nvidia_hpcg,GFLOP/s,4 GPUs,1461.71,0.55,1461.14,1462.28
+,,,,,,,,,,,,,,,,vllm,requests/s,1 GPU,6.77,0.01,6.76,6.79,,vllm,requests/s,1 GPU,20.84,0.08,20.76,20.92
+,,,,,,,,,,,,,,,,vllm,total tokens/s,1 GPU,7801.47,15.84,7784.86,7818.09,,vllm,total tokens/s,1 GPU,24006.44,89.96,23912.03,24100.84
+,,,,,,,,,,,,,,,,vllm,output tokens/s,1 GPU,866.83,1.76,864.98,868.68,,vllm,output tokens/s,1 GPU,2667.38,10.00,2656.89,2677.87
+,,,,,,,,,,,,,,,,vllm,requests/s,2 GPUs,11.31,0.01,11.30,11.32,,vllm,requests/s,2 GPUs,31.30,0.02,31.28,31.32
+,,,,,,,,,,,,,,,,vllm,total tokens/s,2 GPUs,13028.13,5.94,13021.90,13034.36,,vllm,total tokens/s,2 GPUs,36058.06,20.43,36036.61,36079.50
+,,,,,,,,,,,,,,,,vllm,output tokens/s,2 GPUs,1447.57,0.66,1446.88,1448.26,,vllm,output tokens/s,2 GPUs,4006.45,2.27,4004.07,4008.83
+,,,,,,,,,,,,,,,,vllm,requests/s,4 GPUs,18.72,0.20,18.51,18.92,,vllm,requests/s,4 GPUs,51.94,0.19,51.74,52.14
+,,,,,,,,,,,,,,,,vllm,total tokens/s,4 GPUs,21559.86,228.81,21319.75,21799.98,,vllm,total tokens/s,4 GPUs,59839.10,219.62,59608.62,60069.57
+,,,,,,,,,,,,,,,,vllm,output tokens/s,4 GPUs,2395.54,25.42,2368.86,2422.22,,vllm,output tokens/s,4 GPUs,6648.79,24.40,6623.18,6674.40
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+Rome,Performance-per-carbon,,,,,,,Genoa,Performance-per-carbon,,,,,,,A100,Performance-per-carbon,,,,,,,H100,Performance-per-carbon,,,,,
+Benchmark,Metric,Nodes,Mean,Std,CI95 Lower,CI95 Upper,,Benchmark,Metric,Nodes,Mean,Std,CI95 Lower,CI95 Upper,,Benchmark,Metric,GPUs,Mean,Std,CI95 Lower,CI95 Upper,,Benchmark,Metric,GPUs,Mean,Std,CI95 Lower,CI95 Upper
+stress_ng,BogoOps/s /g,1 node,28180.30,239.01,27929.47,28431.12,,stress_ng,BogoOps/s /g,1 node,29516.48,48.36,29465.73,29567.24,,gpu_burn,Gflops /g,4 GPUs,8943.30,157.26,8778.27,9108.34,,gpu_burn,Gflops /g,4 GPUs,12574.99,108.86,12460.76,12689.23
+stream,Copy: Best Rate MB/s /g,1 node,6795377.55,954829.08,5793345.88,7797409.22,,stream,Copy: Best Rate MB/s /g,1 node,54369539.93,26490494.36,26569471.03,82169608.83,,nvidia_stream,Copy: Rate MB/s /g,4 GPUs,2194197.72,26766.03,2166108.49,2222286.94,,nvidia_stream,Copy: Rate MB/s /g,4 GPUs,3881782.47,41674.67,3838047.58,3925517.35
+stream,Scale: Best Rate MB/s /g,1 node,6004496.43,834580.60,5128657.80,6880335.05,,stream,Scale: Best Rate MB/s /g,1 node,47674113.06,23309301.86,23212500.96,72135725.17,,nvidia_stream,Scale: Rate MB/s /g,4 GPUs,2190410.87,26914.04,2162166.32,2218655.42,,nvidia_stream,Scale: Rate MB/s /g,4 GPUs,3869687.62,41835.48,3825783.97,3913591.27
+stream,Add: Best Rate MB/s /g,1 node,5748755.18,790834.17,4918825.62,6578684.75,,stream,Add: Best Rate MB/s /g,1 node,51688872.29,24690065.39,25778237.72,77599506.86,,nvidia_stream,Add: Rate MB/s /g,4 GPUs,2160955.84,25716.65,2133967.87,2187943.81,,nvidia_stream,Add: Rate MB/s /g,4 GPUs,3988553.33,42274.10,3944189.39,4032917.27
+stream,Triad: Best Rate MB/s /g,1 node,5793647.68,835321.20,4917031.84,6670263.52,,stream,Triad: Best Rate MB/s /g,1 node,49496767.25,23440262.01,24897720.89,74095813.62,,nvidia_stream,Triad: Rate MB/s /g,4 GPUs,2159477.01,28079.78,2130009.09,2188944.93,,nvidia_stream,Triad: Rate MB/s /g,4 GPUs,3994529.64,42549.53,3949876.64,4039182.63
+hpl,Gflops /g,1 node,818.32,83.82,730.35,906.29,,hpl,Gflops /g,1 node,1805.27,127.49,1671.48,1939.06,,nvidia_hpl,Gflops /g,1 GPU,11943.29,458.14,11462.50,12424.08,,nvidia_hpl,Gflops /g,1 GPU,40157.11,405.85,39731.20,40583.03
+hpl,Gflops /g,2 nodes,496.07,38.78,455.37,536.76,,hpl,Gflops /g,2 nodes,999.25,62.91,933.23,1065.27,,nvidia_hpl,Gflops /g,2 GPUs,15327.01,171.50,15147.03,15506.98,,nvidia_hpl,Gflops /g,2 GPUs,45273.66,742.78,44494.16,46053.15
+hpl,Gflops /g,4 nodes,365.61,15.12,346.84,384.39,,hpl,Gflops /g,4 nodes,728.91,43.22,683.55,774.27,,nvidia_hpl,Gflops /g,4 GPUs,13466.96,163.78,13295.09,13638.84,,nvidia_hpl,Gflops /g,4 GPUs,33428.21,420.44,32986.98,33869.44
+hpcg,GFLOP/s /g,1 node,0.61,0.01,0.60,0.63,,hpcg,GFLOP/s /g,1 node,0.54,0.04,0.49,0.58,,nvidia_hpcg,GFLOP/s /g,1 GPU,9.87,0.07,9.80,9.94,,nvidia_hpcg,GFLOP/s /g,1 GPU,14.39,0.20,14.18,14.60
+hpcg,GFLOP/s /g,2 nodes,0.60,0.01,0.59,0.61,,hpcg,GFLOP/s /g,2 nodes,0.56,0.02,0.53,0.58,,nvidia_hpcg,GFLOP/s /g,2 GPUs,16.39,0.08,16.30,16.47,,nvidia_hpcg,GFLOP/s /g,2 GPUs,22.02,0.12,21.90,22.15
+hpcg,GFLOP/s /g,4 nodes,0.58,0.00,0.58,0.59,,hpcg,GFLOP/s /g,4 nodes,0.55,0.01,0.54,0.56,,nvidia_hpcg,GFLOP/s /g,4 GPUs,23.80,0.75,23.01,24.60,,nvidia_hpcg,GFLOP/s /g,4 GPUs,28.26,0.28,27.96,28.55
+,,,,,,,,,,,,,,,,vllm,requests/s /g,1 GPU,1.19,0.01,1.17,1.20,,vllm,requests/s /g,1 GPU,5.97,0.06,5.91,6.04
+,,,,,,,,,,,,,,,,vllm,total tokens/s /g,1 GPU,1367.00,16.11,1350.09,1383.91,,vllm,total tokens/s /g,1 GPU,6883.36,66.80,6813.26,6953.46
+,,,,,,,,,,,,,,,,vllm,output tokens/s /g,1 GPU,151.89,1.79,150.01,153.77,,vllm,output tokens/s /g,1 GPU,764.82,7.42,757.03,772.61
+,,,,,,,,,,,,,,,,vllm,requests/s /g,2 GPUs,2.10,0.01,2.09,2.10,,vllm,requests/s /g,2 GPUs,1.99,0.40,1.57,2.41
+,,,,,,,,,,,,,,,,vllm,total tokens/s /g,2 GPUs,2413.90,9.76,2403.65,2424.14,,vllm,total tokens/s /g,2 GPUs,2291.54,461.83,1806.89,2776.20
+,,,,,,,,,,,,,,,,vllm,output tokens/s /g,2 GPUs,268.21,1.08,267.07,269.35,,vllm,output tokens/s /g,2 GPUs,254.62,51.31,200.77,308.47
+,,,,,,,,,,,,,,,,vllm,requests/s /g,4 GPUs,3.57,0.14,3.43,3.71,,vllm,requests/s /g,4 GPUs,1.85,0.06,1.78,1.91
+,,,,,,,,,,,,,,,,vllm,total tokens/s /g,4 GPUs,4112.38,157.29,3947.32,4277.45,,vllm,total tokens/s /g,4 GPUs,2129.62,72.52,2053.52,2205.72
+,,,,,,,,,,,,,,,,vllm,output tokens/s /g,4 GPUs,456.93,17.48,438.59,475.27,,vllm,output tokens/s /g,4 GPUs,236.62,8.06,228.17,245.08
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+Rome,Performance,,,,Rome,Performance-per-carbon,,,,,,,,,,,,,,,,,,,,,,,,
+Benchmark,Metric,Nodes,Mean,,Benchmark,Metric,Nodes,Mean,,,,,,,,,,,,,,,,,,,,,,
+hpl,Gflops,1 node,2843.92,,hpl,Gflops /g,1 node,818.32,,,,,,,,,,,,,,,,,,,,,,
+hpl,Gflops,2 nodes,5142.03,,hpl,Gflops /g,2 nodes,496.07,,,,,,,,,,,,,,,,,,,,,,
+hpl,Gflops,4 nodes,10513.20,,hpl,Gflops /g,4 nodes,365.61,,,,,,,,,,,,,,,,,,,,,,
+hpcg,GFLOP/s,1 node,3.20,,hpcg,GFLOP/s /g,1 node,0.61,,,,,,,,,,,,,,,,,,,,,,
+hpcg,GFLOP/s,2 nodes,6.30,,hpcg,GFLOP/s /g,2 nodes,0.60,,,,,,,,,,,,,,,,,,,,,,
+hpcg,GFLOP/s,4 nodes,12.52,,hpcg,GFLOP/s /g,4 nodes,0.58,,,,,,,,,,,,,,,,,,,,,,

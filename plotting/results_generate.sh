@@ -24,7 +24,7 @@ for target_dir in "${TARGET_DIRS[@]}"; do
 done
 
 for target_dir in "${TARGET_DIRS[@]}"; do
-    echo "Generating PL results in: $target_dir"
+    echo "Generating FR results in: $target_dir"
     (
         cd "$target_dir"
 
@@ -32,7 +32,7 @@ for target_dir in "${TARGET_DIRS[@]}"; do
             [[ -f "$file" ]] || continue
 
             # Replace with your actual command
-            sustainabench result generate -m carbon=../../../../traces/carbon/traces/PL_2021-2024.parquet -m energy-to-solution -m performance-per-carbon -m carbon-per-second -m all-carbon -m max-execution-time -md ../../../../configs/metrics/metrics_dict.yaml -c ../../../../configs/metrics/main.yaml -o ./experiments/results/PL/ -s -r "$file"
+            sustainabench result generate -m carbon=../../../../traces/carbon/traces/FR_2021-2024.parquet -m energy-to-solution -m performance-per-carbon -m carbon-per-second -m all-carbon -m max-execution-time -md ../../../../configs/metrics/metrics_dict.yaml -c ../../../../configs/metrics/main.yaml -o ./experiments/results/FR/ -s -r "$file"
         done
     )
 done
@@ -46,7 +46,7 @@ for target_dir in "${TARGET_DIRS[@]}"; do
             [[ -f "$file" ]] || continue
 
             # Replace with your actual command
-            sustainabench result generate -m carbon=../../../../traces/carbon/traces/NL_2021-2024.parquet -m energy-to-solution -m performance-per-carbon -m carbon-per-second -m all-carbon -m max-execution-time -md ../../../../configs/metrics/metrics_dict.yaml -c ../../../../configs/metrics/early.yaml -o ./experiments/results/2023/ -s -r "$file"
+            sustainabench result generate -m carbon=../../../../traces/carbon/traces/NL_2021-2024.parquet -m energy-to-solution -m performance-per-carbon -m carbon-per-second -m all-carbon -m max-execution-time -md ../../../../configs/metrics/metrics_dict.yaml -c ../../../../configs/metrics/early.yaml -o ./experiments/results/2022/ -s -r "$file"
         done
     )
 done

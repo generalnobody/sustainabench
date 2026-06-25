@@ -41,23 +41,23 @@ def plot_structure(stats_df, arch_name, output_dir, config_order=None, metrics_t
     if arch_name == "rome" or arch_name == "genoa":
         stat_files = [
             "experiments/plots/cpu_benchmark_statistics.csv",
-            "experiments/plots/PL/cpu_benchmark_statistics.csv",
-            "experiments/plots/2023/cpu_benchmark_statistics.csv",
+            "experiments/plots/FR/cpu_benchmark_statistics.csv",
+            "experiments/plots/2022/cpu_benchmark_statistics.csv",
         ]
     elif arch_name == "a100" or arch_name == "h100":
         stat_files = [
             "experiments/plots/gpu_benchmark_statistics.csv",
-            "experiments/plots/PL/gpu_benchmark_statistics.csv",
-            "experiments/plots/2023/gpu_benchmark_statistics.csv",
+            "experiments/plots/FR/gpu_benchmark_statistics.csv",
+            "experiments/plots/2022/gpu_benchmark_statistics.csv",
         ]
     else:
         stat_files = [
             "experiments/plots/cpu_benchmark_statistics.csv",
             "experiments/plots/gpu_benchmark_statistics.csv",
-            "experiments/plots/PL/cpu_benchmark_statistics.csv",
-            "experiments/plots/PL/gpu_benchmark_statistics.csv",
-            "experiments/plots/2023/cpu_benchmark_statistics.csv",
-            "experiments/plots/2023/gpu_benchmark_statistics.csv",
+            "experiments/plots/FR/cpu_benchmark_statistics.csv",
+            "experiments/plots/FR/gpu_benchmark_statistics.csv",
+            "experiments/plots/2022/cpu_benchmark_statistics.csv",
+            "experiments/plots/2022/gpu_benchmark_statistics.csv",
         ]
         
 

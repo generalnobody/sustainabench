@@ -106,7 +106,7 @@ stats_df.to_csv(
 )
 
 # print(stats_df)
-print(f"Stats saved to: {OUTPUT_DIR.resolve()}.cpu_benchmark_statistics.csv")
+print(f"Stats saved to: {OUTPUT_DIR.resolve()}/cpu_benchmark_statistics.csv")
 
 
 config_order = ["1 node", "2 nodes", "4 nodes"]

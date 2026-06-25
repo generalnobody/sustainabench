@@ -92,175 +92,175 @@ h100_files = {
     }
 }
 
-rome_files_PL = {
+rome_files_FR = {
     "stress-ng": {
-        "1 node": "scripts/snellius/cpu/rome/experiments/results/PL/stress-ng.json"
+        "1 node": "scripts/snellius/cpu/rome/experiments/results/FR/stress-ng.json"
     },
     "STREAM": {
-        "1 node": "scripts/snellius/cpu/rome/experiments/results/PL/stream.json"
+        "1 node": "scripts/snellius/cpu/rome/experiments/results/FR/stream.json"
     },
     "HPL": {
-        "1 node": "scripts/snellius/cpu/rome/experiments/results/PL/hpl_1node.json",
-        "2 nodes": "scripts/snellius/cpu/rome/experiments/results/PL/hpl_2nodes.json",
-        "4 nodes": "scripts/snellius/cpu/rome/experiments/results/PL/hpl_4nodes.json",
+        "1 node": "scripts/snellius/cpu/rome/experiments/results/FR/hpl_1node.json",
+        "2 nodes": "scripts/snellius/cpu/rome/experiments/results/FR/hpl_2nodes.json",
+        "4 nodes": "scripts/snellius/cpu/rome/experiments/results/FR/hpl_4nodes.json",
     },
     "HPCG": {
-        "1 node": "scripts/snellius/cpu/rome/experiments/results/PL/hpcg_1node.json",
-        "2 nodes": "scripts/snellius/cpu/rome/experiments/results/PL/hpcg_2nodes.json",
-        "4 nodes": "scripts/snellius/cpu/rome/experiments/results/PL/hpcg_4nodes.json",
+        "1 node": "scripts/snellius/cpu/rome/experiments/results/FR/hpcg_1node.json",
+        "2 nodes": "scripts/snellius/cpu/rome/experiments/results/FR/hpcg_2nodes.json",
+        "4 nodes": "scripts/snellius/cpu/rome/experiments/results/FR/hpcg_4nodes.json",
     },
 }
 
-genoa_files_PL = {
+genoa_files_FR = {
     "stress-ng": {
-        "1 node": "scripts/snellius/cpu/genoa/experiments/results/PL/stress-ng.json"
+        "1 node": "scripts/snellius/cpu/genoa/experiments/results/FR/stress-ng.json"
     },
     "STREAM": {
-        "1 node": "scripts/snellius/cpu/genoa/experiments/results/PL/stream.json"
+        "1 node": "scripts/snellius/cpu/genoa/experiments/results/FR/stream.json"
     },
     "HPL": {
-        "1 node": "scripts/snellius/cpu/genoa/experiments/results/PL/hpl_1node.json",
-        "2 nodes": "scripts/snellius/cpu/genoa/experiments/results/PL/hpl_2nodes.json",
-        "4 nodes": "scripts/snellius/cpu/genoa/experiments/results/PL/hpl_4nodes.json",
+        "1 node": "scripts/snellius/cpu/genoa/experiments/results/FR/hpl_1node.json",
+        "2 nodes": "scripts/snellius/cpu/genoa/experiments/results/FR/hpl_2nodes.json",
+        "4 nodes": "scripts/snellius/cpu/genoa/experiments/results/FR/hpl_4nodes.json",
     },
     "HPCG": {
-        "1 node": "scripts/snellius/cpu/genoa/experiments/results/PL/hpcg_1node.json",
-        "2 nodes": "scripts/snellius/cpu/genoa/experiments/results/PL/hpcg_2nodes.json",
-        "4 nodes": "scripts/snellius/cpu/genoa/experiments/results/PL/hpcg_4nodes.json",
+        "1 node": "scripts/snellius/cpu/genoa/experiments/results/FR/hpcg_1node.json",
+        "2 nodes": "scripts/snellius/cpu/genoa/experiments/results/FR/hpcg_2nodes.json",
+        "4 nodes": "scripts/snellius/cpu/genoa/experiments/results/FR/hpcg_4nodes.json",
     },
 }
 
-a100_files_PL = {
+a100_files_FR = {
     "gpu-burn": {
-        "4 GPUs": "scripts/snellius/gpu/a100/experiments/results/PL/gpu-burn.json"
+        "4 GPUs": "scripts/snellius/gpu/a100/experiments/results/FR/gpu-burn.json"
     },
     "Nvidia STREAM": {
-        "4 GPUs": "scripts/snellius/gpu/a100/experiments/results/PL/nv-stream.json"
+        "4 GPUs": "scripts/snellius/gpu/a100/experiments/results/FR/nv-stream.json"
     },
     "Nvidia HPL": {
-        "1 GPU": "scripts/snellius/gpu/a100/experiments/results/PL/nv-hpl_1gpu.json",
-        "2 GPUs": "scripts/snellius/gpu/a100/experiments/results/PL/nv-hpl_2gpus.json",
-        "4 GPUs": "scripts/snellius/gpu/a100/experiments/results/PL/nv-hpl_4gpus.json",
+        "1 GPU": "scripts/snellius/gpu/a100/experiments/results/FR/nv-hpl_1gpu.json",
+        "2 GPUs": "scripts/snellius/gpu/a100/experiments/results/FR/nv-hpl_2gpus.json",
+        "4 GPUs": "scripts/snellius/gpu/a100/experiments/results/FR/nv-hpl_4gpus.json",
     },
     "Nvidia HPCG": {
-        "1 GPU": "scripts/snellius/gpu/a100/experiments/results/PL/nv-hpcg_1gpu.json",
-        "2 GPUs": "scripts/snellius/gpu/a100/experiments/results/PL/nv-hpcg_2gpus.json",
-        "4 GPUs": "scripts/snellius/gpu/a100/experiments/results/PL/nv-hpcg_4gpus.json",
+        "1 GPU": "scripts/snellius/gpu/a100/experiments/results/FR/nv-hpcg_1gpu.json",
+        "2 GPUs": "scripts/snellius/gpu/a100/experiments/results/FR/nv-hpcg_2gpus.json",
+        "4 GPUs": "scripts/snellius/gpu/a100/experiments/results/FR/nv-hpcg_4gpus.json",
     },
     "vllm": {
-        "1 GPU": "scripts/snellius/gpu/a100/experiments/results/PL/vllm_1gpu.json",
-        "2 GPUs": "scripts/snellius/gpu/a100/experiments/results/PL/vllm_2gpus.json",
-        "4 GPUs": "scripts/snellius/gpu/a100/experiments/results/PL/vllm_4gpus.json",
+        "1 GPU": "scripts/snellius/gpu/a100/experiments/results/FR/vllm_1gpu.json",
+        "2 GPUs": "scripts/snellius/gpu/a100/experiments/results/FR/vllm_2gpus.json",
+        "4 GPUs": "scripts/snellius/gpu/a100/experiments/results/FR/vllm_4gpus.json",
     }
 }
 
-h100_files_PL = {
+h100_files_FR = {
     "gpu-burn": {
-        "4 GPUs": "scripts/snellius/gpu/h100/experiments/results/PL/gpu-burn.json"
+        "4 GPUs": "scripts/snellius/gpu/h100/experiments/results/FR/gpu-burn.json"
     },
     "Nvidia STREAM": {
-        "4 GPUs": "scripts/snellius/gpu/h100/experiments/results/PL/nv-stream.json"
+        "4 GPUs": "scripts/snellius/gpu/h100/experiments/results/FR/nv-stream.json"
     },
     "Nvidia HPL": {
-        "1 GPU": "scripts/snellius/gpu/h100/experiments/results/PL/nv-hpl_1gpu.json",
-        "2 GPUs": "scripts/snellius/gpu/h100/experiments/results/PL/nv-hpl_2gpus.json",
-        "4 GPUs": "scripts/snellius/gpu/h100/experiments/results/PL/nv-hpl_4gpus.json",
+        "1 GPU": "scripts/snellius/gpu/h100/experiments/results/FR/nv-hpl_1gpu.json",
+        "2 GPUs": "scripts/snellius/gpu/h100/experiments/results/FR/nv-hpl_2gpus.json",
+        "4 GPUs": "scripts/snellius/gpu/h100/experiments/results/FR/nv-hpl_4gpus.json",
     },
     "Nvidia HPCG": {
-        "1 GPU": "scripts/snellius/gpu/h100/experiments/results/PL/nv-hpcg_1gpu.json",
-        "2 GPUs": "scripts/snellius/gpu/h100/experiments/results/PL/nv-hpcg_2gpus.json",
-        "4 GPUs": "scripts/snellius/gpu/h100/experiments/results/PL/nv-hpcg_4gpus.json",
+        "1 GPU": "scripts/snellius/gpu/h100/experiments/results/FR/nv-hpcg_1gpu.json",
+        "2 GPUs": "scripts/snellius/gpu/h100/experiments/results/FR/nv-hpcg_2gpus.json",
+        "4 GPUs": "scripts/snellius/gpu/h100/experiments/results/FR/nv-hpcg_4gpus.json",
     },
     "vllm": {
-        "1 GPU": "scripts/snellius/gpu/h100/experiments/results/PL/vllm_1gpu.json",
-        "2 GPUs": "scripts/snellius/gpu/h100/experiments/results/PL/vllm_2gpus.json",
-        "4 GPUs": "scripts/snellius/gpu/h100/experiments/results/PL/vllm_4gpus.json",
+        "1 GPU": "scripts/snellius/gpu/h100/experiments/results/FR/vllm_1gpu.json",
+        "2 GPUs": "scripts/snellius/gpu/h100/experiments/results/FR/vllm_2gpus.json",
+        "4 GPUs": "scripts/snellius/gpu/h100/experiments/results/FR/vllm_4gpus.json",
     }
 }
 
-rome_files_2023 = {
+rome_files_2022 = {
     "stress-ng": {
-        "1 node": "scripts/snellius/cpu/rome/experiments/results/2023/stress-ng.json"
+        "1 node": "scripts/snellius/cpu/rome/experiments/results/2022/stress-ng.json"
     },
     "STREAM": {
-        "1 node": "scripts/snellius/cpu/rome/experiments/results/2023/stream.json"
+        "1 node": "scripts/snellius/cpu/rome/experiments/results/2022/stream.json"
     },
     "HPL": {
-        "1 node": "scripts/snellius/cpu/rome/experiments/results/2023/hpl_1node.json",
-        "2 nodes": "scripts/snellius/cpu/rome/experiments/results/2023/hpl_2nodes.json",
-        "4 nodes": "scripts/snellius/cpu/rome/experiments/results/2023/hpl_4nodes.json",
+        "1 node": "scripts/snellius/cpu/rome/experiments/results/2022/hpl_1node.json",
+        "2 nodes": "scripts/snellius/cpu/rome/experiments/results/2022/hpl_2nodes.json",
+        "4 nodes": "scripts/snellius/cpu/rome/experiments/results/2022/hpl_4nodes.json",
     },
     "HPCG": {
-        "1 node": "scripts/snellius/cpu/rome/experiments/results/2023/hpcg_1node.json",
-        "2 nodes": "scripts/snellius/cpu/rome/experiments/results/2023/hpcg_2nodes.json",
-        "4 nodes": "scripts/snellius/cpu/rome/experiments/results/2023/hpcg_4nodes.json",
+        "1 node": "scripts/snellius/cpu/rome/experiments/results/2022/hpcg_1node.json",
+        "2 nodes": "scripts/snellius/cpu/rome/experiments/results/2022/hpcg_2nodes.json",
+        "4 nodes": "scripts/snellius/cpu/rome/experiments/results/2022/hpcg_4nodes.json",
     },
 }
 
-genoa_files_2023 = {
+genoa_files_2022 = {
     "stress-ng": {
-        "1 node": "scripts/snellius/cpu/genoa/experiments/results/2023/stress-ng.json"
+        "1 node": "scripts/snellius/cpu/genoa/experiments/results/2022/stress-ng.json"
     },
     "STREAM": {
-        "1 node": "scripts/snellius/cpu/genoa/experiments/results/2023/stream.json"
+        "1 node": "scripts/snellius/cpu/genoa/experiments/results/2022/stream.json"
     },
     "HPL": {
-        "1 node": "scripts/snellius/cpu/genoa/experiments/results/2023/hpl_1node.json",
-        "2 nodes": "scripts/snellius/cpu/genoa/experiments/results/2023/hpl_2nodes.json",
-        "4 nodes": "scripts/snellius/cpu/genoa/experiments/results/2023/hpl_4nodes.json",
+        "1 node": "scripts/snellius/cpu/genoa/experiments/results/2022/hpl_1node.json",
+        "2 nodes": "scripts/snellius/cpu/genoa/experiments/results/2022/hpl_2nodes.json",
+        "4 nodes": "scripts/snellius/cpu/genoa/experiments/results/2022/hpl_4nodes.json",
     },
     "HPCG": {
-        "1 node": "scripts/snellius/cpu/genoa/experiments/results/2023/hpcg_1node.json",
-        "2 nodes": "scripts/snellius/cpu/genoa/experiments/results/2023/hpcg_2nodes.json",
-        "4 nodes": "scripts/snellius/cpu/genoa/experiments/results/2023/hpcg_4nodes.json",
+        "1 node": "scripts/snellius/cpu/genoa/experiments/results/2022/hpcg_1node.json",
+        "2 nodes": "scripts/snellius/cpu/genoa/experiments/results/2022/hpcg_2nodes.json",
+        "4 nodes": "scripts/snellius/cpu/genoa/experiments/results/2022/hpcg_4nodes.json",
     },
 }
 
-a100_files_2023 = {
+a100_files_2022 = {
     "gpu-burn": {
-        "4 GPUs": "scripts/snellius/gpu/a100/experiments/results/2023/gpu-burn.json"
+        "4 GPUs": "scripts/snellius/gpu/a100/experiments/results/2022/gpu-burn.json"
     },
     "Nvidia STREAM": {
-        "4 GPUs": "scripts/snellius/gpu/a100/experiments/results/2023/nv-stream.json"
+        "4 GPUs": "scripts/snellius/gpu/a100/experiments/results/2022/nv-stream.json"
     },
     "Nvidia HPL": {
-        "1 GPU": "scripts/snellius/gpu/a100/experiments/results/2023/nv-hpl_1gpu.json",
-        "2 GPUs": "scripts/snellius/gpu/a100/experiments/results/2023/nv-hpl_2gpus.json",
-        "4 GPUs": "scripts/snellius/gpu/a100/experiments/results/2023/nv-hpl_4gpus.json",
+        "1 GPU": "scripts/snellius/gpu/a100/experiments/results/2022/nv-hpl_1gpu.json",
+        "2 GPUs": "scripts/snellius/gpu/a100/experiments/results/2022/nv-hpl_2gpus.json",
+        "4 GPUs": "scripts/snellius/gpu/a100/experiments/results/2022/nv-hpl_4gpus.json",
     },
     "Nvidia HPCG": {
-        "1 GPU": "scripts/snellius/gpu/a100/experiments/results/2023/nv-hpcg_1gpu.json",
-        "2 GPUs": "scripts/snellius/gpu/a100/experiments/results/2023/nv-hpcg_2gpus.json",
-        "4 GPUs": "scripts/snellius/gpu/a100/experiments/results/2023/nv-hpcg_4gpus.json",
+        "1 GPU": "scripts/snellius/gpu/a100/experiments/results/2022/nv-hpcg_1gpu.json",
+        "2 GPUs": "scripts/snellius/gpu/a100/experiments/results/2022/nv-hpcg_2gpus.json",
+        "4 GPUs": "scripts/snellius/gpu/a100/experiments/results/2022/nv-hpcg_4gpus.json",
     },
     "vllm": {
-        "1 GPU": "scripts/snellius/gpu/a100/experiments/results/2023/vllm_1gpu.json",
-        "2 GPUs": "scripts/snellius/gpu/a100/experiments/results/2023/vllm_2gpus.json",
-        "4 GPUs": "scripts/snellius/gpu/a100/experiments/results/2023/vllm_4gpus.json",
+        "1 GPU": "scripts/snellius/gpu/a100/experiments/results/2022/vllm_1gpu.json",
+        "2 GPUs": "scripts/snellius/gpu/a100/experiments/results/2022/vllm_2gpus.json",
+        "4 GPUs": "scripts/snellius/gpu/a100/experiments/results/2022/vllm_4gpus.json",
     }
 }
 
-h100_files_2023 = {
+h100_files_2022 = {
     "gpu-burn": {
-        "4 GPUs": "scripts/snellius/gpu/h100/experiments/results/2023/gpu-burn.json"
+        "4 GPUs": "scripts/snellius/gpu/h100/experiments/results/2022/gpu-burn.json"
     },
     "Nvidia STREAM": {
-        "4 GPUs": "scripts/snellius/gpu/h100/experiments/results/2023/nv-stream.json"
+        "4 GPUs": "scripts/snellius/gpu/h100/experiments/results/2022/nv-stream.json"
     },
     "Nvidia HPL": {
-        "1 GPU": "scripts/snellius/gpu/h100/experiments/results/2023/nv-hpl_1gpu.json",
-        "2 GPUs": "scripts/snellius/gpu/h100/experiments/results/2023/nv-hpl_2gpus.json",
-        "4 GPUs": "scripts/snellius/gpu/h100/experiments/results/2023/nv-hpl_4gpus.json",
+        "1 GPU": "scripts/snellius/gpu/h100/experiments/results/2022/nv-hpl_1gpu.json",
+        "2 GPUs": "scripts/snellius/gpu/h100/experiments/results/2022/nv-hpl_2gpus.json",
+        "4 GPUs": "scripts/snellius/gpu/h100/experiments/results/2022/nv-hpl_4gpus.json",
     },
     "Nvidia HPCG": {
-        "1 GPU": "scripts/snellius/gpu/h100/experiments/results/2023/nv-hpcg_1gpu.json",
-        "2 GPUs": "scripts/snellius/gpu/h100/experiments/results/2023/nv-hpcg_2gpus.json",
-        "4 GPUs": "scripts/snellius/gpu/h100/experiments/results/2023/nv-hpcg_4gpus.json",
+        "1 GPU": "scripts/snellius/gpu/h100/experiments/results/2022/nv-hpcg_1gpu.json",
+        "2 GPUs": "scripts/snellius/gpu/h100/experiments/results/2022/nv-hpcg_2gpus.json",
+        "4 GPUs": "scripts/snellius/gpu/h100/experiments/results/2022/nv-hpcg_4gpus.json",
     },
     "vllm": {
-        "1 GPU": "scripts/snellius/gpu/h100/experiments/results/2023/vllm_1gpu.json",
-        "2 GPUs": "scripts/snellius/gpu/h100/experiments/results/2023/vllm_2gpus.json",
-        "4 GPUs": "scripts/snellius/gpu/h100/experiments/results/2023/vllm_4gpus.json",
+        "1 GPU": "scripts/snellius/gpu/h100/experiments/results/2022/vllm_1gpu.json",
+        "2 GPUs": "scripts/snellius/gpu/h100/experiments/results/2022/vllm_2gpus.json",
+        "4 GPUs": "scripts/snellius/gpu/h100/experiments/results/2022/vllm_4gpus.json",
     }
 }
 
@@ -269,15 +269,15 @@ genoa_results = load_results(genoa_files)
 a100_results = load_results(a100_files)
 h100_results = load_results(h100_files)
 
-rome_results_PL = load_results(rome_files_PL)
-genoa_results_PL = load_results(genoa_files_PL)
-a100_results_PL = load_results(a100_files_PL)
-h100_results_PL = load_results(h100_files_PL)
+rome_results_FR = load_results(rome_files_FR)
+genoa_results_FR = load_results(genoa_files_FR)
+a100_results_FR = load_results(a100_files_FR)
+h100_results_FR = load_results(h100_files_FR)
 
-rome_results_2023 = load_results(rome_files_2023)
-genoa_results_2023 = load_results(genoa_files_2023)
-a100_results_2023 = load_results(a100_files_2023)
-h100_results_2023 = load_results(h100_files_2023)
+rome_results_2022 = load_results(rome_files_2022)
+genoa_results_2022 = load_results(genoa_files_2022)
+a100_results_2022 = load_results(a100_files_2022)
+h100_results_2022 = load_results(h100_files_2022)
 
 
 import pandas as pd
@@ -357,18 +357,18 @@ all_results = {
     "h100": h100_results,
 }
 
-all_results_PL = {
-    "rome": rome_results_PL,
-    "genoa": genoa_results_PL,
-    "a100": a100_results_PL,
-    "h100": h100_results_PL,
+all_results_FR = {
+    "rome": rome_results_FR,
+    "genoa": genoa_results_FR,
+    "a100": a100_results_FR,
+    "h100": h100_results_FR,
 }
 
-all_results_2023 = {
-    "rome": rome_results_2023,
-    "genoa": genoa_results_2023,
-    "a100": a100_results_2023,
-    "h100": h100_results_2023,
+all_results_2022 = {
+    "rome": rome_results_2022,
+    "genoa": genoa_results_2022,
+    "a100": a100_results_2022,
+    "h100": h100_results_2022,
 }
 
 df_ppc = extract_performance_per_carbon_df(all_results)
@@ -379,18 +379,18 @@ summary_ppc.to_csv(
 )
 print(f"Stats saved to: {OUTPUT_DIR.resolve()}/performance_per_carbon.csv")
 
-df_ppc_PL = extract_performance_per_carbon_df(all_results_PL)
-summary_ppc_PL = compute_statistics(df_ppc_PL)
-summary_ppc_PL.to_csv(
-    OUTPUT_DIR / "PL" / "performance_per_carbon.csv",
+df_ppc_FR = extract_performance_per_carbon_df(all_results_FR)
+summary_ppc_FR = compute_statistics(df_ppc_FR)
+summary_ppc_FR.to_csv(
+    OUTPUT_DIR / "FR" / "performance_per_carbon.csv",
     index=False
 )
-print(f"Stats saved to: {OUTPUT_DIR.resolve()}/PL/performance_per_carbon.csv")
+print(f"Stats saved to: {OUTPUT_DIR.resolve()}/FR/performance_per_carbon.csv")
 
-df_ppc_2023 = extract_performance_per_carbon_df(all_results_2023)
-summary_ppc_2023 = compute_statistics(df_ppc_2023)
-summary_ppc_2023.to_csv(
-    OUTPUT_DIR / "2023" / "performance_per_carbon.csv",
+df_ppc_2022 = extract_performance_per_carbon_df(all_results_2022)
+summary_ppc_2022 = compute_statistics(df_ppc_2022)
+summary_ppc_2022.to_csv(
+    OUTPUT_DIR / "2022" / "performance_per_carbon.csv",
     index=False
 )
-print(f"Stats saved to: {OUTPUT_DIR.resolve()}/2023/performance_per_carbon.csv")
+print(f"Stats saved to: {OUTPUT_DIR.resolve()}/2022/performance_per_carbon.csv")
