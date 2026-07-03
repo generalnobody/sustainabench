@@ -1,0 +1,9 @@
+workloads:
+  - name: "stress-ng"
+    params:
+      executable: "/home/ibiemond/stress-ng/stress-ng"
+      args: [
+        "--cpu", "192",
+        "--cpu-method", "matrixprod",
+        "--timeout", "120s",
+      ]

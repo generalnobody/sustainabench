@@ -1,0 +1,7 @@
+measurement:
+  name: "likwid"
+  params:
+    flags: # Supports any flags for likwid-perfctr/likwid-mpirun. NOTE: do NOT use -O or -np here. -O is always added in the measurement, -np is configured through the sustainabench CLI.
+    # All flags should be a list of strings. Lists can be of variable lengths and will be flattened into a 1-dimensional list separated with spaces in processing.
+      # - [-c, "0"]
+      - [-g, ENERGY]
