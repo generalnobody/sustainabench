@@ -1,0 +1,265 @@
+{
+    "workload": "gpu-burn",
+    "backend": "local",
+    "results": {
+        "run0": [
+            {
+                "node_id": "gcn72.local.snellius.surf.nl:0:0",
+                "metrics": {
+                    "execution_time": 98.51233858708292,
+                    "cpu_energy": {
+                        "energy": {
+                            "j": 24169.035111,
+                            "kwh": 0.006713620864166667
+                        },
+                        "power": {
+                            "w": 245.34055381193963
+                        },
+                        "per_domain": [
+                            {
+                                "energy": {
+                                    "j": 11693.173434,
+                                    "kwh": 0.0032481037316666665
+                                },
+                                "power": {
+                                    "w": 118.69773174399275
+                                }
+                            },
+                            {
+                                "energy": {
+                                    "j": 12475.861677,
+                                    "kwh": 0.0034655171325
+                                },
+                                "power": {
+                                    "w": 126.6428220679469
+                                }
+                            }
+                        ]
+                    },
+                    "gpu_nv": [
+                        {
+                            "gpu_id": 0,
+                            "energy": {
+                                "j": 24933.169879433568,
+                                "kwh": 0.00692588052206488
+                            },
+                            "power": {
+                                "avg_w": 253.45413745454027
+                            },
+                            "util": {
+                                "avg": 81.65685279187818,
+                                "max": 100
+                            },
+                            "temp": {
+                                "avg": 48.316751269035535,
+                                "max": 53
+                            },
+                            "clock": {
+                                "avg": 1225.1878172588833,
+                                "max": 1410
+                            },
+                            "memory": {
+                                "mb": {
+                                    "avg": 29802.627220812185,
+                                    "max": 36796.75
+                                }
+                            }
+                        },
+                        {
+                            "gpu_id": 1,
+                            "energy": {
+                                "j": 21932.991123614873,
+                                "kwh": 0.006092497534337465
+                            },
+                            "power": {
+                                "avg_w": 222.96053697409127
+                            },
+                            "util": {
+                                "avg": 73.67918781725888,
+                                "max": 100
+                            },
+                            "temp": {
+                                "avg": 46.588832487309645,
+                                "max": 53
+                            },
+                            "clock": {
+                                "avg": 1127.238578680203,
+                                "max": 1410
+                            },
+                            "memory": {
+                                "mb": {
+                                    "avg": 26927.477157360405,
+                                    "max": 36796.75
+                                }
+                            }
+                        },
+                        {
+                            "gpu_id": 2,
+                            "energy": {
+                                "j": 22256.07437908429,
+                                "kwh": 0.0061822428830789694
+                            },
+                            "power": {
+                                "avg_w": 226.24868270275607
+                            },
+                            "util": {
+                                "avg": 73.43350253807107,
+                                "max": 100
+                            },
+                            "temp": {
+                                "avg": 47.344162436548224,
+                                "max": 54
+                            },
+                            "clock": {
+                                "avg": 1125.228426395939,
+                                "max": 1410
+                            },
+                            "memory": {
+                                "mb": {
+                                    "avg": 26927.47480964467,
+                                    "max": 36796.75
+                                }
+                            }
+                        },
+                        {
+                            "gpu_id": 3,
+                            "energy": {
+                                "j": 23026.065501573616,
+                                "kwh": 0.006396129305992671
+                            },
+                            "power": {
+                                "avg_w": 234.08013803717344
+                            },
+                            "util": {
+                                "avg": 73.7248730964467,
+                                "max": 100
+                            },
+                            "temp": {
+                                "avg": 50.330964467005074,
+                                "max": 58
+                            },
+                            "clock": {
+                                "avg": 1124.0710659898477,
+                                "max": 1410
+                            },
+                            "memory": {
+                                "mb": {
+                                    "avg": 26927.03064720812,
+                                    "max": 36796.75
+                                }
+                            }
+                        }
+                    ],
+                    "memory": {
+                        "rss": {
+                            "mb": {
+                                "avg": 3875.9144194162436,
+                                "max": 4728.1015625,
+                                "min": 654.203125
+                            }
+                        }
+                    },
+                    "network": {
+                        "bytes": {
+                            "sent": 959432,
+                            "received": 863388
+                        },
+                        "packets": {
+                            "sent": 6161,
+                            "received": 9828
+                        }
+                    },
+                    "perf_energy": {
+                        "joules": 24889.91,
+                        "kwh": 0.006913863888888889,
+                        "time": 101.400005499
+                    }
+                },
+                "metadata": {
+                    "hostname": "gcn72.local.snellius.surf.nl",
+                    "local_ip": "172.18.62.72",
+                    "public_ip": "145.136.62.72"
+                }
+            },
+            {
+                "node_id": "local",
+                "metrics": {
+                    "gpu_burn": {
+                        "gpus": [
+                            {
+                                "id": 0,
+                                "name": "NVIDIA A100-SXM4-40GB",
+                                "uuid": "GPU-fe5575bc-424d-fa4b-b2a8-7e6a69fcb6e5",
+                                "memory": {
+                                    "total_mb": 40441,
+                                    "available_mb": 40003,
+                                    "used_mb": 36002
+                                },
+                                "stats": {
+                                    "result": "OK",
+                                    "processed": 1104,
+                                    "gflops": 19107,
+                                    "errors": 0,
+                                    "temp_c": 53
+                                }
+                            },
+                            {
+                                "id": 1,
+                                "name": "NVIDIA A100-SXM4-40GB",
+                                "uuid": "GPU-b8e4d11a-927e-bda4-dc84-fde5c35ff219",
+                                "memory": {
+                                    "total_mb": 40441,
+                                    "available_mb": 40003,
+                                    "used_mb": 36002
+                                },
+                                "stats": {
+                                    "result": "OK",
+                                    "processed": 966,
+                                    "gflops": 19099,
+                                    "errors": 0,
+                                    "temp_c": 53
+                                }
+                            },
+                            {
+                                "id": 2,
+                                "name": "NVIDIA A100-SXM4-40GB",
+                                "uuid": "GPU-8d62b92c-b635-167a-4306-f402dc53e14f",
+                                "memory": {
+                                    "total_mb": 40441,
+                                    "available_mb": 40003,
+                                    "used_mb": 36002
+                                },
+                                "stats": {
+                                    "result": "OK",
+                                    "processed": 966,
+                                    "gflops": 19119,
+                                    "errors": 0,
+                                    "temp_c": 54
+                                }
+                            },
+                            {
+                                "id": 3,
+                                "name": "NVIDIA A100-SXM4-40GB",
+                                "uuid": "GPU-40da2424-987a-cc43-7aea-71987d6e73f9",
+                                "memory": {
+                                    "total_mb": 40441,
+                                    "available_mb": 40003,
+                                    "used_mb": 36002
+                                },
+                                "stats": {
+                                    "result": "OK",
+                                    "processed": 966,
+                                    "gflops": 19104,
+                                    "errors": 0,
+                                    "temp_c": 58
+                                }
+                            }
+                        ]
+                    }
+                },
+                "metadata": {}
+            }
+        ]
+    },
+    "metadata": {}
+}

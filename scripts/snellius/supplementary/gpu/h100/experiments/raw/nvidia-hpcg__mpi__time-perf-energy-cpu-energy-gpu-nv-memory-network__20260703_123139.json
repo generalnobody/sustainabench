@@ -1,0 +1,350 @@
+{
+    "workload": "nvidia-hpcg",
+    "backend": "mpi",
+    "results": {
+        "run0": [
+            {
+                "node_id": "gcn76.local.snellius.surf.nl:0:0",
+                "metrics": {
+                    "execution_time": 504.8628122090013,
+                    "cpu_energy": {
+                        "energy": {
+                            "j": 109718.243742,
+                            "kwh": 0.030477289928333335
+                        },
+                        "power": {
+                            "w": 217.32291199990914
+                        },
+                        "per_domain": [
+                            {
+                                "energy": {
+                                    "j": 52647.273121,
+                                    "kwh": 0.014624242533611111
+                                },
+                                "power": {
+                                    "w": 104.28036681314913
+                                }
+                            },
+                            {
+                                "energy": {
+                                    "j": 57070.970621,
+                                    "kwh": 0.015853047394722222
+                                },
+                                "power": {
+                                    "w": 113.04254518676
+                                }
+                            }
+                        ]
+                    },
+                    "gpu_nv": [
+                        {
+                            "gpu_id": 0,
+                            "energy": {
+                                "j": 134195.79459489294,
+                                "kwh": 0.037276609609692486
+                            },
+                            "power": {
+                                "avg_w": 265.97607893459184
+                            },
+                            "util": {
+                                "avg": 54.38866877971474,
+                                "max": 92
+                            },
+                            "temp": {
+                                "avg": 40.70899366085578,
+                                "max": 45
+                            },
+                            "clock": {
+                                "avg": 1973.1982963549922,
+                                "max": 1980
+                            },
+                            "memory": {
+                                "mb": {
+                                    "avg": 14430.035707210776,
+                                    "max": 14904.75
+                                }
+                            }
+                        },
+                        {
+                            "gpu_id": 1,
+                            "energy": {
+                                "j": 34726.07613121523,
+                                "kwh": 0.009646132258670897
+                            },
+                            "power": {
+                                "avg_w": 68.8206322176983
+                            },
+                            "util": {
+                                "avg": 0.0,
+                                "max": 0
+                            },
+                            "temp": {
+                                "avg": 32.002773375594295,
+                                "max": 33
+                            },
+                            "clock": {
+                                "avg": 345.0,
+                                "max": 345
+                            },
+                            "memory": {
+                                "mb": {
+                                    "avg": 508.62502476228207,
+                                    "max": 508.6875
+                                }
+                            }
+                        },
+                        {
+                            "gpu_id": 2,
+                            "energy": {
+                                "j": 34179.52565337336,
+                                "kwh": 0.009494312681492601
+                            },
+                            "power": {
+                                "avg_w": 67.73781630736198
+                            },
+                            "util": {
+                                "avg": 0.0,
+                                "max": 0
+                            },
+                            "temp": {
+                                "avg": 32.07626782884311,
+                                "max": 33
+                            },
+                            "clock": {
+                                "avg": 345.0,
+                                "max": 345
+                            },
+                            "memory": {
+                                "mb": {
+                                    "avg": 508.62501238114106,
+                                    "max": 508.6875
+                                }
+                            }
+                        },
+                        {
+                            "gpu_id": 3,
+                            "energy": {
+                                "j": 33229.527688237096,
+                                "kwh": 0.009230424357843638
+                            },
+                            "power": {
+                                "avg_w": 65.8554296705236
+                            },
+                            "util": {
+                                "avg": 0.0,
+                                "max": 0
+                            },
+                            "temp": {
+                                "avg": 32.0,
+                                "max": 32
+                            },
+                            "clock": {
+                                "avg": 345.0,
+                                "max": 345
+                            },
+                            "memory": {
+                                "mb": {
+                                    "avg": 508.62502476228207,
+                                    "max": 508.6875
+                                }
+                            }
+                        }
+                    ],
+                    "memory": {
+                        "rss": {
+                            "mb": {
+                                "avg": 9177.857009428239,
+                                "max": 9640.1484375,
+                                "min": 633.6171875
+                            }
+                        }
+                    },
+                    "network": {
+                        "bytes": {
+                            "sent": 4324822,
+                            "received": 36000639
+                        },
+                        "packets": {
+                            "sent": 18842,
+                            "received": 63650
+                        }
+                    },
+                    "perf_energy": {
+                        "joules": 110232.11,
+                        "kwh": 0.030620030555555556,
+                        "time": 507.210623181
+                    }
+                },
+                "metadata": {
+                    "hostname": "gcn76.local.snellius.surf.nl",
+                    "local_ip": "172.18.62.76",
+                    "public_ip": "145.136.62.76"
+                }
+            },
+            {
+                "node_id": "local",
+                "metrics": {
+                    "nvidia_hpcg": {
+                        "Initial_Residual_": 5660.69,
+                        "Iteration_": "52   Scaled Residual = 0.000559582",
+                        "|_Reference_CPU_memory_": "7486.28 MB",
+                        "Departure_from_symmetry_(scaled)_for_SpMV_abs(x'*A*y_y'*A*x)_": 0,
+                        "Departure_from_symmetry_(scaled)_for_MG_abs(x'*Minv*y_y'*Minv*x)_": 0,
+                        "version": 3.1,
+                        "Release_date": "March 28, 2019",
+                        "Machine_Summary": {
+                            "_value": "",
+                            "Distributed_Processes": 1,
+                            "Threads_per_processes": 1
+                        },
+                        "Global_Problem_Dimensions": {
+                            "_value": "",
+                            "Global_nx": 256,
+                            "Global_ny": 256,
+                            "Global_nz": 256
+                        },
+                        "Processor_Dimensions": {
+                            "_value": "",
+                            "npx": 1,
+                            "npy": 1,
+                            "npz": 1
+                        },
+                        "Local_Domain_Dimensions": {
+                            "_value": "",
+                            "nx": 256,
+                            "ny": 256
+                        },
+                        "##########_Problem_Summary_##########": "",
+                        "Setup_Information": {
+                            "_value": "",
+                            "Setup_Time": 0.01913
+                        },
+                        "Linear_System_Information": {
+                            "_value": "",
+                            "Number_of_Equations": 16777216,
+                            "Number_of_Nonzero_Terms": 449455096
+                        },
+                        "Multigrid_Information": {
+                            "_value": "",
+                            "Number_of_coarse_grid_levels": 3,
+                            "Coarse_Grids": {
+                                "_value": "",
+                                "Grid_Level": 3,
+                                "Number_of_Equations": 32768,
+                                "Number_of_Nonzero_Terms": 830584,
+                                "Number_of_Presmoother_Steps": 1,
+                                "Number_of_Postsmoother_Steps": 1
+                            }
+                        },
+                        "##########_Memory_Use_Summary_##########": "",
+                        "Memory_Use_Information": {
+                            "_value": "",
+                            "Total_memory_used_for_data_(Gbytes)": 11.9905,
+                            "Memory_used_for_OptimizeProblem_data_(Gbytes)": 0,
+                            "Bytes_per_equation_(Total_memory_/_Number_of_Equations)": 714.69,
+                            "Memory_used_for_linear_system_and_CG_(Gbytes)": 10.5529,
+                            "Coarse_Grids": {
+                                "_value": "",
+                                "Grid_Level": 3,
+                                "Memory_used": 0.0196946
+                            }
+                        },
+                        "##########_V&V_Testing_Summary_##########": "",
+                        "Spectral_Convergence_Tests": {
+                            "_value": "",
+                            "Result": "PASSED",
+                            "Unpreconditioned": {
+                                "_value": "",
+                                "Maximum_iteration_count": 11,
+                                "Expected_iteration_count": 12
+                            },
+                            "Preconditioned": {
+                                "_value": "",
+                                "Maximum_iteration_count": 1,
+                                "Expected_iteration_count": 2
+                            }
+                        },
+                        "Departure_from_Symmetry_|x'Ay_y'Ax|/(2*||x||*||A||*||y||)/epsilon": {
+                            "_value": "",
+                            "Result": "PASSED",
+                            "Departure_for_SpMV": 0,
+                            "Departure_for_MG": 0
+                        },
+                        "##########_Iterations_Summary_##########": "",
+                        "Iteration_Count_Information": {
+                            "_value": "",
+                            "Result": "PASSED",
+                            "Reference_CG_iterations_per_set": 50,
+                            "Optimized_CG_iterations_per_set": 52,
+                            "Total_number_of_reference_iterations": 17050,
+                            "Total_number_of_optimized_iterations": 17732
+                        },
+                        "##########_Reproducibility_Summary_##########": "",
+                        "Reproducibility_Information": {
+                            "_value": "",
+                            "Result": "PASSED",
+                            "Scaled_residual_mean": 0.000559582,
+                            "Scaled_residual_variance": 0
+                        },
+                        "##########_Performance_Summary_(times_in_sec)_##########": "",
+                        "Benchmark_Time_Summary": {
+                            "_value": "",
+                            "Optimization_phase": 0.0713772,
+                            "DDOT": 9.4689,
+                            "WAXPBY": 10.2967,
+                            "SpMV": 49.5977,
+                            "MG": 230.66,
+                            "Total": 300.036
+                        },
+                        "Floating_Point_Operations_Summary": {
+                            "_value": "",
+                            "Raw_DDOT": 1796400000000.0,
+                            "Raw_WAXPBY": 1796400000000.0,
+                            "Raw_SpMV": 16246000000000.0,
+                            "Raw_MG": 90856900000000.0,
+                            "Total": 110696000000000.0,
+                            "Total_with_convergence_overhead": 106438000000000.0
+                        },
+                        "GB/s_Summary": {
+                            "_value": "",
+                            "Raw_Read_B/W": 2272.84,
+                            "Raw_Write_B/W": 525.294,
+                            "Raw_Total_B/W": 2798.13,
+                            "Total_with_convergence_and_optimization_phase_overhead": 2663.12
+                        },
+                        "GFLOP/s_Summary": {
+                            "_value": "",
+                            "Raw_DDOT": 189.716,
+                            "Raw_WAXPBY": 174.464,
+                            "Raw_SpMV": 327.555,
+                            "Raw_MG": 393.9,
+                            "Raw_Total": 368.941,
+                            "Total_with_convergence_overhead": 354.751,
+                            "Total_with_convergence_and_optimization_phase_overhead": 351.139
+                        },
+                        "User_Optimization_Overheads": {
+                            "_value": "",
+                            "Optimization_phase_time_(sec)": 0.0713772,
+                            "Optimization_phase_time_vs_reference_SpMV+MG_time": 0.0214052
+                        },
+                        "DDOT_Timing_Variations": {
+                            "_value": "",
+                            "Min_DDOT_MPI_Allreduce_time": 0.159495,
+                            "Max_DDOT_MPI_Allreduce_time": 0.159495,
+                            "Avg_DDOT_MPI_Allreduce_time": 0.159495
+                        },
+                        "Final_Summary": {
+                            "_value": "",
+                            "HPCG_result_is_VALID_with_a_GFLOP/s_rating_of": 351.139,
+                            "HPCG_2.4_rating_for_historical_reasons_is": 351.896,
+                            "Results_are_valid_but_execution_time_(sec)_is": 300.036,
+                            "Official_results_execution_time_(sec)_must_be_at_least": 1800
+                        }
+                    }
+                },
+                "metadata": {}
+            }
+        ]
+    },
+    "metadata": {}
+}

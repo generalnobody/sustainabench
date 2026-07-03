@@ -1,0 +1,265 @@
+{
+    "workload": "gpu-burn",
+    "backend": "local",
+    "results": {
+        "run0": [
+            {
+                "node_id": "gcn157.local.snellius.surf.nl:0:0",
+                "metrics": {
+                    "execution_time": 99.31287518609315,
+                    "cpu_energy": {
+                        "energy": {
+                            "j": 21232.181679,
+                            "kwh": 0.005897828244166667
+                        },
+                        "power": {
+                            "w": 213.79102840165672
+                        },
+                        "per_domain": [
+                            {
+                                "energy": {
+                                    "j": 10532.843634,
+                                    "kwh": 0.0029257898983333333
+                                },
+                                "power": {
+                                    "w": 106.05728165626552
+                                }
+                            },
+                            {
+                                "energy": {
+                                    "j": 10699.338045,
+                                    "kwh": 0.0029720383458333335
+                                },
+                                "power": {
+                                    "w": 107.73374674539122
+                                }
+                            }
+                        ]
+                    },
+                    "gpu_nv": [
+                        {
+                            "gpu_id": 0,
+                            "energy": {
+                                "j": 47146.90122516083,
+                                "kwh": 0.013096361451433563
+                            },
+                            "power": {
+                                "avg_w": 476.023423608296
+                            },
+                            "util": {
+                                "avg": 71.97985901309164,
+                                "max": 100
+                            },
+                            "temp": {
+                                "avg": 55.933534743202415,
+                                "max": 65
+                            },
+                            "clock": {
+                                "avg": 1585.5287009063445,
+                                "max": 1980
+                            },
+                            "memory": {
+                                "mb": {
+                                    "avg": 62323.392182779455,
+                                    "max": 86354.75
+                                }
+                            }
+                        },
+                        {
+                            "gpu_id": 1,
+                            "energy": {
+                                "j": 47027.16103295949,
+                                "kwh": 0.013063100286933192
+                            },
+                            "power": {
+                                "avg_w": 474.830483260336
+                            },
+                            "util": {
+                                "avg": 72.03323262839879,
+                                "max": 100
+                            },
+                            "temp": {
+                                "avg": 55.507552870090635,
+                                "max": 64
+                            },
+                            "clock": {
+                                "avg": 1565.3172205438066,
+                                "max": 1980
+                            },
+                            "memory": {
+                                "mb": {
+                                    "avg": 62411.80796827794,
+                                    "max": 86354.75
+                                }
+                            }
+                        },
+                        {
+                            "gpu_id": 2,
+                            "energy": {
+                                "j": 48880.92829554801,
+                                "kwh": 0.013578035637652225
+                            },
+                            "power": {
+                                "avg_w": 493.56071335895103
+                            },
+                            "util": {
+                                "avg": 71.8489425981873,
+                                "max": 100
+                            },
+                            "temp": {
+                                "avg": 58.78348439073515,
+                                "max": 69
+                            },
+                            "clock": {
+                                "avg": 1572.8549848942598,
+                                "max": 1980
+                            },
+                            "memory": {
+                                "mb": {
+                                    "avg": 62324.74660120846,
+                                    "max": 86354.75
+                                }
+                            }
+                        },
+                        {
+                            "gpu_id": 3,
+                            "energy": {
+                                "j": 48286.29307328579,
+                                "kwh": 0.013412859187023831
+                            },
+                            "power": {
+                                "avg_w": 487.56924249508603
+                            },
+                            "util": {
+                                "avg": 72.04028197381672,
+                                "max": 100
+                            },
+                            "temp": {
+                                "avg": 54.73111782477341,
+                                "max": 63
+                            },
+                            "clock": {
+                                "avg": 1572.522658610272,
+                                "max": 1980
+                            },
+                            "memory": {
+                                "mb": {
+                                    "avg": 62238.12531470292,
+                                    "max": 86354.75
+                                }
+                            }
+                        }
+                    ],
+                    "memory": {
+                        "rss": {
+                            "mb": {
+                                "avg": 3933.683546544562,
+                                "max": 4870.44921875,
+                                "min": 687.80078125
+                            }
+                        }
+                    },
+                    "network": {
+                        "bytes": {
+                            "sent": 1063043,
+                            "received": 3371689
+                        },
+                        "packets": {
+                            "sent": 6921,
+                            "received": 14059
+                        }
+                    },
+                    "perf_energy": {
+                        "joules": 21745.75,
+                        "kwh": 0.006040486111111111,
+                        "time": 101.680944896
+                    }
+                },
+                "metadata": {
+                    "hostname": "gcn157.local.snellius.surf.nl",
+                    "local_ip": "172.18.62.157",
+                    "public_ip": "145.136.62.157"
+                }
+            },
+            {
+                "node_id": "local",
+                "metrics": {
+                    "gpu_burn": {
+                        "gpus": [
+                            {
+                                "id": 0,
+                                "name": "NVIDIA H100",
+                                "uuid": "GPU-9b507def-e4f5-c9df-9ab1-f6da3984c22d",
+                                "memory": {
+                                    "total_mb": 95321,
+                                    "available_mb": 94723,
+                                    "used_mb": 85250
+                                },
+                                "stats": {
+                                    "result": "OK",
+                                    "processed": 2648,
+                                    "gflops": 51015,
+                                    "errors": 0,
+                                    "temp_c": 64
+                                }
+                            },
+                            {
+                                "id": 1,
+                                "name": "NVIDIA H100",
+                                "uuid": "GPU-467ded03-ddd5-7dd8-392b-0cc91b2c2f84",
+                                "memory": {
+                                    "total_mb": 95321,
+                                    "available_mb": 94723,
+                                    "used_mb": 85250
+                                },
+                                "stats": {
+                                    "result": "OK",
+                                    "processed": 2648,
+                                    "gflops": 50978,
+                                    "errors": 0,
+                                    "temp_c": 64
+                                }
+                            },
+                            {
+                                "id": 2,
+                                "name": "NVIDIA H100",
+                                "uuid": "GPU-aa211e91-17f6-7bf5-0d62-b2eaa4d98961",
+                                "memory": {
+                                    "total_mb": 95321,
+                                    "available_mb": 94723,
+                                    "used_mb": 85250
+                                },
+                                "stats": {
+                                    "result": "OK",
+                                    "processed": 2648,
+                                    "gflops": 51015,
+                                    "errors": 0,
+                                    "temp_c": 68
+                                }
+                            },
+                            {
+                                "id": 3,
+                                "name": "NVIDIA H100",
+                                "uuid": "GPU-474035b4-5f14-d16f-2688-b97e468f5250",
+                                "memory": {
+                                    "total_mb": 95321,
+                                    "available_mb": 94723,
+                                    "used_mb": 85250
+                                },
+                                "stats": {
+                                    "result": "OK",
+                                    "processed": 2648,
+                                    "gflops": 51016,
+                                    "errors": 0,
+                                    "temp_c": 63
+                                }
+                            }
+                        ]
+                    }
+                },
+                "metadata": {}
+            }
+        ]
+    },
+    "metadata": {}
+}

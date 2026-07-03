@@ -1,0 +1,301 @@
+Warmup
+Running workload: nvidia-hpl
+╭───────────────────── Traceback (most recent call last) ──────────────────────╮
+│ /gpfs/home6/ibiemond/sustainabench/sustainabench/commands/run.py:59 in       │
+│ benchmark                                                                    │
+│                                                                              │
+│    56 │   │   wrapped_execution=wrapped_execution                            │
+│    57 │   )                                                                  │
+│    58 │                                                                      │
+│ ❱  59 │   results = runner.run()                                             │
+│    60 │                                                                      │
+│    61 │   if results is not None and _is_main_process(wrapped_execution):    │
+│    62 │   │   results_dict = results.model_dump()                            │
+│                                                                              │
+│ /gpfs/home6/ibiemond/sustainabench/sustainabench/core/runner.py:234 in run   │
+│                                                                              │
+│   231 │   │   │   │   │   output = subprocess.run(script_cmd,                │
+│       capture_output=True, text=True)                                        │
+│   232 │   │   │   │   │                                                      │
+│   233 │   │   │   │   │   if output.returncode != 0 or output.stdout == "":  │
+│ ❱ 234 │   │   │   │   │   │   raise RuntimeError(                            │
+│   235 │   │   │   │   │   │   │   f"FAILURE: Subprocess executed with        │
+│       command '{' '.join(script_cmd)}' failed with return code               │
+│       {output.returncode}\n"                                                 │
+│   236 │   │   │   │   │   │   │   f"STDOUT: {output.stdout}\nSTDERR:         │
+│       {output.stderr}"                                                       │
+│   237 │   │   │   │   │   │   )                                              │
+╰──────────────────────────────────────────────────────────────────────────────╯
+RuntimeError: FAILURE: Subprocess executed with command 'bash 
+/gpfs/home6/ibiemond/sustainabench/scripts/snellius/supplementary/gpu/a100/exper
+iments/raw/tmpx54fiswt.sh' failed with return code 1
+STDOUT: Running workload: nvidia-hpl
+Running workload: nvidia-hpl
+Running workload: nvidia-hpl
+Running workload: nvidia-hpl
+
+STDERR: ╭───────────────────── Traceback (most recent call last) 
+──────────────────────╮
+│ /gpfs/home6/ibiemond/sustainabench/sustainabench/commands/run.py:59 in       │
+│ benchmark                                                                    │
+│                                                                              │
+│    56 │   │   wrapped_execution=wrapped_execution                            │
+│    57 │   )                                                                  │
+│    58 │                                                                      │
+│ ❱  59 │   results = runner.run()                                             │
+│    60 │                                                                      │
+│    61 │   if results is not None and _is_main_process(wrapped_execution):    │
+│    62 │   │   results_dict = results.model_dump()                            │
+│                                                                              │
+│ /gpfs/home6/ibiemond/sustainabench/sustainabench/core/runner.py:252 in run   │
+│                                                                              │
+│   249 │   │   │   │   │   for res in ext_results:                            │
+│   250 │   │   │   │   │   │   node_results =                                 │
+│       self.backend.add_result(node_results, res)                             │
+│   251 │   │   │   │   else:                                                  │
+│ ❱ 252 │   │   │   │   │   node_results = self.backend.run(self)              │
+│   253 │   │   │   │                                                          │
+│   254 │   │   │   │   if node_results:                                       │
+│   255 │   │   │   │   │   results[f"run{i}"] = node_results                  │
+│                                                                              │
+│ /gpfs/home6/ibiemond/sustainabench/sustainabench/core/backends/local.py:15   │
+│ in run                                                                       │
+│                                                                              │
+│   12 │   │   raise RuntimeError(f"Backend {self.name} does not support       │
+│      command wrapping. Please ensure the correct backend is selected for the │
+│      chosen workload, as it seems to require wrapping.")                     │
+│   13 │                                                                       │
+│   14 │   def run(self, runner):                                              │
+│ ❱ 15 │   │   raw_metrics = self._execute_single(runner, None)                │
+│   16 │   │                                                                   │
+│   17 │   │   metadata = get_node_metadata()                                  │
+│   18 │   │   rank, local_rank = get_mpi_ranks()                              │
+│                                                                              │
+│ /gpfs/home6/ibiemond/sustainabench/sustainabench/core/backends/base.py:63 in │
+│ _execute_single                                                              │
+│                                                                              │
+│   60 │   │   if isinstance(workload, InternalWorkload):                      │
+│   61 │   │   │   workload.run(self.num_processors, context=context)          │
+│   62 │   │   elif isinstance(workload, ExternalWorkload):                    │
+│ ❱ 63 │   │   │   workload.execute()                                          │
+│   64 │   │                                                                   │
+│   65 │   │   if context and context.comm:                                    │
+│   66 │   │   │   context.comm.Barrier()                                      │
+│                                                                              │
+│ /gpfs/home6/ibiemond/sustainabench/sustainabench/workloads/external/nvidia-h │
+│ pl.py:29 in execute                                                          │
+│                                                                              │
+│   26 │   │                                                                   │
+│   27 │   │   global_mpi_rank, _ = get_mpi_ranks()                            │
+│   28 │   │   if (output.returncode != 0 or output.stdout == "") and          │
+│      (global_mpi_rank is None or global_mpi_rank == 0):                      │
+│ ❱ 29 │   │   │   raise RuntimeError(                                         │
+│   30 │   │   │   │   f"FAILURE: Subprocess executed with command '{'         │
+│      '.join(cmd)}' failed with return code {output.returncode}\n"            │
+│   31 │   │   │   │   f"STDOUT: {output.stdout}\n\nSTDERR: {output.stderr}"   │
+│   32 │   │   │   )                                                           │
+╰──────────────────────────────────────────────────────────────────────────────╯
+RuntimeError: FAILURE: Subprocess executed with command 
+'/home/ibiemond/nvidia_hpc_benchmarks/cuda12/hpl.sh --dat 
+/home/ibiemond/sustainabench/scripts/supplementary/snellius/gpu/a100/configs/nv-
+hpl/4GPUs/HPL-4GPUs.dat --no-multinode' failed with return code 139
+STDOUT: 
+
+STDERR: HPL ERROR from process # 0, on line 308 of function HPL_pdinfo:
+>>> cannot open file: 
+/home/ibiemond/sustainabench/scripts/supplementary/snellius/gpu/a100/configs/nv-
+hpl/4GPUs/HPL-4GPUs.dat. <<<
+
+[gcn37:1639451:0:1639451] Caught signal 11 (Segmentation fault: address not 
+mapped to object at address (nil))
+==== backtrace (tid:1639451) ====
+ 0 0x000000000003ebf0 __GI___sigaction()  :0
+ 1 0x000000000007625b _IO_new_fclose()  :0
+ 2 0x00000000004877f2 std::__throw_system_error()  ???:0
+ 3 0x000000000045b7cd std::__throw_system_error()  ???:0
+ 4 0x00000000000295d0 __libc_start_call_main()  ???:0
+ 5 0x0000000000029680 __libc_start_main_alias_2()  :0
+ 6 0x000000000045d9de std::__throw_system_error()  ???:0
+=================================
+/home/ibiemond/nvidia_hpc_benchmarks/cuda12/hpl.sh: line 262: 1639451 
+Segmentation fault      (core dumped) ${NUMCMD} ${CPUBIND} ${MEMBIND} ${XHPL} 
+${DAT}
+
+--------------------------------------------------------------------------
+prterun detected that one or more processes exited with non-zero status,
+thus causing the job to be terminated. The first process to do so was:
+
+   Process name: [prterun-gcn37-1639371@1,0]
+   Exit code:    1
+--------------------------------------------------------------------------
+
+Running Nvidia HPL experiments  (4 GPUs)
+Running workload: nvidia-hpl
+╭───────────────────── Traceback (most recent call last) ──────────────────────╮
+│ /gpfs/home6/ibiemond/sustainabench/sustainabench/commands/run.py:59 in       │
+│ benchmark                                                                    │
+│                                                                              │
+│    56 │   │   wrapped_execution=wrapped_execution                            │
+│    57 │   )                                                                  │
+│    58 │                                                                      │
+│ ❱  59 │   results = runner.run()                                             │
+│    60 │                                                                      │
+│    61 │   if results is not None and _is_main_process(wrapped_execution):    │
+│    62 │   │   results_dict = results.model_dump()                            │
+│                                                                              │
+│ /gpfs/home6/ibiemond/sustainabench/sustainabench/core/runner.py:234 in run   │
+│                                                                              │
+│   231 │   │   │   │   │   output = subprocess.run(script_cmd,                │
+│       capture_output=True, text=True)                                        │
+│   232 │   │   │   │   │                                                      │
+│   233 │   │   │   │   │   if output.returncode != 0 or output.stdout == "":  │
+│ ❱ 234 │   │   │   │   │   │   raise RuntimeError(                            │
+│   235 │   │   │   │   │   │   │   f"FAILURE: Subprocess executed with        │
+│       command '{' '.join(script_cmd)}' failed with return code               │
+│       {output.returncode}\n"                                                 │
+│   236 │   │   │   │   │   │   │   f"STDOUT: {output.stdout}\nSTDERR:         │
+│       {output.stderr}"                                                       │
+│   237 │   │   │   │   │   │   )                                              │
+╰──────────────────────────────────────────────────────────────────────────────╯
+RuntimeError: FAILURE: Subprocess executed with command 'bash 
+/gpfs/home6/ibiemond/sustainabench/scripts/snellius/supplementary/gpu/a100/exper
+iments/raw/tmpl_ta7heq.sh' failed with return code 1
+STDOUT: Running workload: nvidia-hpl
+Running workload: nvidia-hpl
+Running workload: nvidia-hpl
+Running workload: nvidia-hpl
+
+STDERR: ╭───────────────────── Traceback (most recent call last) 
+──────────────────────╮
+│ /gpfs/home6/ibiemond/sustainabench/sustainabench/commands/run.py:59 in       │
+│ benchmark                                                                    │
+│                                                                              │
+│    56 │   │   wrapped_execution=wrapped_execution                            │
+│    57 │   )                                                                  │
+│    58 │                                                                      │
+│ ❱  59 │   results = runner.run()                                             │
+│    60 │                                                                      │
+│    61 │   if results is not None and _is_main_process(wrapped_execution):    │
+│    62 │   │   results_dict = results.model_dump()                            │
+│                                                                              │
+│ /gpfs/home6/ibiemond/sustainabench/sustainabench/core/runner.py:234 in run   │
+│                                                                              │
+│   231 │   │   │   │   │   output = subprocess.run(script_cmd,                │
+│       capture_output=True, text=True)                                        │
+│   232 │   │   │   │   │                                                      │
+│   233 │   │   │   │   │   if output.returncode != 0 or output.stdout == "":  │
+│ ❱ 234 │   │   │   │   │   │   raise RuntimeError(                            │
+│   235 │   │   │   │   │   │   │   f"FAILURE: Subprocess executed with        │
+│       command '{' '.join(script_cmd)}' failed with return code               │
+│       {output.returncode}\n"                                                 │
+│   236 │   │   │   │   │   │   │   f"STDOUT: {output.stdout}\nSTDERR:         │
+│       {output.stderr}"                                                       │
+│   237 │   │   │   │   │   │   )                                              │
+╰──────────────────────────────────────────────────────────────────────────────╯
+RuntimeError: FAILURE: Subprocess executed with command 'bash 
+/gpfs/home6/ibiemond/sustainabench/scripts/snellius/supplementary/gpu/a100/exper
+iments/raw/tmp6xdalekl.sh' failed with return code 1
+STDOUT: Running workload: nvidia-hpl
+╭───────────────────── Traceback (most recent call last) ──────────────────────╮
+│ /gpfs/home6/ibiemond/sustainabench/sustainabench/commands/run.py:59 in       │
+│ benchmark                                                                    │
+│                                                                              │
+│    56 │   │   wrapped_execution=wrapped_execution                            │
+│    57 │   )                                                                  │
+│    58 │                                                                      │
+│ ❱  59 │   results = runner.run()                                             │
+│    60 │                                                                      │
+│    61 │   if results is not None and _is_main_process(wrapped_execution):    │
+│    62 │   │   results_dict = results.model_dump()                            │
+│                                                                              │
+│ /gpfs/home6/ibiemond/sustainabench/sustainabench/core/runner.py:252 in run   │
+│                                                                              │
+│   249 │   │   │   │   │   for res in ext_results:                            │
+│   250 │   │   │   │   │   │   node_results =                                 │
+│       self.backend.add_result(node_results, res)                             │
+│   251 │   │   │   │   else:                                                  │
+│ ❱ 252 │   │   │   │   │   node_results = self.backend.run(self)              │
+│   253 │   │   │   │                                                          │
+│   254 │   │   │   │   if node_results:                                       │
+│   255 │   │   │   │   │   results[f"run{i}"] = node_results                  │
+│                                                                              │
+│ /gpfs/home6/ibiemond/sustainabench/sustainabench/core/backends/local.py:15   │
+│ in run                                                                       │
+│                                                                              │
+│   12 │   │   raise RuntimeError(f"Backend {self.name} does not support       │
+│      command wrapping. Please ensure the correct backend is selected for the │
+│      chosen workload, as it seems to require wrapping.")                     │
+│   13 │                                                                       │
+│   14 │   def run(self, runner):                                              │
+│ ❱ 15 │   │   raw_metrics = self._execute_single(runner, None)                │
+│   16 │   │                                                                   │
+│   17 │   │   metadata = get_node_metadata()                                  │
+│   18 │   │   rank, local_rank = get_mpi_ranks()                              │
+│                                                                              │
+│ /gpfs/home6/ibiemond/sustainabench/sustainabench/core/backends/base.py:63 in │
+│ _execute_single                                                              │
+│                                                                              │
+│   60 │   │   if isinstance(workload, InternalWorkload):                      │
+│   61 │   │   │   workload.run(self.num_processors, context=context)          │
+│   62 │   │   elif isinstance(workload, ExternalWorkload):                    │
+│ ❱ 63 │   │   │   workload.execute()                                          │
+│   64 │   │                                                                   │
+│   65 │   │   if context and context.comm:                                    │
+│   66 │   │   │   context.comm.Barrier()                                      │
+│                                                                              │
+│ /gpfs/home6/ibiemond/sustainabench/sustainabench/workloads/external/nvidia-h │
+│ pl.py:29 in execute                                                          │
+│                                                                              │
+│   26 │   │                                                                   │
+│   27 │   │   global_mpi_rank, _ = get_mpi_ranks()                            │
+│   28 │   │   if (output.returncode != 0 or output.stdout == "") and          │
+│      (global_mpi_rank is None or global_mpi_rank == 0):                      │
+│ ❱ 29 │   │   │   raise RuntimeError(                                         │
+│   30 │   │   │   │   f"FAILURE: Subprocess executed with command '{'         │
+│      '.join(cmd)}' failed with return code {output.returncode}\n"            │
+│   31 │   │   │   │   f"STDOUT: {output.stdout}\n\nSTDERR: {output.stderr}"   │
+│   32 │   │   │   )                                                           │
+╰──────────────────────────────────────────────────────────────────────────────╯
+RuntimeError: FAILURE: Subprocess executed with command 
+'/home/ibiemond/nvidia_hpc_benchmarks/cuda12/hpl.sh --dat 
+/home/ibiemond/sustainabench/scripts/supplementary/snellius/gpu/a100/configs/nv-
+hpl/4GPUs/HPL-4GPUs.dat --no-multinode' failed with return code 139
+STDOUT: 
+
+STDERR: HPL ERROR from process # 0, on line 308 of function HPL_pdinfo:
+>>> cannot open file: 
+/home/ibiemond/sustainabench/scripts/supplementary/snellius/gpu/a100/configs/nv-
+hpl/4GPUs/HPL-4GPUs.dat. <<<
+
+[gcn37:1639696:0:1639696] Caught signal 11 (Segmentation fault: address not 
+mapped to object at address (nil))
+==== backtrace (tid:1639696) ====
+ 0 0x000000000003ebf0 __GI___sigaction()  :0
+ 1 0x000000000007625b _IO_new_fclose()  :0
+ 2 0x00000000004877f2 std::__throw_system_error()  ???:0
+ 3 0x000000000045b7cd std::__throw_system_error()  ???:0
+ 4 0x00000000000295d0 __libc_start_call_main()  ???:0
+ 5 0x0000000000029680 __libc_start_main_alias_2()  :0
+ 6 0x000000000045d9de std::__throw_system_error()  ???:0
+=================================
+/home/ibiemond/nvidia_hpc_benchmarks/cuda12/hpl.sh: line 262: 1639696 
+Segmentation fault      (core dumped) ${NUMCMD} ${CPUBIND} ${MEMBIND} ${XHPL} 
+${DAT}
+
+
+ Performance counter stats for 'system wide':
+
+           1490.49 Joules power/energy-pkg/                                     
+
+       7.159420630 seconds time elapsed
+
+
+STDERR: 
+--------------------------------------------------------------------------
+prterun detected that one or more processes exited with non-zero status,
+thus causing the job to be terminated. The first process to do so was:
+
+   Process name: [prterun-gcn37-1639556@1,0]
+   Exit code:    1
+--------------------------------------------------------------------------
+
