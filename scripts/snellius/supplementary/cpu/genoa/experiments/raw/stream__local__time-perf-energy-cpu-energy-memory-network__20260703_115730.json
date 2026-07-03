@@ -1,0 +1,107 @@
+{
+    "workload": "stream",
+    "backend": "local",
+    "results": {
+        "run0": [
+            {
+                "node_id": "tcn1237.local.snellius.surf.nl:0:0",
+                "metrics": {
+                    "execution_time": 0.5267688001040369,
+                    "cpu_energy": {
+                        "energy": {
+                            "j": 166.050098,
+                            "kwh": 4.612502722222222e-05
+                        },
+                        "power": {
+                            "w": 315.28806225628006
+                        },
+                        "per_domain": [
+                            {
+                                "energy": {
+                                    "j": 79.78695,
+                                    "kwh": 2.2163041666666666e-05
+                                },
+                                "power": {
+                                    "w": 151.4956820973313
+                                }
+                            },
+                            {
+                                "energy": {
+                                    "j": 86.263148,
+                                    "kwh": 2.3961985555555555e-05
+                                },
+                                "power": {
+                                    "w": 163.7923801589488
+                                }
+                            }
+                        ]
+                    },
+                    "memory": {
+                        "rss": {
+                            "mb": {
+                                "avg": 2442.90859375,
+                                "max": 2900.921875,
+                                "min": 610.85546875
+                            }
+                        }
+                    },
+                    "network": {
+                        "bytes": {
+                            "sent": 1282,
+                            "received": 2428
+                        },
+                        "packets": {
+                            "sent": 13,
+                            "received": 22
+                        }
+                    },
+                    "perf_energy": {
+                        "joules": 779.12,
+                        "kwh": 0.00021642222222222223,
+                        "time": 3.213316827
+                    }
+                },
+                "metadata": {
+                    "hostname": "tcn1237.local.snellius.surf.nl",
+                    "local_ip": "172.18.60.223",
+                    "public_ip": "145.136.60.223"
+                }
+            },
+            {
+                "node_id": "local",
+                "metrics": {
+                    "stream": {
+                        "Function": {
+                            "Copy:": {
+                                "Best_Rate_MB/s": 618971.3,
+                                "Avg_time": 0.003552,
+                                "Min_time": 0.002585,
+                                "Max_time": 0.007388
+                            },
+                            "Scale:": {
+                                "Best_Rate_MB/s": 536013.3,
+                                "Avg_time": 0.00307,
+                                "Min_time": 0.002985,
+                                "Max_time": 0.003286
+                            },
+                            "Add:": {
+                                "Best_Rate_MB/s": 579557.2,
+                                "Avg_time": 0.005067,
+                                "Min_time": 0.004141,
+                                "Max_time": 0.011713
+                            },
+                            "Triad:": {
+                                "Best_Rate_MB/s": 563277.4,
+                                "Avg_time": 0.006531,
+                                "Min_time": 0.004261,
+                                "Max_time": 0.021256
+                            }
+                        }
+                    }
+                },
+                "metadata": {}
+            }
+        ]
+    },
+    "metadata": {}
+}

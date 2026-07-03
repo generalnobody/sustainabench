@@ -1,0 +1,99 @@
+{
+    "workload": "stress-ng",
+    "backend": "local",
+    "results": {
+        "run0": [
+            {
+                "node_id": "tcn1181.local.snellius.surf.nl:0:0",
+                "metrics": {
+                    "execution_time": 120.12221420696005,
+                    "cpu_energy": {
+                        "energy": {
+                            "j": 65185.878003,
+                            "kwh": 0.018107188334166666
+                        },
+                        "power": {
+                            "w": 542.663599688152
+                        },
+                        "per_domain": [
+                            {
+                                "energy": {
+                                    "j": 31988.63298,
+                                    "kwh": 0.008885731383333333
+                                },
+                                "power": {
+                                    "w": 266.3010341170987
+                                }
+                            },
+                            {
+                                "energy": {
+                                    "j": 33197.245023,
+                                    "kwh": 0.009221456950833333
+                                },
+                                "power": {
+                                    "w": 276.3625655710533
+                                }
+                            }
+                        ]
+                    },
+                    "memory": {
+                        "rss": {
+                            "mb": {
+                                "avg": 1203.2450740200168,
+                                "max": 1204.3203125,
+                                "min": 608.25
+                            }
+                        }
+                    },
+                    "network": {
+                        "bytes": {
+                            "sent": 2187691,
+                            "received": 28872971
+                        },
+                        "packets": {
+                            "sent": 6101,
+                            "received": 28734
+                        }
+                    },
+                    "perf_energy": {
+                        "joules": 243.95,
+                        "kwh": 6.776388888888888e-05,
+                        "time": 122.720017169
+                    }
+                },
+                "metadata": {
+                    "hostname": "tcn1181.local.snellius.surf.nl",
+                    "local_ip": "172.18.60.167",
+                    "public_ip": "145.136.60.167"
+                }
+            },
+            {
+                "node_id": "local",
+                "metrics": {
+                    "stress_ng": {
+                        "workers": 192,
+                        "stressor": "cpu",
+                        "metrics": {
+                            "bogo_ops": 17302015,
+                            "real_time_seconds": 119.99,
+                            "user_time_seconds": 22813.98,
+                            "system_time_seconds": 0.44,
+                            "bogo_ops_per_sec_real": 144198.97,
+                            "bogo_ops_per_sec_cpu": 758.38
+                        },
+                        "skipped": 0,
+                        "passed": {
+                            "count": 192,
+                            "name": "cpu",
+                            "workers": 192
+                        },
+                        "failed": 0,
+                        "metrics_untrustworthy": 0
+                    }
+                },
+                "metadata": {}
+            }
+        ]
+    },
+    "metadata": {}
+}
