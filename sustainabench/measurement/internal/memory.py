@@ -10,16 +10,25 @@ class MemoryMeasurement(InternalMeasurement):
     require_file = False
 
     def start(self):
+        self.root_process = psutil.Process()
         self.samples = []
 
-    def sample(self):
-        mem = psutil.virtual_memory()
-        mem_used_mb = mem.used / 1024**2
+    def sample(self):        
+        processes = [self.root_process]
 
-        swap = psutil.swap_memory()
-        swap_used_mb = swap.used / 1024**2
+        try:
+            processes.extend(self.root_process.children(recursive=True))
+        except (psutil.NoSuchProcess, psutil.AccessDenied):
+            pass
 
-        self.samples.append((mem_used_mb, mem.percent, swap_used_mb, swap.percent))
+        rss = 0 # Resident Sample Size. Represents memory used
+        for proc in processes:
+            try:
+                rss += proc.memory_info().rss
+            except (psutil.NoSuchProcess, psutil.AccessDenied):
+                pass
+
+        self.samples.append(rss / 1024**2) # MB
 
     def stop(self):
         pass
@@ -27,36 +36,14 @@ class MemoryMeasurement(InternalMeasurement):
     def result(self):
         if not self.samples:
             return {}
-
-        mem_avg = sum(sample[0] for sample in self.samples) / len(self.samples)
-        mem_max = max(sample[0] for sample in self.samples)
-        mem_avg_pct = sum(sample[1] for sample in self.samples) / len(self.samples)
-        mem_max_pct = max(sample[1] for sample in self.samples)
-
-        swap_avg = sum(sample[2] for sample in self.samples) / len(self.samples)
-        swap_max = max(sample[2] for sample in self.samples)
-        swap_avg_pct = sum(sample[3] for sample in self.samples) / len(self.samples)
-        swap_max_pct = max(sample[3] for sample in self.samples)
+        
         return {
-            f"{self.name}": {
-                "mem": {
+            self.name: {
+                "rss": {
                     "mb": {
-                        "avg": mem_avg,
-                        "max": mem_max
-                    },
-                    "pct": {
-                        "avg": mem_avg_pct,
-                        "max": mem_max_pct
-                    }
-                },
-                "swap": {
-                    "mb": {
-                        "avg": swap_avg,
-                        "max": swap_max
-                    },
-                    "pct": {
-                        "avg": swap_avg_pct,
-                        "max": swap_max_pct
+                        "avg": sum(self.samples) / len(self.samples),
+                        "max": max(self.samples),
+                        "min": min(self.samples)
                     }
                 }
             }

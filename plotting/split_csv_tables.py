@@ -100,7 +100,7 @@ def extract_and_save_tables(input_csv, output_dir="output_tables"):
                 df = pd.DataFrame(data, columns=headers)
 
                 filename = (
-                    f"{sanitize_filename(title)}__"
+                    f"{sanitize_filename(title)}-"
                     f"{sanitize_filename(category)}.csv"
                 )
 
@@ -123,9 +123,9 @@ def extract_and_save_tables(input_csv, output_dir="output_tables"):
 
 if __name__ == "__main__":
     output_dir="../experiments/plots/performance_per_carbon/"
-    files = ["NL_2024_Tables.csv",
-             "FR_2024_Tables.csv",
-             "NL_2022_Tables.csv"]
+    files = ["NL-2024-Tables.csv",
+             "FR-2024-Tables.csv",
+             "NL-2022-Tables.csv"]
     
     for file in files:
         extract_and_save_tables(
