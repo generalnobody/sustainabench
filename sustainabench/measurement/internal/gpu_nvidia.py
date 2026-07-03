@@ -29,10 +29,9 @@ class NvidiaGPUMeasurement(InternalMeasurement):
                 pynvml.nvmlDeviceGetPowerUsage(self.handles[i]), 
                 pynvml.nvmlDeviceGetUtilizationRates(self.handles[i]).gpu, 
                 pynvml.nvmlDeviceGetTemperature(self.handles[i], pynvml.NVML_TEMPERATURE_GPU),
-                pynvml.nvmlDeviceGetClockInfo(self.handles[i], pynvml.NVML_CLOCK_SM)
+                pynvml.nvmlDeviceGetClockInfo(self.handles[i], pynvml.NVML_CLOCK_SM),
+                pynvml.nvmlDeviceGetMemoryInfo(self.handles[i]).used
             ))
-        # self.samples.append((pynvml.nvmlDeviceGetPowerUsage(self.handle), time.perf_counter())) # Create list of tuples (mW, timestamp)
-        # self.utils.append(pynvml.nvmlDeviceGetUtilizationRates(self.handle).gpu)
 
     def stop(self):
         pynvml.nvmlShutdown()
@@ -74,6 +73,10 @@ class NvidiaGPUMeasurement(InternalMeasurement):
             avg_clock = sum(sample[4] for sample in samples)/length
             max_clock = max(sample[4] for sample in samples)
 
+            # Mem
+            mem_avg = sum(sample[5] for sample in samples) / length / 1024**2
+            mem_max = max(sample[5] for sample in samples) / 1024**2
+
             results.append({
                 "gpu_id": i,
                 "energy": {
@@ -94,6 +97,12 @@ class NvidiaGPUMeasurement(InternalMeasurement):
                 "clock": {
                     "avg": avg_clock,
                     "max": max_clock
+                },
+                "memory": {
+                    "mb": {
+                        "avg": mem_avg,
+                        "max": mem_max,
+                    }
                 }
             })
 
