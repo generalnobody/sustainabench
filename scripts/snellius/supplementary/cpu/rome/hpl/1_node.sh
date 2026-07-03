@@ -21,4 +21,4 @@ module load HPL/2.3-foss-2025b
 RUNS=1
 
 echo "Running HPL experiments (1 node)"
-sustainabench run benchmark -w hpl -m time -m perf-energy -m cpu-energy -m memory -m network -r $RUNS -b mpi -np $SLURM_NTASKS -c configs/hpl/1node/config.yaml -s
+sustainabench run benchmark -w hpl -m time -m perf-energy -m cpu-energy -m nodemem -m network -r $RUNS -b mpi -np $SLURM_NTASKS -c configs/hpl/1node/config.yaml -s
