@@ -101,12 +101,12 @@ def get_results(results, metrics_dict, metrics_to_extract=None):
 
 #     energy_sources = None
 #     for unitdef in metrics_dict.metrics_dict:
-#         if unitdef.unit == "energy-to-solution":
+#         if unitdef.unit == "node-energy":
 #             energy_sources = unitdef.sources
 #             break
 
 #     if not energy_sources:
-#         raise ValueError("Provided metrics dictionary does not contain sources for paths leading to energy-to-solution data.")
+#         raise ValueError("Provided metrics dictionary does not contain sources for paths leading to node-energy data.")
     
 #     carbon_per_second_sources = None
 

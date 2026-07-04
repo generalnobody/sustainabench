@@ -15,7 +15,7 @@ metrics_dict = MetricsDict.model_validate(raw_metrics_dict)
 
 metrics_to_plot = [
     "all-carbon",
-    "energy-to-solution",
+    "node-energy",
     "carbon-per-second"
 ]
 

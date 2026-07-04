@@ -127,7 +127,7 @@ def plot_structure(stats_df, arch_name, output_dir, config_order=None, metrics_t
         xlabel_map = {
             "carbon": "gCO2eq",
             "all-carbon": "gCO2eq",
-            "energy-to-solution": "Joule",
+            "node-energy": "Joule",
             "carbon-per-second": "gCO2eq/s",
         }
 
@@ -141,7 +141,7 @@ def plot_structure(stats_df, arch_name, output_dir, config_order=None, metrics_t
 
         log_metrics = {
             "all-carbon",
-            "energy-to-solution"
+            "node-energy"
         }
 
         if metric in log_metrics:

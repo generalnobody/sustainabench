@@ -3,9 +3,10 @@ from sustainabench.schemas.results.metrics_dict import MetricsDict
 import jmespath
 
 @register_metric
-class EnergyToSolutionMetric(Metric):
+class AllCarbonMetric(Metric):
     name = "energy-to-solution"
     require_file = False
+    required_metrics = ["node-energy"]
 
     def __init__(self, filename, metrics_dict: MetricsDict):
         self.metrics_dict = metrics_dict
@@ -14,96 +15,84 @@ class EnergyToSolutionMetric(Metric):
         pass
 
     def compute(self, node_id, measurements, metadata, run_metrics, node_results):
-        contribution_groups = {}
-        results = {}
-
-        sources = None
+        perf_sources = None
         for unitdef in self.metrics_dict.metrics_dict:
-            if unitdef.unit == "j": # Should only be one in there
-                sources = unitdef.sources
+            if unitdef.unit == "performance": # Should only be one in there
+                perf_sources = unitdef.sources
                 break
 
-        if not sources:
-            raise ValueError(f"Provided metrics dictionary does not contain sources for paths leading to j data. Please provide this, otherwise no {self.name} output can be calculated.")
+        if not perf_sources:
+            raise ValueError(f"Provided metrics dictionary does not contain sources for paths leading to performance data. Please provide this, otherwise no {self.name} output can be calculated.")
+        
+        has_performance_data = False
 
-        for source_name, source_def in sources.items():
-            curr_measurements = measurements.get(source_name)
-            if curr_measurements is None: # Measurement source not present
+        for source_name, source_def in perf_sources.items():
+            perf_measurements = measurements.get(source_name)
+
+            if perf_measurements is None:
                 continue
-
-            priority = source_def.priority
 
             for metric in source_def.metrics:
                 if metric.kind == "scalar":
-                    resolved = jmespath.search(metric.path, curr_measurements)
-                    if resolved is None:
-                        continue
+                    resolved = jmespath.search(metric.path, perf_measurements)
 
-                    contribution_value = float(resolved)
-
+                    if resolved is not None:
+                        has_performance_data = True
+                        break
                 elif metric.kind == "collection":
-                    items = jmespath.search(
-                        metric.collection_path,
-                        curr_measurements
-                    )
-
+                    items = jmespath.search(metric.collection_path, perf_measurements)
                     if items is None:
                         continue
 
-                    values = []
-
                     for idx, item in enumerate(items):
-                        value = jmespath.search(
-                            metric.value_path,
-                            item
-                        )
+                        value = jmespath.search(metric.value_path, item)
+                        if value is not None:
+                            has_performance_data = True
+                            break
 
-                        if value is None:
-                            continue
+            if has_performance_data:
+                break
 
-                        value = float(value)
-                        values.append(value)
+        if not has_performance_data:
+            return {}
 
-                    contribution_value = sum(values)
-                else:
+        energy_sources = None
+        for unitdef in self.metrics_dict.metrics_dict:
+            if unitdef.unit == "node-energy":
+                energy_sources = unitdef.sources
+                break
+
+        if not energy_sources:
+            raise ValueError(
+                f"Provided metrics dictionary does not contain sources for "
+                f"paths leading to energy data."
+            )
+
+        all_energy_j = 0
+        for source_name, source_def in energy_sources.items():
+            for node_res in run_metrics:
+                energy_metrics = node_res.metrics.get(source_name)
+                if energy_metrics is None:
                     continue
 
-                if (
-                    metric.contributes_to_total and
-                    metric.contribution_group
-                ):
+                priority = source_def.priority
 
-                    group = metric.contribution_group
+                for metric in source_def.metrics:
+                    if metric.kind != "scalar":
+                        print(
+                            f"Metric kind {metric.kind} is currently "
+                            f"unsupported by metric {self.name}. Skipping..."
+                        )
+                        continue
 
-                    existing = contribution_groups.get(group)
+                    resolved = jmespath.search(metric.path, energy_metrics)
+                    if resolved is None:
+                        continue
 
-                    if existing is None:
-
-                        contribution_groups[group] = {
-                            "priority": priority,
-                            "value": contribution_value
-                        }
-
-                    else:
-
-                        existing_priority = existing["priority"]
-
-                        if priority == existing_priority:
-
-                            existing["value"] += contribution_value
-
-                        elif priority > existing_priority:
-
-                            contribution_groups[group] = {
-                                "priority": priority,
-                                "value": contribution_value
-                            }
-
-        results["j"] = sum(
-            group_data["value"]
-            for group_data in contribution_groups.values()
-        )
+                    all_energy_j += float(resolved)
 
         return {
-            self.name: results
+            self.name: {
+                "j": all_energy_j
+            }
         }
