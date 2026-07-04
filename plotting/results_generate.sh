@@ -18,7 +18,7 @@ for target_dir in "${TARGET_DIRS[@]}"; do
             [[ -f "$file" ]] || continue
 
             # Replace with your actual command
-            sustainabench result generate -m carbon=../../../../traces/carbon/traces/NL_2021-2024.parquet -m node-energy -m performance-per-carbon -m carbon-per-second -m all-carbon -m max-execution-time -m energy-to-solution -m carbon-timeseries=../../../../traces/carbon/traces/NL_2021-2024.parquet -md ../../../../configs/metrics/metrics_dict.yaml -c ../../../../configs/metrics/main.yaml -s -r "$file"
+            sustainabench result generate -m carbon=../../../../traces/carbon/traces/NL_2021-2024.parquet -m node-energy -m performance-per-carbon -m carbon-per-second -m all-carbon -m max-execution-time -md ../../../../configs/metrics/metrics_dict.yaml -c ../../../../configs/metrics/main.yaml -s -r "$file"
         done
     )
 done
@@ -32,7 +32,7 @@ for target_dir in "${TARGET_DIRS[@]}"; do
             [[ -f "$file" ]] || continue
 
             # Replace with your actual command
-            sustainabench result generate -m carbon=../../../../traces/carbon/traces/FR_2021-2024.parquet -m node-energy -m performance-per-carbon -m carbon-per-second -m all-carbon -m max-execution-time -m energy-to-solution -m carbon-timeseries=../../../../traces/carbon/traces/NL_2021-2024.parquet -md ../../../../configs/metrics/metrics_dict.yaml -c ../../../../configs/metrics/main.yaml -o ./experiments/results/FR/ -s -r "$file"
+            sustainabench result generate -m carbon=../../../../traces/carbon/traces/FR_2021-2024.parquet -m node-energy -m performance-per-carbon -m carbon-per-second -m all-carbon -m max-execution-time -md ../../../../configs/metrics/metrics_dict.yaml -c ../../../../configs/metrics/main.yaml -o ./experiments/results/FR/ -s -r "$file"
         done
     )
 done
@@ -46,7 +46,13 @@ for target_dir in "${TARGET_DIRS[@]}"; do
             [[ -f "$file" ]] || continue
 
             # Replace with your actual command
-            sustainabench result generate -m carbon=../../../../traces/carbon/traces/NL_2021-2024.parquet -m node-energy -m performance-per-carbon -m carbon-per-second -m all-carbon -m max-execution-time -m energy-to-solution -m carbon-timeseries=../../../../traces/carbon/traces/NL_2021-2024.parquet -md ../../../../configs/metrics/metrics_dict.yaml -c ../../../../configs/metrics/early.yaml -o ./experiments/results/2022/ -s -r "$file"
+            sustainabench result generate -m carbon=../../../../traces/carbon/traces/NL_2021-2024.parquet -m node-energy -m performance-per-carbon -m carbon-per-second -m all-carbon -m max-execution-time -md ../../../../configs/metrics/metrics_dict.yaml -c ../../../../configs/metrics/early.yaml -o ./experiments/results/2022/ -s -r "$file"
         done
     )
 done
+
+(
+    cd "scripts/snellius/gpu/a100"
+
+    sustainabench result generate -m carbon=../../../../traces/carbon/traces/NL_2021-2024.parquet -m node-energy -m performance-per-carbon -m carbon-per-second -m all-carbon -m max-execution-time -m energy-to-solution -m carbon-timeseries=../../../../traces/carbon/traces/NL_2021-2024.parquet -md ../../../../configs/metrics/metrics_dict.yaml -c ../../../../configs/metrics/main.yaml -s -r $FILE_SOURCE_DIR/gpu-burn.json
+)
