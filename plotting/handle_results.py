@@ -1,6 +1,7 @@
 from sustainabench.schemas.results.benchmark import BenchmarkResult
 from pathlib import Path
 import jmespath
+import pandas as pd
 
 def load_results(files: dict):
     results = {}
@@ -15,6 +16,36 @@ def load_results(files: dict):
             results[key] = BenchmarkResult.model_validate_json(Path(value).read_text())
 
     return results
+
+def extract_memory_df(results, arch):
+    rows = []
+
+    for benchmark, configs in results.items():
+        for config, result in configs.items():
+
+            run = result.runs[0]
+
+            metrics = None
+
+            if hasattr(run.metrics, "nodemem") and run.metrics.nodemem:
+                metrics = run.metrics.nodemem
+            elif hasattr(run.metrics, "memory") and run.metrics.memory:
+                metrics = run.metrics.memory
+            else:
+                continue
+
+            rss_avg = metrics["rss"]["mb"]["avg"]
+
+            rows.append(
+                {
+                    "arch": arch,
+                    "benchmark": benchmark,
+                    "config": config,
+                    "mean": rss_avg,
+                }
+            )
+
+    return pd.DataFrame(rows)
 
 def get_results(results, metrics_dict, metrics_to_extract=None):
 

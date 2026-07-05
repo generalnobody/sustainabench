@@ -168,3 +168,132 @@ def plot_energy_breakdown_grouped(
     )
 
     plt.close()
+
+
+def plot_memory_grouped(
+    stats_df,
+    arch_name,
+    output_dir,
+    config_order=None,
+):
+    sns.set_theme(
+        style="whitegrid",
+        context="talk",
+    )
+
+    arch_df = stats_df[
+        stats_df["arch"] == arch_name
+    ]
+
+    benchmarks = arch_df["benchmark"].unique()
+
+    if config_order:
+        configs = [
+            c
+            for c in config_order
+            if c in arch_df["config"].unique()
+        ]
+    else:
+        configs = arch_df["config"].unique()
+
+    pivot = (
+        arch_df
+        .pivot_table(
+            index=["benchmark", "config"],
+            values="mean",
+            fill_value=0,
+        )
+    )
+
+    group_gap = 1.0
+
+    bar_positions = []
+    bar_labels = []
+    benchmark_centers = {}
+
+    current_y = 0
+
+    for benchmark in benchmarks:
+
+        start = current_y
+
+        for config in configs:
+            bar_positions.append(current_y)
+            bar_labels.append(config)
+            current_y += 1
+
+        end = current_y - 1
+
+        benchmark_centers[benchmark] = (start + end) / 2
+
+        current_y += group_gap
+
+    fig, ax = plt.subplots(
+        figsize=(10, max(6, len(benchmarks) * 0.6))
+    )
+
+    color = sns.color_palette("Set2")[0]
+
+    for benchmark in benchmarks:
+
+        try:
+            sub = (
+                pivot
+                .loc[benchmark]
+                .reindex(configs)
+                .fillna(0)
+            )
+        except KeyError:
+            continue
+
+        start_idx = (
+            list(benchmark_centers.keys()).index(benchmark)
+            * len(configs)
+        )
+
+        ypos = bar_positions[
+            start_idx:start_idx + len(configs)
+        ]
+
+        ax.barh(
+            ypos,
+            sub["mean"].values,
+            height=0.8,
+            color=color,
+        )
+
+    ax.set_yticks(bar_positions)
+    ax.set_yticklabels(bar_labels)
+    ax.yaxis.grid(False)
+
+    xmin, xmax = ax.get_xlim()
+    benchmark_labels_x = xmin + 0.01 * (xmax - xmin)
+
+    for benchmark, center in benchmark_centers.items():
+        ax.text(
+            benchmark_labels_x,
+            center + 1.3,
+            benchmark,
+            fontweight="bold",
+            fontsize=13,
+            ha="left",
+            va="bottom",
+        )
+
+    ax.set_xlabel("Average RSS (MB)")
+    ax.set_ylabel("Benchmark")
+    ax.set_title(f"{arch_name.upper()} Average Memory Usage", pad=40)
+
+    plt.tight_layout()
+
+    plt.savefig(
+        output_dir /
+        f"{arch_name}_memory_grouped.pdf"
+    )
+
+    plt.savefig(
+        output_dir /
+        f"{arch_name}_memory_grouped.jpg"
+    )
+
+    plt.close()

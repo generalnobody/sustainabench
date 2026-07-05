@@ -1,0 +1,76 @@
+from handle_results import load_results, extract_memory_df
+from breakdown_plot import plot_memory_grouped 
+import pandas as pd
+from pathlib import Path
+
+OUTPUT_DIR = Path("experiments/plots/supplementary/")
+OUTPUT_DIR.mkdir(parents=True, exist_ok=True)
+
+rome_files = {
+    "stress-ng": {
+        "1 node": "scripts/snellius/supplementary/cpu/rome/experiments/results/stress-ng.json"
+    },
+    "STREAM": {
+        "1 node": "scripts/snellius/supplementary/cpu/rome/experiments/results/stream.json"
+    },
+    "HPL": {
+        "1 node": "scripts/snellius/supplementary/cpu/rome/experiments/results/hpl_1node.json",
+        "2 nodes": "scripts/snellius/supplementary/cpu/rome/experiments/results/hpl_2nodes.json",
+        "4 nodes": "scripts/snellius/supplementary/cpu/rome/experiments/results/hpl_4nodes.json",
+    },
+    "HPCG": {
+        "1 node": "scripts/snellius/supplementary/cpu/rome/experiments/results/hpcg_1node.json",
+        "2 nodes": "scripts/snellius/supplementary/cpu/rome/experiments/results/hpcg_2nodes.json",
+        "4 nodes": "scripts/snellius/supplementary/cpu/rome/experiments/results/hpcg_4nodes.json",
+    },
+}
+
+genoa_files = {
+    "stress-ng": {
+        "1 node": "scripts/snellius/supplementary/cpu/genoa/experiments/results/stress-ng.json"
+    },
+    "STREAM": {
+        "1 node": "scripts/snellius/supplementary/cpu/genoa/experiments/results/stream.json"
+    },
+    "HPL": {
+        "1 node": "scripts/snellius/supplementary/cpu/genoa/experiments/results/hpl_1node.json",
+        "2 nodes": "scripts/snellius/supplementary/cpu/genoa/experiments/results/hpl_2nodes.json",
+        "4 nodes": "scripts/snellius/supplementary/cpu/genoa/experiments/results/hpl_4nodes.json",
+    },
+    "HPCG": {
+        "1 node": "scripts/snellius/supplementary/cpu/genoa/experiments/results/hpcg_1node.json",
+        "2 nodes": "scripts/snellius/supplementary/cpu/genoa/experiments/results/hpcg_2nodes.json",
+        "4 nodes": "scripts/snellius/supplementary/cpu/genoa/experiments/results/hpcg_4nodes.json",
+    },
+}
+
+rome_results = load_results(rome_files)
+genoa_results = load_results(genoa_files)
+
+memory_df = pd.concat(
+    [
+        extract_memory_df(rome_results, "rome"),
+        extract_memory_df(genoa_results, "genoa"),
+    ],
+    ignore_index=True,
+)
+
+config_order = [
+    "1 node",
+    "2 nodes",
+    "4 nodes",
+]
+
+plot_memory_grouped(
+    memory_df,
+    arch_name="rome",
+    output_dir=OUTPUT_DIR,
+    config_order=config_order,
+)
+
+plot_memory_grouped(
+    memory_df,
+    arch_name="genoa",
+    output_dir=OUTPUT_DIR,
+    config_order=config_order,
+)
