@@ -21,4 +21,4 @@ RUNS=1
 
 
 echo "Running STREAM experiments"
-sustainabench run benchmark -w stream -m time -m perf-energy -m cpu-energy -m memory -m network -r $RUNS -c configs/stream.yaml -s
+sustainabench run benchmark -w stream -m time -m perf-energy -m cpu-energy -m nodemem -m network -r $RUNS -c configs/stream.yaml -s

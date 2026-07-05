@@ -23,4 +23,4 @@ export CUDA_VISIBLE_DEVICES=$(echo "$CUDA_VISIBLE_DEVICES" | cut -d, -f1-2)
 echo "Warmup"
 sustainabench run benchmark -w nvidia-hpcg -m none -b mpi -np $SLURM_NTASKS -c configs/nv-hpcg.yaml -s -nof
 echo "Running Nvidia HPCG experiments"
-sustainabench run benchmark -w nvidia-hpcg -m time -m perf-energy -m cpu-energy -m gpu-nv -m memory -m network -r $RUNS -b mpi -np $SLURM_NTASKS -c configs/nv-hpcg.yaml -s
+sustainabench run benchmark -w nvidia-hpcg -m time -m perf-energy -m cpu-energy -m gpu-nv -m nodemem -m network -r $RUNS -b mpi -np $SLURM_NTASKS -c configs/nv-hpcg.yaml -s

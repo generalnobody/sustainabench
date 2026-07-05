@@ -28,4 +28,4 @@ export OMP_PLACES=cores
 export OMP_PROC_BIND=close
 
 echo "Running HPCG experiments (4 nodes)"
-sustainabench run benchmark -w hpcg -m time -m perf-energy -m cpu-energy -m memory -m network -r $RUNS -b mpi -np $SLURM_NTASKS -c configs/hpcg/config.yaml -s
+sustainabench run benchmark -w hpcg -m time -m perf-energy -m cpu-energy -m nodemem -m network -r $RUNS -b mpi -np $SLURM_NTASKS -c configs/hpcg/config.yaml -s

@@ -24,4 +24,4 @@ export CUDA_VISIBLE_DEVICES=$(echo "$CUDA_VISIBLE_DEVICES" | cut -d, -f1)
 echo "Warmup"
 sustainabench run benchmark -w nvidia-hpl -m none -b mpi -np $SLURM_NTASKS -c configs/nv-hpl/1GPU/default.yaml -s -nof
 echo "Running Nvidia HPL experiments (1 GPU)"
-sustainabench run benchmark -w nvidia-hpl -m time -m perf-energy -m cpu-energy -m gpu-nv -m memory -m network -r $RUNS -b mpi -np $SLURM_NTASKS -c configs/nv-hpl/1GPU/default.yaml -s
+sustainabench run benchmark -w nvidia-hpl -m time -m perf-energy -m cpu-energy -m gpu-nv -m nodemem -m network -r $RUNS -b mpi -np $SLURM_NTASKS -c configs/nv-hpl/1GPU/default.yaml -s

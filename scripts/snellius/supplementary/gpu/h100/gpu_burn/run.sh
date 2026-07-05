@@ -23,4 +23,4 @@ RUNS=1
 echo "Warming GPU up"
 sustainabench run benchmark -w gpu-burn -m none -c configs/gpu-burn.yaml -s -nof
 echo "Running gpu-burn experiments"
-sustainabench run benchmark -w gpu-burn -m time -m perf-energy -m cpu-energy -m gpu-nv -m memory -m network -r $RUNS -c configs/gpu-burn.yaml -s
+sustainabench run benchmark -w gpu-burn -m time -m perf-energy -m cpu-energy -m gpu-nv -m nodemem -m network -r $RUNS -c configs/gpu-burn.yaml -s

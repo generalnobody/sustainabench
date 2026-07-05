@@ -22,4 +22,4 @@ export CUDA_VISIBLE_DEVICES=$(echo "$CUDA_VISIBLE_DEVICES" | cut -d, -f1)
 echo "Warmup"
 sustainabench run benchmark -w vllm -m none -c configs/vllm/1GPU.yaml -s -nof
 echo "Running VLLM experiments"
-sustainabench run benchmark -w vllm -m time -m perf-energy -m cpu-energy -m gpu-nv -m memory -m network -r $RUNS -c configs/vllm/1GPU.yaml -s
+sustainabench run benchmark -w vllm -m time -m perf-energy -m cpu-energy -m gpu-nv -m nodemem -m network -r $RUNS -c configs/vllm/1GPU.yaml -s

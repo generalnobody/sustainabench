@@ -23,4 +23,4 @@ RUNS=1
 echo "Warmup"
 sustainabench run benchmark -w nvidia-stream -m none -c configs/nv-stream.yaml -s -nof
 echo "Running Nvidia STREAM experiments"
-sustainabench run benchmark -w nvidia-stream -m time -m perf-energy -m cpu-energy -m gpu-nv -m memory -m network -r $RUNS -c configs/nv-stream.yaml -s
+sustainabench run benchmark -w nvidia-stream -m time -m perf-energy -m cpu-energy -m gpu-nv -m nodemem -m network -r $RUNS -c configs/nv-stream.yaml -s

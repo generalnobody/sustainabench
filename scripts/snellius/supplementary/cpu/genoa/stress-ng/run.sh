@@ -21,4 +21,4 @@ RUNS=1
 
 
 echo "Running stress-ng experiments"
-sustainabench run benchmark -w stress-ng -m time -m perf-energy -m cpu-energy -m memory -m network -r $RUNS -c configs/stress-ng.yaml -s #-o $TMPDIR/experiments/
+sustainabench run benchmark -w stress-ng -m time -m perf-energy -m cpu-energy -m nodemem -m network -r $RUNS -c configs/stress-ng.yaml -s #-o $TMPDIR/experiments/
