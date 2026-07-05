@@ -4,88 +4,91 @@
     "results": {
         "run0": [
             {
-                "node_id": "tcn624.local.snellius.surf.nl:1:1",
+                "node_id": "tcn101.local.snellius.surf.nl:1:1",
                 "metrics": {
-                    "execution_time": 404.3412694239523,
-                    "memory": {
-                        "rss": {
-                            "mb": {
-                                "avg": 2444.8108942153103,
-                                "max": 2535.953125,
-                                "min": 607.80078125
-                            }
-                        }
-                    },
+                    "execution_time": 426.81851096684113,
                     "perf_energy": {}
                 },
                 "metadata": {
-                    "hostname": "tcn624.local.snellius.surf.nl",
-                    "local_ip": "172.18.58.122",
-                    "public_ip": "145.136.58.122"
+                    "hostname": "tcn101.local.snellius.surf.nl",
+                    "local_ip": "172.18.56.111",
+                    "public_ip": "145.136.56.111"
                 }
             },
             {
-                "node_id": "tcn624.local.snellius.surf.nl:0:0",
+                "node_id": "tcn104.local.snellius.surf.nl:3:1",
                 "metrics": {
-                    "execution_time": 404.1392245499883,
+                    "execution_time": 423.6059630641248,
+                    "perf_energy": {}
+                },
+                "metadata": {
+                    "hostname": "tcn104.local.snellius.surf.nl",
+                    "local_ip": "172.18.56.114",
+                    "public_ip": "145.136.56.114"
+                }
+            },
+            {
+                "node_id": "tcn101.local.snellius.surf.nl:0:0",
+                "metrics": {
+                    "execution_time": 426.9452902809717,
                     "cpu_energy": {
                         "energy": {
-                            "j": 91718.259856,
-                            "kwh": 0.025477294404444444
+                            "j": 80108.717556,
+                            "kwh": 0.022252421543333335
                         },
                         "power": {
-                            "w": 226.94728293153292
+                            "w": 187.63237836472805
                         },
                         "per_domain": [
                             {
                                 "energy": {
-                                    "j": 42480.613096,
-                                    "kwh": 0.011800170304444444
+                                    "j": 37397.754571,
+                                    "kwh": 0.010388265158611111
                                 },
                                 "power": {
-                                    "w": 105.11385338687508
+                                    "w": 87.59383310251914
                                 }
                             },
                             {
                                 "energy": {
-                                    "j": 49237.64676,
-                                    "kwh": 0.0136771241
+                                    "j": 42710.962985,
+                                    "kwh": 0.011864156384722222
                                 },
                                 "power": {
-                                    "w": 121.83342954465785
+                                    "w": 100.0385452622089
                                 }
                             }
                         ]
                     },
-                    "memory": {
+                    "nodemem": {
                         "rss": {
                             "mb": {
-                                "avg": 2444.732138161965,
-                                "max": 2535.87109375,
-                                "min": 608.85546875
+                                "avg": 6730.602475749018,
+                                "max": 6909.6171875,
+                                "min": 3143.1171875
                             }
                         }
                     },
                     "network": {
                         "bytes": {
-                            "sent": 3905546,
-                            "received": 30972781
+                            "sent": 3461000,
+                            "received": 30651577
                         },
                         "packets": {
-                            "sent": 15652,
-                            "received": 54373
+                            "sent": 13039,
+                            "received": 52068
                         }
                     },
                     "perf_energy": {
-                        "joules": 92313.54,
-                        "kwh": 0.02564265,
-                        "time": 406.776792369
+                        "joules": 80690.29,
+                        "kwh": 0.022413969444444442,
+                        "time": 430.035495475
                     }
                 },
                 "metadata": {
-                    "hostname": "tcn624.local.snellius.surf.nl",
-                    "local_ip": "172.18.58.122",
-                    "public_ip": "145.136.58.122"
+                    "hostname": "tcn101.local.snellius.surf.nl",
+                    "local_ip": "172.18.56.111",
+                    "public_ip": "145.136.56.111"
                 }
             },
             {
@@ -97,7 +100,7 @@
                         "Machine_Summary": {
                             "_value": "",
                             "Distributed_Processes": 4,
-                            "Threads_per_processes": 96
+                            "Threads_per_processes": 64
                         },
                         "Global_Problem_Dimensions": {
                             "_value": "",
@@ -122,7 +125,7 @@
                         "##########_Problem_Summary_##########": "",
                         "Setup_Information": {
                             "_value": "",
-                            "Setup_Time": 4.61226
+                            "Setup_Time": 9.71484
                         },
                         "Linear_System_Information": {
                             "_value": "",
@@ -172,81 +175,81 @@
                         "Departure_from_Symmetry_|x'Ay_y'Ax|/(2*||x||*||A||*||y||)/epsilon": {
                             "_value": "",
                             "Result": "PASSED",
-                            "Departure_for_SpMV": 1.36834e-09,
-                            "Departure_for_MG": 6.3154e-10
+                            "Departure_for_SpMV": 2.10513e-09,
+                            "Departure_for_MG": 0
                         },
                         "##########_Iterations_Summary_##########": "",
                         "Iteration_Count_Information": {
                             "_value": "",
                             "Result": "PASSED",
                             "Reference_CG_iterations_per_set": 50,
-                            "Optimized_CG_iterations_per_set": 50,
-                            "Total_number_of_reference_iterations": 450,
-                            "Total_number_of_optimized_iterations": 450
+                            "Optimized_CG_iterations_per_set": 51,
+                            "Total_number_of_reference_iterations": 350,
+                            "Total_number_of_optimized_iterations": 357
                         },
                         "##########_Reproducibility_Summary_##########": "",
                         "Reproducibility_Information": {
                             "_value": "",
                             "Result": "PASSED",
-                            "Scaled_residual_mean": 0.000259629,
-                            "Scaled_residual_variance": 2.89302e-37
+                            "Scaled_residual_mean": 0.000201326,
+                            "Scaled_residual_variance": 5.89531e-37
                         },
                         "##########_Performance_Summary_(times_in_sec)_##########": "",
                         "Benchmark_Time_Summary": {
                             "_value": "",
-                            "Optimization_phase": 8e-08,
-                            "DDOT": 20.0984,
-                            "WAXPBY": 4.43684,
-                            "SpMV": 28.3898,
-                            "MG": 253.286,
-                            "Total": 306.226
+                            "Optimization_phase": 9e-08,
+                            "DDOT": 10.7927,
+                            "WAXPBY": 4.75834,
+                            "SpMV": 24.5909,
+                            "MG": 266.322,
+                            "Total": 306.493
                         },
                         "Floating_Point_Operations_Summary": {
                             "_value": "",
-                            "Raw_DDOT": 22800200000.0,
-                            "Raw_WAXPBY": 22800200000.0,
-                            "Raw_SpMV": 205761000000.0,
-                            "Raw_MG": 1149400000000.0,
-                            "Total": 1400760000000.0,
-                            "Total_with_convergence_overhead": 1400760000000.0
+                            "Raw_DDOT": 18085800000.0,
+                            "Raw_WAXPBY": 18085800000.0,
+                            "Raw_SpMV": 163174000000.0,
+                            "Raw_MG": 911858000000.0,
+                            "Total": 1111200000000.0,
+                            "Total_with_convergence_overhead": 1089420000000.0
                         },
                         "GB/s_Summary": {
                             "_value": "",
-                            "Raw_Read_B/W": 28.1817,
-                            "Raw_Write_B/W": 6.51277,
-                            "Raw_Total_B/W": 34.6945,
-                            "Total_with_convergence_and_optimization_phase_overhead": 34.2305
+                            "Raw_Read_B/W": 22.3366,
+                            "Raw_Write_B/W": 5.16223,
+                            "Raw_Total_B/W": 27.4989,
+                            "Total_with_convergence_and_optimization_phase_overhead": 26.3745
                         },
                         "GFLOP/s_Summary": {
                             "_value": "",
-                            "Raw_DDOT": 1.13443,
-                            "Raw_WAXPBY": 5.13884,
-                            "Raw_SpMV": 7.24771,
-                            "Raw_MG": 4.53796,
-                            "Raw_Total": 4.57428,
-                            "Total_with_convergence_overhead": 4.57428,
-                            "Total_with_convergence_and_optimization_phase_overhead": 4.5131
+                            "Raw_DDOT": 1.67575,
+                            "Raw_WAXPBY": 3.80087,
+                            "Raw_SpMV": 6.63556,
+                            "Raw_MG": 3.4239,
+                            "Raw_Total": 3.62554,
+                            "Total_with_convergence_overhead": 3.55446,
+                            "Total_with_convergence_and_optimization_phase_overhead": 3.4773
                         },
                         "User_Optimization_Overheads": {
                             "_value": "",
-                            "Optimization_phase_time_(sec)": 8e-08,
-                            "Optimization_phase_time_vs_reference_SpMV+MG_time": 1.17391e-07
+                            "Optimization_phase_time_(sec)": 9e-08,
+                            "Optimization_phase_time_vs_reference_SpMV+MG_time": 1.09168e-07
                         },
                         "DDOT_Timing_Variations": {
                             "_value": "",
-                            "Min_DDOT_MPI_Allreduce_time": 11.8645,
-                            "Max_DDOT_MPI_Allreduce_time": 13.8133,
-                            "Avg_DDOT_MPI_Allreduce_time": 13.1856
+                            "Min_DDOT_MPI_Allreduce_time": 4.77818,
+                            "Max_DDOT_MPI_Allreduce_time": 57.2465,
+                            "Avg_DDOT_MPI_Allreduce_time": 31.1357
                         },
                         "Final_Summary": {
                             "_value": "",
-                            "HPCG_result_is_VALID_with_a_GFLOP/s_rating_of": 4.5131,
-                            "HPCG_2.4_rating_for_historical_reasons_is": 4.57428,
+                            "HPCG_result_is_VALID_with_a_GFLOP/s_rating_of": 3.4773,
+                            "HPCG_2.4_rating_for_historical_reasons_is": 3.55446,
                             "Reference_version_of_ComputeDotProduct_used": "Performance results are most likely suboptimal",
                             "Reference_version_of_ComputeSPMV_used": "Performance results are most likely suboptimal",
                             "Reference_version_of_ComputeMG_used_and_number_of_threads_greater_than_1": "Performance results are severely suboptimal",
                             "Reference_version_of_ComputeWAXPBY_used": "Performance results are most likely suboptimal",
-                            "Results_are_valid_but_execution_time_(sec)_is": 306.226,
+                            "Results_are_valid_but_execution_time_(sec)_is": 306.493,
                             "Official_results_execution_time_(sec)_must_be_at_least": 1800
                         }
                     }
@@ -254,88 +257,67 @@
                 "metadata": {}
             },
             {
-                "node_id": "tcn859.local.snellius.surf.nl:3:1",
+                "node_id": "tcn104.local.snellius.surf.nl:2:0",
                 "metrics": {
-                    "execution_time": 396.0441637770273,
-                    "memory": {
-                        "rss": {
-                            "mb": {
-                                "avg": 2484.2274601483587,
-                                "max": 2540.17578125,
-                                "min": 606.74609375
-                            }
-                        }
-                    },
-                    "perf_energy": {}
-                },
-                "metadata": {
-                    "hostname": "tcn859.local.snellius.surf.nl",
-                    "local_ip": "172.18.59.101",
-                    "public_ip": "145.136.59.101"
-                }
-            },
-            {
-                "node_id": "tcn859.local.snellius.surf.nl:2:0",
-                "metrics": {
-                    "execution_time": 395.93706212891266,
+                    "execution_time": 423.63129524700344,
                     "cpu_energy": {
                         "energy": {
-                            "j": 90465.678806,
-                            "kwh": 0.02512935522388889
+                            "j": 78069.935082,
+                            "kwh": 0.021686093078333333
                         },
                         "power": {
-                            "w": 228.48506039116697
+                            "w": 184.28754544909114
                         },
                         "per_domain": [
                             {
                                 "energy": {
-                                    "j": 40871.268787,
-                                    "kwh": 0.011353130218611111
+                                    "j": 36201.73224,
+                                    "kwh": 0.010056036733333334
                                 },
                                 "power": {
-                                    "w": 103.22670918202355
+                                    "w": 85.4557950958644
                                 }
                             },
                             {
                                 "energy": {
-                                    "j": 49594.410019,
-                                    "kwh": 0.013776225005277778
+                                    "j": 41868.202842,
+                                    "kwh": 0.011630056345
                                 },
                                 "power": {
-                                    "w": 125.25835120914344
+                                    "w": 98.83175035322674
                                 }
                             }
                         ]
                     },
-                    "memory": {
+                    "nodemem": {
                         "rss": {
                             "mb": {
-                                "avg": 2487.8262907694493,
-                                "max": 2543.39453125,
-                                "min": 613.2421875
+                                "avg": 6146.540841187774,
+                                "max": 6267.83984375,
+                                "min": 2497.62109375
                             }
                         }
                     },
                     "network": {
                         "bytes": {
-                            "sent": 2041708,
-                            "received": 2651153
+                            "sent": 1731567,
+                            "received": 2376521
                         },
                         "packets": {
-                            "sent": 10565,
-                            "received": 32059
+                            "sent": 8844,
+                            "received": 30651
                         }
                     },
                     "perf_energy": {
-                        "joules": 91058.34,
-                        "kwh": 0.025293983333333332,
-                        "time": 398.556672466
+                        "joules": 78627.19,
+                        "kwh": 0.02184088611111111,
+                        "time": 426.681648201
                     }
                 },
                 "metadata": {
-                    "hostname": "tcn859.local.snellius.surf.nl",
-                    "local_ip": "172.18.59.101",
-                    "public_ip": "145.136.59.101"
+                    "hostname": "tcn104.local.snellius.surf.nl",
+                    "local_ip": "172.18.56.114",
+                    "public_ip": "145.136.56.114"
                 }
             }
         ]

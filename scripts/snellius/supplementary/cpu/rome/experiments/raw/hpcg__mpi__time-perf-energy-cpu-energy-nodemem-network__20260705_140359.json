@@ -4,88 +4,79 @@
     "results": {
         "run0": [
             {
-                "node_id": "tcn278.local.snellius.surf.nl:1:1",
+                "node_id": "tcn137.local.snellius.surf.nl:1:1",
                 "metrics": {
-                    "execution_time": 415.33438302204013,
-                    "memory": {
-                        "rss": {
-                            "mb": {
-                                "avg": 2430.888393932097,
-                                "max": 2489.1015625,
-                                "min": 615.40234375
-                            }
-                        }
-                    },
+                    "execution_time": 418.82950067101046,
                     "perf_energy": {}
                 },
                 "metadata": {
-                    "hostname": "tcn278.local.snellius.surf.nl",
-                    "local_ip": "172.18.57.32",
-                    "public_ip": "145.136.57.32"
+                    "hostname": "tcn137.local.snellius.surf.nl",
+                    "local_ip": "172.18.56.147",
+                    "public_ip": "145.136.56.147"
                 }
             },
             {
-                "node_id": "tcn278.local.snellius.surf.nl:0:0",
+                "node_id": "tcn137.local.snellius.surf.nl:0:0",
                 "metrics": {
-                    "execution_time": 415.05271832901053,
+                    "execution_time": 418.8475461001508,
                     "cpu_energy": {
                         "energy": {
-                            "j": 76439.186819,
-                            "kwh": 0.021233107449722222
+                            "j": 76847.357956,
+                            "kwh": 0.021346488321111114
                         },
                         "power": {
-                            "w": 184.16751310803127
+                            "w": 183.4734343467111
                         },
                         "per_domain": [
                             {
                                 "energy": {
-                                    "j": 35484.642554,
-                                    "kwh": 0.009856845153888889
+                                    "j": 35796.188103,
+                                    "kwh": 0.009943385584166667
                                 },
                                 "power": {
-                                    "w": 85.49434713600598
+                                    "w": 85.46357015342919
                                 }
                             },
                             {
                                 "energy": {
-                                    "j": 40954.544265,
-                                    "kwh": 0.011376262295833333
+                                    "j": 41051.169853,
+                                    "kwh": 0.011403102736944445
                                 },
                                 "power": {
-                                    "w": 98.67316597202527
+                                    "w": 98.00986419328189
                                 }
                             }
                         ]
                     },
-                    "memory": {
+                    "nodemem": {
                         "rss": {
                             "mb": {
-                                "avg": 2429.6125592996987,
-                                "max": 2486.515625,
-                                "min": 614.2421875
+                                "avg": 6755.453030510164,
+                                "max": 6876.9140625,
+                                "min": 3131.22265625
                             }
                         }
                     },
                     "network": {
                         "bytes": {
-                            "sent": 2016496,
-                            "received": 2651603
+                            "sent": 1922375,
+                            "received": 4655285
                         },
                         "packets": {
-                            "sent": 11524,
-                            "received": 31655
+                            "sent": 10140,
+                            "received": 31883
                         }
                     },
                     "perf_energy": {
-                        "joules": 77014.82,
-                        "kwh": 0.021393005555555556,
-                        "time": 418.216551427
+                        "joules": 77410.94,
+                        "kwh": 0.021503038888888888,
+                        "time": 421.9384371
                     }
                 },
                 "metadata": {
-                    "hostname": "tcn278.local.snellius.surf.nl",
-                    "local_ip": "172.18.57.32",
-                    "public_ip": "145.136.57.32"
+                    "hostname": "tcn137.local.snellius.surf.nl",
+                    "local_ip": "172.18.56.147",
+                    "public_ip": "145.136.56.147"
                 }
             },
             {
@@ -122,7 +113,7 @@
                         "##########_Problem_Summary_##########": "",
                         "Setup_Information": {
                             "_value": "",
-                            "Setup_Time": 7.90532
+                            "Setup_Time": 9.40447
                         },
                         "Linear_System_Information": {
                             "_value": "",
@@ -172,81 +163,81 @@
                         "Departure_from_Symmetry_|x'Ay_y'Ax|/(2*||x||*||A||*||y||)/epsilon": {
                             "_value": "",
                             "Result": "PASSED",
-                            "Departure_for_SpMV": 6.31545e-09,
-                            "Departure_for_MG": 8.4206e-10
+                            "Departure_for_SpMV": 6.10493e-09,
+                            "Departure_for_MG": 2.10515e-10
                         },
                         "##########_Iterations_Summary_##########": "",
                         "Iteration_Count_Information": {
                             "_value": "",
                             "Result": "PASSED",
                             "Reference_CG_iterations_per_set": 50,
-                            "Optimized_CG_iterations_per_set": 51,
-                            "Total_number_of_reference_iterations": 450,
-                            "Total_number_of_optimized_iterations": 459
+                            "Optimized_CG_iterations_per_set": 50,
+                            "Total_number_of_reference_iterations": 400,
+                            "Total_number_of_optimized_iterations": 400
                         },
                         "##########_Reproducibility_Summary_##########": "",
                         "Reproducibility_Information": {
                             "_value": "",
                             "Result": "PASSED",
-                            "Scaled_residual_mean": 4.40045e-05,
-                            "Scaled_residual_variance": 3.54587e-38
+                            "Scaled_residual_mean": 5.87254e-05,
+                            "Scaled_residual_variance": 2.24802e-37
                         },
                         "##########_Performance_Summary_(times_in_sec)_##########": "",
                         "Benchmark_Time_Summary": {
                             "_value": "",
                             "Optimization_phase": 1.71e-07,
-                            "DDOT": 13.4036,
-                            "WAXPBY": 5.2575,
-                            "SpMV": 33.364,
-                            "MG": 266.677,
-                            "Total": 318.722
+                            "DDOT": 6.90133,
+                            "WAXPBY": 4.47128,
+                            "SpMV": 25.0869,
+                            "MG": 276.976,
+                            "Total": 313.46
                         },
                         "Floating_Point_Operations_Summary": {
                             "_value": "",
-                            "Raw_DDOT": 11626600000.0,
-                            "Raw_WAXPBY": 11626600000.0,
-                            "Raw_SpMV": 104624000000.0,
-                            "Raw_MG": 584428000000.0,
-                            "Total": 712305000000.0,
-                            "Total_with_convergence_overhead": 698339000000.0
+                            "Raw_DDOT": 10133400000.0,
+                            "Raw_WAXPBY": 10133400000.0,
+                            "Raw_SpMV": 91210700000.0,
+                            "Raw_MG": 509306000000.0,
+                            "Total": 620783000000.0,
+                            "Total_with_convergence_overhead": 620783000000.0
                         },
                         "GB/s_Summary": {
                             "_value": "",
-                            "Raw_Read_B/W": 13.7699,
-                            "Raw_Write_B/W": 3.18243,
-                            "Raw_Total_B/W": 16.9524,
-                            "Total_with_convergence_and_optimization_phase_overhead": 16.2571
+                            "Raw_Read_B/W": 12.2021,
+                            "Raw_Write_B/W": 2.81994,
+                            "Raw_Total_B/W": 15.0221,
+                            "Total_with_convergence_and_optimization_phase_overhead": 14.67
                         },
                         "GFLOP/s_Summary": {
                             "_value": "",
-                            "Raw_DDOT": 0.867424,
-                            "Raw_WAXPBY": 2.21143,
-                            "Raw_SpMV": 3.13584,
-                            "Raw_MG": 2.19152,
-                            "Raw_Total": 2.23488,
-                            "Total_with_convergence_overhead": 2.19106,
-                            "Total_with_convergence_and_optimization_phase_overhead": 2.14322
+                            "Raw_DDOT": 1.46833,
+                            "Raw_WAXPBY": 2.26634,
+                            "Raw_SpMV": 3.63579,
+                            "Raw_MG": 1.83881,
+                            "Raw_Total": 1.98042,
+                            "Total_with_convergence_overhead": 1.98042,
+                            "Total_with_convergence_and_optimization_phase_overhead": 1.934
                         },
                         "User_Optimization_Overheads": {
                             "_value": "",
                             "Optimization_phase_time_(sec)": 1.71e-07,
-                            "Optimization_phase_time_vs_reference_SpMV+MG_time": 2.33835e-07
+                            "Optimization_phase_time_vs_reference_SpMV+MG_time": 2.24753e-07
                         },
                         "DDOT_Timing_Variations": {
                             "_value": "",
-                            "Min_DDOT_MPI_Allreduce_time": 6.92642,
-                            "Max_DDOT_MPI_Allreduce_time": 7.39362,
-                            "Avg_DDOT_MPI_Allreduce_time": 7.16002
+                            "Min_DDOT_MPI_Allreduce_time": 0.216756,
+                            "Max_DDOT_MPI_Allreduce_time": 55.9821,
+                            "Avg_DDOT_MPI_Allreduce_time": 28.0994
                         },
                         "Final_Summary": {
                             "_value": "",
-                            "HPCG_result_is_VALID_with_a_GFLOP/s_rating_of": 2.14322,
-                            "HPCG_2.4_rating_for_historical_reasons_is": 2.19106,
+                            "HPCG_result_is_VALID_with_a_GFLOP/s_rating_of": 1.934,
+                            "HPCG_2.4_rating_for_historical_reasons_is": 1.98042,
                             "Reference_version_of_ComputeDotProduct_used": "Performance results are most likely suboptimal",
                             "Reference_version_of_ComputeSPMV_used": "Performance results are most likely suboptimal",
                             "Reference_version_of_ComputeMG_used_and_number_of_threads_greater_than_1": "Performance results are severely suboptimal",
                             "Reference_version_of_ComputeWAXPBY_used": "Performance results are most likely suboptimal",
-                            "Results_are_valid_but_execution_time_(sec)_is": 318.722,
+                            "Results_are_valid_but_execution_time_(sec)_is": 313.46,
                             "Official_results_execution_time_(sec)_must_be_at_least": 1800
                         }
                     }

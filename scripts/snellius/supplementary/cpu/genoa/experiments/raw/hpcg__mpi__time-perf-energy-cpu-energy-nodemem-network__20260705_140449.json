@@ -4,88 +4,79 @@
     "results": {
         "run0": [
             {
-                "node_id": "tcn1237.local.snellius.surf.nl:1:1",
+                "node_id": "tcn861.local.snellius.surf.nl:1:1",
                 "metrics": {
-                    "execution_time": 399.7319313338958,
-                    "memory": {
-                        "rss": {
-                            "mb": {
-                                "avg": 2475.762290467851,
-                                "max": 2530.31640625,
-                                "min": 609.484375
-                            }
-                        }
-                    },
+                    "execution_time": 423.8560734379571,
                     "perf_energy": {}
                 },
                 "metadata": {
-                    "hostname": "tcn1237.local.snellius.surf.nl",
-                    "local_ip": "172.18.60.223",
-                    "public_ip": "145.136.60.223"
+                    "hostname": "tcn861.local.snellius.surf.nl",
+                    "local_ip": "172.18.59.103",
+                    "public_ip": "145.136.59.103"
                 }
             },
             {
-                "node_id": "tcn1237.local.snellius.surf.nl:0:0",
+                "node_id": "tcn861.local.snellius.surf.nl:0:0",
                 "metrics": {
-                    "execution_time": 399.7413187699858,
+                    "execution_time": 423.9948412750382,
                     "cpu_energy": {
                         "energy": {
-                            "j": 93592.497373,
-                            "kwh": 0.025997915936944446
+                            "j": 96188.496423,
+                            "kwh": 0.02671902678416667
                         },
                         "power": {
-                            "w": 234.13274303107423
+                            "w": 226.86250823201507
                         },
                         "per_domain": [
                             {
                                 "energy": {
-                                    "j": 43026.178998,
-                                    "kwh": 0.011951716388333334
+                                    "j": 44061.578792,
+                                    "kwh": 0.012239327442222222
                                 },
                                 "power": {
-                                    "w": 107.63509462515833
+                                    "w": 103.92012198067292
                                 }
                             },
                             {
                                 "energy": {
-                                    "j": 50566.318375,
-                                    "kwh": 0.014046199548611112
+                                    "j": 52126.917631,
+                                    "kwh": 0.014479699341944444
                                 },
                                 "power": {
-                                    "w": 126.4976484059159
+                                    "w": 122.94238625134214
                                 }
                             }
                         ]
                     },
-                    "memory": {
+                    "nodemem": {
                         "rss": {
                             "mb": {
-                                "avg": 2475.9967544017386,
-                                "max": 2531.7890625,
-                                "min": 611.56640625
+                                "avg": 6831.056589060328,
+                                "max": 6946.25390625,
+                                "min": 3113.01953125
                             }
                         }
                     },
                     "network": {
                         "bytes": {
-                            "sent": 2028315,
-                            "received": 2678186
+                            "sent": 1984393,
+                            "received": 4317531
                         },
                         "packets": {
-                            "sent": 9882,
-                            "received": 32411
+                            "sent": 9858,
+                            "received": 33778
                         }
                     },
                     "perf_energy": {
-                        "joules": 94225.72,
-                        "kwh": 0.02617381111111111,
-                        "time": 402.461012945
+                        "joules": 96768.7,
+                        "kwh": 0.026880194444444443,
+                        "time": 426.562475259
                     }
                 },
                 "metadata": {
-                    "hostname": "tcn1237.local.snellius.surf.nl",
-                    "local_ip": "172.18.60.223",
-                    "public_ip": "145.136.60.223"
+                    "hostname": "tcn861.local.snellius.surf.nl",
+                    "local_ip": "172.18.59.103",
+                    "public_ip": "145.136.59.103"
                 }
             },
             {
@@ -122,7 +113,7 @@
                         "##########_Problem_Summary_##########": "",
                         "Setup_Information": {
                             "_value": "",
-                            "Setup_Time": 4.3876
+                            "Setup_Time": 5.32575
                         },
                         "Linear_System_Information": {
                             "_value": "",
@@ -172,8 +163,8 @@
                         "Departure_from_Symmetry_|x'Ay_y'Ax|/(2*||x||*||A||*||y||)/epsilon": {
                             "_value": "",
                             "Result": "PASSED",
-                            "Departure_for_SpMV": 2.94721e-09,
-                            "Departure_for_MG": 8.4206e-10
+                            "Departure_for_SpMV": 3.36824e-09,
+                            "Departure_for_MG": 1.26309e-09
                         },
                         "##########_Iterations_Summary_##########": "",
                         "Iteration_Count_Information": {
@@ -189,17 +180,17 @@
                             "_value": "",
                             "Result": "PASSED",
                             "Scaled_residual_mean": 4.40045e-05,
-                            "Scaled_residual_variance": 6.57032e-38
+                            "Scaled_residual_variance": 3.61424e-38
                         },
                         "##########_Performance_Summary_(times_in_sec)_##########": "",
                         "Benchmark_Time_Summary": {
                             "_value": "",
-                            "Optimization_phase": 1.5e-07,
-                            "DDOT": 9.44678,
-                            "WAXPBY": 4.1029,
-                            "SpMV": 28.7351,
-                            "MG": 269.313,
-                            "Total": 311.619
+                            "Optimization_phase": 1.6e-07,
+                            "DDOT": 7.97276,
+                            "WAXPBY": 3.51266,
+                            "SpMV": 23.6869,
+                            "MG": 294.458,
+                            "Total": 329.647
                         },
                         "Floating_Point_Operations_Summary": {
                             "_value": "",
@@ -212,41 +203,41 @@
                         },
                         "GB/s_Summary": {
                             "_value": "",
-                            "Raw_Read_B/W": 14.0838,
-                            "Raw_Write_B/W": 3.25497,
-                            "Raw_Total_B/W": 17.3388,
-                            "Total_with_convergence_and_optimization_phase_overhead": 16.7861
+                            "Raw_Read_B/W": 13.3135,
+                            "Raw_Write_B/W": 3.07695,
+                            "Raw_Total_B/W": 16.3905,
+                            "Total_with_convergence_and_optimization_phase_overhead": 15.8388
                         },
                         "GFLOP/s_Summary": {
                             "_value": "",
-                            "Raw_DDOT": 1.23075,
-                            "Raw_WAXPBY": 2.83376,
-                            "Raw_SpMV": 3.64098,
-                            "Raw_MG": 2.17007,
-                            "Raw_Total": 2.28582,
-                            "Total_with_convergence_overhead": 2.241,
-                            "Total_with_convergence_and_optimization_phase_overhead": 2.21296
+                            "Raw_DDOT": 1.45829,
+                            "Raw_WAXPBY": 3.30992,
+                            "Raw_SpMV": 4.41695,
+                            "Raw_MG": 1.98476,
+                            "Raw_Total": 2.16081,
+                            "Total_with_convergence_overhead": 2.11844,
+                            "Total_with_convergence_and_optimization_phase_overhead": 2.08808
                         },
                         "User_Optimization_Overheads": {
                             "_value": "",
-                            "Optimization_phase_time_(sec)": 1.5e-07,
-                            "Optimization_phase_time_vs_reference_SpMV+MG_time": 2.54099e-07
+                            "Optimization_phase_time_(sec)": 1.6e-07,
+                            "Optimization_phase_time_vs_reference_SpMV+MG_time": 2.21359e-07
                         },
                         "DDOT_Timing_Variations": {
                             "_value": "",
-                            "Min_DDOT_MPI_Allreduce_time": 2.80825,
-                            "Max_DDOT_MPI_Allreduce_time": 8.98068,
-                            "Avg_DDOT_MPI_Allreduce_time": 5.89447
+                            "Min_DDOT_MPI_Allreduce_time": 0.207849,
+                            "Max_DDOT_MPI_Allreduce_time": 61.4508,
+                            "Avg_DDOT_MPI_Allreduce_time": 30.8293
                         },
                         "Final_Summary": {
                             "_value": "",
-                            "HPCG_result_is_VALID_with_a_GFLOP/s_rating_of": 2.21296,
-                            "HPCG_2.4_rating_for_historical_reasons_is": 2.241,
+                            "HPCG_result_is_VALID_with_a_GFLOP/s_rating_of": 2.08808,
+                            "HPCG_2.4_rating_for_historical_reasons_is": 2.11844,
                             "Reference_version_of_ComputeDotProduct_used": "Performance results are most likely suboptimal",
                             "Reference_version_of_ComputeSPMV_used": "Performance results are most likely suboptimal",
                             "Reference_version_of_ComputeMG_used_and_number_of_threads_greater_than_1": "Performance results are severely suboptimal",
                             "Reference_version_of_ComputeWAXPBY_used": "Performance results are most likely suboptimal",
-                            "Results_are_valid_but_execution_time_(sec)_is": 311.619,
+                            "Results_are_valid_but_execution_time_(sec)_is": 329.647,
                             "Official_results_execution_time_(sec)_must_be_at_least": 1800
                         }
                     }

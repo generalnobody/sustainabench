@@ -4,88 +4,88 @@
     "results": {
         "run0": [
             {
-                "node_id": "tcn1181.local.snellius.surf.nl:0:0",
+                "node_id": "tcn132.local.snellius.surf.nl:0:0",
                 "metrics": {
-                    "execution_time": 120.12221420696005,
+                    "execution_time": 120.1745375120081,
                     "cpu_energy": {
                         "energy": {
-                            "j": 65185.878003,
-                            "kwh": 0.018107188334166666
+                            "j": 47829.460643,
+                            "kwh": 0.013285961289722223
                         },
                         "power": {
-                            "w": 542.663599688152
+                            "w": 398.00039283458017
                         },
                         "per_domain": [
                             {
                                 "energy": {
-                                    "j": 31988.63298,
-                                    "kwh": 0.008885731383333333
+                                    "j": 23658.983667,
+                                    "kwh": 0.0065719399075
                                 },
                                 "power": {
-                                    "w": 266.3010341170987
+                                    "w": 196.87206727703338
                                 }
                             },
                             {
                                 "energy": {
-                                    "j": 33197.245023,
-                                    "kwh": 0.009221456950833333
+                                    "j": 24170.476976,
+                                    "kwh": 0.006714021382222222
                                 },
                                 "power": {
-                                    "w": 276.3625655710533
+                                    "w": 201.12832555754682
                                 }
                             }
                         ]
                     },
-                    "memory": {
+                    "nodemem": {
                         "rss": {
                             "mb": {
-                                "avg": 1203.2450740200168,
-                                "max": 1204.3203125,
-                                "min": 608.25
+                                "avg": 1763.986561669619,
+                                "max": 1764.9140625,
+                                "min": 1245.38671875
                             }
                         }
                     },
                     "network": {
                         "bytes": {
-                            "sent": 2187691,
-                            "received": 28872971
+                            "sent": 611809,
+                            "received": 2880894
                         },
                         "packets": {
-                            "sent": 6101,
-                            "received": 28734
+                            "sent": 3793,
+                            "received": 9905
                         }
                     },
                     "perf_energy": {
-                        "joules": 243.95,
-                        "kwh": 6.776388888888888e-05,
-                        "time": 122.720017169
+                        "joules": 48436.29,
+                        "kwh": 0.013454525,
+                        "time": 123.486714708
                     }
                 },
                 "metadata": {
-                    "hostname": "tcn1181.local.snellius.surf.nl",
-                    "local_ip": "172.18.60.167",
-                    "public_ip": "145.136.60.167"
+                    "hostname": "tcn132.local.snellius.surf.nl",
+                    "local_ip": "172.18.56.142",
+                    "public_ip": "145.136.56.142"
                 }
             },
             {
                 "node_id": "local",
                 "metrics": {
                     "stress_ng": {
-                        "workers": 192,
+                        "workers": 128,
                         "stressor": "cpu",
                         "metrics": {
-                            "bogo_ops": 17302015,
+                            "bogo_ops": 12255707,
                             "real_time_seconds": 119.99,
-                            "user_time_seconds": 22813.98,
-                            "system_time_seconds": 0.44,
-                            "bogo_ops_per_sec_real": 144198.97,
-                            "bogo_ops_per_sec_cpu": 758.38
+                            "user_time_seconds": 15170.97,
+                            "system_time_seconds": 0.84,
+                            "bogo_ops_per_sec_real": 102140.39,
+                            "bogo_ops_per_sec_cpu": 807.79
                         },
                         "skipped": 0,
                         "passed": {
-                            "count": 192,
+                            "count": 128,
                             "name": "cpu",
-                            "workers": 192
+                            "workers": 128
                         },
                         "failed": 0,
                         "metrics_untrustworthy": 0
