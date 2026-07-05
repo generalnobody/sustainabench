@@ -1,0 +1,239 @@
+{
+    "workload": "nvidia-hpl",
+    "backend": "mpi",
+    "results": {
+        "run0": [
+            {
+                "node_id": "gcn68.local.snellius.surf.nl:3:3",
+                "metrics": {
+                    "execution_time": 55.055273447185755,
+                    "perf_energy": {}
+                },
+                "metadata": {
+                    "hostname": "gcn68.local.snellius.surf.nl",
+                    "local_ip": "172.18.62.68",
+                    "public_ip": "145.136.62.68"
+                }
+            },
+            {
+                "node_id": "gcn68.local.snellius.surf.nl:1:1",
+                "metrics": {
+                    "execution_time": 55.05265047587454,
+                    "perf_energy": {}
+                },
+                "metadata": {
+                    "hostname": "gcn68.local.snellius.surf.nl",
+                    "local_ip": "172.18.62.68",
+                    "public_ip": "145.136.62.68"
+                }
+            },
+            {
+                "node_id": "gcn68.local.snellius.surf.nl:2:2",
+                "metrics": {
+                    "execution_time": 55.13291910290718,
+                    "perf_energy": {}
+                },
+                "metadata": {
+                    "hostname": "gcn68.local.snellius.surf.nl",
+                    "local_ip": "172.18.62.68",
+                    "public_ip": "145.136.62.68"
+                }
+            },
+            {
+                "node_id": "gcn68.local.snellius.surf.nl:0:0",
+                "metrics": {
+                    "execution_time": 55.49126064009033,
+                    "cpu_energy": {
+                        "energy": {
+                            "j": 11171.101406,
+                            "kwh": 0.003103083723888889
+                        },
+                        "power": {
+                            "w": 201.3134475721778
+                        },
+                        "per_domain": [
+                            {
+                                "energy": {
+                                    "j": 5283.578881,
+                                    "kwh": 0.0014676608002777778
+                                },
+                                "power": {
+                                    "w": 95.21491582579046
+                                }
+                            },
+                            {
+                                "energy": {
+                                    "j": 5887.522525,
+                                    "kwh": 0.001635422923611111
+                                },
+                                "power": {
+                                    "w": 106.09853174638737
+                                }
+                            }
+                        ]
+                    },
+                    "gpu_nv": [
+                        {
+                            "gpu_id": 0,
+                            "energy": {
+                                "j": 11311.091660039723,
+                                "kwh": 0.0031419699055665897
+                            },
+                            "power": {
+                                "avg_w": 204.5986587973492
+                            },
+                            "util": {
+                                "avg": 62.38424821002387,
+                                "max": 100
+                            },
+                            "temp": {
+                                "avg": 47.87350835322196,
+                                "max": 70
+                            },
+                            "clock": {
+                                "avg": 1333.9260143198092,
+                                "max": 1410
+                            },
+                            "memory": {
+                                "mb": {
+                                    "avg": 18225.050566825776,
+                                    "max": 25198.75
+                                }
+                            }
+                        },
+                        {
+                            "gpu_id": 1,
+                            "energy": {
+                                "j": 11219.976356207015,
+                                "kwh": 0.003116660098946393
+                            },
+                            "power": {
+                                "avg_w": 202.51402623839428
+                            },
+                            "util": {
+                                "avg": 63.4200477326969,
+                                "max": 100
+                            },
+                            "temp": {
+                                "avg": 46.64439140811456,
+                                "max": 66
+                            },
+                            "clock": {
+                                "avg": 1342.6968973747016,
+                                "max": 1410
+                            },
+                            "memory": {
+                                "mb": {
+                                    "avg": 17945.978818615753,
+                                    "max": 24878.75
+                                }
+                            }
+                        },
+                        {
+                            "gpu_id": 2,
+                            "energy": {
+                                "j": 11244.673329046374,
+                                "kwh": 0.0031235203691795483
+                            },
+                            "power": {
+                                "avg_w": 202.965896149133
+                            },
+                            "util": {
+                                "avg": 57.11217183770883,
+                                "max": 100
+                            },
+                            "temp": {
+                                "avg": 45.78758949880668,
+                                "max": 64
+                            },
+                            "clock": {
+                                "avg": 1342.2315035799522,
+                                "max": 1410
+                            },
+                            "memory": {
+                                "mb": {
+                                    "avg": 17993.491348448686,
+                                    "max": 24878.75
+                                }
+                            }
+                        },
+                        {
+                            "gpu_id": 3,
+                            "energy": {
+                                "j": 11332.30623821212,
+                                "kwh": 0.0031478628439478113
+                            },
+                            "power": {
+                                "avg_w": 204.564258949292
+                            },
+                            "util": {
+                                "avg": 57.44630071599045,
+                                "max": 100
+                            },
+                            "temp": {
+                                "avg": 48.32458233890215,
+                                "max": 70
+                            },
+                            "clock": {
+                                "avg": 1344.6658711217183,
+                                "max": 1410
+                            },
+                            "memory": {
+                                "mb": {
+                                    "avg": 17673.96196300716,
+                                    "max": 24422.75
+                                }
+                            }
+                        }
+                    ],
+                    "nodemem": {
+                        "rss": {
+                            "mb": {
+                                "avg": 12341.153732846062,
+                                "max": 13335.69921875,
+                                "min": 3739.015625
+                            }
+                        }
+                    },
+                    "network": {
+                        "bytes": {
+                            "sent": 53428239,
+                            "received": 53566023
+                        },
+                        "packets": {
+                            "sent": 21721,
+                            "received": 24389
+                        }
+                    },
+                    "perf_energy": {
+                        "joules": 11804.48,
+                        "kwh": 0.003279022222222222,
+                        "time": 58.609128591
+                    }
+                },
+                "metadata": {
+                    "hostname": "gcn68.local.snellius.surf.nl",
+                    "local_ip": "172.18.62.68",
+                    "public_ip": "145.136.62.68"
+                }
+            },
+            {
+                "node_id": "local",
+                "metrics": {
+                    "nvidia_hpl": {
+                        "T/V": "WC0",
+                        "N": 99328,
+                        "NB": 1024,
+                        "P": 2,
+                        "Q": 2,
+                        "Time": 11.66,
+                        "Gflops": 56020.0,
+                        "per_GPU": 14000.0
+                    }
+                },
+                "metadata": {}
+            }
+        ]
+    },
+    "metadata": {}
+}
