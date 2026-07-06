@@ -9,3 +9,5 @@ python plotting/gpu-plotting-2022.py
 python plotting/breakdown_cpu_plotting.py
 python plotting/breakdown_gpu_plotting.py
 python plotting/temporal_stats_plotting.py
+python plotting/supplementary_cpu_plotting.py
+python plotting/supplementary_gpu_plotting.py

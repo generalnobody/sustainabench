@@ -49,7 +49,7 @@ a100_files = {
         "4 GPUs": "scripts/snellius/gpu/a100/experiments/results/gpu-burn.json"
     },
     "Nvidia STREAM": {
-        "4 GPUs": "scripts/snellius/gpu/a100/experiments/results/nv-stream.json"
+        "1 GPU": "scripts/snellius/gpu/a100/experiments/results/nv-stream.json"
     },
     "Nvidia HPL": {
         "1 GPU": "scripts/snellius/gpu/a100/experiments/results/nv-hpl_1gpu.json",
@@ -73,7 +73,7 @@ h100_files = {
         "4 GPUs": "scripts/snellius/gpu/h100/experiments/results/gpu-burn.json"
     },
     "Nvidia STREAM": {
-        "4 GPUs": "scripts/snellius/gpu/h100/experiments/results/nv-stream.json"
+        "1 GPU": "scripts/snellius/gpu/h100/experiments/results/nv-stream.json"
     },
     "Nvidia HPL": {
         "1 GPU": "scripts/snellius/gpu/h100/experiments/results/nv-hpl_1gpu.json",
@@ -135,7 +135,7 @@ a100_files_FR = {
         "4 GPUs": "scripts/snellius/gpu/a100/experiments/results/FR/gpu-burn.json"
     },
     "Nvidia STREAM": {
-        "4 GPUs": "scripts/snellius/gpu/a100/experiments/results/FR/nv-stream.json"
+        "1 GPU": "scripts/snellius/gpu/a100/experiments/results/FR/nv-stream.json"
     },
     "Nvidia HPL": {
         "1 GPU": "scripts/snellius/gpu/a100/experiments/results/FR/nv-hpl_1gpu.json",
@@ -159,7 +159,7 @@ h100_files_FR = {
         "4 GPUs": "scripts/snellius/gpu/h100/experiments/results/FR/gpu-burn.json"
     },
     "Nvidia STREAM": {
-        "4 GPUs": "scripts/snellius/gpu/h100/experiments/results/FR/nv-stream.json"
+        "1 GPU": "scripts/snellius/gpu/h100/experiments/results/FR/nv-stream.json"
     },
     "Nvidia HPL": {
         "1 GPU": "scripts/snellius/gpu/h100/experiments/results/FR/nv-hpl_1gpu.json",
@@ -221,7 +221,7 @@ a100_files_2022 = {
         "4 GPUs": "scripts/snellius/gpu/a100/experiments/results/2022/gpu-burn.json"
     },
     "Nvidia STREAM": {
-        "4 GPUs": "scripts/snellius/gpu/a100/experiments/results/2022/nv-stream.json"
+        "1 GPU": "scripts/snellius/gpu/a100/experiments/results/2022/nv-stream.json"
     },
     "Nvidia HPL": {
         "1 GPU": "scripts/snellius/gpu/a100/experiments/results/2022/nv-hpl_1gpu.json",
@@ -245,7 +245,7 @@ h100_files_2022 = {
         "4 GPUs": "scripts/snellius/gpu/h100/experiments/results/2022/gpu-burn.json"
     },
     "Nvidia STREAM": {
-        "4 GPUs": "scripts/snellius/gpu/h100/experiments/results/2022/nv-stream.json"
+        "1 GPU": "scripts/snellius/gpu/h100/experiments/results/2022/nv-stream.json"
     },
     "Nvidia HPL": {
         "1 GPU": "scripts/snellius/gpu/h100/experiments/results/2022/nv-hpl_1gpu.json",

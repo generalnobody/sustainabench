@@ -17,33 +17,96 @@ def load_results(files: dict):
 
     return results
 
-def extract_memory_df(results, arch):
+def extract_memory_df(results: dict[str, dict[str, BenchmarkResult]], arch):
     rows = []
 
     for benchmark, configs in results.items():
         for config, result in configs.items():
 
-            run = result.runs[0]
+            run = result.results["run0"]  # list[NodeResult]
 
-            metrics = None
+            # Determine node numbering
+            node_map = {}
 
-            if hasattr(run.metrics, "nodemem") and run.metrics.nodemem:
-                metrics = run.metrics.nodemem
-            elif hasattr(run.metrics, "memory") and run.metrics.memory:
-                metrics = run.metrics.memory
-            else:
-                continue
+            for node in run:
+                node_id = node.node_id
 
-            rss_avg = metrics["rss"]["mb"]["avg"]
+                if node_id == "local":
+                    physical_node = "local"
+                else:
+                    # id:global_rank:local_rank
+                    physical_node = node_id.split(":")[0]
 
-            rows.append(
-                {
-                    "arch": arch,
-                    "benchmark": benchmark,
-                    "config": config,
-                    "mean": rss_avg,
-                }
-            )
+                if physical_node not in node_map:
+                    node_map[physical_node] = f"node{len(node_map)}"
+
+            for node in run:
+
+                metrics = node.metrics
+
+                if "nodemem" in metrics:
+                    rss = metrics["nodemem"]["rss"]["mb"]
+                elif "memory" in metrics:
+                    rss = metrics["memory"]["rss"]["mb"]
+                else:
+                    continue
+
+                if node.node_id == "local":
+                    physical_node = "local"
+                else:
+                    physical_node = node.node_id.split(":")[0]
+
+                rows.append(
+                    {
+                        "arch": arch,
+                        "benchmark": benchmark,
+                        "config": config,
+                        "node": node_map[physical_node],
+                        "mean": rss["avg"],
+                    }
+                )
+
+    return pd.DataFrame(rows)
+
+def extract_gpu_memory_df(results: dict, arch: str):
+    rows = []
+
+    for benchmark, configs in results.items():
+        for config, result in configs.items():
+
+            run = result.results["run0"]
+
+            for node in run:
+                node_id = node.node_id
+
+                # same physical node logic as CPU version
+                if node_id == "local":
+                    physical_node = "local"
+                else:
+                    physical_node = node_id.split(":")[0]
+
+                metrics = node.metrics
+
+                if "gpu_nv" not in metrics:
+                    continue
+
+                gpu_list = metrics["gpu_nv"]
+
+                for gpu in gpu_list:
+                    gpu_id = gpu["gpu_id"]
+                    mem = gpu.get("memory", {}).get("mb", None)
+
+                    if mem is None:
+                        continue
+
+                    rows.append({
+                        "arch": arch,
+                        "benchmark": benchmark,
+                        "config": config,
+                        "node": physical_node,
+                        "gpu": f"gpu{gpu_id}",
+                        "mean": mem["avg"],
+                    })
 
     return pd.DataFrame(rows)
 

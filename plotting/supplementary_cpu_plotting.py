@@ -8,39 +8,39 @@ OUTPUT_DIR.mkdir(parents=True, exist_ok=True)
 
 rome_files = {
     "stress-ng": {
-        "1 node": "scripts/snellius/supplementary/cpu/rome/experiments/results/stress-ng.json"
+        "1 node": "scripts/snellius/supplementary/cpu/rome/experiments/raw/stress-ng.json"
     },
     "STREAM": {
-        "1 node": "scripts/snellius/supplementary/cpu/rome/experiments/results/stream.json"
+        "1 node": "scripts/snellius/supplementary/cpu/rome/experiments/raw/stream.json"
     },
     "HPL": {
-        "1 node": "scripts/snellius/supplementary/cpu/rome/experiments/results/hpl_1node.json",
-        "2 nodes": "scripts/snellius/supplementary/cpu/rome/experiments/results/hpl_2nodes.json",
-        "4 nodes": "scripts/snellius/supplementary/cpu/rome/experiments/results/hpl_4nodes.json",
+        "1 node": "scripts/snellius/supplementary/cpu/rome/experiments/raw/hpl_1node.json",
+        "2 nodes": "scripts/snellius/supplementary/cpu/rome/experiments/raw/hpl_2nodes.json",
+        "4 nodes": "scripts/snellius/supplementary/cpu/rome/experiments/raw/hpl_4nodes.json",
     },
     "HPCG": {
-        "1 node": "scripts/snellius/supplementary/cpu/rome/experiments/results/hpcg_1node.json",
-        "2 nodes": "scripts/snellius/supplementary/cpu/rome/experiments/results/hpcg_2nodes.json",
-        "4 nodes": "scripts/snellius/supplementary/cpu/rome/experiments/results/hpcg_4nodes.json",
+        "1 node": "scripts/snellius/supplementary/cpu/rome/experiments/raw/hpcg_1node.json",
+        "2 nodes": "scripts/snellius/supplementary/cpu/rome/experiments/raw/hpcg_2nodes.json",
+        "4 nodes": "scripts/snellius/supplementary/cpu/rome/experiments/raw/hpcg_4nodes.json",
     },
 }
 
 genoa_files = {
     "stress-ng": {
-        "1 node": "scripts/snellius/supplementary/cpu/genoa/experiments/results/stress-ng.json"
+        "1 node": "scripts/snellius/supplementary/cpu/genoa/experiments/raw/stress-ng.json"
     },
     "STREAM": {
-        "1 node": "scripts/snellius/supplementary/cpu/genoa/experiments/results/stream.json"
+        "1 node": "scripts/snellius/supplementary/cpu/genoa/experiments/raw/stream.json"
     },
     "HPL": {
-        "1 node": "scripts/snellius/supplementary/cpu/genoa/experiments/results/hpl_1node.json",
-        "2 nodes": "scripts/snellius/supplementary/cpu/genoa/experiments/results/hpl_2nodes.json",
-        "4 nodes": "scripts/snellius/supplementary/cpu/genoa/experiments/results/hpl_4nodes.json",
+        "1 node": "scripts/snellius/supplementary/cpu/genoa/experiments/raw/hpl_1node.json",
+        "2 nodes": "scripts/snellius/supplementary/cpu/genoa/experiments/raw/hpl_2nodes.json",
+        "4 nodes": "scripts/snellius/supplementary/cpu/genoa/experiments/raw/hpl_4nodes.json",
     },
     "HPCG": {
-        "1 node": "scripts/snellius/supplementary/cpu/genoa/experiments/results/hpcg_1node.json",
-        "2 nodes": "scripts/snellius/supplementary/cpu/genoa/experiments/results/hpcg_2nodes.json",
-        "4 nodes": "scripts/snellius/supplementary/cpu/genoa/experiments/results/hpcg_4nodes.json",
+        "1 node": "scripts/snellius/supplementary/cpu/genoa/experiments/raw/hpcg_1node.json",
+        "2 nodes": "scripts/snellius/supplementary/cpu/genoa/experiments/raw/hpcg_2nodes.json",
+        "4 nodes": "scripts/snellius/supplementary/cpu/genoa/experiments/raw/hpcg_4nodes.json",
     },
 }
 
@@ -74,3 +74,4 @@ plot_memory_grouped(
     output_dir=OUTPUT_DIR,
     config_order=config_order,
 )
+print(f"Plots saved to: {OUTPUT_DIR.resolve()}")

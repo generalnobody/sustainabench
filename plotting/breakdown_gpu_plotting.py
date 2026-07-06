@@ -35,7 +35,7 @@ a100_files = {
         "4 GPUs": "scripts/snellius/gpu/a100/experiments/merged/gpu-burn.json"
     },
     "Nvidia STREAM": {
-        "4 GPUs": "scripts/snellius/gpu/a100/experiments/merged/nv-stream.json"
+        "1 GPU": "scripts/snellius/gpu/a100/experiments/merged/nv-stream.json"
     },
     "Nvidia HPL": {
         "1 GPU": "scripts/snellius/gpu/a100/experiments/merged/nv-hpl_1gpu.json",
@@ -59,7 +59,7 @@ h100_files = {
         "4 GPUs": "scripts/snellius/gpu/h100/experiments/merged/gpu-burn.json"
     },
     "Nvidia STREAM": {
-        "4 GPUs": "scripts/snellius/gpu/h100/experiments/merged/nv-stream.json"
+        "1 GPU": "scripts/snellius/gpu/h100/experiments/merged/nv-stream.json"
     },
     "Nvidia HPL": {
         "1 GPU": "scripts/snellius/gpu/h100/experiments/merged/nv-hpl_1gpu.json",
