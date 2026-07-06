@@ -55,6 +55,9 @@ memory_df = pd.concat(
     ignore_index=True,
 )
 
+memory_df[memory_df["arch"]=="rome"].to_csv(f"{OUTPUT_DIR}/rome_memory.csv", index=False)
+memory_df[memory_df["arch"]=="genoa"].to_csv(f"{OUTPUT_DIR}/genoa_memory.csv", index=False)
+
 config_order = [
     "1 node",
     "2 nodes",

@@ -65,6 +65,9 @@ memory_df = pd.concat(
     ignore_index=True,
 )
 
+memory_df[memory_df["arch"]=="a100"].to_csv(f"{OUTPUT_DIR}/a100_memory.csv", index=False)
+memory_df[memory_df["arch"]=="h100"].to_csv(f"{OUTPUT_DIR}/h100_memory.csv", index=False)
+
 config_order = [
     "1 GPU",
     "2 GPUs",
@@ -93,6 +96,9 @@ gpu_memory_df = pd.concat(
     ],
     ignore_index=True,
 )
+
+gpu_memory_df[gpu_memory_df["arch"]=="a100"].to_csv(f"{OUTPUT_DIR}/a100_gpu_memory.csv", index=False)
+gpu_memory_df[gpu_memory_df["arch"]=="h100"].to_csv(f"{OUTPUT_DIR}/h100_gpu_memory.csv", index=False)
 
 plot_gpu_memory_grouped(
     gpu_memory_df,
