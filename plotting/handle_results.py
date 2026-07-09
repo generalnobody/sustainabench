@@ -3,7 +3,7 @@ from pathlib import Path
 import jmespath
 import pandas as pd
 
-def load_results(files: dict):
+def load_results(files: dict[str, dict[str, str]]) -> dict[str, dict[str, BenchmarkResult]]:
     results = {}
 
     for key, value in files.items():

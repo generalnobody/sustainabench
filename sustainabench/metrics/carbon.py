@@ -317,6 +317,8 @@ class CarbonMetric(Metric):
             group_data["value"]
             for group_data in contribution_groups.values()
         )
+        if results["total_g"] == 0:
+            return {}
         results["spatial_temporal_data"] = spatial_temporal_data
 
         return {
