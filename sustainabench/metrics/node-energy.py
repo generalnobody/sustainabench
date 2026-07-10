@@ -104,6 +104,9 @@ class EnergyToSolutionMetric(Metric):
             for group_data in contribution_groups.values()
         )
 
+        if results["j"] == 0:
+            return {}
+
         return {
             self.name: results
         }
