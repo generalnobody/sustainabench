@@ -35,6 +35,7 @@ a100_files = {
         "1 GPU": "scripts/snellius/gpu/a100/experiments/results/2022/nv-hpcg_1gpu.json",
         "2 GPUs": "scripts/snellius/gpu/a100/experiments/results/2022/nv-hpcg_2gpus.json",
         "4 GPUs": "scripts/snellius/gpu/a100/experiments/results/2022/nv-hpcg_4gpus.json",
+        "8 GPUs": "scripts/snellius/gpu/a100/experiments/results/2022/nv-hpcg_8gpus.json",
     },
     "vllm": {
         "1 GPU": "scripts/snellius/gpu/a100/experiments/results/2022/vllm_1gpu.json",
@@ -54,11 +55,13 @@ h100_files = {
         "1 GPU": "scripts/snellius/gpu/h100/experiments/results/2022/nv-hpl_1gpu.json",
         "2 GPUs": "scripts/snellius/gpu/h100/experiments/results/2022/nv-hpl_2gpus.json",
         "4 GPUs": "scripts/snellius/gpu/h100/experiments/results/2022/nv-hpl_4gpus.json",
+        "8 GPUs": "scripts/snellius/gpu/h100/experiments/results/2022/nv-hpl_8gpus.json",
     },
     "Nvidia HPCG": {
         "1 GPU": "scripts/snellius/gpu/h100/experiments/results/2022/nv-hpcg_1gpu.json",
         "2 GPUs": "scripts/snellius/gpu/h100/experiments/results/2022/nv-hpcg_2gpus.json",
         "4 GPUs": "scripts/snellius/gpu/h100/experiments/results/2022/nv-hpcg_4gpus.json",
+        "8 GPUs": "scripts/snellius/gpu/h100/experiments/results/2022/nv-hpcg_8gpus.json",
     },
     "vllm": {
         "1 GPU": "scripts/snellius/gpu/h100/experiments/results/2022/vllm_1gpu.json",
