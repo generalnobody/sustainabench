@@ -75,6 +75,7 @@ config_order = [
     "1 GPU",
     "2 GPUs",
     "4 GPUs",
+    "8 GPUs"
 ]
 
 plot_memory_grouped(

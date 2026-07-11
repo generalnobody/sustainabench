@@ -25,20 +25,26 @@ def extract_memory_df(results: dict[str, dict[str, BenchmarkResult]], arch):
 
             run = result.results["run0"]  # list[NodeResult]
 
-            # Determine node numbering
-            node_map = {}
+            memory_nodes = []
 
             for node in run:
-                node_id = node.node_id
+                metrics = node.metrics
 
-                if node_id == "local":
+                if "nodemem" not in metrics and "memory" not in metrics:
+                    continue
+
+                if node.node_id == "local":
                     physical_node = "local"
                 else:
-                    # id:global_rank:local_rank
-                    physical_node = node_id.split(":")[0]
+                    physical_node = node.node_id.split(":")[0]
 
-                if physical_node not in node_map:
-                    node_map[physical_node] = f"node{len(node_map)}"
+                if physical_node not in memory_nodes:
+                    memory_nodes.append(physical_node)
+
+            node_map = {
+                physical_node: f"node{idx}"
+                for idx, physical_node in enumerate(memory_nodes)
+            }
 
             for node in run:
 
@@ -68,6 +74,48 @@ def extract_memory_df(results: dict[str, dict[str, BenchmarkResult]], arch):
 
     return pd.DataFrame(rows)
 
+# def extract_gpu_memory_df(results: dict, arch: str):
+#     rows = []
+
+#     for benchmark, configs in results.items():
+#         for config, result in configs.items():
+
+#             run = result.results["run0"]
+
+#             for node in run:
+#                 node_id = node.node_id
+
+#                 # same physical node logic as CPU version
+#                 if node_id == "local":
+#                     physical_node = "local"
+#                 else:
+#                     physical_node = node_id.split(":")[0]
+
+#                 metrics = node.metrics
+
+#                 if "gpu_nv" not in metrics:
+#                     continue
+
+#                 gpu_list = metrics["gpu_nv"]
+
+#                 for gpu in gpu_list:
+#                     gpu_id = gpu["gpu_id"]
+#                     mem = gpu.get("memory", {}).get("mb", None)
+
+#                     if mem is None:
+#                         continue
+
+#                     rows.append({
+#                         "arch": arch,
+#                         "benchmark": benchmark,
+#                         "config": config,
+#                         "node": physical_node,
+#                         "gpu": f"gpu{gpu_id}",
+#                         "mean": mem["avg"],
+#                     })
+
+#     return pd.DataFrame(rows)
+
 def extract_gpu_memory_df(results: dict, arch: str):
     rows = []
 
@@ -76,24 +124,29 @@ def extract_gpu_memory_df(results: dict, arch: str):
 
             run = result.results["run0"]
 
+            # Same node numbering logic, but only based on gpu_nv
+            entries_with_gpu = [
+                entry for entry in run
+                if entry.metrics.get("gpu_nv")
+            ]
+
+            node_ids = [entry.node_id for entry in entries_with_gpu]
+            unique_nodes = list(dict.fromkeys(node_ids))
+
+            node_map = {
+                node_id: idx
+                for idx, node_id in enumerate(unique_nodes)
+            }
+
             for node in run:
-                node_id = node.node_id
 
-                # same physical node logic as CPU version
-                if node_id == "local":
-                    physical_node = "local"
-                else:
-                    physical_node = node_id.split(":")[0]
-
-                metrics = node.metrics
-
-                if "gpu_nv" not in metrics:
+                if node.node_id not in node_map:
                     continue
 
-                gpu_list = metrics["gpu_nv"]
+                node_idx = node_map[node.node_id]
+                gpu_list = node.metrics["gpu_nv"]
 
                 for gpu in gpu_list:
-                    gpu_id = gpu["gpu_id"]
                     mem = gpu.get("memory", {}).get("mb", None)
 
                     if mem is None:
@@ -103,8 +156,8 @@ def extract_gpu_memory_df(results: dict, arch: str):
                         "arch": arch,
                         "benchmark": benchmark,
                         "config": config,
-                        "node": physical_node,
-                        "gpu": f"gpu{gpu_id}",
+                        "node": node_idx,
+                        "gpu": f"gpu{gpu['gpu_id']}_{node_idx}",
                         "mean": mem["avg"],
                     })
 

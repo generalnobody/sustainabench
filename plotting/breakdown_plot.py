@@ -201,7 +201,7 @@ def plot_energy_breakdown_grouped(
     fig, axes = plt.subplots(
         nrows=1,
         ncols=len(benchmarks),
-        figsize=(3 * len(benchmarks), 6),
+        figsize=(3 * len(benchmarks), 7),
         sharey=False,
     )
 
@@ -260,12 +260,14 @@ def plot_energy_breakdown_grouped(
 
     handles, labels = axes[0].get_legend_handles_labels()
 
+    ncols = min(5, len(components))
+
     fig.legend(
         handles,
         labels,
         loc="upper center",
-        bbox_to_anchor=(0.5, 0.9),
-        ncol=len(components),
+        bbox_to_anchor=(0.5, 0.94),
+        ncol=ncols,
         frameon=False,
     )
 
@@ -433,7 +435,7 @@ def plot_gpu_memory_grouped(
     fig, axes = plt.subplots(
         nrows=1,
         ncols=len(benchmarks),
-        figsize=(3 * len(benchmarks), 6),
+        figsize=(3 * len(benchmarks), 7),
         sharey=False,
     )
 
@@ -486,12 +488,13 @@ def plot_gpu_memory_grouped(
 
     handles, labels = axes[0].get_legend_handles_labels()
 
+    ncols = min(4, len(gpu_cols))
     fig.legend(
         handles,
         labels,
         loc="upper center",
-        bbox_to_anchor=(0.5, 0.9),
-        ncol=len(gpu_cols),
+        bbox_to_anchor=(0.5, 0.94),
+        ncol=ncols,
         frameon=False,
     )
 

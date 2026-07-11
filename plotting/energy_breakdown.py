@@ -59,45 +59,52 @@ def extract_gpu_breakdown(results, arch_name):
 
             for run_name, run_data in benchmark_result.results.items():
 
+                entries_with_metrics = [
+                    entry for entry in run_data
+                    if (
+                        entry.metrics.get("cpu_energy") is not None
+                        or entry.metrics.get("gpu_nv")
+                    )
+                ]
+
+                node_ids = [entry.node_id for entry in entries_with_metrics]
+                unique_nodes = list(dict.fromkeys(node_ids))
+
+                node_map = {
+                    node_id: idx
+                    for idx, node_id in enumerate(unique_nodes)
+                }
+
                 for entry in run_data:
 
-                    metrics = entry.metrics
+                    # Ignore empty MPI ranks
+                    if entry.node_id not in node_map:
+                        continue
 
-                    cpu_energy = metrics.get(
-                        "cpu_energy"
-                    )
+                    metrics = entry.metrics
+                    node_idx = node_map[entry.node_id]
+
+                    cpu_energy = metrics.get("cpu_energy")
 
                     if cpu_energy:
-
                         rows.append({
                             "arch": arch_name,
                             "benchmark": benchmark,
                             "config": config,
                             "run": run_name,
-                            "component": "cpu",
-                            "value": (
-                                cpu_energy
-                                ["energy"]
-                                ["j"]
-                            )
+                            "component": f"cpu_{node_idx}",
+                            "value": cpu_energy["energy"]["j"],
                         })
 
-                    for gpu in metrics.get(
-                        "gpu_nv",
-                        []
-                    ):
+                    for gpu in metrics.get("gpu_nv", []):
 
                         rows.append({
                             "arch": arch_name,
                             "benchmark": benchmark,
                             "config": config,
                             "run": run_name,
-                            "component": (
-                                f"gpu{gpu['gpu_id']}"
-                            ),
-                            "value": (
-                                gpu["energy"]["j"]
-                            )
+                            "component": f"gpu{gpu['gpu_id']}_{node_idx}",
+                            "value": gpu["energy"]["j"],
                         })
 
     return pd.DataFrame(rows)

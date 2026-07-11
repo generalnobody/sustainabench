@@ -123,7 +123,7 @@ stats_df.to_csv(
 print(f"Stats saved to: {OUTPUT_DIR.resolve()}/gpu_benchmark_statistics.csv")
 
 
-config_order = ["1 GPU", "2 GPUs", "4 GPUs"]
+config_order = ["1 GPU", "2 GPUs", "4 GPUs", "8 GPUs"]
 plot_structure(stats_df, "a100", OUTPUT_DIR, config_order=config_order, metrics_to_plot=metrics_to_plot)
 plot_structure(stats_df, "h100", OUTPUT_DIR, config_order=config_order, metrics_to_plot=metrics_to_plot)
 

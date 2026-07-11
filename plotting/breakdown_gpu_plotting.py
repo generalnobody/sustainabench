@@ -2,20 +2,10 @@ from pathlib import Path
 from sustainabench.schemas.results.metrics_dict import MetricsDict
 import yaml
 import pandas as pd
-from stats import compute_statistics
-from plot import build_dataframe, plot_structure
-from handle_results import load_results, get_results
-from energy_breakdown import (
-    extract_gpu_breakdown
-)
-
-from breakdown_stats import (
-    compute_breakdown_statistics
-)
-
-from breakdown_plot import (
-    plot_energy_breakdown_grouped
-)
+from handle_results import load_results
+from energy_breakdown import extract_gpu_breakdown
+from breakdown_stats import compute_breakdown_statistics
+from breakdown_plot import plot_energy_breakdown_grouped
 
 OUTPUT_DIR = Path("experiments/plots/")
 OUTPUT_DIR.mkdir(parents=True, exist_ok=True)
@@ -84,58 +74,19 @@ h100_files = {
 a100_results = load_results(a100_files)
 h100_results = load_results(h100_files)
 
+a100_breakdown = extract_gpu_breakdown(a100_results, "a100")
+h100_breakdown = extract_gpu_breakdown(h100_results, "h100")
 
-
-a100_breakdown = extract_gpu_breakdown(
-    a100_results,
-    "a100"
-)
-
-h100_breakdown = extract_gpu_breakdown(
-    h100_results,
-    "h100"
-)
-
-breakdown_df = pd.concat(
-    [
-        a100_breakdown,
-        h100_breakdown
-    ],
-    ignore_index=True
-)
+breakdown_df = pd.concat([a100_breakdown, h100_breakdown], ignore_index=True)
 
 breakdown_stats = (
-    compute_breakdown_statistics(
-        breakdown_df
-    )
+    compute_breakdown_statistics(breakdown_df)
 )
 
-breakdown_stats.to_csv(
-    OUTPUT_DIR /
-    "gpu_energy_breakdown.csv",
-    index=False
-)
+breakdown_stats.to_csv(OUTPUT_DIR / "gpu_energy_breakdown.csv", index=False)
 
-plot_energy_breakdown_grouped(
-    breakdown_stats,
-    "a100",
-    OUTPUT_DIR,
-    config_order=[
-        "1 GPU",
-        "2 GPUs",
-        "4 GPUs"
-    ]
-)
-
-plot_energy_breakdown_grouped(
-    breakdown_stats,
-    "h100",
-    OUTPUT_DIR,
-    config_order=[
-        "1 GPU",
-        "2 GPUs",
-        "4 GPUs"
-    ]
-)
+config_order = ["1 GPU", "2 GPUs", "4 GPUs", "8 GPUs"]
+plot_energy_breakdown_grouped(breakdown_stats, "a100", OUTPUT_DIR, config_order)
+plot_energy_breakdown_grouped(breakdown_stats, "h100", OUTPUT_DIR, config_order)
 
 print(f"Plots saved to: {OUTPUT_DIR.resolve()}")

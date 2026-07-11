@@ -289,9 +289,6 @@ a100_results_2022 = load_results(a100_files_2022)
 h100_results_2022 = load_results(h100_files_2022)
 
 
-import pandas as pd
-
-
 def extract_performance_per_carbon_df(results_dict):
     rows = []
 
@@ -306,9 +303,9 @@ def extract_performance_per_carbon_df(results_dict):
                     ppc = None
 
                     for node in nodes:
-                        ppc = node.metrics.get("performance_per_carbon")
-
-                        if ppc is not None:
+                        candidate = node.metrics.get("performance_per_carbon")
+                        if candidate and any(metrics for metrics in candidate.values()):
+                            ppc = candidate
                             break
 
                     if ppc is None:
