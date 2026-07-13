@@ -174,6 +174,41 @@ def plot_statistic(output_dir, stats, summary, ylabel, title, filename):
     plt.savefig(output_dir / f"{filename}.pdf")
     plt.savefig(output_dir / f"{filename}.jpg")
 
+def compute_monthly_statistics(df: pd.DataFrame):
+    """
+    Aggregate daily carbon intensity into monthly statistics.
+
+    Returns a DataFrame indexed by month with:
+        mean
+        lower
+        upper
+    """
+    monthly = []
+
+    for month, month_df in df.groupby(pd.Grouper(freq="MS")):
+        values = month_df.to_numpy().ravel()
+        values = values[~np.isnan(values)]
+
+        if len(values) == 0:
+            continue
+
+        n = len(values)
+        mean = values.mean()
+        std = values.std(ddof=1) if n > 1 else 0.0
+        sem = std / np.sqrt(n) if n > 1 else 0.0
+        ci95 = sem * t.ppf(0.975, n - 1) if n > 1 else 0.0
+
+        monthly.append(
+            {
+                "month": month,
+                "mean": mean,
+                "lower": mean - ci95,
+                "upper": mean + ci95,
+            }
+        )
+
+    return pd.DataFrame(monthly).set_index("month")
+
 
 filepath = Path("scripts/snellius/gpu/a100/experiments/results/gpu-burn.json")
 OUTPUT_DIR = Path("experiments/plots/")
@@ -200,7 +235,7 @@ plot_statistic(
     OUTPUT_DIR,
     intensity_stats,
     intensity_summary,
-    ylabel="Carbon intensity",
+    ylabel="Carbon intensity (gCO2eq/kWh)",
     title="Daily carbon intensity",
     filename="daily_carbon_intensity"
 )
@@ -209,7 +244,10 @@ plot_statistic(
     OUTPUT_DIR,
     output_stats,
     output_summary,
-    ylabel="Carbon output (g)",
+    ylabel="Carbon output (gCO2eq)",
     title=f"Daily carbon output - {result.workload}",
     filename=f"{result.workload}-daily_carbon_output"
 )
+
+monthly_intensity_stats = compute_monthly_statistics(intensity_df.iloc[1:])
+monthly_intensity_stats.to_csv(OUTPUT_DIR / "monthly_carbon_intensity.csv", index=True)
