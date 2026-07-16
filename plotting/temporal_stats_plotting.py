@@ -250,4 +250,4 @@ plot_statistic(
 )
 
 monthly_intensity_stats = compute_monthly_statistics(intensity_df.iloc[1:])
-monthly_intensity_stats.to_csv(OUTPUT_DIR / "monthly_carbon_intensity.csv", index=True)
+monthly_intensity_stats.to_csv(OUTPUT_DIR / "supplementary" / "monthly-carbon-intensity.csv", index=True)
