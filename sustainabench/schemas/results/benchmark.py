@@ -35,11 +35,4 @@ class BenchmarkResult(BaseModel):
     backend: str
     results: dict[str, list[NodeResult]]
     metadata: dict[str, Any] = Field(default_factory=dict)
-
-    # @field_validator("results")
-    # @classmethod
-    # def validate_run_keys(cls, value):
-    #     for key in value:
-    #         if not re.fullmatch(r"run\d+", key):
-    #             raise ValueError(f"Invalid run key: {key}")
-    #     return value
+    

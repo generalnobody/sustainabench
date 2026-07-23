@@ -161,7 +161,7 @@ fi
 
         return script_files
 
-    # TODO: if time left, make internal workloads, so ones that do not require wrapping, also play nice with wrapping external measurements. Right now it doesnt work somewhere, but it really should work. Not required for the thesis, but would be nice to get working
+    # TODO: if time left, make internal workloads, so ones that do not require wrapping, also play nice with wrapping external measurements. Right now it doesnt work in some cases I think, but it really should work. Not required for the thesis, but would be nice to get working
     def run(self) -> BenchmarkResult:
         """Function that runs the benchmark on the correct backend (only internal measurements)"""
         results = {}
