@@ -23,15 +23,14 @@ class Workload(ABC):
         self.workload_cfg = workload_cfg
 
 class InternalWorkload(Workload):
-    "Handles internal workloads."
+    "Handles internal workloads (workloads without their own metrics)."
     @abstractmethod
     def run(self, num_processors: int, context=None):
         """Execute workload."""
         pass
 
 class ExternalWorkload(Workload):
-    """Handles external workloads. External workloads are prioritized, but do not run with the MeasurementManager, instead they are run without any measurements. Then, manual interpretation for the obtained results is needed. 
-    Do note, that any measurements that are selected will not be run. As such, it is recommended to use the 'none' measurement (this does nothing)."""    
+    """Handles external workloads (workloads with their own metrics)."""    
 
     require_wrapping: bool = False
 
