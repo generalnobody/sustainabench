@@ -6,7 +6,7 @@ import jmespath
 class CarbonPerSecondMetric(Metric):
     name = "carbon-per-second"
     require_file = False
-    required_metrics = ["carbon", "max-execution-time"]
+    required_metrics = ["all-carbon", "max-execution-time"]
 
     def __init__(self, filename, metrics_dict: MetricsDict):
         self.metrics_dict = metrics_dict
