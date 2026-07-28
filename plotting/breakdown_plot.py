@@ -198,10 +198,21 @@ def plot_energy_breakdown_grouped(
         fill_value=0,
     )
 
+    width_ratios = []
+
+    for benchmark in benchmarks:
+        try:
+            sub = pivot.loc[benchmark]
+            sub = sub.loc[[c for c in configs if c in sub.index]]
+            width_ratios.append(max(len(sub), 1))
+        except KeyError:
+            width_ratios.append(1)
+
     fig, axes = plt.subplots(
         nrows=1,
         ncols=len(benchmarks),
         figsize=(3 * len(benchmarks), 7),
+        gridspec_kw={"width_ratios": width_ratios},
         sharey=False,
     )
 
@@ -214,17 +225,14 @@ def plot_energy_breakdown_grouped(
     for ax, benchmark in zip(axes, benchmarks):
 
         try:
-            sub = (
-                pivot.loc[benchmark]
-                .reindex(configs)
-                .fillna(0)
-            )
+            sub = pivot.loc[benchmark]
+            sub = sub.loc[[c for c in configs if c in sub.index]]
         except KeyError:
             ax.set_visible(False)
             continue
 
-        xpos = np.arange(len(configs))
-        bottom = np.zeros(len(configs))
+        xpos = np.arange(len(sub.index))
+        bottom = np.zeros(len(sub))
 
         for i, component in enumerate(components):
 
@@ -242,11 +250,7 @@ def plot_energy_breakdown_grouped(
             bottom += values
 
         ax.set_xticks(xpos)
-        ax.set_xticklabels(
-            configs,
-            rotation=45,
-            ha="right",
-        )
+        ax.set_xticklabels(sub.index, rotation=45, ha="right")
 
         ax.set_title(benchmark)
 
@@ -273,7 +277,7 @@ def plot_energy_breakdown_grouped(
 
     fig.suptitle(f"{arch_name.upper()} Energy Breakdown")
 
-    plt.tight_layout(rect=(0, 0, 1, 0.92))
+    plt.tight_layout(rect=(0, 0, 1, 0.9))
 
     plt.savefig(
         output_dir /
@@ -324,10 +328,21 @@ def plot_memory_grouped(
         )
     )
 
+    width_ratios = []
+    
+    for benchmark in benchmarks:
+        try:
+            sub = pivot.loc[benchmark]
+            sub = sub.loc[[c for c in configs if c in sub.index]]
+            width_ratios.append(max(len(sub), 1))
+        except KeyError:
+            width_ratios.append(1)
+
     fig, axes = plt.subplots(
         nrows=1,
         ncols=len(benchmarks),
-        figsize=(3 * len(benchmarks), 6),
+        figsize=(3 * len(benchmarks), 7),
+        gridspec_kw={"width_ratios": width_ratios},
         sharey=False,
     )
 
@@ -340,19 +355,15 @@ def plot_memory_grouped(
     for ax, benchmark in zip(axes, benchmarks):
 
         try:
-            sub = (
-                pivot
-                .loc[benchmark]
-                .reindex(configs)
-                .fillna(0)
-            )
+            sub = pivot.loc[benchmark]
+            sub = sub.loc[[c for c in configs if c in sub.index]]
         except KeyError:
             ax.set_visible(False)
             continue
 
-        xpos = np.arange(len(configs))
+        xpos = np.arange(len(sub.index))
 
-        bottom = np.zeros(len(configs))
+        bottom = np.zeros(len(sub))
 
         for i, node in enumerate(nodes):
             values = sub[node].values
@@ -369,7 +380,7 @@ def plot_memory_grouped(
             bottom += values
 
         ax.set_xticks(xpos)
-        ax.set_xticklabels(configs, rotation=45, ha="right")
+        ax.set_xticklabels(sub.index, rotation=45, ha="right")
         ax.set_title(benchmark)
         # ax.set_ylabel("Average RSS (MB)")
         if ax is axes[0]:
@@ -391,7 +402,7 @@ def plot_memory_grouped(
     )
 
     fig.suptitle(f"{arch_name.upper()} Average Memory Usage")
-    plt.tight_layout(rect=(0, 0, 1, 0.92))
+    plt.tight_layout(rect=(0, 0, 1, 0.9))
 
     plt.savefig(
         output_dir /
@@ -432,10 +443,21 @@ def plot_gpu_memory_grouped(
         fill_value=0,
     )
 
+    width_ratios = []
+    
+    for benchmark in benchmarks:
+        try:
+            sub = pivot.loc[benchmark]
+            sub = sub.loc[[c for c in configs if c in sub.index]]
+            width_ratios.append(max(len(sub), 1))
+        except KeyError:
+            width_ratios.append(1)
+
     fig, axes = plt.subplots(
         nrows=1,
         ncols=len(benchmarks),
         figsize=(3 * len(benchmarks), 7),
+        gridspec_kw={"width_ratios": width_ratios},
         sharey=False,
     )
 
@@ -448,17 +470,14 @@ def plot_gpu_memory_grouped(
     for ax, benchmark in zip(axes, benchmarks):
 
         try:
-            sub = (
-                pivot.loc[benchmark]
-                .reindex(configs)
-                .fillna(0)
-            )
+            sub = pivot.loc[benchmark]
+            sub = sub.loc[[c for c in configs if c in sub.index]]
         except KeyError:
             ax.set_visible(False)
             continue
 
-        xpos = np.arange(len(configs))
-        bottom = np.zeros(len(configs))
+        xpos = np.arange(len(sub.index))
+        bottom = np.zeros(len(sub))
 
         for i, gpu in enumerate(gpu_cols):
             values = sub[gpu].values
@@ -475,7 +494,7 @@ def plot_gpu_memory_grouped(
             bottom += values
 
         ax.set_xticks(xpos)
-        ax.set_xticklabels(configs, rotation=45, ha="right")
+        ax.set_xticklabels(sub.index, rotation=45, ha="right")
         ax.set_title(benchmark)
 
         if ax is axes[0]:
@@ -499,7 +518,7 @@ def plot_gpu_memory_grouped(
     )
 
     fig.suptitle(f"{arch_name.upper()} Average GPU Memory Usage")
-    plt.tight_layout(rect=(0, 0, 1, 0.92))
+    plt.tight_layout(rect=(0, 0, 1, 0.9))
 
     plt.savefig(output_dir / f"{arch_name}_gpu_memory_grouped.pdf")
     plt.savefig(output_dir / f"{arch_name}_gpu_memory_grouped.jpg")

@@ -114,7 +114,7 @@ def compute_statistics(df: pd.DataFrame):
     )
 
 def plot_statistic(output_dir, stats, summary, ylabel, title, filename):
-    sns.set_theme(style="whitegrid")
+    sns.set_theme(style="whitegrid", context="talk")
 
     fig, ax = plt.subplots(figsize=(14, 6))
 
