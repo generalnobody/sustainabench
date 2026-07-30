@@ -171,7 +171,7 @@ def summarize(result: BenchmarkResult) -> dict:
     }
 
 
-def analyze(machine: str, files: dict):
+def analyze(arch: str, files: dict):
     results = load_results(files)
 
     rows = []
@@ -180,7 +180,7 @@ def analyze(machine: str, files: dict):
         for configuration, result in configs.items():
             rows.append(
                 {
-                    "machine": machine,
+                    "arch": arch,
                     "benchmark": benchmark,
                     "configuration": configuration,
                     **summarize(result),
@@ -200,5 +200,5 @@ df = pd.DataFrame(rows)
 
 pd.set_option("display.float_format", "{:.3f}".format)
 
-# print(df)
+print(df[["arch", "benchmark", "configuration", "cpu_mean_J", "perf_mean_J", "overhead_J", "overhead_pct"]])
 df.to_csv("experiments/plots/supplementary/perf_energy_overhead.csv", index=False)
